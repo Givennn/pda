@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.template.library
+package com.given.bleed.library
 
 object FactorialCalculator {
 

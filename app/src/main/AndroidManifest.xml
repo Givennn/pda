@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ncorti.kotlin.template.app">
-
+    package="com.given.bleed.app">
+    <!--TODO rename package-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

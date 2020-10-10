@@ -1,10 +1,10 @@
-package com.ncorti.kotlin.template.app
+package com.given.bleed.app
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.ncorti.kotlin.template.library.FactorialCalculator
-import com.ncorti.kotlin.template.library.android.NotificationUtil
+import com.given.bleed.library.FactorialCalculator
+import com.given.bleed.library.android.NotificationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.template.library
+package com.given.bleed.library
 
 import com.ncorti.kotlin.template.library.FactorialCalculator.computeFactorial
 import org.junit.Assert.assertEquals

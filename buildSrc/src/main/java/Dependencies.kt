@@ -9,10 +9,18 @@ object Versions {
     const val ANDROIDX_TEST = "1.2.0"
     const val APPCOMPAT = "1.1.0"
     const val CONSTRAINT_LAYOUT = "1.1.3"
+    const val RECYCLER_VIEW = "1.1.0"
+    const val COORDINATOR_LAYOUT = "1.1.0"
     const val CORE_KTX = "1.2.0"
     const val ESPRESSO_CORE = "3.2.0"
     const val JUNIT = "4.13"
     const val KTLINT = "0.37.2"
+
+    // lib versions
+    const val RETROFIT = "2.8.2"
+    const val OK_HTTP = "4.7.2"
+    const val STETHO = "1.5.0"
+    const val TIMBER = "4.7.1"
 }
 
 object BuildPluginsVersion {
