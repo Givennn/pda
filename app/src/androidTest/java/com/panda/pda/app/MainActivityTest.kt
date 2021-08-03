@@ -1,4 +1,4 @@
-package com.given.bleed.app
+package com.panda.pda.app
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click

@@ -16,8 +16,8 @@ pluginManagement {
         jcenter()
     }
 }
-
-rootProject.name = ("bleed")
+//TODO rename project name
+rootProject.name = ("PDA-temp")
 
 include(
     "app",

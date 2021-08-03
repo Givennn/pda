@@ -1,10 +1,10 @@
-package com.given.bleed.app
+package com.panda.pda.app
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.given.bleed.library.FactorialCalculator
-import com.given.bleed.library.android.NotificationUtil
+import com.panda.pda.library.FactorialCalculator
+import com.panda.pda.library.android.NotificationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

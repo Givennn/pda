@@ -1,4 +1,4 @@
-package com.given.bleed.library.android
+package com.panda.pda.library.android
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.given.bleed.library.android.R
 
 private const val CHANNEL_ID = "default"
 private const val NOTIFICATION_ID = 42

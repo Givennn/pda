@@ -1,4 +1,4 @@
-package com.given.bleed.library
+package com.panda.pda.library
 
 object FactorialCalculator {
 
