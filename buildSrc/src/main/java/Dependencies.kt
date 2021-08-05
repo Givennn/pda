@@ -24,6 +24,7 @@ object Versions {
 }
 
 object BuildPluginsVersion {
+    const val SWAGGER_CODEGEN = "1.4.1"
     const val AGP = "4.0.0"
     const val DETEKT = "1.10.0"
     const val KOTLIN = "1.3.72"

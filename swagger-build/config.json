@@ -1,0 +1,14 @@
+{
+    "library": "retrofit2",
+    "useRxJava2": "true",
+    "developerName": "anjiwei",
+    "developerEmail": "",
+    "developerOrganization": "app.com",
+    "invokerPackage": "com.panda.pda.client",
+    "modelPackage": "com.panda.pda.client.entity",
+    "apiPackage": "com.panda.pda.client.api",
+    "groupId": "com.panda.pda",
+    "artifactId": "client",
+    "artifactVersion": "1.2.0",
+    "serializableModel": true
+}

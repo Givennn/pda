@@ -4,6 +4,7 @@ plugins {
     id("com.android.application") version BuildPluginsVersion.AGP apply false
     id("com.android.library") version BuildPluginsVersion.AGP apply false
     kotlin("android") version BuildPluginsVersion.KOTLIN apply false
+    id("com.yelp.codegen.plugin") version BuildPluginsVersion.SWAGGER_CODEGEN apply false
     id("io.gitlab.arturbosch.detekt") version BuildPluginsVersion.DETEKT
     id("org.jlleitschuh.gradle.ktlint") version BuildPluginsVersion.KTLINT
     id("com.github.ben-manes.versions") version BuildPluginsVersion.VERSIONS_PLUGIN
@@ -15,6 +16,7 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
+        maven("https://www.jitpack.io")
     }
 }
 
@@ -52,6 +54,16 @@ subprojects {
 tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
 }
+buildscript {
+    repositories {
+        maven("https://www.jitpack.io")
+    }
+//    dependencies {
+//        val kotlinVersion = "1.4.21"
+//        classpath(kotlin("gradle-plugin", version = kotlinVersion))
+//        classpath(kotlin("serialization", version = kotlinVersion))
+}
+//}
 
 tasks.withType<DependencyUpdatesTask> {
     rejectVersionIf {
