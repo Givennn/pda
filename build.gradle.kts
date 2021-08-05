@@ -55,10 +55,14 @@ tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
 }
 buildscript {
+    val kotlinVersion by extra("1.4.21")
     repositories {
         maven("https://www.jitpack.io")
     }
-//    dependencies {
+    dependencies {
+        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+    //    dependencies {
 //        val kotlinVersion = "1.4.21"
 //        classpath(kotlin("gradle-plugin", version = kotlinVersion))
 //        classpath(kotlin("serialization", version = kotlinVersion))

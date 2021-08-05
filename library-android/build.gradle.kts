@@ -3,7 +3,7 @@ version = LibraryAndroidCoordinates.LIBRARY_VERSION
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("kotlin-android-extensions")
+    id("kotlin-android")
     id("maven-publish")
 }
 

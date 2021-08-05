@@ -1,3 +1,4 @@
+include(":api-client")
 pluginManagement {
     resolutionStrategy {
         eachPlugin {

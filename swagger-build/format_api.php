@@ -12,9 +12,9 @@ unset($content['errorCodes']);
 unset($content['commonParams']);
 unset($content['apiEnvs']);
 foreach ($paths as $key => $path) {
-    // /web/
-    if (strpos($key, '/web/') !== false || startsWith($key, '/app/admin/role/') !== true) {
-        // printf("remove path $key\n");
+    // strpos($key, '/web/') !== false || 
+    // 过滤接口
+    if (startsWith($key, '/app') !== true) {
         unset($paths[$key]);
     } else {
         $paths[$key] = handlePath($key, $path);
@@ -25,6 +25,8 @@ $content['paths'] = $paths;
 $content['definitions'] = $definitions;
 
 file_put_contents('./docs.json', str_replace("\\/", "/", json_encode($content, JSON_UNESCAPED_UNICODE)));
+
+printf("generate done.\n");
 
 function handlePath($url, $path) {
     foreach ($path as $key => $request) {
@@ -51,17 +53,27 @@ function handleRequest($path, $method, $request) {
 
     if ($request['parameters']) {
         $parameters = [];
+        $parameterBodies = [];
+        $formattedParameterBody = [];
         foreach ($request['parameters'] as $key => $parameter) {
+            
             $parameter = handleParameter($parameter);
             unset($request['parameters'][$key]);
             if ($parameter) {
-                $parameters[] = $parameter;
+                if($parameter['in']== 'body') {
+                    $parameterBodies[] = $parameter;
+                } else {
+                    $parameters[] = $parameter;
+                }
             }
         }
-
-        if (empty($parameters)) {
+        if (empty($parameters) && empty($parameterBodies)) {
             unset($request['parameters']);
         } else {
+            $bodyParameter = handleBodyParameter($path, $parameterBodies);
+            if($bodyParameter) {
+                $parameters[] = $bodyParameter;
+            }
             $request['parameters'] = $parameters;
         }
     }
@@ -71,6 +83,9 @@ function handleRequest($path, $method, $request) {
         foreach ($request['responses'] as $key => $response) {
             $response = handleResponse($path, $method, $response);
             if ($response) {
+                if($key == "20000") {
+                    $key = "200";
+                }
                 $responses[$key] = $response;
             }
         }
@@ -84,21 +99,65 @@ function handleRequest($path, $method, $request) {
     return $request;
 }
 
-function handleResponse($path, $method, $response) {
-    if (isset($response['schema']) && isset($response['schema']['type'])  && $response['schema']['type'] == 'object' && isset($response['schema']['properties']) ) {
+function handleBodyParameter($path, $parameterBodies) {
+    if(empty($parameterBodies) !== true) {
         $paths = explode("/",$path); 
         $name = "";
         foreach ($paths as $item) {
             $name .= ucfirst($item);
         }
         $name.=ucfirst($method);
+        $name .= "Request";
+        $schema = [];
+        $formattedParameterBody['in'] = "body";
+        $formattedParameterBody['name'] = $name;
+        $schema['type'] = "object";
+        $schema['properties'] = [];
+        foreach ($parameterBodies as $key => $bodyParameter) {
+            $item = [];
+            $item['type'] = $bodyParameter['type'];
+            if($item['type'] == "cust") {
+                $item['type'] = "string";
+            }
+            $item['description'] = $bodyParameter['description'];
+            if(isset($bodyParameter['format'])) {
+                $item['format'] = $bodyParameter['format'];
+            }
+            $schema['properties'][$bodyParameter['name']] = $item; 
+        }
+        $formattedParameterBody['schema'] = $schema;
+        return $formattedParameterBody;
+    }
+}
+
+function handleResponse($path, $method, $response) {
+    if (isset($response['schema']) && isset($response['schema']['type'])  && $response['schema']['type'] == 'object' && isset($response['schema']['properties']) ) {
+        
+        $paths = explode("/",str_replace("/app/", "", $path)); 
+        $name = "";
+        foreach ($paths as $item) {
+            if(strpos($item, '-') !== false) {
+                $dashNames = explode("-",$item);
+                $subName = "";
+                foreach ($dashNames as $subItem) {
+                    $subName .= ucfirst($subItem);
+                }
+                $name .= $subName;
+            } else {
+                $name .= ucfirst($item);
+            }
+        }
+        $name.=ucfirst($method);
         $name .= "Response";
         $definition = removeRequiredField($response['schema']);
-        if(isset($definition['properties']['data']['properties'])) {
+        if(isset($definition['properties']['data']['properties']) && empty($definition['properties']['data']['properties']) !== true) {
             $definition = $definition['properties']['data'];
+            $definition['title'] = $name;
             global $definitions; 
             $definitions[$name] = $definition;
             $response['schema']= ['$ref'=> "#/definitions/".$name];
+        } else {
+            unset($response['schema']);
         }
         
     }    
@@ -120,7 +179,6 @@ function removeRequiredField($node) {
     if (isset($response['items'])) {
         $response['items'] = removeRequiredField($response['items']);
     }
-    printf(json_encode($response, JSON_UNESCAPED_UNICODE));
 
     return $response;
 }
