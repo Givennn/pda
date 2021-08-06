@@ -17,10 +17,15 @@ object Versions {
     const val KTLINT = "0.37.2"
 
     // lib versions
-    const val RETROFIT = "2.8.2"
-    const val OK_HTTP = "4.7.2"
+    const val RETROFIT = "2.9.0"
+    const val OK_HTTP = "4.9.0"
+    const val MOSHI = "1.12.0"
     const val STETHO = "1.5.0"
     const val TIMBER = "4.7.1"
+    const val COIL = "0.11.0"
+    const val EXO_PLAYER = "2.12.0"
+    const val RX_JAVA = "2.2.20"
+    const val KAML = "0.26.0"
 }
 
 object BuildPluginsVersion {
@@ -36,6 +41,34 @@ object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROIDX_CONSTRAINT_LAYOUT = "com.android.support.constraint:constraint-layout:${Versions.CONSTRAINT_LAYOUT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+
+    //RXJava
+    const val RX_JAVA = "io.reactivex.rxjava3:rxjava:${Versions.RX_JAVA}"
+    const val RX_ANDROID = "io.reactivex.rxjava3:rxandroid:3.0.0"
+    const val RX_LIFE_CYCLE = "com.trello.rxlifecycle4:rxlifecycle:4.0.0"
+    const val RX_LIFE_CYCLE_ANDROID = "com.trello.rxlifecycle4:rxlifecycle-android:4.0.0"
+    const val RX_LIFE_CYCLE_KOTLIN = "com.trello.rxlifecycle4:rxlifecycle-kotlin:4.0.0"
+    //RxBinding
+    const val RX_BINDING = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
+    const val EXO_PLAYER = "com.google.android.exoplayer:exoplayer:${Versions.RETROFIT}"
+
+    // Moshi + OkHttp + Retrofit
+    const val OK_HTTP = "com.squareup.okhttp3:okhttp:${Versions.OK_HTTP}"
+    const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OK_HTTP}"
+    const val MOSHI = "com.squareup.moshi:moshi:${Versions.MOSHI}"
+    const val MOSHI_KOTLIN = "com.squareup.moshi:moshi-kotlin:${Versions.MOSHI}"
+    const val MOSHI_ADAPTER = "com.squareup.moshi:moshi-adapters:${Versions.MOSHI}"
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val RETROFIT_MOSHI_CONVERTER = "com.squareup.retrofit2:converter-moshi:${Versions.RETROFIT}"
+    const val RETROFIT_RXJAVA_ADAPTER = "com.squareup.retrofit2:adapter-rxjava2:${Versions.RETROFIT}"
+
+    // localTime threeTemBp
+    const val THREE_TEN_BP = "com.jakewharton.threetenabp:threetenabp:1.3.1"
+
+    const val STETHO = "com.facebook.stetho:stetho:${Versions.STETHO}"
+    const val STETHO_OK_HTTP = "com.facebook.stetho:stetho-okhttp3:${Versions.STETHO}"
+    const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
+    const val COIL = "io.coil-kt:coil:${Versions.COIL}"
 }
 
 object TestingLib {

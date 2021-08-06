@@ -14,6 +14,17 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
 
+    implementation(SupportLibs.MOSHI)
+    implementation(SupportLibs.MOSHI_ADAPTER)
+    implementation(SupportLibs.MOSHI_KOTLIN)
+    implementation(SupportLibs.OK_HTTP)
+    implementation(SupportLibs.RETROFIT)
+    implementation(SupportLibs.RETROFIT_MOSHI_CONVERTER)
+    implementation(SupportLibs.RETROFIT_RXJAVA_ADAPTER)
+    implementation(SupportLibs.THREE_TEN_BP)
+
+    implementation(SupportLibs.RX_JAVA)
+    implementation(SupportLibs.RX_ANDROID)
     testImplementation(TestingLib.JUNIT)
 }
 
@@ -32,7 +43,7 @@ publishing {
 
 generateSwagger {
     platform = "kotlin"
-    packageName = "com.panda.android.api-client"
+    packageName = "com.panda.android.client"
     specName = "docs"
     specVersion = "1.0.0"
     inputFile = file("../swagger-build/docs.json")
