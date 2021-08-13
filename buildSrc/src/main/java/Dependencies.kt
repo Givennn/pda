@@ -15,6 +15,8 @@ object Versions {
     const val ESPRESSO_CORE = "3.2.0"
     const val JUNIT = "4.13"
     const val KTLINT = "0.37.2"
+    const val NAVIGATION = "2.3.0"
+    const val FRAGMENT_KTX = "1.3.6"
 
     // lib versions
     const val RETROFIT = "2.9.0"
@@ -26,6 +28,7 @@ object Versions {
     const val EXO_PLAYER = "2.12.0"
     const val RX_JAVA = "2.2.20"
     const val KAML = "0.26.0"
+    const val MATERIAL = "1.1.0"
 }
 
 object BuildPluginsVersion {
@@ -41,6 +44,13 @@ object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROIDX_CONSTRAINT_LAYOUT = "com.android.support.constraint:constraint-layout:${Versions.CONSTRAINT_LAYOUT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+    const val ANDROIDX_FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT_KTX}"
+
+    // navigation ktx
+    const val NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+    const val NAVIGATION_DYNAMIC_FEATURE_FRAGMENT_KTX = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.NAVIGATION}"
+    const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+    const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
 
     //RXJava
     const val RX_JAVA = "io.reactivex.rxjava3:rxjava:${Versions.RX_JAVA}"

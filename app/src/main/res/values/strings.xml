@@ -2,8 +2,10 @@
     <!--TODO rename app_name-->
     <string name="app_name">bleed</string>
     <string name="title">This is just a template</string>
-    <string name="description">You can compute a factorial using the library-kotlin module. The result will be also shown in a notification using the library-android module.</string>
-    <string name="factorial_hint">Insert a number to compute his factorial</string>
-    <string name="compute">Compute</string>
-    <string name="notification_title">The Result is:</string>
+    <string name="description">Panda-fa Digital Manufacture Platform</string>
+    <string name="discovery">发现</string>
+    <string name="profile">我的</string>
+    <string name="task">任务</string>
+    <string name="operation">业务服务</string>
+
 </resources>

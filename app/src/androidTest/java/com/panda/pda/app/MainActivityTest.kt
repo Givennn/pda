@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 class MainActivityTest {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var activityRule: ActivityTestRule<ShellActivity> = ActivityTestRule(ShellActivity::class.java)
 
     @Test
     fun typeANumber_resultIsDisplayed() {

@@ -1,4 +1,3 @@
-include(":api-client")
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
@@ -23,5 +22,6 @@ rootProject.name = ("PDA-temp")
 include(
     "app",
     "library-android",
-    "library-kotlin"
+    "library-kotlin",
+    "api-client"
 )
