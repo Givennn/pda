@@ -28,8 +28,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     protected val sp: SharedPreferences by lazy {
         this.requireContext().getSharedPreferences("SOG", Context.MODE_PRIVATE)
     }
-
-    abstract fun<T : ViewBinding> bindingView(view: View): T
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

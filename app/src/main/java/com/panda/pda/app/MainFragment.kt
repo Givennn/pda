@@ -10,10 +10,6 @@ import com.panda.pda.app.databinding.FragmentMainBinding
  * created by AnJiwei 2021/8/9
  */
 class MainFragment: BaseFragment(R.layout.fragment_main) {
-    override fun <T : ViewBinding> bindingView(view: View): T {
-        return FragmentMainBinding.bind(view)
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +19,7 @@ class MainFragment: BaseFragment(R.layout.fragment_main) {
     }
 
     private fun initNavManager() {
-        binding.nvBottom.setupWithNavController(binding.fcvNavHostMain.findNavController())
+//        binding.nvBottom.setupWithNavController(binding.fcvNavHostMain.findNavController())
     }
 
     private fun initBottomNavigation() {
