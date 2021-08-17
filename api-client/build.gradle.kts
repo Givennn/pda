@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0")
 
     implementation(SupportLibs.MOSHI)
     implementation(SupportLibs.MOSHI_ADAPTER)

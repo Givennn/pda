@@ -1,1 +1,3227 @@
-{"swagger":"2.0","info":{"description":"<p><br></p>","version":"","title":"781-sog同步需求版本"},"schemes":[],"consumes":[],"produces":[],"paths":{"/app/admin/login":{"post":{"tags":["app-系统管理"],"summary":"用户登陆","operationId":"loginUsingPOST","parameters":[{"in":"body","name":"AppAdminLoginRequest","schema":{"type":"object","properties":{"personCode":{"type":"string","description":""},"password":{"type":"string","description":""},"worktableIpAddress":{"type":"string","description":""}}}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/AdminLoginPostResponse"}}}}},"/app/admin/logout":{"post":{"tags":["app-系统管理"],"summary":"退出登陆","operationId":"logoutUsingPOST","parameters":[{"in":"body","name":"AppAdminLogoutRequest","schema":{"type":"object","properties":{"worktableCode":{"type":"string","description":""},"userId":{"type":"integer","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/admin/select":{"get":{"tags":["web-系统管理-用户管理"],"summary":"操作人列表查询","operationId":"selectUsingGET","parameters":[],"responses":{"200":{"description":"查询成功","schema":{"$ref":"#/definitions/AdminSelectGetResponse"}}}}},"/app/admin/verify-server":{"get":{"tags":["app-系统管理"],"summary":"验证服务器","operationId":"verify-serverUsingGET","parameters":[],"responses":{"200":{"description":""}}}},"/app/material-rack/list-by-worktable":{"get":{"tags":["app-料架相关"],"summary":"根据作业台和产品获取料架列表","operationId":"list-by-worktableUsingGET","parameters":[{"name":"worktableCode","in":"query","description":"","required":false,"type":"string","default":"","format":""},{"name":"productCode","in":"query","description":"","required":false,"type":"string","default":"","format":""}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/MaterialRackListByWorktableGetResponse"}}}}},"/app/material-rack/report-material-num":{"post":{"tags":["app-料架相关"],"summary":"发送物料剩余数量","operationId":"report-material-numUsingPOST","parameters":[{"in":"body","name":"AppMaterial-rackReport-material-numRequest","schema":{"type":"object","properties":{"materialRackId":{"type":"integer","description":""},"remainNum":{"type":"integer","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/material-rack/verify-material-serial-code":{"get":{"tags":["app-料架相关"],"summary":"验证物料条码","operationId":"verify-material-serial-codeUsingGET","parameters":[{"name":"materialSerialCode","in":"query","description":"","required":false,"type":"string","default":"","format":""}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/MaterialRackVerifyMaterialSerialCodeGetResponse"}}}}},"/app/work/article-back":{"post":{"tags":["mes交互"],"summary":"空托盘返回任务完成的时候","operationId":"article-backUsingPOST","parameters":[{"in":"body","name":"AppWorkArticle-backRequest","schema":{"type":"object","properties":{"requestId ":{"type":"integer","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/article-return":{"post":{"tags":["app-空托盘返回"],"summary":"app点击空托盘返回","operationId":"article-returnUsingPOST","parameters":[{"in":"body","name":"AppWorkArticle-returnRequest","schema":{"type":"object","properties":{"productRecordId":{"type":"integer","description":""},"transferId":{"type":"integer","description":""},"positionId":{"type":"integer","description":""},"positionType":{"type":"integer","description":""},"positionCode":{"type":"string","description":""},"positionName":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/back-info":{"get":{"tags":["app-空托盘返回"],"summary":"查询返回区域和返回点-用于点击空托盘返回选择返回点的页面","operationId":"back-infoUsingGET","parameters":[{"name":"productRecordId","in":"query","description":"","required":false,"type":"integer","default":"","format":"int32"},{"name":"transferId","in":"query","description":"","required":false,"type":"integer","default":"","format":"int32"}],"responses":{"200":{"description":""}}}},"/app/work/bind-core-part":{"post":{"tags":["app-作业相关"],"summary":"绑定核心部件","operationId":"bind-core-partUsingPOST","parameters":[{"in":"body","name":"AppWorkBind-core-partRequest","schema":{"type":"object","properties":{"id":{"type":"integer","description":""},"materialSerialCode":{"type":"string","description":""},"worktableCode":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/change-core-part":{"get":{"tags":["app-作业相关"],"summary":"替换核心部件","operationId":"change-core-partUsingGET","parameters":[{"in":"body","name":"AppWorkChange-core-partRequest","schema":{"type":"object","properties":{"id":{"type":"integer","description":""},"materialSerialCode":{"type":"string","description":""},"worktableCode":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/change-date-record":{"post":{"tags":["app-作业相关"],"summary":"数据记录替换","operationId":"change-date-recordUsingPOST","parameters":[{"in":"body","name":"AppWorkChange-date-recordRequest","schema":{"type":"object","properties":{"processRecordId":{"type":"integer","description":""},"stepDataInfoId":{"type":"integer","description":""},"stepId":{"type":"integer","description":""},"dataContent":{"type":"string","description":""},"worktableCode":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/get-material":{"post":{"tags":["app-要料相关"],"summary":"app点击要料","operationId":"get-materialUsingPOST","parameters":[{"in":"body","name":"AppWorkGet-materialRequest","schema":{"type":"object","properties":{"productRecordId":{"type":"integer","description":""},"transferId":{"type":"integer","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/mes-call":{"post":{"tags":["mes交互"],"summary":"mes调用sog(agv到达中间点或者要料任务完成)","operationId":"mes-callUsingPOST","parameters":[{"in":"body","name":"AppWorkMes-callRequest","schema":{"type":"object","properties":{"requestId ":{"type":"integer","description":""},"type":{"type":"integer","description":""}}}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/WorkMesCallPostResponse"}}}}},"/app/work/product-complete":{"post":{"tags":["app-作业相关"],"summary":"步骤完成","operationId":"product-completeUsingPOST","parameters":[{"in":"body","name":"AppWorkProduct-completeRequest","schema":{"type":"object","properties":{"productRecordId":{"type":"integer","description":""},"stepId":{"type":"integer","description":""},"stepBeginTime":{"type":"string","description":""},"stepEndTime":{"type":"string","description":""},"stepUsedTime":{"type":"integer","description":""},"stepDetail":{"type":"string","description":""},"materialRackList":{"type":"string","description":""},"stepNum":{"type":"integer","description":""},"stepDataList":{"type":"string","description":""},"stepPictureList":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/product-next":{"post":{"tags":["app-作业相关"],"summary":"步骤下一步","operationId":"product-nextUsingPOST","parameters":[{"in":"body","name":"AppWorkProduct-nextRequest","schema":{"type":"object","properties":{"productRecordId":{"type":"integer","description":""},"stepId":{"type":"integer","description":""},"stepBeginTime":{"type":"string","description":""},"stepEndTime":{"type":"string","description":""},"stepUsedTime":{"type":"integer","description":""},"stepDetailList":{"type":"string","description":""},"stepNum":{"type":"integer","description":""},"materialRackList":{"type":"string","description":""},"stepDataList":{"type":"string","description":""},"stepPictureList":{"type":"string","description":""}}}}],"responses":{"200":{"description":"插入成功"}}}},"/app/work/product-quit":{"post":{"tags":["app-作业相关"],"summary":"产品中途退出","operationId":"product-quitUsingPOST","parameters":[{"in":"body","name":"AppWorkProduct-quitRequest","schema":{"type":"object","properties":{"productRecordId":{"type":"string","description":""},"worktableCode":{"type":"string","description":""},"materialRackList":{"type":"string","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/product-restart":{"post":{"tags":["app-作业相关"],"summary":"产品重新生产","operationId":"product-restartUsingPOST","parameters":[{"in":"body","name":"AppWorkProduct-restartRequest","schema":{"type":"object","properties":{"productProcessRecordId":{"type":"string","description":""},"worktableCode":{"type":"string","description":""}}}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/WorkProductRestartPostResponse"}}}}},"/app/work/product-scan":{"get":{"tags":["app-作业相关"],"summary":"产品扫描获得工序列表","operationId":"product-scanUsingGET","parameters":[{"name":"productCode","in":"query","description":"","required":false,"type":"string","default":"","format":""},{"name":"productSerialCode","in":"query","description":"","required":false,"type":"string","default":"","format":""},{"name":"worktableCode","in":"query","description":"","required":false,"type":"string","default":"","format":""},{"name":"produceType","in":"query","description":"","required":false,"type":"integer","default":"","format":"int32"}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/WorkProductScanGetResponse"}}}}},"/app/work/product-start":{"post":{"tags":["app-作业相关"],"summary":"产品扫描生产","operationId":"product-startUsingPOST","parameters":[{"name":"produceType","in":"formData","description":"","required":false,"type":"integer","default":"","format":"int32"},{"in":"body","name":"AppWorkProduct-startRequest","schema":{"type":"object","properties":{"productSerialCode":{"type":"string","description":""},"productCode":{"type":"string","description":""},"worktableCode":{"type":"string","description":""},"procedureId":{"type":"integer","description":""}}}}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/WorkProductStartPostResponse"}}}}},"/app/work/report-status":{"post":{"tags":["app-要料相关"],"summary":"app上报接驳口状态","operationId":"report-statusUsingPOST","parameters":[{"in":"body","name":"AppWorkReport-statusRequest","schema":{"type":"object","properties":{"worktableCode":{"type":"string","description":""},"transferId":{"type":"integer","description":""},"status":{"type":"integer","description":""}}}}],"responses":{"200":{"description":""}}}},"/app/work/task-list":{"get":{"tags":["app-作业相关"],"summary":"任务下拉列表","operationId":"task-listUsingGET","parameters":[{"name":"worktableIpAddress","in":"query","description":"","required":false,"type":"string","default":"","format":""}],"responses":{"200":{"description":"","schema":{"$ref":"#/definitions/WorkTaskListGetResponse"}}}}}},"definitions":{"AdminLoginPostResponse":{"type":"object","format":"","description":"","title":"AdminLoginPostResponse","properties":{"userInfo":{"type":"object","format":"","description":"用户信息","title":"userInfo","properties":{"id":{"type":"integer","format":"int32","description":"用户id"},"personCode":{"type":"string","description":"用户工号"},"realName":{"type":"string","description":"用户名称"}}},"worktableInfo":{"type":"object","format":"","description":"工作台信息","title":"worktableInfo","properties":{"id":{"type":"integer","format":"int32","description":"工作台id"},"worktableCode":{"type":"string","description":"工作台编号"},"worktableName":{"type":"string","description":"工作台名称"},"controlIpAddress":{"type":"string","description":"控制器的ip地址"},"controlFlag":{"type":"integer","format":"int32","description":"控制器标志位  1-选择  2-未选择"},"errorProofModuleFlag":{"type":"integer","format":"int32","description":"防错模组"},"electricScrewdriverFlag":{"type":"integer","format":"int32","description":"电动螺丝刀"},"tricolorLampFlag":{"type":"integer","format":"int32","description":"三色灯"},"buzzerFlag":{"type":"integer","format":"int32","description":"蜂鸣器"},"completionButtonFlag":{"type":"integer","format":"int32","description":"完成按钮"},"lineId":{"type":"integer","format":"int32","description":"产线id"},"materialFlag":{"type":"integer","format":"int32","description":"要料按钮  1-勾选  2-未勾选"},"produceType":{"type":"integer","format":"int32","description":"生产方式 1-条码 2-编码"},"cameraFlag":{"type":"integer","format":"int32","description":"摄像头 1-启用 2-禁用"},"toolFlag":{"type":"integer","format":"int32","description":"作业台是否设置了电动螺丝刀，1-是，2-否"},"toolType":{"type":"integer","format":"int32","description":"类型 2-电动-结果反馈 3-电动-扭力反馈"}}},"transferList":{"type":"array","format":"","description":"接驳口list","items":{"title":"transferList","properties":{"id":{"type":"integer","format":"int32","description":"接驳口id"},"transferCode":{"type":"string","description":"接驳口编码"},"transferName":{"type":"string","description":"接驳口名称"}}}},"processInProductionInfo":{"type":"object","format":"","description":"该作业台异常退出的产品记录详情","title":"processInProductionInfo","properties":{"id":{"type":"integer","format":"int32","description":"记录id"},"productProcedureId":{"type":"integer","format":"int32","description":"生产产品工序id"},"productCode":{"type":"string","description":"产品编码"},"productSerialCode":{"type":"string","description":"产品条码"},"procedureName":{"type":"string","description":"工序名称"},"procedureExist":{"type":"integer","format":"int32","description":"工序是否存在 1-存在 2-不存在"}}},"productCodeList":{"type":"object","format":"","description":"产品编码列表","title":"productCodeList","properties":{"productCode":{"type":"string","description":"产品编码"},"productName":{"type":"string","description":"产品名称"}}},"serialCodeRuleInfo":{"type":"object","format":"","description":"产品和物料的正则","title":"serialCodeRuleInfo","properties":{"materialRule":{"type":"string","description":"物料正则"},"productRule":{"type":"string","description":"产品正则"}}},"taskList":{"type":"array","format":"","description":"任务列表","items":{"title":"taskList","properties":{"id":{"type":"integer","format":"int32","description":"任务id"},"taskCode":{"type":"string","description":"任务编码"},"productCode":{"type":"string","description":"产品编码"},"productName":{"type":"string","description":"产品名称"},"planNum":{"type":"integer","format":"int32","description":"计划数量"},"status":{"type":"integer","format":"int32","description":"任务状态 1-未完成 2-已完成"},"planStartTime":{"type":"string","format":"date-time","description":"计划开始时间"},"planEndTime":{"type":"string","format":"date-time","description":"计划完成时间"},"executeTime":{"type":"string","format":"date-time","description":"任务执行时间"},"detailList":{"type":"array","format":"","description":"任务详情list","items":{"title":"detailList","properties":{"id":{"type":"integer","format":"int32","description":""},"productSerial_code":{"type":"string","description":"产品条码"},"status":{"type":"integer","format":"int32","description":"生产状态1 待执行 2 执行中 3 已完工"},"workOrder_code":{"type":"string","description":"工作令"},"batchNumber":{"type":"string","description":"批次号"},"onlineTime":{"type":"string","format":"date-time","description":"上线时间"},"finishTime":{"type":"string","format":"date-time","description":"完工时间"}}}}}}}}},"AdminSelectGetResponse":{"type":"object","format":"","description":"","title":"AdminSelectGetResponse","properties":{"dataList":{"type":"array","format":"","description":"","items":{"type":"object","format":"","description":"","title":"","properties":{"id":{"type":"integer","format":"int32","description":"操作人id"},"personCode":{"type":"string","description":"操作人工号"},"realName":{"type":"string","description":"操作人名称"}}}}}},"MaterialRackListByWorktableGetResponse":{"type":"object","format":"","description":"","title":"MaterialRackListByWorktableGetResponse","properties":{"dataList":{"type":"array","format":"","description":"","items":{"type":"object","format":"","description":"","title":"","properties":{"id":{"type":"integer","format":"int32","description":"料架id"},"orderNum":{"type":"integer","format":"int32","description":"序号1-10"},"materialId":{"type":"integer","format":"int32","description":"物料id"},"materialCode":{"type":"string","description":"物料编号"},"materialName":{"type":"string","description":"物料名称"},"alarmThreshold":{"type":"integer","format":"int32","description":"报警阈值"},"feedNum":{"type":"integer","format":"int32","description":"补料数量"},"remainNum":{"type":"string","description":"剩余数量"},"status":{"type":"integer","format":"int32","description":"料架状态 1 未分配 2 已分配"},"model":{"type":"string","description":"物料型号"}}}}}},"MaterialRackVerifyMaterialSerialCodeGetResponse":{"type":"object","format":"","description":"","title":"MaterialRackVerifyMaterialSerialCodeGetResponse","properties":{"materialCode":{"type":"string","description":"物料编号"},"materialName":{"type":"string","description":"物料名称"}}},"WorkMesCallPostResponse":{"type":"object","format":"","description":"","title":"WorkMesCallPostResponse","properties":{"worktableId":{"type":"integer","format":"int32","description":""},"status":{"type":"integer","format":"int32","description":" 1-通过 2-不通过"}}},"WorkProductRestartPostResponse":{"type":"object","format":"","description":"","title":"WorkProductRestartPostResponse","properties":{"processRecordInfo":{"type":"object","format":"","description":"产品生产记录信息","title":"processRecordInfo","properties":{"id":{"type":"integer","format":"int32","description":"生产记录id"},"productId":{"type":"integer","format":"int32","description":"产品id"},"productCode":{"type":"string","description":"产品编号"},"productName":{"type":"string","description":"产品名称"},"procedureId":{"type":"integer","format":"int32","description":"工序id"},"procedureCode":{"type":"string","description":"工序编号"},"procedureName":{"type":"string","description":"工序名称"},"status":{"type":"integer","format":"int32","description":"1 开始生产 2 中途退出"}}}}},"WorkProductScanGetResponse":{"type":"object","format":"","description":"","title":"WorkProductScanGetResponse","properties":{"productName":{"type":"string","description":"产品名称"},"productCode":{"type":"string","description":"产品编码"},"productSerialCode":{"type":"string","description":"产品条码"},"procedureList":{"type":"array","format":"","description":"","items":{"title":"procedureList","properties":{"procedureId":{"type":"integer","format":"int32","description":"工序id"},"procedureCode":{"type":"string","description":"工序编码"},"procedureName":{"type":"string","description":"工序名称"},"productionStatus":{"type":"integer","format":"int32","description":"工序生产状态 1-未开始 2-已开始未完成 3-已完成"}}}}}},"WorkProductStartPostResponse":{"type":"object","format":"","description":"","title":"WorkProductStartPostResponse","properties":{"processRecordInfo":{"type":"object","format":"","description":"产品生产记录信息","title":"processRecordInfo","properties":{"id":{"type":"integer","format":"int32","description":"生产记录id"},"productId":{"type":"integer","format":"int32","description":"产品id"},"productCode":{"type":"string","description":"产品编号"},"productName":{"type":"string","description":"产品名称"},"procedureId":{"type":"integer","format":"int32","description":"工序id"},"procedureCode":{"type":"string","description":"工序编号"},"procedureName":{"type":"string","description":"工序名称"},"status":{"type":"integer","format":"int32","description":"1 开始生产 2 中途退出"},"currentStepNum":{"type":"integer","format":"int32","description":"当前生产步骤"},"allowRework":{"type":"integer","format":"int32","description":"是否允许返工 1-允许 2-不允许"}}},"productStepRecordList":{"type":"array","format":"","description":"步骤记录信息列表","items":{"type":"object","format":"","description":"步骤记录信息","title":"productStepRecord","properties":{"id":{"type":"integer","format":"int32","description":"主键id"},"stepId":{"type":"integer","format":"int32","description":"步骤id"},"stepNum":{"type":"integer","format":"int32","description":"步骤序号"},"worktableCode":{"type":"string","description":"作业台编号"},"worktableName":{"type":"string","description":"作业台名称"},"beginTime":{"type":"string","format":"date","description":"步骤开始时间"},"endTime":{"type":"string","format":"date","description":"步骤结束时间"},"usedTime":{"type":"integer","format":"int32","description":"步骤已用时"},"currentUserName":{"type":"string","description":"操作人名字"},"currentPersonCode":{"type":"string","description":"操作人工号"},"stepDetailRecordList":{"type":"array","format":"","description":"步骤操作详情(拧螺丝才会有)","items":{"type":"object","format":"","description":"","title":"StepDetailRecord","properties":{"operationResult":{"type":"integer","format":"int32","description":"操作结果"},"operationTime":{"type":"string","format":"date","description":"操作时间"},"torque":{"type":"string","description":"扭矩"},"torqueUnit":{"type":"string","description":"扭矩单位"},"badReason":{"type":"string","description":"不良原因"}}}},"stepDataList":{"type":"array","format":"","description":"","items":{"title":"stepDataList","properties":{"id":{"type":"integer","format":"int32","description":"数据记录id"},"dataName":{"type":"string","description":"数据名称"},"dataContent":{"type":"string","description":"数据内容"},"dataUnit":{"type":"integer","format":"int32","description":"数据单位 1-米(m)、2-千克(kg)、3-秒(s)、4-安培(A)、5-开(K)、6-牛(N)、7-赫兹(Hz)、8-帕(Pa)、9-个、10-其他"},"unitDesc":{"type":"string","description":"单位说明"}}}},"stepPictureList":{"type":"array","format":"","description":"步骤照片记录列表","items":{"title":"stepPictureList","properties":{"fileName":{"type":"string","description":"文件名称"},"fileUrl":{"type":"string","description":"文件路径"}}}}}}},"stepNum\t":{"type":"integer","format":"int32","description":"步骤总数"},"stepList":{"type":"array","format":"","description":"步骤列表","items":{"type":"object","format":"","description":"","title":"","properties":{"id":{"type":"integer","format":"int32","description":"步骤id"},"rank":{"type":"integer","format":"int32","description":"步骤排序"},"stepName":{"type":"string","description":"步骤名称"},"workTime":{"type":"integer","format":"int32","description":"标准作业时间"},"stepDesc":{"type":"string","description":"步骤描述"},"materialList":{"type":"array","format":"","description":"物料信息","items":{"type":"object","format":"","description":"","title":"materialObject","properties":{"materialId":{"type":"integer","format":"int32","description":"物料id"},"materialCode":{"type":"string","description":"物料编号"},"materialName":{"type":"string","description":"物料名称"},"corePartFlag":{"type":"integer","format":"int32","description":"关键部件"},"receiveMaterialNum":{"type":"integer","format":"int32","description":"取料数量"},"model":{"type":"string","description":"物料型号"}}}},"toolList":{"type":"array","format":"","description":"工具信息","items":{"type":"object","format":"","description":"","title":"toolObject","properties":{"toolId":{"type":"integer","format":"int32","description":"工具id"},"toolCode":{"type":"string","description":"工具编号"},"toolName":{"type":"string","description":"工具名称"},"toolModel":{"type":"string","description":"工具型号"},"toolType":{"type":"integer","format":"int32","description":"工具类型"}}}},"fileList":{"type":"array","format":"","description":"","items":{"title":"fileList","properties":{"fileUrl":{"type":"string","description":"图片路径"},"fileName":{"type":"string","description":"图片名字"}}}},"subStepList":{"type":"array","format":"","description":"子步骤列表","items":{"type":"object","format":"","description":"","title":"","properties":{"substepDesc":{"type":"string","description":"操作说明"},"technicalRequirement":{"type":"string","description":"技术要求"}}}},"dataInfoList":{"type":"array","format":"","description":"","items":{"title":"dataInfoList","properties":{"id":{"type":"integer","format":"int32","description":"步骤数据id"},"dataName":{"type":"string","description":"数据名称"},"dataUnit":{"type":"integer","format":"int32","description":"数据单位 1-米(m)、2-千克(kg)、3-秒(s)、4-安培(A)、5-开(K)、6-牛(N)、7-赫兹(Hz)、8-帕(Pa)、9-个、10-其他"},"unitDesc":{"type":"string","description":"单位说明"},"remark":{"type":"string","description":"数据内容"}}}},"electricFlag":{"type":"integer","format":"int32","description":"包含电动工具"},"attention":{"type":"string","description":"注意事项"},"pictureFlag":{"type":"integer","format":"int32","description":"是否需要上传照片 1-选中 2-未选中"}}}},"corePartBindRecordNum":{"type":"integer","format":"int32","description":"核心部件绑定记录总数"},"corePartBindRecordList":{"type":"array","format":"","description":"核心部件绑定记录","items":{"title":"corePartBindRecordList","properties":{"id":{"type":"integer","format":"int32","description":"主键id"},"materialId":{"type":"integer","format":"int32","description":"物料id"},"materialCode":{"type":"string","description":"物料编号"},"materialName":{"type":"string","description":"物料名称"},"model":{"type":"string","description":"物料型号"},"isBind":{"type":"integer","format":"int32","description":"是否绑定 1 未绑定 2 已绑定"},"materialSerialCode":{"type":"string","description":"物料条码"},"bindId":{"type":"integer","format":"int32","description":"绑定人id"},"bindName":{"type":"string","description":"绑定人姓名"},"bindPersonCode":{"type":"string","description":"绑定人工号"},"bindTime":{"type":"string","format":"date-time","description":"绑定时间"}}}}}},"WorkTaskListGetResponse":{"type":"object","format":"","description":"","title":"WorkTaskListGetResponse","properties":{"taskList":{"type":"array","format":"","description":"任务列表","items":{"title":"taskList","properties":{"id":{"type":"integer","format":"int32","description":"任务id"},"taskCode":{"type":"string","description":"任务编码"},"productCode":{"type":"string","description":"产品编码"},"productName":{"type":"string","description":"产品名称"},"planNum":{"type":"integer","format":"int32","description":"计划数量"},"status":{"type":"integer","format":"int32","description":"任务状态 1-未完成 2-已完成"},"planStartTime":{"type":"string","format":"date-time","description":"计划开始时间"},"planEndTime":{"type":"string","format":"date-time","description":"计划完成时间"},"executeTime":{"type":"string","format":"date-time","description":"任务执行时间"},"detailList":{"type":"array","format":"","description":"任务详情list","items":{"title":"detailList","properties":{"id":{"type":"integer","format":"int32","description":""},"productSerial_code":{"type":"string","description":"产品条码"},"status":{"type":"integer","format":"int32","description":"生产状态1 待执行 2 执行中 3 已完工"},"workOrder_code":{"type":"string","description":"工作令"},"batchNumber":{"type":"string","description":"批次号"},"onlineTime":{"type":"string","format":"date-time","description":"上线时间"},"finishTime":{"type":"string","format":"date-time","description":"完工时间"}}}}}}}}}}}
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "mes",
+        "version": "last"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/pda/common/upload-file": {
+            "post": {
+                "tags": [
+                    "【PDA】公共基础接口"
+                ],
+                "summary": "文件上传",
+                "description": "",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "查询成功",
+                            "title": "PdaCommonUploadFilePostResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "20000"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "fileUrl": {
+                                            "type": "string",
+                                            "description": "文件url"
+                                        },
+                                        "fileName": {
+                                            "type": "string",
+                                            "description": "文件名"
+                                        },
+                                        "fileSize": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "description": "文件大小"
+                                        }
+                                    },
+                                    "required": [
+                                        "fileUrl",
+                                        "fileName",
+                                        "fileSize"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/config/sys-param/list-by-param": {
+            "get": {
+                "tags": [
+                    "【PDA】公共基础接口"
+                ],
+                "summary": "查询数据字典",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "paramName",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaConfigSysParamListByParamGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "total": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": ""
+                                        },
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "createId": {
+                                                        "type": "string",
+                                                        "description": "创建者ID"
+                                                    },
+                                                    "createTime": {
+                                                        "type": "string",
+                                                        "description": "创建时间"
+                                                    },
+                                                    "createName": {
+                                                        "type": "string",
+                                                        "description": "创建者姓名"
+                                                    },
+                                                    "paramName": {
+                                                        "type": "string",
+                                                        "description": "参数名称"
+                                                    },
+                                                    "paramValue": {
+                                                        "type": "string",
+                                                        "description": "参数VALUE"
+                                                    },
+                                                    "paramDesc": {
+                                                        "type": "string",
+                                                        "description": "参数描述"
+                                                    },
+                                                    "parentId": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "父ID"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "createId",
+                                                    "createTime",
+                                                    "createName",
+                                                    "paramName",
+                                                    "paramValue",
+                                                    "paramDesc",
+                                                    "parentId"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "total",
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/admin/user/logout": {
+            "post": {
+                "tags": [
+                    "【PDA】公共基础接口"
+                ],
+                "summary": "登出",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary",
+                            "default": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/admin/user/name-login": {
+            "post": {
+                "tags": [
+                    "【PDA】公共基础接口"
+                ],
+                "summary": "登陆",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "workCode": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "workCode",
+                                "password"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaAdminUserNameLoginPostResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "description": ""
+                                        },
+                                        "userInfo": {
+                                            "type": "object",
+                                            "format": "",
+                                            "description": "",
+                                            "title": "userInfo",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "description": "id"
+                                                },
+                                                "userName": {
+                                                    "type": "string",
+                                                    "description": "姓名"
+                                                },
+                                                "phoneNumber": {
+                                                    "type": "string",
+                                                    "description": "手机号"
+                                                },
+                                                "workCode": {
+                                                    "type": "string",
+                                                    "description": "用户id"
+                                                },
+                                                "orgName": {
+                                                    "type": "string",
+                                                    "description": "组织架构名称"
+                                                },
+                                                "orgFullName": {
+                                                    "type": "string",
+                                                    "description": "组织架构全称"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "userName",
+                                                "phoneNumber",
+                                                "workCode",
+                                                "orgName",
+                                                "orgFullName"
+                                            ]
+                                        },
+                                        "menus": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "菜单ID数组",
+                                            "items": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "token",
+                                        "userInfo",
+                                        "menus"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/task/msg-count": {
+            "get": {
+                "tags": [
+                    "【PDA】任务"
+                ],
+                "summary": "任务/查询任务数量",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaTaskMsgCountGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "taskToReceive": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务接收"
+                                        },
+                                        "taskToRun": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务执行"
+                                        },
+                                        "taskToReport": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务报工"
+                                        },
+                                        "taskToFinish": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务完工"
+                                        }
+                                    },
+                                    "required": [
+                                        "taskToReceive",
+                                        "taskToRun",
+                                        "taskToReport",
+                                        "taskToFinish"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/admin/user/password/modify": {
+            "post": {
+                "tags": [
+                    "【PDA】我的"
+                ],
+                "summary": "修改密码/修改",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "oldPassword": {
+                                    "type": "string"
+                                },
+                                "newPassword": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "oldPassword",
+                                "newPassword"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {}
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/admin/user/password/check": {
+            "post": {
+                "tags": [
+                    "【PDA】我的"
+                ],
+                "summary": "修改密码/校验",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "oldPassword": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "oldPassword"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {}
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/admin/user/info": {
+            "get": {
+                "tags": [
+                    "【PDA】我的"
+                ],
+                "summary": "获取用户信息",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaAdminUserInfoGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "userInfo": {
+                                            "type": "object",
+                                            "format": "",
+                                            "description": "",
+                                            "title": "userInfo",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "description": "id"
+                                                },
+                                                "userName": {
+                                                    "type": "string",
+                                                    "description": "姓名"
+                                                },
+                                                "phoneNumber": {
+                                                    "type": "string",
+                                                    "description": "手机号"
+                                                },
+                                                "workCode": {
+                                                    "type": "string",
+                                                    "description": "用户id"
+                                                },
+                                                "orgName": {
+                                                    "type": "string",
+                                                    "description": "组织架构名称"
+                                                },
+                                                "orgFullName": {
+                                                    "type": "string",
+                                                    "description": "组织架构全称"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "userName",
+                                                "phoneNumber",
+                                                "workCode",
+                                                "orgName",
+                                                "orgFullName"
+                                            ]
+                                        },
+                                        "menus": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "菜单ID数组",
+                                            "items": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "userInfo",
+                                        "menus"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/report/list-all": {
+            "get": {
+                "tags": [
+                    "【PDA】发现"
+                ],
+                "summary": "全部报工列表",
+                "description": "keywords：任务编号/任务描述",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsReportListAllGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "报工记录id"
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编号"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "reportNumber": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "报工数量"
+                                                    },
+                                                    "createName": {
+                                                        "type": "string",
+                                                        "description": "报工人"
+                                                    },
+                                                    "createTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "报工时间"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "productCode",
+                                                    "productName",
+                                                    "reportNumber",
+                                                    "createName",
+                                                    "createTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/list-all": {
+            "get": {
+                "tags": [
+                    "【PDA】发现"
+                ],
+                "summary": "未取消任务列表",
+                "description": "keywords：任务编号/任务描述",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskListAllGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "issueTime": {
+                                                        "type": "string",
+                                                        "description": "派工时间"
+                                                    },
+                                                    "realStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "执行时间"
+                                                    },
+                                                    "reportNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "已报工数量"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "issueTime",
+                                                    "realStartTime",
+                                                    "reportNum"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/report/get-by-id": {
+            "get": {
+                "tags": [
+                    "【PDA】发现"
+                ],
+                "summary": "查询报工详情",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsReportGetByIdGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": ""
+                                        },
+                                        "orderNo": {
+                                            "type": "string",
+                                            "description": "订单编号"
+                                        },
+                                        "planCode": {
+                                            "type": "string",
+                                            "description": "计划编号"
+                                        },
+                                        "workNo": {
+                                            "type": "string",
+                                            "description": "工作令号"
+                                        },
+                                        "batchNo": {
+                                            "type": "string",
+                                            "description": "批次号"
+                                        },
+                                        "taskCode": {
+                                            "type": "string",
+                                            "description": "任务编号"
+                                        },
+                                        "taskDesc": {
+                                            "type": "string",
+                                            "description": "任务描述"
+                                        },
+                                        "productCode": {
+                                            "type": "string",
+                                            "description": "产品编码"
+                                        },
+                                        "productName": {
+                                            "type": "string",
+                                            "description": "产品描述"
+                                        },
+                                        "taskNum": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务数量"
+                                        },
+                                        "reportNumber": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "报工数量"
+                                        },
+                                        "reportTime": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "工时"
+                                        },
+                                        "remark": {
+                                            "type": "string",
+                                            "description": "备注"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "orderNo",
+                                        "planCode",
+                                        "workNo",
+                                        "batchNo",
+                                        "taskCode",
+                                        "taskDesc",
+                                        "productCode",
+                                        "productName",
+                                        "taskNum",
+                                        "reportNumber",
+                                        "reportTime",
+                                        "remark"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/work-guide/list": {
+            "get": {
+                "tags": [
+                    "【PDA】业务服务/作业指导书"
+                ],
+                "summary": "作业指导书列表",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsWorkGuideListGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "total": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "总条数"
+                                        },
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "数据列表",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "technicsCode": {
+                                                        "type": "string",
+                                                        "description": "工艺编码"
+                                                    },
+                                                    "technicsDesc": {
+                                                        "type": "string",
+                                                        "description": "工艺描述"
+                                                    },
+                                                    "technicsVersion": {
+                                                        "type": "string",
+                                                        "description": "工艺版本"
+                                                    },
+                                                    "procedureCode": {
+                                                        "type": "string",
+                                                        "description": "工序编码"
+                                                    },
+                                                    "procedureDesc": {
+                                                        "type": "string",
+                                                        "description": "工序描述"
+                                                    },
+                                                    "procedureId": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "工序id"
+                                                    },
+                                                    "fileId": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "文件id"
+                                                    },
+                                                    "fileName": {
+                                                        "type": "string",
+                                                        "description": "文件名"
+                                                    },
+                                                    "fileUrl": {
+                                                        "type": "string",
+                                                        "description": "文件的key"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "productCode",
+                                                    "productName",
+                                                    "technicsCode",
+                                                    "technicsDesc",
+                                                    "technicsVersion",
+                                                    "procedureCode",
+                                                    "procedureDesc",
+                                                    "procedureId",
+                                                    "fileId",
+                                                    "fileName",
+                                                    "fileUrl"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "total",
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/bind-change": {
+            "post": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "产品物料替换绑定物料",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "productBarCode": {
+                                    "type": "string"
+                                },
+                                "newMaterialSerialCode": {
+                                    "type": "string"
+                                },
+                                "field_14oldMaterialSerialCode": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "productBarCode",
+                                "newMaterialSerialCode",
+                                "field_14oldMaterialSerialCode"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/unbind": {
+            "post": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "产品物料解绑",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "productBarCode": {
+                                    "type": "string"
+                                },
+                                "materialSerialCode": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "productBarCode",
+                                "materialSerialCode"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/task/list-by-page": {
+            "get": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "任务列表",
+                "description": "keywords：任务编号/产品编码/产品描述/派工人",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskMaterialTaskListByPageGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "issueTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "派工时间"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "issueTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/task/query-bind-by-product": {
+            "get": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "查询已绑定的物料",
+                "description": "keywords：任务编号/产品编码/产品描述/派工人",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "productBarCode",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskMaterialTaskQueryBindByProductGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "totalBindCount": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "总已绑定个数"
+                                        },
+                                        "totalToBindCount": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "总需绑定物料个数"
+                                        },
+                                        "bindList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "已绑定列表",
+                                            "items": {
+                                                "title": "bindList",
+                                                "properties": {
+                                                    "materialCode": {
+                                                        "type": "string",
+                                                        "description": "物料编码"
+                                                    },
+                                                    "materielSerialCode": {
+                                                        "type": "string",
+                                                        "description": "物料条码"
+                                                    },
+                                                    "materialName": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "物料名称"
+                                                    },
+                                                    "materialNo": {
+                                                        "type": "string",
+                                                        "description": "型号代号"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "materialCode",
+                                                    "materielSerialCode",
+                                                    "materialName",
+                                                    "materialNo"
+                                                ]
+                                            }
+                                        },
+                                        "toBindList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "待绑定列表",
+                                            "items": {
+                                                "title": "toBindList",
+                                                "properties": {
+                                                    "materialCode": {
+                                                        "type": "string",
+                                                        "description": "物料编码"
+                                                    },
+                                                    "materialNum": {
+                                                        "type": "string",
+                                                        "description": "物料个数"
+                                                    },
+                                                    "materialName": {
+                                                        "type": "string",
+                                                        "description": "物料描述"
+                                                    },
+                                                    "materialNo": {
+                                                        "type": "string",
+                                                        "description": "型号代号"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "materialCode",
+                                                    "materialNum",
+                                                    "materialName",
+                                                    "materialNo"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "totalBindCount",
+                                        "totalToBindCount",
+                                        "bindList",
+                                        "toBindList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/task/query-material": {
+            "get": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "绑定/查询物料",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "materielSerialCode",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskMaterialTaskQueryMaterialGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "bindProductBarCode": {
+                                            "type": "string",
+                                            "description": "已绑定产品条码"
+                                        },
+                                        "materialCode": {
+                                            "type": "string",
+                                            "description": "物料编码"
+                                        },
+                                        "materielSerialCode": {
+                                            "type": "string",
+                                            "description": "物料条码"
+                                        },
+                                        "materialName": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "物料名称"
+                                        },
+                                        "materialNo": {
+                                            "type": "string",
+                                            "description": "型号代号"
+                                        }
+                                    },
+                                    "required": [
+                                        "bindProductBarCode",
+                                        "materialCode",
+                                        "materielSerialCode",
+                                        "materialName",
+                                        "materialNo"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/material/bind": {
+            "post": {
+                "tags": [
+                    "【PDA】业务服务/物料绑定、解绑、替换"
+                ],
+                "summary": "绑定产品物料",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "taskId": {
+                                    "type": "string"
+                                },
+                                "productBarCode": {
+                                    "type": "string"
+                                },
+                                "materialSerialCode": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "taskId",
+                                "productBarCode",
+                                "materialSerialCode"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/alarm/add": {
+            "post": {
+                "tags": [
+                    "【PDA】业务服务/实时警报"
+                ],
+                "summary": "新增警报",
+                "description": "status  状态 1未关闭 2关闭",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "alarmDetail": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "alarmDetail"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/alarm/my-history": {
+            "get": {
+                "tags": [
+                    "【PDA】业务服务/实时警报"
+                ],
+                "summary": "警报历史查询",
+                "description": "status  状态 1未关闭 2关闭",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "查询成功",
+                            "title": "PdaFmsAlarmMyHistoryGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "20000"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "total": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "总个数"
+                                        },
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "主键id"
+                                                    },
+                                                    "alarmCode": {
+                                                        "type": "string",
+                                                        "description": "警报编码"
+                                                    },
+                                                    "alarmDetail": {
+                                                        "type": "string",
+                                                        "description": "警报详情"
+                                                    },
+                                                    "status": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "状态 1未关闭 2关闭"
+                                                    },
+                                                    "closeId": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "关闭ID"
+                                                    },
+                                                    "closeName": {
+                                                        "type": "string",
+                                                        "description": "关闭姓名"
+                                                    },
+                                                    "closeRemark": {
+                                                        "type": "string",
+                                                        "description": "关闭说明"
+                                                    },
+                                                    "createName": {
+                                                        "type": "string",
+                                                        "description": "创建人"
+                                                    },
+                                                    "createTime": {
+                                                        "type": "string",
+                                                        "description": "创建时间"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "alarmCode",
+                                                    "alarmDetail",
+                                                    "status",
+                                                    "closeId",
+                                                    "closeName",
+                                                    "closeRemark",
+                                                    "createName",
+                                                    "createTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "total",
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/receive/list-by-page": {
+            "get": {
+                "tags": [
+                    "【PDA】任务接收"
+                ],
+                "summary": "任务接收列表",
+                "description": "keywords：任务编号/产品编码/产品描述/派工人",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskReceiveListByPageGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "issueTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "派工时间"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "issueTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/operation-record": {
+            "get": {
+                "tags": [
+                    "【PDA】任务接收"
+                ],
+                "summary": "任务操作记录",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskOperationRecordGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "operateName": {
+                                                        "type": "string",
+                                                        "description": "操作人"
+                                                    },
+                                                    "operateType": {
+                                                        "type": "string",
+                                                        "description": "操作类型"
+                                                    },
+                                                    "createTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "操作时间"
+                                                    },
+                                                    "operateDetail": {
+                                                        "type": "string",
+                                                        "description": "操作详情"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "operateName",
+                                                    "operateType",
+                                                    "createTime",
+                                                    "operateDetail"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/get-by-id": {
+            "get": {
+                "tags": [
+                    "【PDA】任务接收"
+                ],
+                "summary": "任务详情",
+                "description": "",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskGetByIdGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": ""
+                                        },
+                                        "taskCode": {
+                                            "type": "string",
+                                            "description": "任务编号"
+                                        },
+                                        "taskDesc": {
+                                            "type": "string",
+                                            "description": "任务描述"
+                                        },
+                                        "taskStatus": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务状态"
+                                        },
+                                        "taskNum": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "任务数量"
+                                        },
+                                        "productCode": {
+                                            "type": "string",
+                                            "description": "产品编码"
+                                        },
+                                        "productName": {
+                                            "type": "string",
+                                            "description": "产品描述"
+                                        },
+                                        "planCode": {
+                                            "type": "string",
+                                            "description": "计划编号"
+                                        },
+                                        "workNo": {
+                                            "type": "string",
+                                            "description": "工作令"
+                                        },
+                                        "batchNo": {
+                                            "type": "string",
+                                            "description": "批次号"
+                                        },
+                                        "equipmentDesc": {
+                                            "type": "string",
+                                            "description": "生产设备"
+                                        },
+                                        "jockeyName": {
+                                            "type": "string",
+                                            "description": "操作工名称"
+                                        },
+                                        "planStartTime": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "计划开始时间"
+                                        },
+                                        "planEndTime": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "计划结束时间"
+                                        },
+                                        "realStartTime": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "实际开始时间"
+                                        },
+                                        "realEndTime": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "实际完成时间"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "taskCode",
+                                        "taskDesc",
+                                        "taskStatus",
+                                        "taskNum",
+                                        "productCode",
+                                        "productName",
+                                        "planCode",
+                                        "workNo",
+                                        "batchNo",
+                                        "equipmentDesc",
+                                        "jockeyName",
+                                        "planStartTime",
+                                        "planEndTime",
+                                        "realStartTime",
+                                        "realEndTime"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/receive/confirm": {
+            "post": {
+                "tags": [
+                    "【PDA】任务接收"
+                ],
+                "summary": "接收任务",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/execution/list-by-page": {
+            "get": {
+                "tags": [
+                    "【PDA】任务执行"
+                ],
+                "summary": "任务执行列表",
+                "description": "keywords：任务编号\n\n产品编码或者描述\n\n派工人工号或者姓名",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskExecutionListByPageGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "reveiveTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "接收时间"
+                                                    },
+                                                    "prepareFinishTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "准备完成时间"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "reveiveTime",
+                                                    "prepareFinishTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/execution/confirm": {
+            "post": {
+                "tags": [
+                    "【PDA】任务执行"
+                ],
+                "summary": "执行任务",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/report/confirm": {
+            "post": {
+                "tags": [
+                    "【PDA】任务报工"
+                ],
+                "summary": "任务报工",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "reportNumber": {
+                                    "type": "string"
+                                },
+                                "remark": {
+                                    "type": "string"
+                                },
+                                "fileList": {
+                                    "type": "object",
+                                    "properties": {
+                                        "fileName": {
+                                            "type": "string"
+                                        },
+                                        "fileUrl": {
+                                            "type": "string"
+                                        },
+                                        "fileSize": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "fileName",
+                                        "fileUrl",
+                                        "fileSize"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "reportNumber",
+                                "remark",
+                                "fileList"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/report/list-by-page": {
+            "get": {
+                "tags": [
+                    "【PDA】任务报工"
+                ],
+                "summary": "任务报工列表",
+                "description": "keywords：任务编号\n\n产品编码或者描述\n\n派工人工号或者姓名",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskReportListByPageGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "realStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "执行时间"
+                                                    },
+                                                    "reportNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "已报工数量"
+                                                    },
+                                                    "totalReportTime": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "总工时"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "realStartTime",
+                                                    "reportNum",
+                                                    "totalReportTime"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/complete/confirm": {
+            "post": {
+                "tags": [
+                    "【PDA】任务完工"
+                ],
+                "summary": "任务完工",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "root",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "title": "empty object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/pda/fms/task/complete/list-by-page": {
+            "get": {
+                "tags": [
+                    "【PDA】任务完工"
+                ],
+                "summary": "任务完工列表",
+                "description": "keywords：任务编号\n\n产品编码或者描述\n\n派工人工号或者姓名",
+                "consumes": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "description": "",
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "body",
+                        "description": "raw paramter",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "format": "",
+                            "description": "",
+                            "title": "PdaFmsTaskCompleteListByPageGetResponse",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": ""
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "format": "",
+                                    "description": "",
+                                    "title": "data",
+                                    "properties": {
+                                        "dataList": {
+                                            "type": "array",
+                                            "format": "",
+                                            "description": "",
+                                            "items": {
+                                                "title": "dataList",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": ""
+                                                    },
+                                                    "taskCode": {
+                                                        "type": "string",
+                                                        "description": "任务编号"
+                                                    },
+                                                    "taskDesc": {
+                                                        "type": "string",
+                                                        "description": "任务描述"
+                                                    },
+                                                    "taskStatus": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务状态"
+                                                    },
+                                                    "taskNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "任务数量"
+                                                    },
+                                                    "productCode": {
+                                                        "type": "string",
+                                                        "description": "产品编码"
+                                                    },
+                                                    "productName": {
+                                                        "type": "string",
+                                                        "description": "产品描述"
+                                                    },
+                                                    "planCode": {
+                                                        "type": "string",
+                                                        "description": "计划编号"
+                                                    },
+                                                    "workNo": {
+                                                        "type": "string",
+                                                        "description": "工作令"
+                                                    },
+                                                    "batchNo": {
+                                                        "type": "string",
+                                                        "description": "批次号"
+                                                    },
+                                                    "planStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划开始时间"
+                                                    },
+                                                    "planEndTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "计划结束时间"
+                                                    },
+                                                    "issueName": {
+                                                        "type": "string",
+                                                        "description": "派工人名称"
+                                                    },
+                                                    "realStartTime": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "description": "执行时间"
+                                                    },
+                                                    "reportNum": {
+                                                        "type": "integer",
+                                                        "format": "int32",
+                                                        "description": "已报工数量"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "required": [
+                                                    "id",
+                                                    "taskCode",
+                                                    "taskDesc",
+                                                    "taskStatus",
+                                                    "taskNum",
+                                                    "productCode",
+                                                    "productName",
+                                                    "planCode",
+                                                    "workNo",
+                                                    "batchNo",
+                                                    "planStartTime",
+                                                    "planEndTime",
+                                                    "issueName",
+                                                    "realStartTime",
+                                                    "reportNum"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "dataList"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message",
+                                "data"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

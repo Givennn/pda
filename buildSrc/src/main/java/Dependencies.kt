@@ -7,7 +7,7 @@ object Sdk {
 object Versions {
     const val ANDROIDX_TEST_EXT = "1.1.1"
     const val ANDROIDX_TEST = "1.2.0"
-    const val APPCOMPAT = "1.1.0"
+    const val APPCOMPAT = "1.3.1"
     const val CONSTRAINT_LAYOUT = "1.1.3"
     const val RECYCLER_VIEW = "1.1.0"
     const val COORDINATOR_LAYOUT = "1.1.0"
@@ -15,7 +15,7 @@ object Versions {
     const val ESPRESSO_CORE = "3.2.0"
     const val JUNIT = "4.13"
     const val KTLINT = "0.37.2"
-    const val NAVIGATION = "2.3.0"
+    const val NAVIGATION = "2.3.5"
     const val FRAGMENT_KTX = "1.3.6"
 
     // lib versions
@@ -26,9 +26,9 @@ object Versions {
     const val TIMBER = "4.7.1"
     const val COIL = "0.11.0"
     const val EXO_PLAYER = "2.12.0"
-    const val RX_JAVA = "2.2.20"
+    const val RX_JAVA = "3.1.0"
     const val KAML = "0.26.0"
-    const val MATERIAL = "1.1.0"
+    const val MATERIAL = "1.4.0"
 }
 
 object BuildPluginsVersion {

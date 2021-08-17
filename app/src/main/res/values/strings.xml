@@ -1,8 +1,7 @@
 <resources>
-    <!--TODO rename app_name-->
-    <string name="app_name">bleed</string>
-    <string name="title">This is just a template</string>
-    <string name="description">Panda-fa Digital Manufacture Platform</string>
+    <string name="app_name">MES平台</string>
+<!--    <string name="title">This is just a template</string>-->
+    <string name="description">Manufacturing Execution System</string>
     <string name="discovery">发现</string>
     <string name="profile">我的</string>
     <string name="task">任务</string>

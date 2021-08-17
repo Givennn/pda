@@ -14,11 +14,14 @@ unset($content['apiEnvs']);
 foreach ($paths as $key => $path) {
     // strpos($key, '/web/') !== false || 
     // 过滤接口
-    if (startsWith($key, '/app') !== true) {
+    if (startsWith($key, '/pda/') !== true) {
         unset($paths[$key]);
-    } else {
-        $paths[$key] = handlePath($key, $path);
     }
+    // } else {
+    //     $paths[$key] = handlePath($key, $path);
+    // }
+    // $paths[$key] = handlePath($key, $path);
+
 }
 
 $content['paths'] = $paths;
@@ -37,7 +40,7 @@ function handlePath($url, $path) {
 }
 
 function handleRequest($path, $method, $request) {
-    $request['operationId'] = basename($path, '.do').'Using'.strtoupper($method);
+    // $request['operationId'] = basename($path, '.do').'Using'.strtoupper($method);
     unset($request["sortWeight"]);
     unset($request["devStatus"]);
     unset($request["devStatusName"]);
@@ -50,32 +53,35 @@ function handleRequest($path, $method, $request) {
     unset($request["schemes"]);
     unset($request["consumes"]);
     unset($request["produces"]);
-
+   
     if ($request['parameters']) {
         $parameters = [];
-        $parameterBodies = [];
-        $formattedParameterBody = [];
         foreach ($request['parameters'] as $key => $parameter) {
             
             $parameter = handleParameter($parameter);
             unset($request['parameters'][$key]);
             if ($parameter) {
-                if($parameter['in']== 'body') {
-                    $parameterBodies[] = $parameter;
-                } else {
-                    $parameters[] = $parameter;
-                }
+               $parameters[] = $parameter;
             }
         }
-        if (empty($parameters) && empty($parameterBodies)) {
-            unset($request['parameters']);
-        } else {
-            $bodyParameter = handleBodyParameter($path, $parameterBodies);
-            if($bodyParameter) {
-                $parameters[] = $bodyParameter;
-            }
-            $request['parameters'] = $parameters;
-        }
+        
+        // if (empty($parameters)) {
+        //     unset($request['parameters']);
+        // } else {
+        //     if ($method == 'post') {
+        //         $bodyParameter = handleBodyParameter($path, $parameters);
+        //         printf("$path\n");
+        //         printf(json_encode($parameters, JSON_UNESCAPED_UNICODE));
+        //         printf("\n");
+        //         if($bodyParameter) {
+        //             $parameters[] = [];
+        //             $parameters[] = $bodyParameter;
+        //         }
+        //         // var_dump($parameters);
+        //     }
+        // }
+        
+        $request['parameters'] = $parameters;
     }
 
     if ($request['responses']) {
@@ -100,6 +106,8 @@ function handleRequest($path, $method, $request) {
 }
 
 function handleBodyParameter($path, $parameterBodies) {
+
+    printf("\n");
     if(empty($parameterBodies) !== true) {
         $paths = explode("/",$path); 
         $name = "";
@@ -112,8 +120,9 @@ function handleBodyParameter($path, $parameterBodies) {
         $formattedParameterBody['in'] = "body";
         $formattedParameterBody['name'] = $name;
         $schema['type'] = "object";
-        $schema['properties'] = [];
+        $properties = [];
         foreach ($parameterBodies as $key => $bodyParameter) {
+            // var_dump($bodyParameter);
             $item = [];
             $item['type'] = $bodyParameter['type'];
             if($item['type'] == "cust") {
@@ -123,9 +132,13 @@ function handleBodyParameter($path, $parameterBodies) {
             if(isset($bodyParameter['format'])) {
                 $item['format'] = $bodyParameter['format'];
             }
-            $schema['properties'][$bodyParameter['name']] = $item; 
+            $propertyName = $bodyParameter['name'];
+            printf("$propertyName\n");
+            $properties[$propertyName] = $item; 
         }
+        $schema['properties'] = $properties;
         $formattedParameterBody['schema'] = $schema;
+        // var_dump($formattedParameterBody);
         return $formattedParameterBody;
     }
 }
@@ -133,7 +146,8 @@ function handleBodyParameter($path, $parameterBodies) {
 function handleResponse($path, $method, $response) {
     if (isset($response['schema']) && isset($response['schema']['type'])  && $response['schema']['type'] == 'object' && isset($response['schema']['properties']) ) {
         
-        $paths = explode("/",str_replace("/app/", "", $path)); 
+        // $paths = explode("/",str_replace("/pda/", "", $path)); 
+        $paths = explode("/", $path); 
         $name = "";
         foreach ($paths as $item) {
             if(strpos($item, '-') !== false) {
@@ -151,7 +165,7 @@ function handleResponse($path, $method, $response) {
         $name .= "Response";
         $definition = removeRequiredField($response['schema']);
         if(isset($definition['properties']['data']['properties']) && empty($definition['properties']['data']['properties']) !== true) {
-            $definition = $definition['properties']['data'];
+            // $definition = $definition['properties']['data'];
             $definition['title'] = $name;
             global $definitions; 
             $definitions[$name] = $definition;

@@ -16,8 +16,7 @@ pluginManagement {
         jcenter()
     }
 }
-//TODO rename project name
-rootProject.name = ("PDA-temp")
+rootProject.name = ("MES-PDA")
 
 include(
     "app",

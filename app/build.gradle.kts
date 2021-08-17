@@ -48,21 +48,19 @@ dependencies {
     implementation(project(":library-kotlin"))
     implementation(project(":api-client"))
 
-    implementation(SupportLibs.ANDROIDX_APPCOMPAT)
-    implementation(SupportLibs.ANDROIDX_CONSTRAINT_LAYOUT)
-    implementation(SupportLibs.ANDROIDX_CORE_KTX)
-    implementation(SupportLibs.MATERIAL)
-    implementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.android.support.constraint:constraint-layout:2.0.4")
+    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("com.trello.rxlifecycle4:rxlifecycle:4.0.0")
-//    const val RX_LIFE_CYCLE_ANDROID = "com.trello.rxlifecycle4:rxlifecycle-android:4.0.0"
-//    const val RX_LIFE_CYCLE_KOTLIN = "com.trello.rxlifecycle4:rxlifecycle-kotlin:4.0.0"
 
     //ktx
-    implementation(SupportLibs.ANDROIDX_FRAGMENT_KTX)
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
 
     //nav
-    implementation(SupportLibs.NAVIGATION_FRAGMENT_KTX)
-    implementation(SupportLibs.NAVIGATION_UI_KTX)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
 
     //API
     implementation(SupportLibs.MOSHI)
