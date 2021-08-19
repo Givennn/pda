@@ -1,4 +1,4 @@
-package com.panda.pda.app.retrofit
+package com.panda.pda.app.base.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.Response

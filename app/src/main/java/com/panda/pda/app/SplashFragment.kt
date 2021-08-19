@@ -2,20 +2,35 @@ package com.panda.pda.app
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.databinding.FragmentSplashBinding
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 /**
  * created by AnJiwei 2021/8/9
  */
-class SplashFragment: BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
+class SplashFragment: BaseFragment(R.layout.fragment_splash) {
 
+    private lateinit var navController: NavController
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         requestLocalUserInfo()
     }
 
     private fun requestLocalUserInfo() {
-        TODO("Not yet implemented")
+        Completable.timer(1, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnError { Timber.e(it) }
+            .subscribe {
+                navController.navigate(R.id.action_splashFragment_to_loginFragment)
+//                navController.navigate(R.id.taskFragment)
+            }
     }
 }

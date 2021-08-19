@@ -3,17 +3,17 @@
     <item
         android:id="@+id/taskFragment"
         android:title="@string/task"
-        android:icon="@drawable/ic_round_person"/>
+        android:icon="@drawable/ic_nav_task"/>
     <item
         android:id="@+id/operationFragment"
         android:title="@string/operation"
-        android:icon="@drawable/ic_round_person"/>
+        android:icon="@drawable/ic_nav_operation"/>
     <item
         android:id="@+id/discoveryFragment"
         android:title="@string/discovery"
-        android:icon="@drawable/ic_round_person"/>
+        android:icon="@drawable/ic_nav_discovery"/>
     <item
         android:id="@+id/profileFragment"
         android:title="@string/profile"
-        android:icon="@drawable/ic_round_person"/>
+        android:icon="@drawable/ic_nav_profile"/>
 </menu>

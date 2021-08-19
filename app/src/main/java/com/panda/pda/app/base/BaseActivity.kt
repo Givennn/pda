@@ -7,7 +7,9 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.panda.pda.app.R
+import com.panda.pda.app.base.extension.toast
 import com.panda.pda.library.android.LoadingDialog
 import timber.log.Timber
 
@@ -54,18 +56,18 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
             loadingDialog.show()
     }
 
-//    protected fun<TViewModel> bindLoadingStatusAndErrorMessage(viewModel: TViewModel)
-//            where TViewModel : ILoadingViewModel {
-//        viewModel.isLoading.observe(this, Observer {
-//            if (it.first) showLoading()
-//            else hideLoading()
-//        })
-//
-//        viewModel.errorMessage.observe(this, Observer {
-//            if (it.isNotEmpty()) {
-//                com.panda.pda.app.base.extension.toast(it)
-//            }
-//        })
-//    }
+    protected fun<TViewModel> bindLoadingStatusAndErrorMessage(viewModel: TViewModel)
+            where TViewModel : ILoadingViewModel {
+        viewModel.isLoading.observe(this, Observer {
+            if (it.first) showLoading()
+            else hideLoading()
+        })
+
+        viewModel.errorMessage.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                toast(it)
+            }
+        })
+    }
 }
 

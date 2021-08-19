@@ -1,4 +1,4 @@
-package com.panda.pda.app.retrofit
+package com.panda.pda.app.base.retrofit
 
 /**
  * created by AnJiwei 2020/10/28

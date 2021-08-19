@@ -1,12 +1,10 @@
 package com.panda.pda.app.user.data
 
-import com.panda.android.client.models.*
-import com.panda.pda.app.retrofit.BaseResponse
-import io.reactivex.Single
+import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.user.data.model.LoginDataModel
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
-import java.util.*
 
 /**
  * created by AnJiwei 2021/8/17
@@ -21,7 +19,7 @@ interface UserApi {
     @GET("pda/admin/user/info")
     fun pdaAdminUserInfoGet(
         @retrofit2.http.Body raw: List<Byte>?
-    ): Single<PdaAdminUserInfoGetResponse>
+    ): Single<BaseResponse<LoginDataModel>>
     /**
      * 登出
      *
@@ -40,8 +38,8 @@ interface UserApi {
      */
     @POST("pda/admin/user/name-login")
     fun pdaAdminUserNameLoginPost(
-        @retrofit2.http.Body root: LoginRequest
-    ): Single<PdaAdminUserNameLoginPostResponse>
+        @retrofit2.http.Body root: Any
+    ): Single<BaseResponse<LoginDataModel>>
     /**
      * 修改密码/校验
      *
@@ -50,8 +48,8 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/check")
     fun pdaAdminUserPasswordCheckPost(
-        @retrofit2.http.Body root: EmptyObject
-    ): Single<InlineResponse2001>
+        @retrofit2.http.Body root: Any
+    ): Single<BaseResponse<Any>>
     /**
      * 修改密码/修改
      *
@@ -60,6 +58,6 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/modify")
     fun pdaAdminUserPasswordModifyPost(
-        @retrofit2.http.Body root: EmptyObject
-    ): Single<InlineResponse2001>
+        @retrofit2.http.Body root: Any
+    ): Single<BaseResponse<Any>>
 }

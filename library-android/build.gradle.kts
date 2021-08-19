@@ -36,6 +36,11 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
     lintOptions {
         isWarningsAsErrors = true
         isAbortOnError = true
@@ -44,10 +49,10 @@ android {
 
 dependencies {
     implementation(kotlin("stdlib-jdk7"))
-
+    implementation("com.google.android.material:material:1.4.0")
     implementation(SupportLibs.ANDROIDX_APPCOMPAT)
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
-
+    api( "com.github.kirich1409:viewbindingpropertydelegate:1.4.7")
     testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_RUNNER)

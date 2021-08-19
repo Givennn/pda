@@ -14,18 +14,6 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0")
 
-    implementation(SupportLibs.MOSHI)
-    implementation(SupportLibs.MOSHI_ADAPTER)
-    implementation(SupportLibs.MOSHI_KOTLIN)
-    implementation(SupportLibs.OK_HTTP)
-    implementation(SupportLibs.RETROFIT)
-    implementation(SupportLibs.RETROFIT_MOSHI_CONVERTER)
-    implementation(SupportLibs.RETROFIT_RXJAVA_ADAPTER)
-    implementation(SupportLibs.THREE_TEN_BP)
-
-    implementation(SupportLibs.RX_JAVA)
-    implementation(SupportLibs.RX_ANDROID)
-    testImplementation(TestingLib.JUNIT)
 }
 
 java {

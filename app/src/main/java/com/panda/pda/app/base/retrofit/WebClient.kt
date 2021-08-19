@@ -1,9 +1,9 @@
-package com.panda.pda.app.retrofit
+package com.panda.pda.app.base.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -33,7 +33,7 @@ object WebClient {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(NetworkParams.SERVICE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(serviceClass)

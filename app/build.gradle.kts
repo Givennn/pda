@@ -20,6 +20,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    // TODO update temp
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -32,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
 
@@ -46,39 +53,34 @@ dependencies {
 
     implementation(project(":library-android"))
     implementation(project(":library-kotlin"))
-    implementation(project(":api-client"))
 
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.android.support.constraint:constraint-layout:2.0.4")
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("com.trello.rxlifecycle4:rxlifecycle:4.0.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    //ktx
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
-
-    //nav
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-
-    //API
-    implementation(SupportLibs.MOSHI)
-    implementation(SupportLibs.MOSHI_ADAPTER)
-    implementation(SupportLibs.MOSHI_KOTLIN)
-    implementation(SupportLibs.OK_HTTP)
+    implementation(SupportLibs.ANDROIDX_CORE_KTX)
+    implementation(SupportLibs.NAVIGATION_FRAGMENT_KTX)
+    implementation(SupportLibs.NAVIGATION_UI_KTX)
+    implementation(SupportLibs.ANDROIDX_APPCOMPAT)
+    implementation(SupportLibs.RECYCLER_VIEW)
+    implementation(SupportLibs.ANDROIDX_CONSTRAINT_LAYOUT)
     implementation(SupportLibs.RETROFIT)
     implementation(SupportLibs.RETROFIT_MOSHI_CONVERTER)
-    implementation(SupportLibs.RETROFIT_RXJAVA_ADAPTER)
+    implementation(SupportLibs.RETROFIT_RXJAVA3_ADAPTER)
     implementation(SupportLibs.LOGGING_INTERCEPTOR)
-    implementation(SupportLibs.THREE_TEN_BP)
-
-    //RxJava
-    implementation(SupportLibs.RX_JAVA)
-    implementation(SupportLibs.RX_ANDROID)
-
-    //log
+    implementation(SupportLibs.OK_HTTP)
     implementation(SupportLibs.TIMBER)
+//    implementation(SupportLibs.NAVIGATION_DYNAMIC_FEATURE_FRAGMENT_KTX)
+//    implementation(SupportLibs.LIFE_CYCLE)
+    implementation(SupportLibs.RX_JAVA)
+//    implementation(SupportLibs.RX_ANDROID)
+//    implementation(SupportLibs.RX_KOTLIN)
+    implementation(SupportLibs.RX_LIFE_CYCLE)
+    implementation(SupportLibs.RX_LIFE_CYCLE_ANDROID)
+    implementation(SupportLibs.RX_LIFE_CYCLE_KOTLIN)
+    implementation(SupportLibs.RX_BINDING)
+    implementation(SupportLibs.COIL)
+    implementation(SupportLibs.MATERIAL)
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_RULES)

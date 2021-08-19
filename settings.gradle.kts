@@ -21,6 +21,5 @@ rootProject.name = ("MES-PDA")
 include(
     "app",
     "library-android",
-    "library-kotlin",
-    "api-client"
+    "library-kotlin"
 )
