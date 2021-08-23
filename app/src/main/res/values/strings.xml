@@ -14,8 +14,7 @@
     <string name="task_receive">任务接收</string>
     <string name="task_execute">任务执行</string>
     <string name="task_report">任务报工</string>
-    <string name="task_finish">任务完成</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="task_finish">任务完工</string>
+    <string name="hello_blank_fragment">test</string>
 
 </resources>

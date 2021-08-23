@@ -194,6 +194,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/company"
             android:textColor="#7EA6FF"
+            android:layout_marginBottom="4dp"
             android:textSize="12sp" />
 
     </RelativeLayout>

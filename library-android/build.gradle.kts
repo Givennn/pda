@@ -26,6 +26,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    // TODO update temp
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -54,7 +59,7 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
     api( "com.github.kirich1409:viewbindingpropertydelegate:1.4.7")
     testImplementation(TestingLib.JUNIT)
-
+    implementation(SupportLibs.NAVIGATION_UI_KTX)
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_RUNNER)
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)
 }

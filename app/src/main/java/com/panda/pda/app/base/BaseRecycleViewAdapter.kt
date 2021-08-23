@@ -26,6 +26,10 @@ abstract class BaseRecycleViewAdapter<TBinding: ViewBinding, TSource>(protected 
         return dataSource.size
     }
 
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+    }
+
     inner class ViewHolder(val binding: TBinding): RecyclerView.ViewHolder(binding.root)
 
 }

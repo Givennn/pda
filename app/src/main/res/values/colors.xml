@@ -7,4 +7,6 @@
     <color name="white">#FFFFFF</color>
     <color name="input_text_hint">#73FFFFFF</color>
     <color name="login_error">#FFAA6D</color>
+
+    <color name="divider">#ECECEC</color>
 </resources>
