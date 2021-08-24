@@ -27,5 +27,13 @@ class TaskFragment: BaseFragment(R.layout.fragment_task) {
         binding.llTaskFinish.setOnClickListener {
             navController.navigate(R.id.taskFinishFragment)
         }
+
+        binding.llTaskExecute.setOnClickListener {
+            navController.navigate(R.id.taskExecuteFragment)
+        }
+
+        binding.llTaskReport.setOnClickListener {
+            navController.navigate(R.id.taskReportFragment)
+        }
     }
 }

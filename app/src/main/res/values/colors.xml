@@ -9,4 +9,8 @@
     <color name="login_error">#FFAA6D</color>
 
     <color name="divider">#ECECEC</color>
+    <color name="textHeaderLineColor">#262626</color>
+    <color name="textSubHeaderLineColor">#A6000000</color>
+    <color name="textHighLightColor">#457FFF</color>
+    <color name="textDescColor">#CCCCCC</color>
 </resources>

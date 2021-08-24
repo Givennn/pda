@@ -12,10 +12,17 @@ abstract class BaseRecycleViewAdapter<TBinding: ViewBinding, TSource>(protected 
 
     protected abstract fun createBinding(parent: ViewGroup): TBinding
 
+    protected abstract fun onBindViewHolderWithData(holder:ViewHolder, data: TSource, position: Int)
+
     fun refreshData(newSource: List<TSource>) {
         dataSource.clear()
         dataSource.addAll(newSource)
         notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = dataSource[holder.bindingAdapterPosition]
+        onBindViewHolderWithData(holder, data, position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

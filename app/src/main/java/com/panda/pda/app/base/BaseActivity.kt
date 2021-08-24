@@ -20,7 +20,7 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
 
 
 
-    private val loadingDialog by lazy { buildLoadingDialog() }
+//    private val loadingDialog by lazy { buildLoadingDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,35 +39,35 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
         return super.onTouchEvent(event)
     }
 
-    private fun buildLoadingDialog(): LoadingDialog {
-        val dialog =
-            LoadingDialog(this, R.layout.dialog_loading, R.id.tv_loading_message)
-        dialog.setCancelable(false)
-        return dialog
-    }
+//    private fun buildLoadingDialog(): LoadingDialog {
+//        val dialog =
+//            LoadingDialog(this, R.layout.dialog_loading, R.id.tv_loading_message)
+//        dialog.setCancelable(false)
+//        return nullsFirst<>()
+//    }
+//
+//    private fun hideLoading() {
+//        if (!loadingDialog.isShowing)
+//            return
+//        loadingDialog.dismiss()
+//    }
+//
+//    private fun showLoading() {
+//            loadingDialog.show()
+//    }
 
-    private fun hideLoading() {
-        if (!loadingDialog.isShowing)
-            return
-        loadingDialog.dismiss()
-    }
-
-    private fun showLoading() {
-            loadingDialog.show()
-    }
-
-    protected fun<TViewModel> bindLoadingStatusAndErrorMessage(viewModel: TViewModel)
-            where TViewModel : ILoadingViewModel {
-        viewModel.isLoading.observe(this, Observer {
-            if (it.first) showLoading()
-            else hideLoading()
-        })
-
-        viewModel.errorMessage.observe(this, Observer {
-            if (it.isNotEmpty()) {
-                toast(it)
-            }
-        })
-    }
+//    protected fun<TViewModel> bindLoadingStatusAndErrorMessage(viewModel: TViewModel)
+//            where TViewModel : ILoadingViewModel {
+//        viewModel.isLoading.observe(this, Observer {
+//            if (it.first) showLoading()
+//            else hideLoading()
+//        })
+//
+//        viewModel.errorMessage.observe(this, Observer {
+//            if (it.isNotEmpty()) {
+//                toast(it)
+//            }
+//        })
+//    }
 }
 

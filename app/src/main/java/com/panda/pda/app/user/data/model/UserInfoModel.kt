@@ -18,7 +18,6 @@ import com.squareup.moshi.JsonClass
  * @property orgName 组织架构名称
  * @property orgFullName 组织架构全称
  */
-@JsonClass(generateAdapter = true)
 data class UserInfoModel(
     @Json(name = "id") @field:Json(name = "id") var id: Int,
     @Json(name = "userName") @field:Json(name = "userName") var userName: String,

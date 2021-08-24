@@ -1,5 +1,8 @@
 package com.panda.pda.app.base.retrofit
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,5 +41,11 @@ object WebClient {
             .build()
             .create(serviceClass)
     }
+}
+
+internal fun <T> Single<T>.onMainThread(): Single<T> {
+
+    return this.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 }
 

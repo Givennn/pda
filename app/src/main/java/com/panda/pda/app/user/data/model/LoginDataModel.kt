@@ -12,14 +12,18 @@ import com.squareup.moshi.JsonClass
 import java.math.BigDecimal
 
 /**
- * 
- * @property token 
+ *
+ * @property token
  * @property userInfo
  * @property menus 菜单ID数组
  */
-@JsonClass(generateAdapter = true)
 data class LoginDataModel(
     @Json(name = "token") @field:Json(name = "token") var token: String,
     @Json(name = "userInfo") @field:Json(name = "userInfo") var userInfo: UserInfoModel,
-    @Json(name = "menus") @field:Json(name = "menus") var menus: List<BigDecimal>
+    @Json(name = "menus") @field:Json(name = "menus") var menus: List<String>
+)
+
+data class LoginRequest(
+    val password: String,
+    val workCode: String
 )

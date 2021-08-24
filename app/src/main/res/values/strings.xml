@@ -16,5 +16,8 @@
     <string name="task_report">任务报工</string>
     <string name="task_finish">任务完工</string>
     <string name="hello_blank_fragment">test</string>
+    <string name="task_description">任务描述</string>
+    <string name="already_report">已报工</string>
+    <string name="reporter">派工人</string>
 
 </resources>

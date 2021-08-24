@@ -2,6 +2,7 @@ package com.panda.pda.app.user.data
 
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.user.data.model.LoginDataModel
+import com.panda.pda.app.user.data.model.LoginRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -37,8 +38,8 @@ interface UserApi {
      * @param root (optional)
      */
     @POST("pda/admin/user/name-login")
-    fun pdaAdminUserNameLoginPost(
-        @retrofit2.http.Body root: Any
+    fun userNameLoginPost(
+        @retrofit2.http.Body request: LoginRequest
     ): Single<BaseResponse<LoginDataModel>>
     /**
      * 修改密码/校验

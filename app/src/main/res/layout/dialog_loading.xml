@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/loading_anim"
-    android:layout_width="640px"
-    android:layout_height="320px"
-    android:background="@drawable/svg_white_round_corner_16px"
-    android:orientation="vertical">
+<com.google.android.material.progressindicator.CircularProgressIndicator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:indeterminate="true"
+    app:showDelay="500"
+    app:minHideDelay="500">
 
-    <ProgressBar
-        android:layout_width="160px"
-        android:layout_height="160px"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40px"
-        android:indeterminateBehavior="repeat"
-
-        android:visibility="visible" />
-
-    <TextView
-        android:id="@+id/tv_loading_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:singleLine="true"
-        android:padding="20px"
-        android:text="加载中..."
-        android:textSize="36px"
-        />
-
-</LinearLayout>
+</com.google.android.material.progressindicator.CircularProgressIndicator>

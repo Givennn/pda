@@ -8,3 +8,8 @@ data class BaseResponse<T> (
     var data: T?,
     var code: Int
 )
+
+
+data class DataListNode<T>(
+    val dataList: List<T>
+)
