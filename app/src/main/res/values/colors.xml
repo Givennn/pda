@@ -6,7 +6,10 @@
     <color name="iconColor">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="input_text_hint">#73FFFFFF</color>
-    <color name="login_error">#FFAA6D</color>
+    <color name="text_field_normal">#F4F4F4</color>
+    <color name="text_field_icon">#999999</color>
+    <color name="text_field_hint">#A9ADB5</color>
+    <color name="text_field_error">#FFAA6D</color>
 
     <color name="divider">#ECECEC</color>
     <color name="textHeaderLineColor">#262626</color>

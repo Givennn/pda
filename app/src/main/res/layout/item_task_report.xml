@@ -112,6 +112,28 @@
                 android:text="@string/reporter"
                 style="@style/descText"/>
 
+            <ImageView
+                android:id="@+id/iv_total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clock"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_desc_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_task_code"
+                android:layout_marginTop="16dp"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_total_time"
+                app:layout_constraintTop_toTopOf="@id/iv_total_time"
+                android:includeFontPadding="false"
+                android:gravity="top"
+                android:textSize="14sp"
+                android:textColor="#888888"
+                android:layout_marginStart="2dp"
+                tools:text="总工时5h5min"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View android:layout_height="1dp"
             android:layout_width="match_parent"
@@ -122,8 +144,8 @@
             style="@style/actionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/finish"
-            app:icon="@drawable/ic_action_finish"/>
+            android:text="@string/report"
+            app:icon="@drawable/ic_action_report"/>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

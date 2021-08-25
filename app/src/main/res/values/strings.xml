@@ -19,5 +19,10 @@
     <string name="task_description">任务描述</string>
     <string name="already_report">已报工</string>
     <string name="reporter">派工人</string>
+    <string name="finish">完成</string>
+    <string name="report">报工</string>
+    <string name="task_search_bar_hint">请输入任务编号/产品编码/产品描述/派工人</string>
+    <string name="receive">接收</string>
+    <string name="execute">执行</string>
 
 </resources>

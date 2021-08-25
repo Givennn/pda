@@ -3,12 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,98 +22,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_header_bullet"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_task_code"
+                style="@style/headerLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:gravity="top"
+                android:includeFontPadding="false"
                 android:maxWidth="240dp"
-                app:layout_constraintStart_toEndOf="@id/iv_header_bullet"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_plan_finish_date"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                android:layout_marginStart="8dp"
-                tools:text="机器人001机器人001机器"
-                android:includeFontPadding="false"
 
-                android:gravity="top"
-                android:ellipsize="end"
-                style="@style/headerLineText"/>
+                app:layout_constraintStart_toEndOf="@id/iv_header_bullet"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="机器人001机器人001机器" />
 
             <TextView
                 android:id="@+id/tv_plan_finish_date"
+                style="@style/subHeaderLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:text="计划完成时间：2019-01-22"
                 android:gravity="end"
                 android:includeFontPadding="false"
-                style="@style/subHeaderLineText"
-                app:layout_constraintStart_toEndOf="@id/tv_task_code"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/tv_task_code"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="计划完成时间：2019-01-22" />
 
             <TextView
                 android:id="@+id/tv_task_desc"
+                style="@style/contentText"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12.5dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_task_sender"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="@id/tv_task_code"
                 app:layout_constraintTop_toBottomOf="@id/tv_task_code"
-                app:layout_constraintEnd_toStartOf="@id/tv_task_progress"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                style="@style/contentText"
-                android:layout_marginTop="12.5dp"
-                tools:text="底座肩部 00001"/>
-
-            <TextView
-                app:layout_constraintStart_toEndOf="@id/tv_task_desc"
-                app:layout_constraintEnd_toStartOf="@id/tv_task_sender"
-                android:id="@+id/tv_task_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc"
-                app:layout_constraintBottom_toBottomOf="@id/tv_task_desc"
-
-                tools:text="5/7"
-                style="@style/contentText"/>
+                tools:text="底座肩部 00001" />
 
             <TextView
                 android:id="@+id/tv_task_sender"
+                style="@style/headerLineText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                style="@style/headerLineText"
-                tools:text="张三"
                 android:gravity="end"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc"
                 app:layout_constraintBottom_toBottomOf="@id/tv_task_desc"
-                app:layout_constraintStart_toEndOf="@id/tv_task_progress"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_task_desc"
+                app:layout_constraintTop_toTopOf="@id/tv_task_desc"
+                tools:text="张三" />
+
             <TextView
                 android:id="@+id/tv_task_desc_label"
+                style="@style/descText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/descText"
                 android:layout_marginTop="8dp"
                 android:text="@string/task_description"
                 app:layout_constraintStart_toStartOf="@id/tv_task_code"
-                app:layout_constraintTop_toBottomOf="@id/tv_task_desc"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_task_desc" />
 
             <TextView
+                style="@style/descText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc_label"
-                app:layout_constraintStart_toStartOf="@id/tv_task_progress"
-                app:layout_constraintEnd_toEndOf="@id/tv_task_progress"
-                android:text="@string/already_report"
-                style="@style/descText"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc_label"
                 android:text="@string/reporter"
-                style="@style/descText"/>
+                app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
+                app:layout_constraintTop_toTopOf="@id/tv_task_desc_label" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View android:layout_height="1dp"
@@ -122,8 +107,8 @@
             style="@style/actionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/finish"
-            app:icon="@drawable/ic_action_finish"/>
+            android:text="@string/receive"
+            app:icon="@drawable/ic_action_receive"/>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
