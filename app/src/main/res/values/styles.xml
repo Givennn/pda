@@ -157,5 +157,23 @@
         <item name="android:textColor">@color/textDescColor</item>
     </style>
 
+    <style name="titleText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/textHeaderLineColor</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="detailText" parent="subHeaderLineText">
+        <item name="android:textColor">@color/textSubHeaderLineColor</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="detailText.label" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textDetailLabelColor</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
 
 </resources>

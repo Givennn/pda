@@ -16,4 +16,5 @@
     <color name="textSubHeaderLineColor">#A6000000</color>
     <color name="textHighLightColor">#457FFF</color>
     <color name="textDescColor">#CCCCCC</color>
+    <color name="textDetailLabelColor">#666666</color>
 </resources>

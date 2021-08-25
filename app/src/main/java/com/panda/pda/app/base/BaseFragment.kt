@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import io.reactivex.rxjava3.core.*
 import timber.log.Timber
 
@@ -27,6 +29,8 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     protected val sp: SharedPreferences by lazy {
         this.requireContext().getSharedPreferences("SOG", Context.MODE_PRIVATE)
     }
+
+    protected val navController by lazy { findNavController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
