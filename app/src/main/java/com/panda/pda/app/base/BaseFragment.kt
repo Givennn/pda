@@ -32,6 +32,8 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected val navController by lazy { findNavController() }
 
+    protected val navBackListener =  { _: View -> navController.popBackStack()}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.v("onCreate ${javaClass.simpleName}")
@@ -49,7 +51,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
                 permissionEmit?.onError(Exception("请允许"))
             }
         }
-        
+
         requestOpenFileLauncher =
             registerForActivityResult(
                 ActivityResultContracts.OpenDocument()
@@ -69,7 +71,9 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected fun permissionRequest(permission: String): Completable {
         return Completable.create { emit ->
-            if (ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireContext(),
+                    permission) == PackageManager.PERMISSION_GRANTED
+            ) {
                 emit.onComplete()
             } else {
                 permissionEmit = emit
@@ -81,8 +85,8 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     protected fun openFileRequest(fileTypes: Array<String>): Single<Uri> {
         return permissionRequest(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             .andThen(Single.create { emit ->
-            openFileEmit = emit
-            requestOpenFileLauncher.launch(fileTypes)
-        })
+                openFileEmit = emit
+                requestOpenFileLauncher.launch(fileTypes)
+            })
     }
 }

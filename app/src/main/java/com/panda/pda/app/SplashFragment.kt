@@ -16,10 +16,8 @@ import java.util.concurrent.TimeUnit
  */
 class SplashFragment: BaseFragment(R.layout.fragment_splash) {
 
-    private lateinit var navController: NavController
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = findNavController()
         requestLocalUserInfo()
     }
 

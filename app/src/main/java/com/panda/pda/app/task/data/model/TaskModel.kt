@@ -1,4 +1,4 @@
-package com.panda.pda.app.task.model
+package com.panda.pda.app.task.data.model
 
 /**
  * created by AnJiwei 2021/8/24

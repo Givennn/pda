@@ -1,11 +1,13 @@
-package com.panda.pda.app.task.model
+package com.panda.pda.app.task.data
 
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.task.data.model.TaskDetailModel
+import com.panda.pda.app.task.data.model.TaskModel
+import com.panda.pda.app.task.data.model.TaskRecordModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.POST
 
 /**
  * created by AnJiwei 2021/8/24
@@ -80,36 +82,27 @@ interface TaskApi {
 //    fun pdaFmsTaskExecutionConfirmPost(
 //        @retrofit2.http.Body root: EmptyObject
 //    ): Single<EmptyObject8>
-//    /**
-//     * 任务执行列表
-//     * keywords：任务编号  产品编码或者描述  派工人工号或者姓名
-//     * The endpoint is owned by docs service owner
-//     * @param keywords  (optional)
-//     * @param raw raw paramter (optional)
-//     */
-//    @Headers(
-//        "Content-Type: text/plain"
-//    )
-//    @GET("pda/fms/task/execution/list-by-page")
-//    fun pdaFmsTaskExecutionListByPageGet(
-//        @retrofit2.http.Query("keywords") keywords: String?,
-//        @retrofit2.http.Body raw: List<Byte>?
-//    ): Single<PdaFmsTaskExecutionListByPageGetResponse>
-//    /**
-//     * 任务详情
-//     *
-//     * The endpoint is owned by docs service owner
-//     * @param id  (required)
-//     * @param raw raw paramter (optional)
-//     */
-//    @Headers(
-//        "Content-Type: text/plain"
-//    )
-//    @GET("pda/fms/task/get-by-id")
-//    fun pdaFmsTaskGetByIdGet(
-//        @retrofit2.http.Query("id") id: String,
-//        @retrofit2.http.Body raw: List<Byte>?
-//    ): Single<PdaFmsTaskGetByIdGetResponse>
+    /**
+     * 任务执行列表
+     * keywords：任务编号  产品编码或者描述  派工人工号或者姓名
+     * The endpoint is owned by docs service owner
+     * @param keywords  (optional)
+     */
+
+    @GET("pda/fms/task/execution/list-by-page")
+    fun pdaFmsTaskExecutionListByPageGet(
+        @retrofit2.http.Query("keywords") keywords: String?,
+    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    /**
+     * 任务详情
+     *
+     * The endpoint is owned by docs service owner
+     * @param id  (required)
+     * @param raw raw paramter (optional)
+     */
+    @GET("pda/fms/task/get-by-id")
+    fun taskGetByIdGet(
+        @retrofit2.http.Query("id") id: Int): Single<BaseResponse<TaskDetailModel>>
 //    /**
 //     * 未取消任务列表
 //     * keywords：任务编号/任务描述
@@ -211,21 +204,16 @@ interface TaskApi {
 //    fun pdaFmsTaskMaterialUnbindPost(
 //        @retrofit2.http.Body root: EmptyObject
 //    ): Single<EmptyObject4>
-//    /**
-//     * 任务操作记录
-//     *
-//     * The endpoint is owned by docs service owner
-//     * @param id  (required)
-//     * @param raw raw paramter (optional)
-//     */
-//    @Headers(
-//        "Content-Type: text/plain"
-//    )
-//    @GET("pda/fms/task/operation-record")
-//    fun pdaFmsTaskOperationRecordGet(
-//        @retrofit2.http.Query("id") id: String,
-//        @retrofit2.http.Body raw: List<Byte>?
-//    ): Single<PdaFmsTaskOperationRecordGetResponse>
+    /**
+     * 任务操作记录
+     *
+     * The endpoint is owned by docs service owner
+     * @param id  (required)
+     */
+    @GET("pda/fms/task/operation-record")
+    fun taskOperationRecordGet(
+        @retrofit2.http.Query("id") id: Int,
+    ): Single<BaseResponse<DataListNode<TaskRecordModel>>>
 //    /**
 //     * 接收任务
 //     *

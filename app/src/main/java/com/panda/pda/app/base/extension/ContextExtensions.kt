@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import kotlin.reflect.KProperty1
 
 fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
@@ -14,6 +15,14 @@ fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
 
 fun Context.toast(@StringRes resId: Int, length: Int = Toast.LENGTH_SHORT) {
     this.toast(getString(resId), length)
+}
+
+fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
+    this.requireContext().toast(message, length)
+}
+
+fun Fragment.toast(@StringRes resId: Int, length: Int = Toast.LENGTH_SHORT) {
+    this.requireContext().toast(resId, length)
 }
 
 inline fun <reified T : AppCompatActivity> Context.startActivity(

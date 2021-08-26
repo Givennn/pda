@@ -12,26 +12,30 @@ import io.reactivex.rxjava3.core.Single
 /**
  * created by AnJiwei 2020/10/29
  */
-interface ILoadingViewModel {
-
-    val isLoading: MutableLiveData<Pair<Boolean, String?>>
-    val errorMessage: MutableLiveData<String>
-
-}
-
-internal fun <T> Single<T>.bindLoadingStatus(viewModel: ILoadingViewModel): Single<T> {
-
-    return this.doOnSubscribe { viewModel.isLoading.postValue(Pair(true, null)) }
-        .doOnError { viewModel.errorMessage.postValue(it.message) }
-        .doFinally { viewModel.isLoading.postValue(Pair(false, null)) }
-}
-
-internal fun Completable.bindLoadingStatus(viewModel: ILoadingViewModel): Completable {
-    return this.doOnSubscribe { viewModel.isLoading.postValue(Pair(true, null)) }
-        .doOnError { viewModel.errorMessage.postValue(it.message) }
-        .doFinally { viewModel.isLoading.postValue(Pair(false, null)) }
-}
-
+//interface ILoadingViewModel {
+//
+//    val isLoading: MutableLiveData<Pair<Boolean, String?>>
+//    val errorMessage: MutableLiveData<String>
+//
+//}
+//
+//internal fun <T> Single<T>.bindLoadingStatus(viewModel: ILoadingViewModel): Single<T> {
+//
+//    return this.doOnSubscribe { viewModel.isLoading.postValue(Pair(true, null)) }
+//        .doOnError { viewModel.errorMessage.postValue(it.message) }
+//        .doFinally { viewModel.isLoading.postValue(Pair(false, null)) }
+//}
+//
+//internal fun Completable.bindLoadingStatus(viewModel: ILoadingViewModel): Completable {
+//    return this.doOnSubscribe { viewModel.isLoading.postValue(Pair(true, null)) }
+//        .doOnError { viewModel.errorMessage.postValue(it.message) }
+//        .doFinally { viewModel.isLoading.postValue(Pair(false, null)) }
+//}
+//
+//abstract class AsyncAppViewModel(app: Application) : AndroidViewModel(app), ILoadingViewModel {
+//    override val isLoading = MutableLiveData<Pair<Boolean, String?>>()
+//    override val errorMessage = MutableLiveData<String>()
+//}
 
 internal fun <T> Single<BaseResponse<T>>.unWrapperData(): Single<T> {
     return this.concatMap {
@@ -49,9 +53,4 @@ internal fun Single<BaseResponse<Any>>.unWrapperData(): Completable {
             else -> Completable.error(HttpInnerException(it.code, it.message))
         }
     }
-}
-
-abstract class AsyncAppViewModel(app: Application) : AndroidViewModel(app), ILoadingViewModel {
-    override val isLoading = MutableLiveData<Pair<Boolean, String?>>()
-    override val errorMessage = MutableLiveData<String>()
 }

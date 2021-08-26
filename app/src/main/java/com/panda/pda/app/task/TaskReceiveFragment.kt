@@ -1,60 +1,120 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.viewbinding.ViewBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
+import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.base.retrofit.onMainThread
+import com.panda.pda.app.base.unWrapperData
+import com.panda.pda.app.databinding.FragmentTaskReceiveBinding
+import com.panda.pda.app.databinding.FrameEmptyViewBinding
+import com.panda.pda.app.databinding.ItemTaskFinishBinding
+import com.panda.pda.app.databinding.ItemTaskReceiveBinding
+import com.panda.pda.app.task.data.TaskApi
+import com.panda.pda.app.task.data.model.TaskInfoModel
+import com.panda.pda.app.task.data.model.TaskModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class TaskReceiveFragment : BaseFragment(R.layout.fragment_task_receive) {
+    private val viewBinding by viewBinding<FragmentTaskReceiveBinding>()
+    private val taskViewModel by activityViewModels<TaskViewModel>()
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TaskReceiveFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TaskReceiveFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var adapter: BaseRecycleViewAdapter<ItemTaskReceiveBinding, TaskModel>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        createAdapter()
+        viewBinding.root.setOnRefreshListener { refreshData() }
+        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task_receive, container, false)
+    override fun onResume() {
+        super.onResume()
+        refreshData()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskReceiveFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TaskReceiveFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun createAdapter() {
+        adapter =
+            object : BaseRecycleViewAdapter<ItemTaskReceiveBinding, TaskModel>(mutableListOf()) {
+                override fun createBinding(parent: ViewGroup): ItemTaskReceiveBinding {
+                    return ItemTaskReceiveBinding.inflate(LayoutInflater.from(parent.context))
                 }
+
+                override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                    return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
+                        parent,
+                        false)
+                }
+
+                override fun onBindViewHolderWithData(
+                    holder: ViewBindingHolder,
+                    data: TaskModel,
+                    position: Int,
+                ) {
+                    holder.itemViewBinding.apply {
+                        tvTaskCode.text = data.taskCode
+                        tvPlanFinishDate.text = data.planEndTime
+                        tvTaskDesc.text = data.taskDesc
+                        tvTaskSender.text = data.issueName
+                        btnAction.setOnClickListener {
+                            onItemActionClicked(data)
+                        }
+                        clInfo.setOnClickListener {
+                            onItemInfoClicked(data)
+                        }
+                    }
+                }
+
+
             }
+        viewBinding.rvTaskList.adapter = adapter
+    }
+
+    private fun onItemInfoClicked(data: TaskModel) {
+        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
+            navToDetailFragment(data.id)
+            return
+        }
+        WebClient.request(TaskApi::class.java)
+            .taskGetByIdGet(data.id)
+            .unWrapperData()
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
+                .unWrapperData(),
+                { detail, records -> TaskInfoModel(detail, records.dataList) })
+            .onMainThread()
+            .subscribe({ info ->
+                taskViewModel.taskInfoData.postValue(info)
+                navToDetailFragment(data.id)
+            },
+                { toast(it.message ?: return@subscribe) })
+    }
+
+    private fun navToDetailFragment(id: Int) {
+        navController.navigate(R.id.taskDetailFragment,
+            Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
+    }
+
+
+    private fun refreshData() {
+        WebClient.request(TaskApi::class.java)
+            .taskCompleteListGet(viewBinding.etSearchBar.text?.toString())
+            .onMainThread()
+            .unWrapperData()
+            .doFinally { viewBinding.root.isRefreshing = false }
+            .subscribe({ data -> adapter.refreshData(data.dataList) },
+                { toast(it.message ?: return@subscribe) })
+//            .subscribe ({ data -> adapter.refreshData(listOf()) }, { err -> requireActivity().toast(err.message ?: return@subscribe)})
+    }
+
+    private fun onItemActionClicked(data: TaskModel) {
+
     }
 }
