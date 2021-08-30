@@ -22,6 +22,7 @@
                 android:src="@drawable/ic_header_bullet"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
+
             <TextView
                 android:id="@+id/tv_task_code"
                 android:layout_width="0dp"

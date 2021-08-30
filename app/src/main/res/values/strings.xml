@@ -39,5 +39,22 @@
     <string name="prd_equipment">生产设备</string>
     <string name="actual_start_time">实际开始时间</string>
     <string name="actual_finish_time">实际完成时间</string>
+    <string name="get_task_detail_failed">获取任务详情失败</string>
+    <string name="operate_record">操作记录</string>
+    <string name="task_detail">任务详情</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="task_finish_confirm">确定完成该任务？</string>
+    <string name="task_finish_toast">完成任务成功</string>
+    <string name="net_work_error">系统数据异常</string>
+    <string name="loading_data">正在加载数据</string>
+    <string name="task_receive_toast">接收任务成功</string>
+    <string name="task_receive_confirm">确认接受任务</string>
+    <string name="operate_guide">作业指导书</string>
+    <string name="material_bind">物料绑定</string>
+    <string name="material_unbind">物料解绑</string>
+    <string name="material_replace">物料替换</string>
+    <string name="alarm_report">实时报警</string>
+    <string name="factory_manage">生产管理</string>
 
 </resources>

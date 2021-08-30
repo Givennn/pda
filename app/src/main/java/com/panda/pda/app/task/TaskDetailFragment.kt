@@ -1,22 +1,93 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.databinding.FragmentTaskDetailBinding
+import com.panda.pda.app.databinding.ItemTaskDetailOperateRecordBinding
+import com.panda.pda.app.task.data.model.TaskInfoModel
+import com.panda.pda.app.task.data.model.TaskRecordModel
 
 
 class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
+    private val viewBinding by viewBinding<FragmentTaskDetailBinding>()
+    private val viewModel by activityViewModels<TaskViewModel>()
+
+    private lateinit var adapter: BaseRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
+        createRecordAdapter()
+        viewBinding.rvRecords.adapter = adapter
+        val taskInfo = viewModel.taskInfoData.value
+        if (taskInfo != null) {
+            bindData(taskInfo)
+        } else {
+            toast(R.string.get_task_detail_failed)
+            navBackListener(requireView())
+        }
+    }
+
+    private fun createRecordAdapter() {
+        adapter = object : BaseRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
+            mutableListOf()) {
+            override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
+                return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: TaskRecordModel,
+                position: Int,
+            ) {
+                holder.itemViewBinding.apply {
+                    when (holder.layoutPosition) {
+                        0 -> {
+                            viewStepLineTop.visibility = View.INVISIBLE
+                        }
+                        itemCount - 1 -> {
+                            viewStepLineBottom.visibility = View.INVISIBLE
+                        }
+                    }
+                    tvRecordType.text = data.operateType
+                    tvOperator.text = data.operateName
+                    tvTime.text = data.createTime
+                    tvDesc.text = data.operateDetail
+                }
+            }
+
+        }
+    }
+
+    private fun bindData(info: TaskInfoModel) {
+        viewBinding.apply {
+            val taskDetail = info.detail
+            tvTaskCode.text = taskDetail.taskCode
+            tvTaskDesc.text = taskDetail.taskDesc
+            tvTaskCount.text = taskDetail.taskNum.toString()
+            tvProductCode.text = taskDetail.productCode
+            tvProductDesc.text = taskDetail.productName
+            tvPlanCode.text = taskDetail.planCode
+            tvOrderCode.text = taskDetail.workNo
+            tvBatchCode.text = taskDetail.batchNo
+            tvTaskStatus.text = taskDetail.taskStatus.toString() //TODO user moshi adapter
+            tvPlanStartTime.text = taskDetail.planStartTime
+            tvPlanFinishTime.text = taskDetail.planEndTime
+            tvOperator.text = taskDetail.jockeyName
+            tvPrdEqp.text = taskDetail.equipmentDesc
+            tvActualStartTime.text = taskDetail.realStartTime
+            tvActualFinishTime.text = taskDetail.realEndTime
+            adapter.refreshData(info.recordList)
+        }
     }
 
     override fun onCreateView(

@@ -90,11 +90,11 @@ class TaskReportFragment : BaseFragment(R.layout.fragment_task_report) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
+            .bindToFragment()
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
-            },
-                { toast(it.message ?: return@subscribe) })
+            }, { })
     }
 
     private fun navToDetailFragment(id: Int) {
@@ -109,12 +109,11 @@ class TaskReportFragment : BaseFragment(R.layout.fragment_task_report) {
             .onMainThread()
             .unWrapperData()
             .doFinally { viewBinding.root.isRefreshing = false }
-            .subscribe({ data -> adapter.refreshData(data.dataList) },
-                { toast(it.message ?: return@subscribe) })
-//            .subscribe ({ data -> adapter.refreshData(listOf()) }, { err -> requireActivity().toast(err.message ?: return@subscribe)})
+            .subscribe({ data -> adapter.refreshData(data.dataList) }, { })
     }
 
     private fun onItemActionClicked(data: TaskModel) {
 
+//        navController.navigate()
     }
 }

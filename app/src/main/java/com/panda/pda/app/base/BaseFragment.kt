@@ -11,8 +11,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.panda.pda.app.R
+import com.panda.pda.app.base.extension.toast
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
 import timber.log.Timber
 
@@ -89,4 +91,31 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
                 requestOpenFileLauncher.launch(fileTypes)
             })
     }
+
+    protected fun<T> Single<T>.bindToFragment(loadMessage: String = "",  fragment: BaseFragment = this@BaseFragment): Single<T> {
+        return this
+            .bindToLifecycle(fragment.requireView())
+            .doOnSubscribe { showLoadingDialog(loadMessage)  }
+            .doOnError { toast(it.message ?: getString(R.string.net_work_error)) }
+            .doFinally { dismissLoadingDialog() }
+
+    }
+
+    protected fun Completable.bindToFragment(loadMessage: String = "",  fragment: BaseFragment = this@BaseFragment): Completable {
+        return this
+            .bindToLifecycle(fragment.requireView())
+            .doOnSubscribe { showLoadingDialog(loadMessage)  }
+            .doOnError { toast(it.message ?: getString(R.string.net_work_error)) }
+            .doFinally { dismissLoadingDialog() }
+    }
+
+    private fun dismissLoadingDialog() {
+
+
+    }
+
+    private fun showLoadingDialog(loadMessage: String) {
+        TODO("Not yet implemented")
+    }
+
 }

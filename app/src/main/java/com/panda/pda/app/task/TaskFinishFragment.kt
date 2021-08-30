@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.base.retrofit.onMainThread
@@ -18,6 +19,7 @@ import com.panda.pda.app.databinding.FragmentTaskFinishBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskFinishBinding
 import com.panda.pda.app.task.data.TaskApi
+import com.panda.pda.app.task.data.model.TaskIdRequest
 import com.panda.pda.app.task.data.model.TaskInfoModel
 import com.panda.pda.app.task.data.model.TaskModel
 
@@ -90,11 +92,12 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
+            .bindToFragment(getString(R.string.loading_data))
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
             },
-                { toast(it.message ?: return@subscribe) })
+                { toast(it.message ?: getString(R.string.net_work_error)) })
     }
 
     private fun navToDetailFragment(id: Int) {
@@ -110,11 +113,21 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
             .unWrapperData()
             .doFinally { viewBinding.root.isRefreshing = false }
             .subscribe({ data -> adapter.refreshData(data.dataList) },
-                { toast(it.message ?: return@subscribe) })
-//            .subscribe ({ data -> adapter.refreshData(listOf()) }, { err -> requireActivity().toast(err.message ?: return@subscribe)})
+                { toast(it.message ?: getString(R.string.net_work_error)) })
     }
 
     private fun onItemActionClicked(data: TaskModel) {
 
+        val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_finish_confirm))
+            .setConfirmButton({ _, _ ->
+                WebClient.request(TaskApi::class.java)
+                    .taskCompleteConfirmPost(TaskIdRequest(data.id))
+                    .onMainThread()
+                    .unWrapperData()
+                    .bindToFragment()
+                    .subscribe({ toast(R.string.task_finish_toast) },
+                        { })
+            })
+        dialog.show(parentFragmentManager, TAG)
     }
 }

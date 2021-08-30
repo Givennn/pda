@@ -5,7 +5,9 @@ import com.panda.pda.app.user.data.model.LoginDataModel
 import com.panda.pda.app.user.data.model.LoginRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 /**
  * created by AnJiwei 2021/8/17

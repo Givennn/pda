@@ -36,7 +36,7 @@
                 android:gravity="top"
                 android:includeFontPadding="false"
                 android:maxWidth="240dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_plan_finish_date"
+                app:layout_constraintEnd_toStartOf="@id/tv_plan_issue_date"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
 
                 app:layout_constraintStart_toEndOf="@id/iv_header_bullet"
@@ -44,7 +44,7 @@
                 tools:text="机器人001机器人001机器" />
 
             <TextView
-                android:id="@+id/tv_plan_finish_date"
+                android:id="@+id/tv_plan_issue_date"
                 style="@style/subHeaderLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

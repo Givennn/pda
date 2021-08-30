@@ -73,4 +73,24 @@
         android:name="com.panda.pda.app.task.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
+    <fragment
+        android:id="@+id/materialBindFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialBindFragment"
+        android:label="MaterialBindFragment" />
+    <fragment
+        android:id="@+id/materialReplaceFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialReplaceFragment"
+        android:label="MaterialReplaceFragment" />
+    <fragment
+        android:id="@+id/materialUnbindFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialUnbindFragment"
+        android:label="MaterialUnbindFragment" />
+    <fragment
+        android:id="@+id/alarmReportFragment"
+        android:name="com.panda.pda.app.operation.AlarmReportFragment"
+        android:label="AlarmReportFragment" />
+    <fragment
+        android:id="@+id/operateGuideFragment"
+        android:name="com.panda.pda.app.operation.OperateGuideFragment"
+        android:label="OperateGuideFragment" />
 </navigation>

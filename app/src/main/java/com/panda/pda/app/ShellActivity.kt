@@ -18,7 +18,8 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     private val viewBinding by viewBinding<ActivityShellBinding>(R.id.container)
 
-    private val viewModel by viewModels<ShellViewModel>()
+    @Suppress("unused")
+    private val shellViewModel by viewModels<ShellViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

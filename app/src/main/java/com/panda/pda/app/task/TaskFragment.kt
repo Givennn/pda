@@ -30,6 +30,5 @@ class TaskFragment: BaseFragment(R.layout.fragment_task) {
         binding.llTaskReport.setOnClickListener {
             navController.navigate(R.id.taskReportFragment)
         }
-
     }
 }

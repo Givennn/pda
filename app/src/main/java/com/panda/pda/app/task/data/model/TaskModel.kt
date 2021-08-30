@@ -18,5 +18,8 @@ data class TaskModel(
     val taskDesc: String,
     val taskNum: Int,
     val taskStatus: Int,
-    val workNo: String
+    val workNo: String,
+    var issueTime: String?,
+    var prepareFinishTime: String?,
+    val receiveTime: String?
 )

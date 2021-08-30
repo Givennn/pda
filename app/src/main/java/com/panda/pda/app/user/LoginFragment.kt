@@ -9,10 +9,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.base.retrofit.onMainThread
+import com.panda.pda.app.base.unWrapperData
 import com.panda.pda.app.databinding.DialogLoadingBinding
 import com.panda.pda.app.databinding.FragmentLoginBinding
 import com.panda.pda.app.user.data.UserApi
 import com.panda.pda.app.user.data.model.LoginRequest
+import com.panda.pda.library.android.AESUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
@@ -37,11 +40,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun login() {
         val request =
-            LoginRequest(binding.etAccount.text.toString(), binding.etPassword.text.toString())
+            LoginRequest(binding.etAccount.text.toString(), AESUtils.encrypt(binding.etPassword.text.toString()))
         WebClient.request(UserApi::class.java)
             .userNameLoginPost(request)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+//            .userNameLoginPost(binding.etAccount.text.toString(), AESUtils.encrypt(binding.etPassword.text.toString()))
+            .onMainThread()
+            .unWrapperData()
             .subscribe({ _ -> navToMain() }, { e -> Timber.e(e) })
     }
 

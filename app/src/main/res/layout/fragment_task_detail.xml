@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".task.TaskDetailFragment">
 
@@ -10,7 +11,7 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        tools:title="任务详情" />
+        app:title="@string/task_detail" />
 
 
     <androidx.core.widget.NestedScrollView
@@ -329,6 +330,21 @@
                     android:id="@+id/tv_actual_finish_time"
                     tools:text="0011" />
             </LinearLayout>
+
+            <TextView
+                style="@style/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="48dp"
+                android:text="@string/operate_record" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_records"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_task_detail_operate_record"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
