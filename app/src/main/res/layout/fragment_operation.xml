@@ -6,14 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="?attr/actionBarSize"-->
-    <!--        android:gravity="center"-->
-    <!--        android:text="@string/task"-->
-    <!--        android:textColor="@android:color/black"-->
-    <!--        android:textSize="@dimen/header_text_size"-->
-    <!--        android:textStyle="bold" />-->
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -55,7 +47,7 @@
                 android:src="@drawable/ic_op_task_receive" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -77,11 +69,10 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                
                 android:src="@drawable/ic_op_task_execute" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -96,7 +87,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/materialBindFragment"
+            app:layout_constraintEnd_toStartOf="@+id/material_bind_nav_graph"
             app:layout_constraintStart_toEndOf="@+id/taskExecuteFragment"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -107,7 +98,7 @@
                 android:src="@drawable/ic_op_guide" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -117,7 +108,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/materialBindFragment"
+            android:id="@+id/material_bind_nav_graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -133,7 +124,7 @@
                 android:src="@drawable/ic_op_material_bind" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -144,7 +135,7 @@
 
 
         <LinearLayout
-            android:id="@+id/materialUnbindFragment"
+            android:id="@+id/material_unbind_nav_graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -162,7 +153,7 @@
                 android:src="@drawable/ic_op_material_unbind" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -180,8 +171,8 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@+id/taskReportFragment"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toTopOf="@id/materialUnbindFragment"
-            app:layout_constraintStart_toEndOf="@+id/materialUnbindFragment">
+            app:layout_constraintTop_toTopOf="@id/material_unbind_nav_graph"
+            app:layout_constraintStart_toEndOf="@+id/material_unbind_nav_graph">
 
             <ImageView
                 android:layout_width="36dp"
@@ -190,7 +181,7 @@
                 android:src="@drawable/ic_op_material_replace" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -207,7 +198,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@+id/taskFinishFragment"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toTopOf="@id/materialUnbindFragment"
+            app:layout_constraintTop_toTopOf="@id/material_unbind_nav_graph"
             app:layout_constraintStart_toEndOf="@+id/materialReplaceFragment">
 
             <ImageView
@@ -217,7 +208,7 @@
                 android:src="@drawable/ic_task_report" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -232,7 +223,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="@id/materialUnbindFragment"
+            app:layout_constraintTop_toTopOf="@id/material_unbind_nav_graph"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/taskReportFragment">
@@ -244,7 +235,7 @@
                 android:src="@drawable/ic_op_task_finish" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -259,7 +250,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/materialUnbindFragment"
+            app:layout_constraintTop_toBottomOf="@+id/material_unbind_nav_graph"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
@@ -269,7 +260,7 @@
                 android:src="@drawable/ic_op_alarm" />
 
             <TextView
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

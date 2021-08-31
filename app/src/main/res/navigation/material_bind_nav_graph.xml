@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/material_bind_nav_graph"
+    app:startDestination="@id/materialBindFragment">
+
+    <fragment
+        android:id="@+id/materialBindFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialBindFragment"
+        android:label="MaterialBindFragment" >
+        <action
+            android:id="@+id/action_materialBindFragment_to_productScanBindFragment"
+            app:destination="@id/productScanBindFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productScanBindFragment"
+        android:name="com.panda.pda.app.operation.material.ProductScanFragment"
+        android:label="ProductScanBindFragment" >
+        <action
+            android:id="@+id/action_productScanBindFragment_to_materialBindingProductFragment"
+            app:destination="@id/materialBindingProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/materialBindingProductFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialBindingProductFragment"
+        android:label="MaterialBindingProductFragment" />
+</navigation>

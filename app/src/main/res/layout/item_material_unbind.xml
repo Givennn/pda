@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="12dp">
+
+            <TextView
+                android:id="@+id/tv_material_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                tools:text="机器人001机器人001机器"
+                android:includeFontPadding="false"
+                android:gravity="top"
+                style="@style/moduleTitleText"/>
+
+            <TextView
+                android:id="@+id/tv_material_code"
+                style="@style/contentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12.5dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                tools:text="底座肩部 00001" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/descText"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="12dp"
+                android:text="@string/material_serial_code"
+                app:layout_constraintStart_toStartOf="@id/tv_task_code"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_desc"/>
+
+
+        <View android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="12dp"
+            style="@style/divider"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_action"
+            style="@style/actionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/material_unbind"
+            app:icon="@drawable/ic_action_unbind"/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

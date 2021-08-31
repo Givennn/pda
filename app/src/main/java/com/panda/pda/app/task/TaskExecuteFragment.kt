@@ -1,10 +1,13 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -35,6 +38,16 @@ class TaskExecuteFragment : BaseFragment(R.layout.fragment_task_execute) {
         createAdapter()
         viewBinding.root.setOnRefreshListener { refreshData() }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
+        viewBinding.etSearchBar.setOnEditorActionListener { editText, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                refreshData()
+            } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                refreshData()
+                (editText as EditText).selectAll()
+                return@setOnEditorActionListener true
+            }
+            false
+        }
     }
 
     override fun onResume() {

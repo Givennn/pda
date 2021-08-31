@@ -115,7 +115,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     }
 
     private fun showLoadingDialog(loadMessage: String) {
-        TODO("Not yet implemented")
+        // TODO
     }
 
 }

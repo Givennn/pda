@@ -102,7 +102,6 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
         <!--        边框圆角    -->
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
-        <item name="startIconTint">@color/text_field_icon</item>
         <item name="hintEnabled">false</item>
     </style>
 
@@ -118,12 +117,38 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+    <style name="ShapeAppearance.App.MiddleComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="Widget.App.Button.confirm" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Button" parent="">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+    </style>
+
+    <style name="Widget.App.TextInputLayout.searchBar" parent="Widget.App.TextInputLayout">
+        <item name="startIconDrawable">@drawable/ic_text_field_search</item>
+        <item name="endIconDrawable">@drawable/ic_delete_dark</item>
+        <item name="endIconTint">@color/text_field_icon</item>
+        <item name="startIconTint">@color/text_field_icon</item>
+        <item name="endIconMode">clear_text</item>
+    </style>
+
     <style name="Widget.App.TextInputEditText.searchBar" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
         <item name="android:textColor">@color/textSubHeaderLineColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 
     <style name="LoginTextInputEditText">
@@ -139,6 +164,11 @@
         <item name="android:textColor">@color/textHeaderLineColor</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="moduleTitleText"  parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/textHeaderLineColor</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="subHeaderLineText" parent="Widget.AppCompat.TextView">

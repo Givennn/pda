@@ -56,5 +56,13 @@
     <string name="material_replace">物料替换</string>
     <string name="alarm_report">实时报警</string>
     <string name="factory_manage">生产管理</string>
+    <string name="material_search_bar_hint">请输入任务编号/产品编码/产品描述</string>
+    <string name="task_number">任务数量</string>
+    <string name="task_scan_bar_hint">请输入或扫描产品条码</string>
+    <string name="scan_product_serial_code">扫描产品条码</string>
+    <string name="material">物料</string>
+    <string name="material_serial_code">物料条码</string>
+    <string name="new_material_serial_code">新物料条码</string>
+    <string name="old_material_serial_code">原物料条码</string>
 
 </resources>

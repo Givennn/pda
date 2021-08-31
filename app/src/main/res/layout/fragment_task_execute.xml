@@ -18,13 +18,12 @@
             app:title="@string/task_execute" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.App.TextInputLayout"
+            style="@style/Widget.App.TextInputLayout.searchBar"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            app:startIconDrawable="@drawable/ic_text_field_search">
+            android:layout_marginEnd="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search_bar"

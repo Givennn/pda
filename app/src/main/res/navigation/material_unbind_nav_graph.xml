@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/material_unbind_nav_graph"
+    app:startDestination="@id/productScanUnbindFragment">
+    <fragment
+        android:id="@+id/materialUnbindFragment"
+        android:name="com.panda.pda.app.operation.material.MaterialUnbindFragment"
+        android:label="MaterialUnbindFragment" >
+        <action
+            android:id="@+id/action_materialUnbindFragment_to_scanToReplaceFragment"
+            app:destination="@id/scanToReplaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productScanUnbindFragment"
+        android:name="com.panda.pda.app.operation.material.ProductScanFragment"
+        android:label="ProductScanBindFragment" >
+        <action
+            android:id="@+id/action_productScanUnbindFragment_to_materialUnbindFragment"
+            app:destination="@id/materialUnbindFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanToReplaceFragment"
+        android:name="com.panda.pda.app.operation.material.ScanToReplaceFragment"
+        android:label="ScanToReplaceFragment" />
+</navigation>

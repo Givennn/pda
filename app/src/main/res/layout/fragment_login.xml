@@ -161,7 +161,7 @@
             android:layout_below="@+id/ll_login_password"
             android:layout_marginTop="60dp"
             android:backgroundTint="@color/white"
-            android:text="登录"
+            android:text="@string/login"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
