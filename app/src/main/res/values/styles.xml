@@ -101,7 +101,7 @@
         <item name="boxBackgroundColor">@color/text_field_normal</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
         <!--        边框圆角    -->
-        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>
         <item name="hintEnabled">false</item>
     </style>
 

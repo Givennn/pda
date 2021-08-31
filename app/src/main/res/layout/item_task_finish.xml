@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
                 app:layout_constraintTop_toTopOf="@id/tv_task_desc_label"
-                android:text="@string/reporter"
+                android:text="@string/sender"
                 style="@style/descText"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

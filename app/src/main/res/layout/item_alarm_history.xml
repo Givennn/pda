@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp">
+
+
+            <ImageView
+                android:id="@+id/iv_header_bullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_header_bullet"/>
+            <TextView
+                android:id="@+id/tv_task_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                tools:text="W202101011"
+                android:includeFontPadding="false"
+                android:gravity="start"
+                android:ellipsize="end"
+
+                style="@style/headerLineText"/>
+
+            <TextView
+                android:id="@+id/tv_alarm_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="未关闭"
+                android:gravity="end"
+                android:includeFontPadding="false"
+                style="@style/moduleTitleText"/>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_top_line"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_reporter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                tools:text="张三"
+                style="@style/moduleTitleText"/>
+
+            <TextView
+                android:id="@+id/tv_report_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                style="@style/moduleTitleText"
+                tools:text="2019-01-22 10:12:40"/>
+
+            <TextView
+                android:id="@+id/tv_reporter_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_reporter"
+                app:layout_constraintTop_toBottomOf="@id/tv_reporter"
+                android:text="@string/alarm_reporter"
+                style="@style/descText"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                app:layout_constraintEnd_toEndOf="@+id/tv_report_time"
+                android:text="@string/alarm_report_time"
+                app:layout_constraintTop_toBottomOf="@id/tv_report_time"
+                android:layout_marginTop="8dp"/>
+
+            <ImageView
+                android:id="@+id/iv_detail_bullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_message_detail"
+                app:layout_constraintTop_toBottomOf="@id/tv_reporter_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_reporter"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_alarm_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_detail_bullet"
+                app:layout_constraintTop_toTopOf="@+id/iv_detail_bullet"
+                app:layout_constraintEnd_toEndOf="@id/tv_report_time"
+                android:layout_marginStart="2dp"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:textColor="@color/textRemarkColor"
+                tools:text="@string/long_text_test"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_top_line"
+            tools:visibility="gone"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_closer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                tools:text="张三"
+                style="@style/moduleTitleText"/>
+
+            <TextView
+                android:id="@+id/tv_close_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                style="@style/moduleTitleText"
+                tools:text="2019-01-22 10:12:40"/>
+
+            <TextView
+                android:id="@+id/tv_closer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_closer"
+                app:layout_constraintTop_toBottomOf="@id/tv_closer"
+                android:text="@string/alarm_reporter"
+                style="@style/descText"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                app:layout_constraintEnd_toEndOf="@+id/tv_close_time"
+                android:text="@string/alarm_report_time"
+                app:layout_constraintTop_toBottomOf="@id/tv_close_time"
+                android:layout_marginTop="8dp"/>
+
+            <ImageView
+                android:id="@+id/iv_close_bullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_message_detail"
+                app:layout_constraintTop_toBottomOf="@id/tv_closer_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_closer"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_close_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_close_bullet"
+                app:layout_constraintTop_toTopOf="@+id/iv_close_bullet"
+                app:layout_constraintEnd_toEndOf="@id/tv_close_time"
+                android:layout_marginStart="2dp"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:textColor="@color/textRemarkColor"
+                tools:text="@string/long_text_test"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

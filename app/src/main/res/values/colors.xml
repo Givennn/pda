@@ -17,4 +17,5 @@
     <color name="textHighLightColor">#457FFF</color>
     <color name="textDescColor">#CCCCCC</color>
     <color name="textDetailLabelColor">#666666</color>
+    <color name="textRemarkColor">#888888</color>
 </resources>

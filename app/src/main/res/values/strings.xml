@@ -18,7 +18,7 @@
     <string name="hello_blank_fragment">test</string>
     <string name="task_description">任务描述</string>
     <string name="already_report">已报工</string>
-    <string name="reporter">派工人</string>
+    <string name="sender">派工人</string>
     <string name="finish">完成</string>
     <string name="report">报工</string>
     <string name="task_search_bar_hint">请输入任务编号/产品编码/产品描述/派工人</string>
@@ -64,5 +64,12 @@
     <string name="material_serial_code">物料条码</string>
     <string name="new_material_serial_code">新物料条码</string>
     <string name="old_material_serial_code">原物料条码</string>
+    <string name="history_record">历史记录</string>
+    <string name="alarm">报警</string>
+    <string name="alarm_detail">警报说明</string>
+    <string name="remark_hint">请输入备注信息，最多200个字</string>
+    <string name="alarm_reporter">报警人</string>
+    <string name="alarm_report_time">报警时间</string>
+    <string name="long_text_test">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</string>
 
 </resources>

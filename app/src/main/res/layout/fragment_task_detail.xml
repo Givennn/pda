@@ -34,7 +34,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -54,7 +54,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -74,7 +74,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -94,7 +94,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -114,7 +114,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -134,7 +134,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -154,7 +154,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -174,7 +174,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -194,7 +194,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -214,7 +214,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -234,7 +234,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -254,7 +254,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -274,7 +274,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -294,7 +294,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
@@ -314,7 +314,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_detail_item_underline"
+                android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
 
                 <TextView
