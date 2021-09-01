@@ -15,7 +15,7 @@ import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.databinding.FragmentMaterialUnbindBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemMaterialUnbindBinding
-import com.panda.pda.app.operation.model.MaterialModel
+import com.panda.pda.app.operation.data.model.MaterialModel
 import com.panda.pda.app.task.TaskViewModel
 
 /**

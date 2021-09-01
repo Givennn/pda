@@ -21,5 +21,6 @@ data class TaskModel(
     val workNo: String,
     var issueTime: String?,
     var prepareFinishTime: String?,
-    val receiveTime: String?
+    val receiveTime: String?,
+    val totalReportTime: Int? //总工时min
 )

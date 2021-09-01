@@ -78,13 +78,10 @@
         android:name="com.panda.pda.app.operation.material.MaterialReplaceFragment"
         android:label="MaterialReplaceFragment" />
     <fragment
-        android:id="@+id/alarmReportFragment"
-        android:name="com.panda.pda.app.operation.AlarmReportFragment"
-        android:label="AlarmReportFragment" />
-    <fragment
         android:id="@+id/operateGuideFragment"
         android:name="com.panda.pda.app.operation.OperateGuideFragment"
         android:label="OperateGuideFragment" />
     <include app:graph="@navigation/material_bind_nav_graph" />
     <include app:graph="@navigation/material_unbind_nav_graph" />
+    <include app:graph="@navigation/alarm_nav_graph" />
 </navigation>
