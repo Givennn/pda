@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/discovery_report_nav_graph">
+    android:id="@+id/discovery_report_nav_graph"
+    app:startDestination="@id/workReportDiscoveryFragment">
 
+    <fragment
+        android:id="@+id/workReportDiscoveryFragment"
+        android:name="com.panda.pda.app.discovery.WorkReportDiscoveryFragment"
+        android:label="WorkReportDiscoveryFragment" >
+        <action
+            android:id="@+id/action_workReportDiscoveryFragment_to_taskReportDetailFragment"
+            app:destination="@id/taskReportDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskReportDetailFragment"
+        android:name="com.panda.pda.app.discovery.TaskReportDetailFragment"
+        android:label="TaskReportDetailFragment" />
 </navigation>

@@ -43,6 +43,6 @@ interface DiscoveryApi {
      */
     @GET("pda/fms/report/get-by-id")
     fun pdaFmsReportGetByIdGet(
-        @retrofit2.http.Query("id") id: String,
+        @retrofit2.http.Query("id") id: Int,
     ): Single<BaseResponse<TaskReportDetailModel>>
 }

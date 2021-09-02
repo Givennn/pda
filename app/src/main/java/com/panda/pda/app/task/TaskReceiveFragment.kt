@@ -20,7 +20,6 @@ import com.panda.pda.app.base.retrofit.onMainThread
 import com.panda.pda.app.base.unWrapperData
 import com.panda.pda.app.databinding.FragmentTaskReceiveBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
-import com.panda.pda.app.databinding.ItemTaskFinishBinding
 import com.panda.pda.app.databinding.ItemTaskReceiveBinding
 import com.panda.pda.app.task.data.TaskApi
 import com.panda.pda.app.task.data.model.TaskIdRequest
@@ -105,7 +104,7 @@ class TaskReceiveFragment : BaseFragment(R.layout.fragment_task_receive) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
-            .bindToFragment()
+            .bindLoadingStatus()
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
@@ -139,7 +138,7 @@ class TaskReceiveFragment : BaseFragment(R.layout.fragment_task_receive) {
                     .taskReceiveConfirmPost(TaskIdRequest(data.id))
                     .onMainThread()
                     .unWrapperData()
-                    .bindToFragment()
+                    .bindLoadingStatus()
                     .subscribe({ toast(R.string.task_receive_toast) },
                         { })
             })

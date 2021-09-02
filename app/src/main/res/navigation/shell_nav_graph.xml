@@ -84,4 +84,8 @@
     <include app:graph="@navigation/material_bind_nav_graph" />
     <include app:graph="@navigation/material_unbind_nav_graph" />
     <include app:graph="@navigation/alarm_nav_graph" />
+    <include app:graph="@navigation/discovery_order_nav_graph" />
+    <include app:graph="@navigation/discovery_task_nav_graph" />
+    <include app:graph="@navigation/discovery_plan_nav_graph" />
+    <include app:graph="@navigation/discovery_report_nav_graph" />
 </navigation>

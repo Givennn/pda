@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.panda.pda.app.R
 import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.base.retrofit.onMainThread
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
 import timber.log.Timber
@@ -92,22 +94,37 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             })
     }
 
-    protected fun<T> Single<T>.bindToFragment(loadMessage: String = "",  fragment: BaseFragment = this@BaseFragment): Single<T> {
+    protected fun<T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
         return this
-            .bindToLifecycle(fragment.requireView())
+            .bindToLifecycle(this@BaseFragment.requireView())
             .doOnSubscribe { showLoadingDialog(loadMessage)  }
             .doOnError { toast(it.message ?: getString(R.string.net_work_error)) }
             .doFinally { dismissLoadingDialog() }
 
     }
 
-    protected fun Completable.bindToFragment(loadMessage: String = "",  fragment: BaseFragment = this@BaseFragment): Completable {
+    protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
         return this
-            .bindToLifecycle(fragment.requireView())
+            .bindToLifecycle(this@BaseFragment.requireView())
             .doOnSubscribe { showLoadingDialog(loadMessage)  }
             .doOnError { toast(it.message ?: getString(R.string.net_work_error)) }
             .doFinally { dismissLoadingDialog() }
     }
+
+    protected fun<T> Single<BaseResponse<T>>.bindToFragment(loadMessage: String = ""): Single<T> {
+        return this
+            .onMainThread()
+            .unWrapperData()
+            .bindLoadingStatus(loadMessage)
+    }
+
+    protected fun Single<BaseResponse<Any>>.bindToFragment(loadMessage: String = ""): Completable {
+        return this
+            .onMainThread()
+            .unWrapperData()
+            .bindLoadingStatus(loadMessage)
+    }
+
 
     private fun dismissLoadingDialog() {
 

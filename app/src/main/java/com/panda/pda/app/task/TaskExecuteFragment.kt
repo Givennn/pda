@@ -2,7 +2,6 @@ package com.panda.pda.app.task
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,7 +103,7 @@ class TaskExecuteFragment : BaseFragment(R.layout.fragment_task_execute) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
-            .bindToFragment()
+            .bindLoadingStatus()
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
@@ -122,7 +121,7 @@ class TaskExecuteFragment : BaseFragment(R.layout.fragment_task_execute) {
             .taskExecutionListByPageGet(viewBinding.etSearchBar.text?.toString())
             .onMainThread()
             .unWrapperData()
-            .bindToFragment()
+            .bindLoadingStatus()
             .doFinally { viewBinding.root.isRefreshing = false }
             .subscribe({ data -> adapter.refreshData(data.dataList) }, { })
     }
@@ -134,7 +133,7 @@ class TaskExecuteFragment : BaseFragment(R.layout.fragment_task_execute) {
                     .taskExecutionConfirmPost(TaskIdRequest(data.id))
                     .onMainThread()
                     .unWrapperData()
-                    .bindToFragment()
+                    .bindLoadingStatus()
                     .subscribe({ toast(R.string.task_finish_toast) },
                         { })
             })

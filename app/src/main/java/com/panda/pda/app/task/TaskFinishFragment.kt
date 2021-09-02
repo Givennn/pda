@@ -105,7 +105,7 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
-            .bindToFragment(getString(R.string.loading_data))
+            .bindLoadingStatus(getString(R.string.loading_data))
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
@@ -137,7 +137,7 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
                     .taskCompleteConfirmPost(TaskIdRequest(data.id))
                     .onMainThread()
                     .unWrapperData()
-                    .bindToFragment()
+                    .bindLoadingStatus()
                     .subscribe({ toast(R.string.task_finish_toast) },
                         { })
             })

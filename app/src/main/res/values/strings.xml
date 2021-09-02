@@ -30,7 +30,7 @@
     <string name="product_code">产品编码</string>
     <string name="product_description">产品描述</string>
     <string name="plan_code">计划编号</string>
-    <string name="order_code">工作令号</string>
+    <string name="work_order_code">工作令号</string>
     <string name="batch_code">批次号</string>
     <string name="task_status">任务状态</string>
     <string name="plan_start_time">计划开始时间</string>
@@ -73,5 +73,13 @@
     <string name="long_text_test">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</string>
     <string name="order">订单</string>
     <string name="plan">计划</string>
+    <string name="report_number">报工数量</string>
+    <string name="work_reporter">报工人</string>
+    <string name="order_code">订单编号</string>
+    <string name="unify_code">统一号</string>
+    <string name="man_hour">工时</string>
+    <string name="maintain_description">维修描述</string>
+    <string name="picture">图片</string>
+    <string name="common_search_bar_hint">请扫描或输入</string>
 
 </resources>

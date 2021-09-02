@@ -2,9 +2,10 @@ package com.panda.pda.app.common.data
 
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.common.data.model.FileInfoModel
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import okhttp3.ResponseBody
+import retrofit2.http.*
 import java.io.File
 
 
@@ -46,4 +47,8 @@ interface CommonApi {
 //            fbody,
 //            name,
 //            id)
+
+    @Streaming
+    @GET
+    fun downloadFile(@Url fileUrl: String): Observable<retrofit2.Response<ResponseBody>>
 }
