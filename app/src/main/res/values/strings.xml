@@ -81,5 +81,17 @@
     <string name="maintain_description">维修描述</string>
     <string name="picture">图片</string>
     <string name="common_search_bar_hint">请扫描或输入</string>
+    <string name="exit_login">退出登录</string>
+    <string name="change_password">修改密码</string>
+    <string name="old_password">旧密码</string>
+    <string name="password_hint">由6~12位英文、数字组成</string>
+    <string name="digits_password">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="password_confirm">确认密码</string>
+    <string name="forget_password_notice">忘记密码，请联系管理员！</string>
+    <string name="user_pwd_error">用户或密码错误，请重新输入！</string>
+    <string name="input_user_name_alert">请输入账号</string>
+    <string name="input_password_alert">请输入密码</string>
 
 </resources>

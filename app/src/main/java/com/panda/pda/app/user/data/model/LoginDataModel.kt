@@ -24,6 +24,6 @@ data class LoginDataModel(
 )
 
 data class LoginRequest(
+    val workCode: String,
     val password: String,
-    val workCode: String
 )

@@ -38,20 +38,20 @@ import io.reactivex.rxjava3.core.Single
 //    override val errorMessage = MutableLiveData<String>()
 //}
 
-internal fun <T> Single<BaseResponse<T>>.unWrapperData(): Single<T> {
-    return this.concatMap {
-        when (it.code) {
-            NetworkParams.SUCCESS_CODE -> Single.just(it.data)
-            else -> Single.error(HttpInnerException(it.code, it.message))
-        }
-    }
-}
-
-internal fun Single<BaseResponse<Any>>.unWrapperData(): Completable {
-    return this.concatMapCompletable {
-        when (it.code) {
-            NetworkParams.SUCCESS_CODE -> Completable.complete()
-            else -> Completable.error(HttpInnerException(it.code, it.message))
-        }
-    }
-}
+//internal fun <T> Single<BaseResponse<T>>.unWrapperData(): Single<T> {
+//    return this.concatMap {
+//        when (it.code) {
+//            NetworkParams.SUCCESS_CODE -> Single.just(it.data)
+//            else -> Single.error(HttpInnerException(it.code, it.message))
+//        }
+//    }
+//}
+//
+//internal fun Single<BaseResponse<Any>>.unWrapperData(): Completable {
+//    return this.concatMapCompletable {
+//        when (it.code) {
+//            NetworkParams.SUCCESS_CODE -> Completable.complete()
+//            else -> Completable.error(HttpInnerException(it.code, it.message))
+//        }
+//    }
+//}

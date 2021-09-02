@@ -54,7 +54,7 @@
         android:id="@+id/iv_step_indicate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_record_indicate"
+        android:src="@drawable/ic_point_indicate"
         app:layout_constraintTop_toTopOf="@+id/tv_record_type"
         app:layout_constraintBottom_toBottomOf="@id/tv_record_type"
         app:layout_constraintStart_toStartOf="parent"

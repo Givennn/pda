@@ -16,6 +16,7 @@ import com.panda.pda.app.R
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.onMainThread
+import com.panda.pda.app.base.retrofit.unWrapperData
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
 import timber.log.Timber
@@ -31,7 +32,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     private lateinit var requestOpenFileLauncher: ActivityResultLauncher<Array<String>>
     protected val TAG get() = javaClass.simpleName
     protected val sp: SharedPreferences by lazy {
-        this.requireContext().getSharedPreferences("SOG", Context.MODE_PRIVATE)
+        this.requireContext().getSharedPreferences("private", Context.MODE_PRIVATE)
     }
 
     protected val navController by lazy { findNavController() }

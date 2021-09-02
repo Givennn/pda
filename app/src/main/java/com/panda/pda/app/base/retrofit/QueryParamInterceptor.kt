@@ -13,6 +13,11 @@ class QueryParamInterceptor : Interceptor {
         .removeHeader("User_Agent")
         .addHeader("Content_type", "application/json")
         .addHeader("os", "Android")
+        .addHeader("token", TOKEN)
         .build()
         .let { chain.proceed(it) }
+
+    companion object {
+        var TOKEN = ""
+    }
 }

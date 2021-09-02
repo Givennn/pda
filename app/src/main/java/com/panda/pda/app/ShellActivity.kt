@@ -3,14 +3,20 @@ package com.panda.pda.app
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.base.retrofit.onMainThread
+import com.panda.pda.app.base.retrofit.unWrapperData
 import com.panda.pda.app.databinding.ActivityShellBinding
+import com.panda.pda.app.task.TaskViewModel
+import com.panda.pda.app.task.data.TaskApi
 import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
 import com.panda.pda.library.android.material.extension.setupNavControllerToFinalStack
-import timber.log.Timber
 
 class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
@@ -20,13 +26,14 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     @Suppress("unused")
     private val shellViewModel by viewModels<ShellViewModel>()
+    private val taskViewModel by viewModels<TaskViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createNavController()
         initBottomNavigation()
-        customThemes()
         initViewModel()
+        customThemes()
     }
 
     private fun createNavController() {
@@ -46,6 +53,9 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
                     R.id.profileFragment)
                 -> {
                     window.statusBarColor = getColor(R.color.white)
+                    if (destination.id != R.id.loginFragment) {
+                        updateTaskCount()
+                    }
                 }
                 else -> {
                     window.statusBarColor = getColor(R.color.colorPrimaryDark)
@@ -57,10 +67,23 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     private fun initViewModel() {
         // update badge from viewModel
+        taskViewModel.taskMsgData.observe(this, Observer {
+            val badge = viewBinding.nvBottom.getOrCreateBadge(R.id.taskFragment)
+            badge.isVisible = it.hasNewMessage()
+        })
+    }
+
+    private fun updateTaskCount() {
+        WebClient.request(TaskApi::class.java)
+            .pdaTaskMsgCountGet()
+            .onMainThread()
+            .unWrapperData()
+            .subscribe({
+                taskViewModel.taskMsgData.postValue(it)
+            }, {})
     }
 
     private fun initBottomNavigation() {
-
         viewBinding.nvBottom.hideWhenDestinationExclude(navController)
             .customIcons()
             .setupNavControllerToFinalStack(navController)
