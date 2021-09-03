@@ -17,5 +17,7 @@ class MaterialBindingProductFragment: BaseFragment(R.layout.fragment_material_bi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
+
+        //TODO 物料绑定
     }
 }
