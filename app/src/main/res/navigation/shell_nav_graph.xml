@@ -94,4 +94,8 @@
     <include app:graph="@navigation/discovery_task_nav_graph" />
     <include app:graph="@navigation/discovery_plan_nav_graph" />
     <include app:graph="@navigation/discovery_report_nav_graph" />
+    <fragment
+        android:id="@+id/taskReportInputFragment"
+        android:name="com.panda.pda.app.task.TaskReportInputFragment"
+        android:label="TaskReportInputFragment" />
 </navigation>

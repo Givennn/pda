@@ -22,7 +22,7 @@ abstract class CommonSearchListFragment<TSource> :
 
     BaseFragment(R.layout.fragment_common_search_list) {
 
-    private val viewBinding by viewBinding<FragmentCommonSearchListBinding>()
+    protected val viewBinding by viewBinding<FragmentCommonSearchListBinding>()
 
     private val itemListAdapter by lazy { createAdapter() }
 

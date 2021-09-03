@@ -18,4 +18,6 @@
     <color name="textDescColor">#CCCCCC</color>
     <color name="textDetailLabelColor">#666666</color>
     <color name="textRemarkColor">#888888</color>
+    <color name="numberEditTextBtnDisable">#CCCCCC</color>
+    <color name="numberEditTextBtnEnable">#FF9A00</color>
 </resources>

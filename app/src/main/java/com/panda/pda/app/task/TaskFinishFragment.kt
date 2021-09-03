@@ -1,96 +1,68 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.WebClient
-import com.panda.pda.app.base.retrofit.onMainThread
-import com.panda.pda.app.base.retrofit.unWrapperData
-import com.panda.pda.app.databinding.FragmentTaskFinishBinding
+import com.panda.pda.app.base.retrofit.*
+import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskFinishBinding
 import com.panda.pda.app.task.data.TaskApi
 import com.panda.pda.app.task.data.model.TaskIdRequest
 import com.panda.pda.app.task.data.model.TaskInfoModel
 import com.panda.pda.app.task.data.model.TaskModel
+import io.reactivex.rxjava3.core.Single
 
-class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
-
-    private val viewBinding by viewBinding<FragmentTaskFinishBinding>()
+class TaskFinishFragment :
+    CommonSearchListFragment<TaskModel>() {
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
-    private lateinit var adapter: BaseRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>
+    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
+        WebClient.request(TaskApi::class.java)
+            .taskCompleteListGet(key)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override val titleResId: Int
+        get() = R.string.task_finish
 
-        createAdapter()
-        viewBinding.root.setOnRefreshListener { refreshData() }
-        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
-        viewBinding.etSearchBar.setOnEditorActionListener { editText, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                refreshData()
-            } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
-                refreshData()
-                (editText as EditText).selectAll()
-                return@setOnEditorActionListener true
+    override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
+        return object : BaseRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>(mutableListOf()) {
+            override fun createBinding(parent: ViewGroup): ItemTaskFinishBinding {
+                return ItemTaskFinishBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
             }
-            false
-        }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        refreshData()
-    }
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
+            }
 
-    private fun createAdapter() {
-        adapter =
-            object : BaseRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>(mutableListOf()) {
-                override fun createBinding(parent: ViewGroup): ItemTaskFinishBinding {
-                    return ItemTaskFinishBinding.inflate(LayoutInflater.from(parent.context))
-                }
-
-                override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
-                    return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
-                        parent,
-                        false)
-                }
-
-                override fun onBindViewHolderWithData(
-                    holder: ViewBindingHolder,
-                    data: TaskModel,
-                    position: Int,
-                ) {
-                    holder.itemViewBinding.apply {
-                        tvTaskCode.text = data.taskCode
-                        tvPlanFinishDate.text = data.planEndTime
-                        tvTaskDesc.text = data.taskDesc
-                        tvTaskSender.text = data.issueName
-                        btnAction.setOnClickListener {
-                            onItemActionClicked(data)
-                        }
-                        clInfo.setOnClickListener {
-                            onItemInfoClicked(data)
-                        }
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: TaskModel,
+                position: Int,
+            ) {
+                holder.itemViewBinding.apply {
+                    tvTaskCode.text = data.taskCode
+                    tvPlanFinishDate.text = data.planEndTime
+                    tvTaskDesc.text = data.taskDesc
+                    tvTaskSender.text = data.issueName
+                    btnAction.setOnClickListener {
+                        onItemActionClicked(data)
+                    }
+                    clInfo.setOnClickListener {
+                        onItemInfoClicked(data)
                     }
                 }
-
-
             }
-        viewBinding.rvTaskList.adapter = adapter
+        }
     }
 
     private fun onItemInfoClicked(data: TaskModel) {
@@ -105,7 +77,7 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
                 .unWrapperData(),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
-            .bindLoadingStatus(getString(R.string.loading_data))
+            .bindLoadingStatus()
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
@@ -118,27 +90,14 @@ class TaskFinishFragment : BaseFragment(R.layout.fragment_task_finish) {
             Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
     }
 
-
-    private fun refreshData() {
-        WebClient.request(TaskApi::class.java)
-            .taskCompleteListGet(viewBinding.etSearchBar.text?.toString())
-            .onMainThread()
-            .unWrapperData()
-            .doFinally { viewBinding.root.isRefreshing = false }
-            .subscribe({ data -> adapter.refreshData(data.dataList) },
-                { toast(it.message ?: getString(R.string.net_work_error)) })
-    }
-
     private fun onItemActionClicked(data: TaskModel) {
 
         val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_finish_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(TaskApi::class.java)
                     .taskCompleteConfirmPost(TaskIdRequest(data.id))
-                    .onMainThread()
-                    .unWrapperData()
-                    .bindLoadingStatus()
-                    .subscribe({ toast(R.string.task_finish_toast) },
+                    .bindToFragment()
+                    .subscribe({ toast(R.string.task_finish_success_toast) },
                         { })
             })
         dialog.show(parentFragmentManager, TAG)

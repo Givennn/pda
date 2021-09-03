@@ -123,11 +123,11 @@
                 android:layout_marginTop="16dp"/>
             
             <TextView
+                android:id="@+id/tv_man_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/iv_total_time"
                 app:layout_constraintTop_toTopOf="@id/iv_total_time"
-                android:includeFontPadding="false"
                 android:gravity="top"
                 android:textSize="14sp"
                 android:textColor="#888888"

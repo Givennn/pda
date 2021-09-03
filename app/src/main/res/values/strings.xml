@@ -27,7 +27,7 @@
     <string name="basic_info">基本信息</string>
     <string name="task_code">任务编号</string>
     <string name="task_count">任务数量</string>
-    <string name="product_code">产品编码</string>
+    <string name="product_code">产品编号</string>
     <string name="product_description">产品描述</string>
     <string name="plan_code">计划编号</string>
     <string name="work_order_code">工作令号</string>
@@ -45,11 +45,10 @@
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
     <string name="task_finish_confirm">确定完成该任务？</string>
-    <string name="task_finish_toast">完成任务成功</string>
     <string name="net_work_error">系统数据异常</string>
     <string name="loading_data">正在加载数据</string>
-    <string name="task_receive_toast">接收任务成功</string>
-    <string name="task_receive_confirm">确认接受任务</string>
+    <string name="task_receive_success_toast">接收任务成功</string>
+    <string name="task_receive_confirm">确认接受该任务？</string>
     <string name="operate_guide">作业指导书</string>
     <string name="material_bind">物料绑定</string>
     <string name="material_unbind">物料解绑</string>
@@ -93,5 +92,10 @@
     <string name="user_pwd_error">用户或密码错误，请重新输入！</string>
     <string name="input_user_name_alert">请输入账号</string>
     <string name="input_password_alert">请输入密码</string>
+    <string name="task_execute_success_toast">任务执行成功</string>
+    <string name="task_finish_success_toast">完成任务成功</string>
+    <string name="task_execute_confirm">确定执行该任务？</string>
+    <string name="already_report_number">已报工数量</string>
+    <string name="remark">备注</string>
 
 </resources>

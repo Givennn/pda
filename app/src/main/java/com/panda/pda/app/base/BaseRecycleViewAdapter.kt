@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 /**
  * created by AnJiwei 2021/3/15
  */
-abstract class BaseRecycleViewAdapter<TBinding : ViewBinding, TSource>(private val dataSource: MutableList<TSource>) :
+abstract class BaseRecycleViewAdapter<TBinding : ViewBinding, TSource>(protected val dataSource: MutableList<TSource>) :
     RecyclerView.Adapter<BaseRecycleViewAdapter<TBinding, TSource>.ViewBindingHolder>() {
 
     protected abstract fun createBinding(parent: ViewGroup): TBinding
@@ -77,8 +77,6 @@ abstract class BaseRecycleViewAdapter<TBinding : ViewBinding, TSource>(private v
         RecyclerView.ViewHolder(itemView) {
         lateinit var itemViewBinding: TBinding
     }
-
-    inner class EmptyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     companion object {
         const val VIEW_TYPE_ITEM = 1
