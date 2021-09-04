@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.progressindicator.CircularProgressIndicator xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="80dp"
     android:layout_height="80dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:indeterminate="true"
-    app:showDelay="500"
-    app:minHideDelay="500">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="true"/>
 
-</com.google.android.material.progressindicator.CircularProgressIndicator>
+    <TextView
+        android:id="@+id/tv_load_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

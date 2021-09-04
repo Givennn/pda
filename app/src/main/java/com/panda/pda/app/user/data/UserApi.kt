@@ -27,11 +27,9 @@ interface UserApi {
      * 登出
      *
      * The endpoint is owned by docs service owner
-     * @param raw raw paramter (optional)
      */
     @POST("pda/admin/user/logout")
     fun pdaAdminUserLogoutPost(
-        @retrofit2.http.Body raw: List<Byte>?
     ): Single<BaseResponse<Any>>
     /**
      * 登陆
@@ -51,7 +49,6 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/check")
     fun pdaAdminUserPasswordCheckPost(
-        @retrofit2.http.Body root: Any
     ): Single<BaseResponse<Any>>
     /**
      * 修改密码/修改
@@ -61,6 +58,5 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/modify")
     fun pdaAdminUserPasswordModifyPost(
-        @retrofit2.http.Body root: Any
     ): Single<BaseResponse<Any>>
 }

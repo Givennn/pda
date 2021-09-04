@@ -1,0 +1,56 @@
+package com.panda.pda.app.user
+
+import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.View
+import androidx.core.widget.doOnTextChanged
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.panda.pda.app.R
+import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.databinding.FragmentChangePwdOldVerifyBinding
+import com.panda.pda.app.user.data.UserApi
+
+/**
+ * create by AnJiwei 2021/9/4
+ */
+class ChangePwdOldVerifyFragment : BaseFragment(R.layout.fragment_change_pwd_old_verify) {
+    private val viewBinding by viewBinding<FragmentChangePwdOldVerifyBinding>()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.apply {
+            topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+            btnStepNext.setOnClickListener {
+                verifyPassword()
+            }
+        }
+
+        viewBinding.ivPwdDelete.setOnClickListener {
+            viewBinding.etPassword.setText("")
+        }
+        viewBinding.ivPwdVisible.setOnCheckedChangeListener { _, visible ->
+            viewBinding.etPassword.transformationMethod =
+                if (visible) HideReturnsTransformationMethod.getInstance() else PasswordTransformationMethod.getInstance()
+            viewBinding.etPassword.setSelection(viewBinding.etPassword.text.length)
+        }
+        viewBinding.etPassword.doOnTextChanged { text, _, _, _ ->
+            val visible = if (text?.isEmpty() != false) View.INVISIBLE else View.VISIBLE
+            viewBinding.ivPwdDelete.visibility = visible
+            viewBinding.ivPwdVisible.visibility = visible
+        }
+    }
+
+    private fun verifyPassword() {
+        //todo api update
+        WebClient.request(UserApi::class.java)
+            .pdaAdminUserPasswordCheckPost()
+            .bindToFragment()
+            .subscribe({ navToNewPwdFragment() }, { })
+    }
+
+    private fun navToNewPwdFragment() {
+        navController.navigate(R.id.action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment)
+    }
+}

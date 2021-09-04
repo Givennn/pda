@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.base.retrofit.onMainThread
 import com.panda.pda.app.base.retrofit.unWrapperData
 import com.panda.pda.app.databinding.ActivityShellBinding
 import com.panda.pda.app.task.TaskViewModel
 import com.panda.pda.app.task.data.TaskApi
+import com.panda.pda.app.user.UserViewModel
 import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
 import com.panda.pda.library.android.material.extension.setupNavControllerToFinalStack
@@ -27,13 +31,24 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     @Suppress("unused")
     private val shellViewModel by viewModels<ShellViewModel>()
     private val taskViewModel by viewModels<TaskViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createNavController()
         initBottomNavigation()
         initViewModel()
+        initTokenEvent()
         customThemes()
+    }
+
+    private fun initTokenEvent() {
+        userViewModel.logoutActionData.observe(this, { _ ->
+
+            navController.navigate(R.id.loginFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.shell_nav_graph, true).build())
+        })
     }
 
     private fun createNavController() {
@@ -50,7 +65,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
                     R.id.taskFragment,
                     R.id.operationFragment,
                     R.id.discoveryFragment,
-                    R.id.profileFragment)
+                    R.id.profileFragment),
                 -> {
                     window.statusBarColor = getColor(R.color.white)
                     if (destination.id != R.id.loginFragment) {

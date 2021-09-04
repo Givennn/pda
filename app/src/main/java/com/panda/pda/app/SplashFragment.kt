@@ -37,6 +37,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         if (loginRequest == null) {
             Completable.timer(1, TimeUnit.SECONDS)
                 .onMainThread()
+                .bindLoadingStatus()
                 .subscribe {
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
                 }

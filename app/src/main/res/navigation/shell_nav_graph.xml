@@ -31,11 +31,6 @@
         android:label="TaskFragment"
         tools:layout="@layout/fragment_task" />
     <fragment
-        android:id="@+id/profileFragment"
-        tools:layout="@layout/fragment_profile"
-        android:name="com.panda.pda.app.user.ProfileFragment"
-        android:label="ProfileFragment" />
-    <fragment
         android:id="@+id/discoveryFragment"
         tools:layout="@layout/fragment_discovery"
         android:name="com.panda.pda.app.discovery.DiscoveryFragment"
@@ -98,4 +93,5 @@
         android:id="@+id/taskReportInputFragment"
         android:name="com.panda.pda.app.task.TaskReportInputFragment"
         android:label="TaskReportInputFragment" />
+    <include app:graph="@navigation/profile_nav_graph" />
 </navigation>
