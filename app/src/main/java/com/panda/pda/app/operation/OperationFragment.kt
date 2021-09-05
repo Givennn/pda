@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.databinding.FragmentOperationBinding
+import com.panda.pda.app.operation.material.ProductScanFragment
 import timber.log.Timber
 
 /**
@@ -20,9 +21,21 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.clFactoryManageArea.children.forEach {
-           it.setOnClickListener { llBtn ->
-               navController.navigate(llBtn.id)
-           }
+            it.setOnClickListener { llBtn ->
+                when (llBtn.id) {
+                    R.navigation.material_unbind_nav_graph ->
+                        navController.navigate(llBtn.id, Bundle().apply {
+                            putString(ProductScanFragment.ACTION_KEY,
+                                ProductScanFragment.MaterialAction.Unbind.name)
+                        })
+                    R.navigation.material_replace_nav_graph ->
+                        navController.navigate(llBtn.id, Bundle().apply {
+                            putString(ProductScanFragment.ACTION_KEY,
+                                ProductScanFragment.MaterialAction.Replace.name)
+                        })
+                    else -> navController.navigate(llBtn.id)
+                }
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ interface MaterialApi {
 
     @GET("pda/fms/task/material/task/list-by-page")
     fun materialTaskListByPageGet(
-        @retrofit2.http.Query("keywords") keywords: String,
+        @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<BaseResponse<DataListNode<TaskModel>>>
     /**
      * 查询已绑定的物料
@@ -57,7 +57,7 @@ interface MaterialApi {
 
     @GET("pda/fms/task/material/task/query-bind-by-product")
     fun materialTaskQueryBindByProductGet(
-        @retrofit2.http.Query("taskId") taskId: String,
+        @retrofit2.http.Query("taskId") taskId: Int,
         @retrofit2.http.Query("productBarCode") productBarCode: String,
     ): Single<BaseResponse<TaskBandedMaterialModel>>
     /**

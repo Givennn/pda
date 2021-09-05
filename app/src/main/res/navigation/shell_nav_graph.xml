@@ -75,10 +75,6 @@
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
     <fragment
-        android:id="@+id/materialReplaceFragment"
-        android:name="com.panda.pda.app.operation.material.MaterialReplaceFragment"
-        android:label="MaterialReplaceFragment" />
-    <fragment
         android:id="@+id/operateGuideFragment"
         android:name="com.panda.pda.app.operation.OperateGuideFragment"
         android:label="OperateGuideFragment" />
@@ -94,4 +90,5 @@
         android:name="com.panda.pda.app.task.TaskReportInputFragment"
         android:label="TaskReportInputFragment" />
     <include app:graph="@navigation/profile_nav_graph" />
+    <include app:graph="@navigation/material_replace_nav_graph" />
 </navigation>

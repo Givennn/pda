@@ -19,7 +19,6 @@ import io.reactivex.rxjava3.core.Single
  */
 class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
 
-    //TODO 作业指导书
     override fun createAdapter(): BaseRecycleViewAdapter<*, GuideInfoModel> {
         return object :
             BaseRecycleViewAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {

@@ -98,5 +98,9 @@
     <string name="already_report_number">已报工数量</string>
     <string name="remark">备注</string>
     <string name="pwd_changed_message">您的密码修改成功，请使用新密码重新登录！</string>
+    <string name="scan_material_code_message">请扫描物料条码</string>
+    <string name="material_replace_success_message">物料替换成功</string>
+    <string name="material_banded_count_format">已绑定%1$d/%2$d个</string>
+    <string name="material_unbind_success_message">物料解绑成功</string>
 
 </resources>
