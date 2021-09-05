@@ -18,5 +18,7 @@ data class AlarmHistoryModel(
     val createName: String,
     val createTime: String,
     val id: Int,
-    val status: Int
-)
+    val status: Int,
+    val closeTime: String?
+) {
+}

@@ -102,5 +102,7 @@
     <string name="material_replace_success_message">物料替换成功</string>
     <string name="material_banded_count_format">已绑定%1$d/%2$d个</string>
     <string name="material_unbind_success_message">物料解绑成功</string>
+    <string name="alarm_detail_empty_message">请输入警报说明</string>
+    <string name="alarm_report_success_message">报警成功</string>
 
 </resources>

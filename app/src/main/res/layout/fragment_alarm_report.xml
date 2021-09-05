@@ -26,6 +26,7 @@
       app:layout_constraintTop_toBottomOf="@id/topAppBar"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_show_alarm_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         android:layout_width="wrap_content"

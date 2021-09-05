@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_header_bullet"/>
             <TextView
-                android:id="@+id/tv_task_code"
+                android:id="@+id/tv_alarm_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_item_top_line"
-            tools:visibility="gone"
+            tools:visibility="visible"
             android:padding="12dp">
 
             <TextView
