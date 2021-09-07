@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/operateGuideFragment"
+            app:layout_constraintEnd_toStartOf="@+id/operation_guide_nav_graph"
             app:layout_constraintStart_toEndOf="@+id/taskReceiveFragment"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -82,7 +82,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/operateGuideFragment"
+            android:id="@+id/operation_guide_nav_graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -114,7 +114,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/operateGuideFragment"
+            app:layout_constraintStart_toEndOf="@+id/operation_guide_nav_graph"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -141,7 +141,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toStartOf="@+id/materialReplaceFragment"
+            app:layout_constraintEnd_toStartOf="@+id/material_replace_nav_graph"
             app:layout_constraintTop_toBottomOf="@+id/taskReceiveFragment"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent">
@@ -164,7 +164,7 @@
 
 
         <LinearLayout
-            android:id="@+id/materialReplaceFragment"
+            android:id="@+id/material_replace_nav_graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -199,7 +199,7 @@
             app:layout_constraintEnd_toStartOf="@+id/taskFinishFragment"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toTopOf="@id/material_unbind_nav_graph"
-            app:layout_constraintStart_toEndOf="@+id/materialReplaceFragment">
+            app:layout_constraintStart_toEndOf="@+id/material_replace_nav_graph">
 
             <ImageView
                 android:layout_width="36dp"

@@ -5,6 +5,7 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
@@ -19,6 +20,8 @@ import com.panda.pda.app.user.data.UserApi
  */
 class ChangePwdNewVerifyFragment : BaseFragment(R.layout.fragment_change_pwd_new_verify) {
     private val viewBinding by viewBinding<FragmentChangePwdNewVerifyBinding>()
+    private val userViewModel by activityViewModels<UserViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
@@ -65,6 +68,7 @@ class ChangePwdNewVerifyFragment : BaseFragment(R.layout.fragment_change_pwd_new
     }
 
     private fun showLoginFragment() {
+        userViewModel.logout(LogoutReasonCode.PwdChanged)
         navController.setGraph(R.navigation.shell_nav_graph)
         navController.navigate(R.id.loginFragment,
             null,

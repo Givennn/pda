@@ -1,29 +1,21 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
-import android.view.KeyEvent
+import android.text.Html
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
+import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
-import com.panda.pda.app.base.ConfirmDialogFragment
-import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
-import com.panda.pda.app.base.retrofit.onMainThread
-import com.panda.pda.app.base.retrofit.unWrapperData
 import com.panda.pda.app.common.CommonSearchListFragment
-import com.panda.pda.app.databinding.FragmentTaskReportBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskReportBinding
 import com.panda.pda.app.task.data.TaskApi
-import com.panda.pda.app.task.data.model.TaskIdRequest
 import com.panda.pda.app.task.data.model.TaskInfoModel
 import com.panda.pda.app.task.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
@@ -38,6 +30,9 @@ class TaskReportFragment :
 
     override val titleResId: Int
         get() = R.string.task_report
+
+    override val searchBarHintResId: Int
+        get() = R.string.task_search_bar_hint
 
     override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
         return object : BaseRecycleViewAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
@@ -59,11 +54,17 @@ class TaskReportFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvPlanFinishDate.text = data.planEndTime
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode)
+                    tvPlanFinishDate.text =
+                        getString(R.string.plan_finish_time_formatter, data.planStartTime)
+                    tvTaskProgress.text = getColorTaskProgress(data)
                     tvTaskSender.text = data.issueName
-                    // 总工时
+                    tvManHour.text = getManHour(data.totalReportTime ?: 0)
+                    btnAction.visibility = if (data.taskNum > data.reportNum) View.VISIBLE else View.GONE
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
@@ -73,6 +74,25 @@ class TaskReportFragment :
                 }
             }
         }
+    }
+
+    private fun getColorTaskProgress(data: TaskModel): SpannableStringBuilder {
+        return SpannableStringBuilder()
+            .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
+            .append("/${data.taskNum}")
+    }
+
+    private fun getManHour(minute: Int): String {
+        var result = ""
+        val hours: Int = minute / 60
+        val minutes: Int = minute % 60
+        if (hours != 0) {
+            result += "${hours}h"
+        }
+        if (minutes != 0) {
+            result += "${minutes}min"
+        }
+        return if (result.isEmpty()) "0min" else result
     }
 
     private fun onItemInfoClicked(data: TaskModel) {
@@ -100,122 +120,11 @@ class TaskReportFragment :
     }
 
     private fun onItemActionClicked(data: TaskModel) {
-
-        navController.navigate(R.id.taskReportInputFragment)
-        // todo task-report page
-//        val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
-//            .setConfirmButton({ _, _ ->
-//                WebClient.request(TaskApi::class.java)
-//                    .taskExecutionConfirmPost(TaskIdRequest(data.id))
-//                    .bindToFragment()
-//                    .subscribe({ toast(R.string.task_receive_toast) },
-//                        { })
-//            })
-//        dialog.show(parentFragmentManager, TAG)
+        WebClient.request(TaskApi::class.java).taskGetByIdGet(data.id)
+            .bindToFragment()
+            .subscribe({
+                taskViewModel.taskInfoData.postValue(TaskInfoModel(it, null))
+                navController.navigate(R.id.taskReportInputFragment)
+            }, {})
     }
 }
-//BaseFragment(R.layout.fragment_task_report) {
-//    private val viewBinding by viewBinding<FragmentTaskReportBinding>()
-//    private val taskViewModel by activityViewModels<TaskViewModel>()
-//
-//    private lateinit var adapter: BaseRecycleViewAdapter<ItemTaskReportBinding, TaskModel>
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        createAdapter()
-//        viewBinding.root.setOnRefreshListener { refreshData() }
-//        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
-//        viewBinding.etSearchBar.setOnEditorActionListener { editText, actionId, event ->
-//            if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                refreshData()
-//            } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
-//                refreshData()
-//                (editText as EditText).selectAll()
-//                return@setOnEditorActionListener true
-//            }
-//            false
-//        }
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        refreshData()
-//    }
-//
-//    private fun createAdapter() {
-//        adapter =
-//            object : BaseRecycleViewAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
-//                override fun createBinding(parent: ViewGroup): ItemTaskReportBinding {
-//                    return ItemTaskReportBinding.inflate(LayoutInflater.from(parent.context))
-//                }
-//
-//                override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
-//                    return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
-//                        parent,
-//                        false)
-//                }
-//
-//                override fun onBindViewHolderWithData(
-//                    holder: ViewBindingHolder,
-//                    data: TaskModel,
-//                    position: Int,
-//                ) {
-//                    holder.itemViewBinding.apply {
-//                        tvTaskCode.text = data.taskCode
-//                        tvPlanFinishDate.text = data.planEndTime
-//                        tvTaskDesc.text = data.taskDesc
-//                        tvTaskSender.text = data.issueName
-//                        btnAction.setOnClickListener {
-//                            onItemActionClicked(data)
-//                        }
-//                        clInfo.setOnClickListener {
-//                            onItemInfoClicked(data)
-//                        }
-//                    }
-//                }
-//
-//
-//            }
-//        viewBinding.rvTaskList.adapter = adapter
-//    }
-//
-//    private fun onItemInfoClicked(data: TaskModel) {
-//        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
-//            navToDetailFragment(data.id)
-//            return
-//        }
-//        WebClient.request(TaskApi::class.java)
-//            .taskGetByIdGet(data.id)
-//            .unWrapperData()
-//            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
-//                .unWrapperData(),
-//                { detail, records -> TaskInfoModel(detail, records.dataList) })
-//            .onMainThread()
-//            .bindLoadingStatus()
-//            .subscribe({ info ->
-//                taskViewModel.taskInfoData.postValue(info)
-//                navToDetailFragment(data.id)
-//            }, { })
-//    }
-//
-//    private fun navToDetailFragment(id: Int) {
-//        navController.navigate(R.id.taskDetailFragment,
-//            Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
-//    }
-//
-//
-//    private fun refreshData() {
-//        WebClient.request(TaskApi::class.java)
-//            .taskCompleteListGet(viewBinding.etSearchBar.text?.toString())
-//            .onMainThread()
-//            .unWrapperData()
-//            .doFinally { viewBinding.root.isRefreshing = false }
-//            .subscribe({ data -> adapter.refreshData(data.dataList) }, { })
-//    }
-//
-//    private fun onItemActionClicked(data: TaskModel) {
-//
-////        navController.navigate()
-//    }
-//}

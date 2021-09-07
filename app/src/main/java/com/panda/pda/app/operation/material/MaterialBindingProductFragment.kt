@@ -84,7 +84,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
 
     private fun requestBindData(taskId: Int, productCode: String) {
         WebClient.request(MaterialApi::class.java)
-            .materialTaskQueryBindByProductGet(taskId, productCode)
+            .materialTaskQueryBindByProductGet(productCode, taskId)
             .bindToFragment()
             .subscribe({ data -> updateBindMaterial(data) }, {})
     }

@@ -14,7 +14,7 @@ import timber.log.Timber
 /**
  * created by AnJiwei 2021/8/17
  */
-class UserViewModel(app: Application): AndroidViewModel(app) {
+class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     val loginData by lazy { MutableLiveData<LoginDataModel>() }
     val logoutActionData by lazy { MutableLiveData<String?>() }
@@ -46,30 +46,33 @@ class UserViewModel(app: Application): AndroidViewModel(app) {
             }
     }
 
-    fun logout(reasonCode: Int) {
+    fun logout(reasonCode: LogoutReasonCode) {
         val app = getApplication<PdaApplication>()
         app.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
             .edit {
                 putString(SP_USER_NAME, null)
                 putString(SP_PASSWORD, null)
             }
-        logoutActionData.postValue(getLogoutReasonMessage(reasonCode))
+        logoutActionData.postValue(reasonCode.message)
     }
 
-    private fun getLogoutReasonMessage(code: Int): String? {
-        return when (code) {
-            40001 -> "" //todo add reasons
-            else -> null
-        }
-    }
 
     companion object {
         val SP_NAME = UserViewModel::class.simpleName
         const val SP_USER_NAME = "UserName"
         const val SP_PASSWORD = "password"
-        val TOKEN_EXCEPTION_CODES = arrayOf(
-            40000,
-            40001
-        )
+        val IgnoreToastCodeList = listOf<Int>()
+    }
+}
+
+enum class LogoutReasonCode(val code: Int, val message: String) {
+    PwdChanged(40001, ""),
+    LoginError(41101, "");
+
+    companion object {
+        fun findReason(code: Int): LogoutReasonCode? {
+            Timber.e(code.toString())
+            return values().firstOrNull { it.code == code }
+        }
     }
 }

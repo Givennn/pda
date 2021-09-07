@@ -5,5 +5,5 @@ package com.panda.pda.app.task.data.model
  */
 data class TaskInfoModel(
     val detail: TaskDetailModel,
-    val recordList: List<TaskRecordModel>,
+    val recordList: List<TaskRecordModel>?,
 )

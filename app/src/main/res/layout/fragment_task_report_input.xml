@@ -206,10 +206,12 @@
                     app:endIconMode="custom"
                     app:boxBackgroundColor="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_report_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:inputType="number"
                         android:text="0"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -296,8 +298,20 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="4"/>
+                tools:itemCount="3"
+                tools:listitem="@layout/item_task_report_photo"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm"
+                style="@style/Widget.App.Button.confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/confirm"
+                app:layout_constraintBottom_toBottomOf="parent" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -104,5 +104,10 @@
     <string name="material_unbind_success_message">物料解绑成功</string>
     <string name="alarm_detail_empty_message">请输入警报说明</string>
     <string name="alarm_report_success_message">报警成功</string>
+    <string name="desc_and_code_formatter">%1$s %2$s</string>
+    <string name="report_time_formatter">派工时间：%s</string>
+    <string name="plan_finish_time_formatter">计划完成时间：%s</string>
+    <string name="task_reported_number_formatter"><font color='#457FFF'>%1$d</font>/%2$d</string>
+    <string name="take_photo_hint">上传图片\n(最多3张)</string>
 
 </resources>

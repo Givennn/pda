@@ -14,11 +14,14 @@
         app:title="@string/scan_product_serial_code" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search_bar"
         style="@style/Widget.App.TextInputLayout.searchBar"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
+        app:startIconTint="@color/scan_text_field_tint_color"
+        app:endIconTint="@color/scan_text_field_tint_color"
         app:startIconDrawable="@drawable/ic_scan"
         android:layout_marginEnd="12dp">
 
@@ -27,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/task_scan_bar_hint"
+            android:textColor="@color/text_field_search_bar_highlight"
             tools:text="" />
     </com.google.android.material.textfield.TextInputLayout>
 

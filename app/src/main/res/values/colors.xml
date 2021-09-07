@@ -10,6 +10,8 @@
     <color name="text_field_icon">#999999</color>
     <color name="text_field_hint">#A9ADB5</color>
     <color name="text_field_error">#FFAA6D</color>
+    <color name="text_field_search_bar_highlight">#2B6ADB</color>
+    <color name="text_field_search_bar_highlight_background">#ECF3FF</color>
 
     <color name="divider">#ECECEC</color>
     <color name="textHeaderLineColor">#262626</color>
@@ -20,4 +22,5 @@
     <color name="textRemarkColor">#888888</color>
     <color name="numberEditTextBtnDisable">#CCCCCC</color>
     <color name="numberEditTextBtnEnable">#FF9A00</color>
+
 </resources>

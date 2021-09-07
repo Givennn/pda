@@ -86,7 +86,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             tvPrdEqp.text = taskDetail.equipmentDesc
             tvActualStartTime.text = taskDetail.realStartTime
             tvActualFinishTime.text = taskDetail.realEndTime
-            adapter.refreshData(info.recordList)
+            adapter.refreshData(info.recordList ?: listOf())
         }
     }
 

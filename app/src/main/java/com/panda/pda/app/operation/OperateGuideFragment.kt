@@ -1,5 +1,6 @@
 package com.panda.pda.app.operation
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.panda.pda.app.R
@@ -47,7 +48,8 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
     }
 
     private fun onItemClicked(data: GuideInfoModel) {
-        TODO("Not yet implemented")
+        navController.navigate(R.id.action_operateGuideFragment_to_guidePdfPreviewFragment,
+            Bundle().apply { putString(GuidePdfPreviewFragment.PDF_URI_KEY, data.fileUrl) })
     }
 
     override fun api(key: String?): Single<BaseResponse<DataListNode<GuideInfoModel>>> =

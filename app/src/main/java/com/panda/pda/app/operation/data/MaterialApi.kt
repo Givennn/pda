@@ -57,8 +57,8 @@ interface MaterialApi {
 
     @GET("pda/fms/task/material/task/query-bind-by-product")
     fun materialTaskQueryBindByProductGet(
-        @retrofit2.http.Query("taskId") taskId: Int,
         @retrofit2.http.Query("productBarCode") productBarCode: String,
+        @retrofit2.http.Query("taskId") taskId: Int? = null,
     ): Single<BaseResponse<TaskBandedMaterialModel>>
     /**
      * 绑定/查询物料

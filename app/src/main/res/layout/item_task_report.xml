@@ -23,7 +23,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
-                android:id="@+id/tv_task_code"
+                android:id="@+id/tv_task_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxWidth="240dp"
@@ -47,16 +47,16 @@
                 android:gravity="end"
                 android:includeFontPadding="false"
                 style="@style/subHeaderLineText"
-                app:layout_constraintStart_toEndOf="@id/tv_task_code"
+                app:layout_constraintStart_toEndOf="@id/tv_task_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_task_desc"
+                android:id="@+id/tv_product_info"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/tv_task_code"
-                app:layout_constraintTop_toBottomOf="@id/tv_task_code"
+                app:layout_constraintStart_toStartOf="@id/tv_task_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_info"
                 app:layout_constraintEnd_toStartOf="@id/tv_task_progress"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 style="@style/contentText"
@@ -64,42 +64,41 @@
                 tools:text="底座肩部 00001"/>
 
             <TextView
-                app:layout_constraintStart_toEndOf="@id/tv_task_desc"
+                app:layout_constraintStart_toEndOf="@id/tv_product_info"
                 app:layout_constraintEnd_toStartOf="@id/tv_task_sender"
                 android:id="@+id/tv_task_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc"
-                app:layout_constraintBottom_toBottomOf="@id/tv_task_desc"
-
+                app:layout_constraintTop_toTopOf="@id/tv_product_info"
+                app:layout_constraintBottom_toBottomOf="@id/tv_product_info"
                 tools:text="5/7"
-                style="@style/contentText"/>
+                style="@style/moduleTitleText"/>
 
             <TextView
                 android:id="@+id/tv_task_sender"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                style="@style/headerLineText"
+                style="@style/moduleTitleText"
                 tools:text="张三"
                 android:gravity="end"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc"
-                app:layout_constraintBottom_toBottomOf="@id/tv_task_desc"
+                app:layout_constraintTop_toTopOf="@id/tv_product_info"
+                app:layout_constraintBottom_toBottomOf="@id/tv_product_info"
                 app:layout_constraintStart_toEndOf="@id/tv_task_progress"/>
             <TextView
-                android:id="@+id/tv_task_desc_label"
+                android:id="@+id/tv_product_info_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/descText"
                 android:layout_marginTop="8dp"
                 android:text="@string/task_description"
-                app:layout_constraintStart_toStartOf="@id/tv_task_code"
-                app:layout_constraintTop_toBottomOf="@id/tv_task_desc"/>
+                app:layout_constraintStart_toStartOf="@id/tv_task_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_info"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc_label"
+                app:layout_constraintTop_toTopOf="@id/tv_product_info_label"
                 app:layout_constraintStart_toStartOf="@id/tv_task_progress"
                 app:layout_constraintEnd_toEndOf="@id/tv_task_progress"
                 android:text="@string/already_report"
@@ -109,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
-                app:layout_constraintTop_toTopOf="@id/tv_task_desc_label"
+                app:layout_constraintTop_toTopOf="@id/tv_product_info_label"
                 android:text="@string/sender"
                 style="@style/descText"/>
 
@@ -118,8 +117,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_clock"
-                app:layout_constraintTop_toBottomOf="@id/tv_task_desc_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_task_code"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_info_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_task_info"
                 android:layout_marginTop="16dp"/>
             
             <TextView

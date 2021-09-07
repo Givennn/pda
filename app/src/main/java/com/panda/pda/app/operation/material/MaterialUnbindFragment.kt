@@ -71,7 +71,7 @@ class MaterialUnbindFragment :
 
     override fun api(key: String?): Single<BaseResponse<DataListNode<MaterialModel>>> =
         WebClient.request(MaterialApi::class.java)
-            .materialTaskQueryBindByProductGet(-1, productModel.code) //todo find task id
+            .materialTaskQueryBindByProductGet(productModel.code)
             .map { BaseResponse(it.message, DataListNode(it.data?.bindList ?: listOf()), it.code) }
 
     override val titleResId: Int

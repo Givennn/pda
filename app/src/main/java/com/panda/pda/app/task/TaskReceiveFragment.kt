@@ -30,6 +30,9 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
     override val titleResId: Int
         get() = R.string.task_receive
 
+    override val searchBarHintResId: Int
+        get() = R.string.task_search_bar_hint
+
     override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
         return object : BaseRecycleViewAdapter<ItemTaskReceiveBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReceiveBinding {
@@ -50,9 +53,9 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvIssueDate.text = data.issueTime ?: ""
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text = getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
+                    tvSendDate.text = getString(R.string.report_time_formatter, data.issueTime?: "")
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)

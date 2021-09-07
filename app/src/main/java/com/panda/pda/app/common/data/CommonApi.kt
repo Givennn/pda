@@ -1,6 +1,8 @@
 package com.panda.pda.app.common.data
 
 import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.common.data.model.DataParamModel
 import com.panda.pda.app.common.data.model.FileInfoModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -28,6 +30,14 @@ interface CommonApi {
         @retrofit2.http.Part("file\"; filename=\"file") file: File,
     ): Single<BaseResponse<FileInfoModel>>
 
+    /**
+     * 查询数据字典
+     *
+     * The endpoint is owned by docs service owner
+     */
+    @GET("pda/config/sys-param/list-by-param")
+    fun pdaConfigSysParamListByParamGet(
+    ): Single<BaseResponse<DataListNode<DataParamModel>>>
 
 //    var file: File = File(imageUri.getPath())
 //

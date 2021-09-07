@@ -8,5 +8,6 @@ data class MaterialModel(
     val materialName: String,
     val materialNo: String,
     val materialNum: String,
-    val bindProductBarCode: String? //已绑定产品条码
+    val bindProductBarCode: String?, //已绑定产品条码
+    val materialSerialCode: String?
 )

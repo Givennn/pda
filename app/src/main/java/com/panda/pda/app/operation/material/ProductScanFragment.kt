@@ -1,5 +1,6 @@
 package com.panda.pda.app.operation.material
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -10,6 +11,7 @@ import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.databinding.FragmentProductScanBinding
+import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/8/31
@@ -28,6 +30,9 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
             materialAction = MaterialAction.valueOf(actionName)
         }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
+        viewBinding.tilSearchBar.addOnEditTextAttachedListener {
+            Timber.e("text: ${it.editText?.text.toString()}")
+        }
         viewBinding.etSearchBar.setOnEditorActionListener { editText, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 onProductInput()
@@ -38,21 +43,27 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
             }
             false
         }
+
     }
 
     private fun onProductInput() {
-        //TODO update search bar tint
 
-        val navId = when (materialAction) {
-            MaterialAction.Bind -> R.id.action_productScanBindFragment_to_materialBindingProductFragment
-            MaterialAction.Unbind -> R.id.action_productScanUnbindFragment_to_materialUnbindFragment
-            MaterialAction.Replace -> R.id.action_productScanReplaceFragment_to_materialReplaceFragment
-        }
+//        val textFieldHighlightTint = ColorStateList.valueOf(requireContext().getColor(R.color.text_field_search_bar_highlight))
+//        viewBinding.tilSearchBar.apply {
+//            setStartIconTintList(textFieldHighlightTint)
+//            setEndIconTintList(textFieldHighlightTint)
+//            boxBackgroundColor = requireContext().getColor(R.color.text_field_search_bar_highlight_background)
+//        }
+//        val navId = when (materialAction) {
+//            MaterialAction.Bind -> R.id.action_productScanBindFragment_to_materialBindingProductFragment
+//            MaterialAction.Unbind -> R.id.action_productScanUnbindFragment_to_materialUnbindFragment
+//            MaterialAction.Replace -> R.id.action_productScanReplaceFragment_to_materialReplaceFragment
+//        }
 
-        //todo verify product code, api undefined
-        navController.navigate(navId, Bundle().apply {
-            putString(SCANNED_PRODUCT_CODE, viewBinding.etSearchBar.text.toString())
-        })
+//        //todo verify product code, api undefined
+//        navController.navigate(navId, Bundle().apply {
+//            putString(SCANNED_PRODUCT_CODE, viewBinding.etSearchBar.text.toString())
+//        })
     }
 
     enum class MaterialAction {

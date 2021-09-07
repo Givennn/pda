@@ -1,5 +1,6 @@
 package com.panda.pda.app.operation
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,11 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2021/8/31
  */
 class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.etSearchBar.visibility = View.GONE
+    }
     override fun createAdapter(): BaseRecycleViewAdapter<*, AlarmHistoryModel> {
         return object : BaseRecycleViewAdapter<ItemAlarmHistoryBinding, AlarmHistoryModel>(
             mutableListOf()) {

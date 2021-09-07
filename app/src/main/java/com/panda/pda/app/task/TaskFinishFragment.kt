@@ -1,8 +1,10 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
@@ -30,6 +32,9 @@ class TaskFinishFragment :
     override val titleResId: Int
         get() = R.string.task_finish
 
+    override val searchBarHintResId: Int
+        get() = R.string.task_search_bar_hint
+
     override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
         return object : BaseRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskFinishBinding {
@@ -50,9 +55,14 @@ class TaskFinishFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvPlanFinishDate.text = data.planEndTime
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode)
+                    tvPlanFinishDate.text =
+                        getString(R.string.plan_finish_time_formatter, data.planStartTime)
+                    tvTaskProgress.text = getColorTaskProgress(data)
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
@@ -63,6 +73,12 @@ class TaskFinishFragment :
                 }
             }
         }
+    }
+
+    private fun getColorTaskProgress(data: TaskModel): SpannableStringBuilder {
+        return SpannableStringBuilder()
+            .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
+            .append("/${data.taskNum}")
     }
 
     private fun onItemInfoClicked(data: TaskModel) {

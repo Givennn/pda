@@ -6,6 +6,26 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
+        android:id="@+id/changePwdOldVerifyFragment"
+        android:name="com.panda.pda.app.user.ChangePwdOldVerifyFragment"
+        android:label="ChangePwdOldVerifyFragment">
+        <action
+            android:id="@+id/action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment"
+            app:destination="@id/changePwdNewVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePwdNewVerifyFragment"
+        android:name="com.panda.pda.app.user.ChangePwdNewVerifyFragment"
+        android:label="ChangePwdNewVerifyFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.panda.pda.app.user.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_changePwdOldVerifyFragment"
+            app:destination="@id/changePwdOldVerifyFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/taskReportFragment"
         android:name="com.panda.pda.app.task.TaskReportFragment"
         android:label="fragment_task_report"
@@ -74,10 +94,6 @@
         android:name="com.panda.pda.app.task.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
-    <fragment
-        android:id="@+id/operateGuideFragment"
-        android:name="com.panda.pda.app.operation.OperateGuideFragment"
-        android:label="OperateGuideFragment" />
     <include app:graph="@navigation/material_bind_nav_graph" />
     <include app:graph="@navigation/material_unbind_nav_graph" />
     <include app:graph="@navigation/alarm_nav_graph" />

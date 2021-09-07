@@ -59,8 +59,8 @@ abstract class CommonSearchListFragment<TSource> :
     abstract val titleResId: Int
 
     @get:StringRes
-    protected val searchBarHintResId: Int?
-        get() = null
+    protected open val searchBarHintResId: Int? = null
+
 
     protected fun onSearching(text: String) {
         refreshData()

@@ -19,5 +19,6 @@ data class TaskDetailModel(
     val taskDesc: String,
     val taskNum: Int,
     val taskStatus: Int,
-    val workNo: String
+    val workNo: String,
+    val reportNum: Int
 )

@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-android")
+//    kotlin("kapt")
 }
 
 android {
@@ -70,6 +71,8 @@ dependencies {
     implementation(SupportLibs.LOGGING_INTERCEPTOR)
     implementation(SupportLibs.OK_HTTP)
     implementation(SupportLibs.TIMBER)
+//    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+
 //    implementation(SupportLibs.NAVIGATION_DYNAMIC_FEATURE_FRAGMENT_KTX)
 //    implementation(SupportLibs.LIFE_CYCLE)
     implementation(SupportLibs.RX_JAVA)
@@ -81,7 +84,8 @@ dependencies {
     implementation(SupportLibs.RX_BINDING)
     implementation(SupportLibs.COIL)
     implementation(SupportLibs.MATERIAL)
-    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+//    implementation("com.github.chrisbanes:PhotoView:2.3.0")
+    implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
     testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)

@@ -39,7 +39,7 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
     }
 
     private fun alarmReport() {
-        val alarmDetail = viewBinding.tvAlarmDetail.text.toString()
+        val alarmDetail = viewBinding.etRemark.text.toString()
         if (alarmDetail.isEmpty()) {
             toast(getString(R.string.alarm_detail_empty_message))
             return

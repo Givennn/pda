@@ -56,14 +56,22 @@ class TaskReportInputPhotoAdapter :
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         if (holder.viewType == VIEW_TYPE_ACTION) {
-            holder.itemView.findViewById<MaterialButton>(R.id.btn_open_camera)
-                .setOnClickListener { onTakePhotoAction.invoke() }
+            holder.itemView.setOnClickListener { onTakePhotoAction.invoke() }
         } else {
             val data = dataSource[holder.bindingAdapterPosition]
             holder.itemViewBinding.apply {
                 ivReportPhoto.setImageURI(data.fileUrl.toUri())
+                ivDelete.setOnClickListener {
+                    dataSource.remove(data)
+                    notifyItemRemoved(holder.bindingAdapterPosition)
+                }
             }
+
         }
+    }
+
+    fun getDataSource(): MutableList<FileInfoModel> {
+        return dataSource
     }
 
     fun addPhoto(uri: Uri) {

@@ -15,6 +15,7 @@ import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.HttpInnerException
 import com.panda.pda.app.base.retrofit.onMainThread
 import com.panda.pda.app.base.retrofit.unWrapperData
+import com.panda.pda.app.user.LogoutReasonCode
 import com.panda.pda.app.user.UserViewModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
@@ -103,7 +104,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         return this
             .bindToLifecycle(this@BaseFragment.requireView())
             .doOnSubscribe { showLoadingDialog(loadMessage) }
-            .doOnError { toast(it.message ?: getString(R.string.net_work_error)) }
+            .doOnError {this@BaseFragment.onNetworkError(it)  }
             .doFinally { dismissLoadingDialog() }
 
     }
@@ -131,8 +132,12 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     }
 
     private fun onNetworkError(throwable: Throwable) {
-        if (throwable is HttpInnerException && throwable.code in UserViewModel.TOKEN_EXCEPTION_CODES) {
-            userViewModel.logout(throwable.code)
+        if (throwable is HttpInnerException) {
+            when(throwable.code) {
+                in LogoutReasonCode.values().map { it.code } ->
+                    userViewModel.logout(LogoutReasonCode.findReason(throwable.code)!!)
+                in UserViewModel.IgnoreToastCodeList -> return
+            }
         }
         toast(throwable.message ?: getString(R.string.net_work_error))
     }

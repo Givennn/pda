@@ -2,7 +2,9 @@ package com.panda.pda.app.task
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
@@ -30,6 +32,9 @@ class TaskExecuteFragment :
     override val titleResId: Int
         get() = R.string.task_execute
 
+    override val searchBarHintResId: Int
+        get() = R.string.task_search_bar_hint
+
     override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
         return object : BaseRecycleViewAdapter<ItemTaskExecuteBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskExecuteBinding {
@@ -50,9 +55,9 @@ class TaskExecuteFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvPlanFinishDate.text = data.planEndTime
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text = getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
+                    tvPlanFinishDate.text = getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)

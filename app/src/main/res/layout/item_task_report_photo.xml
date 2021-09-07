@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/iv_report_photo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:src="@drawable/img_test"
-        android:padding="10dp"/>
+        android:scaleType="centerCrop"
+        android:layout_margin="10dp"/>
     
     <ImageView
         android:id="@+id/iv_delete"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/ic_delete_large"
-        android:layout_alignEnd="@id/iv_report_photo"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"/>
 
 </RelativeLayout>
