@@ -21,7 +21,18 @@ object WebClient {
 
     private val client by lazy { buildOkHttpClient() }
 
-    private fun buildOkHttpClient() : OkHttpClient {
+    private val downLoadClient by lazy {
+        OkHttpClient.Builder()
+            .connectTimeout(NetworkParams.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
+            .readTimeout(NetworkParams.READ_TIMEOUT, TimeUnit.MILLISECONDS)
+            .writeTimeout(NetworkParams.WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.HEADERS
+            })
+            .build()
+    }
+
+    private fun buildOkHttpClient(): OkHttpClient {
 
         return OkHttpClient.Builder()
             .connectTimeout(NetworkParams.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
@@ -30,11 +41,12 @@ object WebClient {
             .addInterceptor(QueryParamInterceptor())
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
+
             })
             .build()
     }
 
-    fun<TService> request(serviceClass: Class<TService>) : TService {
+    fun <TService> request(serviceClass: Class<TService>): TService {
         return Retrofit.Builder()
             .client(client)
 //            .baseUrl(NetworkParams.SERVICE_URL)
@@ -43,6 +55,14 @@ object WebClient {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(serviceClass)
+    }
+
+    fun downLoader(): Retrofit {
+        return Retrofit.Builder()
+            .client(downLoadClient)
+            .baseUrl(BuildConfig.GRADLE_API_BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build()
     }
 }
 

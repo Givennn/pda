@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
@@ -21,6 +20,7 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2021/8/30
  */
 class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
+
 
     override fun createAdapter(): BaseRecycleViewAdapter<*, GuideInfoModel> {
         return object :
@@ -57,7 +57,7 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
 
     private fun onItemClicked(data: GuideInfoModel) {
         navController.navigate(R.id.action_operateGuideFragment_to_guidePdfPreviewFragment,
-            Bundle().apply { putString(GuidePdfPreviewFragment.PDF_URI_KEY, data.fileUrl) })
+            Bundle().apply { putSerializable(GuidePdfPreviewFragment.PDF_KEY, data) })
     }
 
     override fun api(key: String?): Single<BaseResponse<DataListNode<GuideInfoModel>>> =

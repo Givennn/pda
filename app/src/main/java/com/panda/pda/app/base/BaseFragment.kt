@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -99,14 +98,14 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
         return this
-            .doOnSubscribe { showLoadingDialog(loadMessage) }
+            .doOnSubscribe { showLoadingDialog() }
             .doFinally { dismissLoadingDialog() }
 
     }
 
     protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
         return this
-            .doOnSubscribe { showLoadingDialog(loadMessage) }
+            .doOnSubscribe { showLoadingDialog() }
             .doFinally { dismissLoadingDialog() }
     }
 
@@ -149,15 +148,16 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         toast(throwable.message ?: getString(R.string.net_work_error))
     }
 
-    private fun dismissLoadingDialog() {
+    protected fun dismissLoadingDialog() {
         loadingDialog?.dismiss()
     }
 
-    private fun showLoadingDialog(loadMessage: String) {
+    protected fun showLoadingDialog() {
         DialogFragment(R.layout.dialog_loading).apply {
+            isCancelable = false
             loadingDialog = this
-        }
-            .show(parentFragmentManager, TAG)
+        }.show(parentFragmentManager, TAG)
     }
+
 
 }

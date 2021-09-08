@@ -58,7 +58,17 @@ interface CommonApi {
 //            name,
 //            id)
 
+//    @Streaming
+//    @GET
+//    fun downloadFile(@Url fileUrl: String): Observable<retrofit2.Response<ResponseBody>>
+
+    @Headers(
+        "Content-Type: application/pdf"
+    )
     @Streaming
-    @GET
-    fun downloadFile(@Url fileUrl: String): Observable<retrofit2.Response<ResponseBody>>
+    @GET("pda/common/get-file?")
+    fun downloadFile(
+        @retrofit2.http.Query("fileUrl") fileUrl: String,
+        @retrofit2.http.Query("fileName") fileName: String,
+    ): Observable<retrofit2.Response<ResponseBody>>
 }

@@ -1,5 +1,7 @@
 package com.panda.pda.app.operation.data.model
 
+import java.io.Serializable
+
 /**
  * created by AnJiwei 2021/9/1
  */
@@ -20,4 +22,4 @@ data class GuideInfoModel(
     val technicsCode: String,
     val technicsDesc: String,
     val technicsVersion: String
-)
+) : Serializable
