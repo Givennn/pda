@@ -3,6 +3,7 @@ package com.panda.pda.app.operation
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
@@ -10,6 +11,7 @@ import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
+import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemGuideInfoBinding
 import com.panda.pda.app.operation.data.GuideApi
 import com.panda.pda.app.operation.data.model.GuideInfoModel
@@ -25,6 +27,12 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
             BaseRecycleViewAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemGuideInfoBinding {
                 return ItemGuideInfoBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
+            }
+
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
                     false)
             }

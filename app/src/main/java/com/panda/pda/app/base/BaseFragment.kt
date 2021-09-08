@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -11,11 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.panda.pda.app.R
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.BaseResponse
-import com.panda.pda.app.base.retrofit.HttpInnerException
-import com.panda.pda.app.base.retrofit.onMainThread
-import com.panda.pda.app.base.retrofit.unWrapperData
-import com.panda.pda.app.user.LogoutReasonCode
+import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.user.UserViewModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
@@ -102,25 +99,33 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
         return this
-            .bindToLifecycle(this@BaseFragment.requireView())
             .doOnSubscribe { showLoadingDialog(loadMessage) }
-            .doOnError {this@BaseFragment.onNetworkError(it)  }
             .doFinally { dismissLoadingDialog() }
 
     }
 
     protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
         return this
-            .bindToLifecycle(this@BaseFragment.requireView())
             .doOnSubscribe { showLoadingDialog(loadMessage) }
-            .doOnError { this@BaseFragment.onNetworkError(it) }
             .doFinally { dismissLoadingDialog() }
+    }
+
+    protected fun <T> Single<T>.catchError(): Single<T> {
+        return this
+            .doOnError { this@BaseFragment.onNetworkError(it) }
+    }
+
+    protected fun Completable.catchError(): Completable {
+        return this
+            .doOnError { this@BaseFragment.onNetworkError(it) }
     }
 
     protected fun <T> Single<BaseResponse<T>>.bindToFragment(loadMessage: String = ""): Single<T> {
         return this
             .onMainThread()
             .unWrapperData()
+            .bindToLifecycle(this@BaseFragment.requireView())
+            .catchError()
             .bindLoadingStatus(loadMessage)
     }
 
@@ -128,14 +133,16 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         return this
             .onMainThread()
             .unWrapperData()
+            .bindToLifecycle(this@BaseFragment.requireView())
+            .catchError()
             .bindLoadingStatus(loadMessage)
     }
 
     private fun onNetworkError(throwable: Throwable) {
         if (throwable is HttpInnerException) {
-            when(throwable.code) {
-                in LogoutReasonCode.values().map { it.code } ->
-                    userViewModel.logout(LogoutReasonCode.findReason(throwable.code)!!)
+            when (throwable.code) {
+                in UserViewModel.LogoutCodeList ->
+                    userViewModel.logout(throwable.code)
                 in UserViewModel.IgnoreToastCodeList -> return
             }
         }
@@ -143,15 +150,14 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     }
 
     private fun dismissLoadingDialog() {
-//        loadingDialog?.dismiss()
-//        loadingDialog = null
+        loadingDialog?.dismiss()
     }
 
     private fun showLoadingDialog(loadMessage: String) {
-//        DialogFragment(R.layout.dialog_loading)
-//            .also { loadingDialog = it
-//            it.requireDialog().findViewById<TextView>(R.id.tv_load_message).setText(loadMessage)}
-//            .show(parentFragmentManager, TAG)
+        DialogFragment(R.layout.dialog_loading).apply {
+            loadingDialog = this
+        }
+            .show(parentFragmentManager, TAG)
     }
 
 }

@@ -3,6 +3,8 @@ package com.panda.pda.app.user.data
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.user.data.model.LoginDataModel
 import com.panda.pda.app.user.data.model.LoginRequest
+import com.panda.pda.app.user.data.model.PwdCheckRequest
+import com.panda.pda.app.user.data.model.PwdModifyRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -49,6 +51,7 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/check")
     fun pdaAdminUserPasswordCheckPost(
+        @retrofit2.http.Body request: PwdCheckRequest
     ): Single<BaseResponse<Any>>
     /**
      * 修改密码/修改
@@ -58,5 +61,6 @@ interface UserApi {
      */
     @POST("pda/admin/user/password/modify")
     fun pdaAdminUserPasswordModifyPost(
+        @retrofit2.http.Body request: PwdModifyRequest
     ): Single<BaseResponse<Any>>
 }

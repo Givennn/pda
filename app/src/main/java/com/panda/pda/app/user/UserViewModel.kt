@@ -17,7 +17,7 @@ import timber.log.Timber
 class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     val loginData by lazy { MutableLiveData<LoginDataModel>() }
-    val logoutActionData by lazy { MutableLiveData<String?>() }
+    val logoutActionData by lazy { MutableLiveData<Int?>() }
 
     fun getAppVersionName(context: Context): String {
         var versionName = ""
@@ -46,14 +46,15 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             }
     }
 
-    fun logout(reasonCode: LogoutReasonCode) {
+    fun logout(reasonCode: Int? = null) {
         val app = getApplication<PdaApplication>()
         app.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
             .edit {
                 putString(SP_USER_NAME, null)
                 putString(SP_PASSWORD, null)
             }
-        logoutActionData.postValue(reasonCode.message)
+
+        logoutActionData.postValue(reasonCode)
     }
 
 
@@ -61,18 +62,16 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         val SP_NAME = UserViewModel::class.simpleName
         const val SP_USER_NAME = "UserName"
         const val SP_PASSWORD = "password"
-        val IgnoreToastCodeList = listOf<Int>()
-    }
-}
+        val IgnoreToastCodeList = listOf(
+            41205, // 角色不存在
+            41211, // 没有权限,无法登录
+        )
 
-enum class LogoutReasonCode(val code: Int, val message: String) {
-    PwdChanged(40001, ""),
-    LoginError(41101, "");
-
-    companion object {
-        fun findReason(code: Int): LogoutReasonCode? {
-            Timber.e(code.toString())
-            return values().firstOrNull { it.code == code }
-        }
+        val LogoutCodeList = listOf(
+            40001, //PwdChanged
+            41101,
+            50014, //LoseEfficacy
+            50006
+        )
     }
 }

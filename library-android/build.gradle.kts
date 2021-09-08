@@ -54,12 +54,12 @@ android {
 
 dependencies {
     implementation(kotlin("stdlib-jdk7"))
-    implementation("com.google.android.material:material:1.4.0")
     implementation(SupportLibs.ANDROIDX_APPCOMPAT)
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
     api( "com.github.kirich1409:viewbindingpropertydelegate:1.4.7")
     testImplementation(TestingLib.JUNIT)
     implementation(SupportLibs.NAVIGATION_UI_KTX)
+    api(SupportLibs.MATERIAL)
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_RUNNER)
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)
 }

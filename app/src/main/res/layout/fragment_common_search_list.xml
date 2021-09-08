@@ -18,6 +18,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.App.TextInputLayout.searchBar"
+            android:id="@+id/til_search_bar"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginStart="12dp"

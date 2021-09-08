@@ -52,7 +52,7 @@
                 android:layout_toStartOf="@+id/iv_account_delete"
                 android:background="@null"
                 android:hint="@string/login_user_name_field_hint"
-                android:singleLine="true"
+                android:inputType="textVisiblePassword"
                 android:textColor="@color/white"
                 android:textColorHint="@color/input_text_hint"
                 android:textCursorDrawable="@drawable/et_cursor_login"

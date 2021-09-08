@@ -3,6 +3,7 @@ package com.panda.pda.app.operation
 import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
@@ -10,6 +11,7 @@ import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentAlarmReportBinding
 import com.panda.pda.app.operation.data.AlarmApi
 import com.panda.pda.app.operation.data.model.AlarmDetailRequest
+import java.util.concurrent.TimeUnit
 
 /**
  * created by AnJiwei 2021/8/30
@@ -23,13 +25,17 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
             topAppBar.setNavigationOnClickListener {
                 navBackListener.invoke(it)
             }
-            btnConfirm.setOnClickListener {
-                alarmReport()
-            }
-
-            btnShowAlarmHistory.setOnClickListener {
-                navToAlarmHistory()
-            }
+            btnConfirm
+                .clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    alarmReport()
+                }
+            btnShowAlarmHistory.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    navToAlarmHistory()
+                }
         }
 
     }
@@ -47,7 +53,7 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
         WebClient.request(AlarmApi::class.java)
             .pdaFmsAlarmAddPost(AlarmDetailRequest(alarmDetail))
             .bindToFragment()
-            .subscribe ({
+            .subscribe({
                 toast(getString(R.string.alarm_report_success_message))
                 navBackListener.invoke(requireView())
             }, {})

@@ -40,7 +40,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     }
 
     private fun initTokenEvent() {
-        userViewModel.logoutActionData.observe(this, { _ ->
+        userViewModel.logoutActionData.observe(this, {
 
             navController.navigate(R.id.loginFragment,
                 null,

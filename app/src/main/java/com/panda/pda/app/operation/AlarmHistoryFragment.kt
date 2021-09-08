@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
+import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemAlarmHistoryBinding
 import com.panda.pda.app.operation.data.AlarmApi
 import com.panda.pda.app.operation.data.model.AlarmHistoryModel
+import com.panda.pda.app.operation.data.model.AlarmStatus
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -22,13 +25,20 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.etSearchBar.visibility = View.GONE
+        viewBinding.tilSearchBar.visibility = View.GONE
     }
+
     override fun createAdapter(): BaseRecycleViewAdapter<*, AlarmHistoryModel> {
         return object : BaseRecycleViewAdapter<ItemAlarmHistoryBinding, AlarmHistoryModel>(
             mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemAlarmHistoryBinding {
                 return ItemAlarmHistoryBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
+            }
+
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
                     false)
             }
@@ -40,17 +50,18 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
             ) {
                 holder.itemViewBinding.apply {
                     tvAlarmCode.text = data.alarmCode
-                    tvAlarmStatus.text = data.status.toString()
+                    tvAlarmStatus.text = data.alarmStatus.type
                     tvReporter.text = data.createName
                     tvReportTime.text = data.createTime
                     tvAlarmDetail.text = data.alarmDetail
-                    tvCloser.text = data.closeName
-                    tvCloseTime.text = data.closeTime
-                    tvCloseDetail.text = data.closeRemark
-                    if (data.status == 0) { //TODO status charge
+
+                    if (data.alarmStatus == AlarmStatus.Open) {
                         clClose.visibility = View.GONE
                     } else {
                         clClose.visibility = View.VISIBLE
+                        tvCloser.text = data.closeName
+                        tvCloseTime.text = data.closeTime
+                        tvCloseDetail.text = data.closeRemark
                     }
                 }
             }

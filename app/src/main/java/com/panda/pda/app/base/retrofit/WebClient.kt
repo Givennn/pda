@@ -1,5 +1,6 @@
 package com.panda.pda.app.base.retrofit
 
+import com.panda.pda.app.BuildConfig
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
@@ -36,7 +37,8 @@ object WebClient {
     fun<TService> request(serviceClass: Class<TService>) : TService {
         return Retrofit.Builder()
             .client(client)
-            .baseUrl(NetworkParams.SERVICE_URL)
+//            .baseUrl(NetworkParams.SERVICE_URL)
+            .baseUrl(BuildConfig.GRADLE_API_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()

@@ -109,5 +109,7 @@
     <string name="plan_finish_time_formatter">计划完成时间：%s</string>
     <string name="task_reported_number_formatter"><font color='#457FFF'>%1$d</font>/%2$d</string>
     <string name="take_photo_hint">上传图片\n(最多3张)</string>
+    <string name="alarm_closer">关闭人</string>
+    <string name="alarm_close_time">关闭时间</string>
 
 </resources>

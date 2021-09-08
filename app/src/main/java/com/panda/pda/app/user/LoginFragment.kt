@@ -8,6 +8,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.retrofit.WebClient
@@ -15,6 +16,8 @@ import com.panda.pda.app.databinding.FragmentLoginBinding
 import com.panda.pda.app.user.data.UserApi
 import com.panda.pda.app.user.data.model.LoginRequest
 import com.panda.pda.library.android.AESUtils
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import java.util.concurrent.TimeUnit
 
 /**
  * created by AnJiwei 2021/8/9
@@ -51,9 +54,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             viewBinding.ivAccountDelete.visibility =
                 if (text?.isEmpty() != false) View.INVISIBLE else View.VISIBLE
         }
-        viewBinding.btLogin.setOnClickListener {
-            login()
-        }
+        viewBinding.btLogin.clicks()
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .bindToLifecycle(requireView())
+            .subscribe {
+                login()
+            }
     }
 
     private fun login() {

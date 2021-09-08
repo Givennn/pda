@@ -69,10 +69,12 @@
             android:id="@+id/et_remark"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:inputType="textMultiLine"
             android:gravity="top"
             android:padding="12dp"
+            android:maxLength="200"
             android:hint="@string/remark_hint"
-            tools:text="" />
+            tools:text="@string/long_text_test" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton

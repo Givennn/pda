@@ -8,9 +8,12 @@ import androidx.core.widget.doOnTextChanged
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentChangePwdOldVerifyBinding
 import com.panda.pda.app.user.data.UserApi
+import com.panda.pda.app.user.data.model.PwdCheckRequest
+import com.panda.pda.library.android.AESUtils
 
 /**
  * create by AnJiwei 2021/9/4
@@ -43,14 +46,24 @@ class ChangePwdOldVerifyFragment : BaseFragment(R.layout.fragment_change_pwd_old
     }
 
     private fun verifyPassword() {
-        //todo api update
+        val oldPwd = viewBinding.etPassword.text.toString()
+        if (oldPwd.isEmpty()) {
+            toast("请输入旧密码")
+            return
+        }
         WebClient.request(UserApi::class.java)
-            .pdaAdminUserPasswordCheckPost()
+            .pdaAdminUserPasswordCheckPost(PwdCheckRequest(AESUtils.encrypt(oldPwd)))
             .bindToFragment()
-            .subscribe({ navToNewPwdFragment() }, { })
+            .subscribe({ navToNewPwdFragment(oldPwd) }, { })
     }
 
-    private fun navToNewPwdFragment() {
-        navController.navigate(R.id.action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment)
+    private fun navToNewPwdFragment(oldPwd: String) {
+        navController.navigate(R.id.action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment, Bundle().apply {
+            putString(OLD_PWD, oldPwd)
+        })
+    }
+
+    companion object {
+        const val OLD_PWD = "old_password"
     }
 }

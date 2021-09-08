@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.CommonSearchListFragment
+import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemDiscoveryTaskBinding
 import com.panda.pda.app.discovery.data.DiscoveryApi
 import com.panda.pda.app.task.TaskViewModel
@@ -29,6 +31,11 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
             BaseRecycleViewAdapter<ItemDiscoveryTaskBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemDiscoveryTaskBinding {
                 return ItemDiscoveryTaskBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
+            }
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
                     false)
             }

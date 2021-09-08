@@ -2,16 +2,16 @@ package com.panda.pda.app.user
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentProfileBinding
 import com.panda.pda.app.user.data.UserApi
-import com.panda.pda.app.user.data.model.UserInfoModel
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import java.util.concurrent.TimeUnit
 
 /**
  * created by AnJiwei 2021/8/16
@@ -29,15 +29,15 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             tvName.text = userInfoModel?.userName
             tvMyPhone.text = userInfoModel?.phoneNumber
             tvDepartment.text = userInfoModel?.orgName
-            llChangePwd.setOnClickListener {
-                changePwd()
-            }
-            btnLogout.setOnClickListener {
-                logout()
-            }
+            llChangePwd.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .bindToLifecycle(view)
+                .subscribe { changePwd() }
+            btnLogout.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .bindToLifecycle(view)
+                .subscribe { logout() }
         }
-
-
     }
 
     private fun logout() {
@@ -45,7 +45,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             .pdaAdminUserLogoutPost()
             .bindToFragment()
             .onErrorComplete()
-            .subscribe { navBackListener.invoke(requireView()) }
+            .subscribe {
+                navBackListener.invoke(requireView())
+                userViewModel.logout(null)
+            }
     }
 
     private fun changePwd() {
