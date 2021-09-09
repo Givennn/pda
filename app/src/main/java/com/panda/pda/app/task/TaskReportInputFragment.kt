@@ -30,9 +30,6 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     private val viewBinding by viewBinding<FragmentTaskReportInputBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
 
-    private var count = 0
-    private var max = 1
-
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
@@ -45,12 +42,10 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupReportNumberEditText()
         setupPhotoAdapter()
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         viewModel.taskInfoData.observe(viewLifecycleOwner, { info ->
             val detail = info.detail
-            max = detail.taskNum - detail.reportNum
             viewBinding.apply {
                 tvPlanCode.text = detail.planCode
                 tvTaskCode.text = detail.taskCode
@@ -59,6 +54,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvProductDesc.text = detail.productName
                 tvTaskCount.text = detail.taskNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
+                tilReportNum.maxValue =  detail.taskNum - detail.reportNum
             }.btnConfirm.setOnClickListener {
                 report(info)
             }
@@ -114,47 +110,4 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
         photoAdapter.addPhoto(uri)
     }
 
-    private fun setupReportNumberEditText() {
-        viewBinding.tilReportNum.apply {
-            setEndIconOnClickListener {
-                updateReportNum(++count)
-                editText?.setText(count.toString())
-            }
-            setStartIconOnClickListener {
-                updateReportNum(--count)
-                editText?.setText(count.toString())
-            }
-            editText?.doOnTextChanged { text, _, _, _ ->
-                val str = text.toString()
-                if (str.isEmpty())
-                    updateReportNum(0)
-                else {
-                    updateReportNum(str.toInt())
-                }
-                val number = str.toInt()
-                if (count != number)
-                    editText?.setText(count.toString())
-            }
-        }
-    }
-
-    private fun updateReportNum(number: Int) {
-        val inputLayout = viewBinding.tilReportNum
-        when {
-            number in 1 until max -> {
-                inputLayout.setStartIconTintList(ColorStateList.valueOf(requireContext().getColor(R.color.numberEditTextBtnEnable)))
-                inputLayout.setEndIconTintList(ColorStateList.valueOf(requireContext().getColor(R.color.numberEditTextBtnEnable)))
-
-            }
-            number <= 0 -> {
-                inputLayout.setStartIconTintList(ColorStateList.valueOf(requireContext().getColor(R.color.numberEditTextBtnDisable)))
-                count = 0
-            }
-            number >= max -> {
-                inputLayout.setEndIconTintList(ColorStateList.valueOf(requireContext().getColor(
-                    R.color.numberEditTextBtnDisable)))
-                count = max
-            }
-        }
-    }
 }

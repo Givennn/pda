@@ -100,7 +100,7 @@
     <string name="pwd_changed_message">您的密码修改成功，请使用新密码重新登录！</string>
     <string name="scan_material_code_message">请扫描物料条码</string>
     <string name="material_replace_success_message">物料替换成功</string>
-    <string name="material_banded_count_format">已绑定%1$d/%2$d个</string>
+    <string name="material_banded_count_format">已绑定 $s 个</string>
     <string name="material_unbind_success_message">物料解绑成功</string>
     <string name="alarm_detail_empty_message">请输入警报说明</string>
     <string name="alarm_report_success_message">报警成功</string>
@@ -111,5 +111,7 @@
     <string name="take_photo_hint">上传图片\n(最多3张)</string>
     <string name="alarm_closer">关闭人</string>
     <string name="alarm_close_time">关闭时间</string>
+    <string name="product_bar_code_formatter">产品条码：%s</string>
+    <string name="material_scan_bar_hint">请扫描或输入物料条码</string>
 
 </resources>

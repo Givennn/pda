@@ -36,9 +36,9 @@ abstract class CommonSearchListFragment<TSource> :
         viewBinding.etSearchBar.setHint(searchBarHintResId ?: R.string.common_search_bar_hint)
         viewBinding.etSearchBar.setOnEditorActionListener { editText, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                onSearching(editText.text.toString())
+                onSearching()
             } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
-                onSearching(editText.text.toString())
+                onSearching()
                 (editText as EditText).selectAll()
                 return@setOnEditorActionListener true
             }
@@ -62,11 +62,11 @@ abstract class CommonSearchListFragment<TSource> :
     protected open val searchBarHintResId: Int? = null
 
 
-    protected fun onSearching(text: String) {
+    protected fun onSearching() {
         refreshData()
     }
 
-    private fun refreshData() {
+    protected fun refreshData() {
         api(viewBinding.etSearchBar.text?.toString())
             .bindToFragment()
             .doFinally { viewBinding.root.isRefreshing = false }

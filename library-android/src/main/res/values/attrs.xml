@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="numbersTextField">
+        <attr name="iconDisableColor" format="color" />
+        <attr name="iconEnableColor" format="color"/>
+        <attr name="maxNumber" format="integer"/>
+    </declare-styleable>
+</resources>

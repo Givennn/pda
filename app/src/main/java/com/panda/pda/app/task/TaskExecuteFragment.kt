@@ -55,9 +55,13 @@ class TaskExecuteFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text = getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-                    tvProductInfo.text = getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
-                    tvPlanFinishDate.text = getString(R.string.plan_finish_time_formatter, data.planStartTime)
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode)
+                    tvPlanFinishDate.text =
+                        getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
@@ -86,7 +90,7 @@ class TaskExecuteFragment :
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
-            }, {  })
+            }, { })
     }
 
     private fun navToDetailFragment(id: Int) {
@@ -101,7 +105,10 @@ class TaskExecuteFragment :
                 WebClient.request(TaskApi::class.java)
                     .taskExecutionConfirmPost(TaskIdRequest(data.id))
                     .bindToFragment()
-                    .subscribe({ toast(R.string.task_execute_success_toast) },
+                    .subscribe({
+                        toast(R.string.task_execute_success_toast)
+                        refreshData()
+                    },
                         { })
             })
         dialog.show(parentFragmentManager, TAG)

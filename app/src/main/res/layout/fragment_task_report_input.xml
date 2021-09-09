@@ -191,20 +191,16 @@
                     android:text="@string/already_report_number"
                     android:layout_weight="1"/>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.App.TextInputLayout"
+                <com.panda.pda.library.android.material.custom.NumbersTextField
                     android:id="@+id/til_report_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:startIconDrawable="@drawable/ic_minus"
-                    app:startIconTint="@color/numberEditTextBtnDisable"
+                    app:iconDisableColor="@color/numberEditTextBtnDisable"
                     app:endIconDrawable="@drawable/ic_plus"
-                    app:endIconTint="@color/numberEditTextBtnEnable"
-                    app:boxStrokeWidth="0dp"
-                    app:boxBackgroundMode="none"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:endIconMode="custom"
-                    app:boxBackgroundColor="@android:color/white">
+                    app:iconEnableColor="@color/numberEditTextBtnEnable"
+                    style="@style/Widget.App.TextInputLayout.NumbersTextField">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_report_num"
                         android:layout_width="wrap_content"
@@ -213,7 +209,7 @@
                         android:paddingEnd="10dp"
                         android:inputType="number"
                         android:text="0"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.panda.pda.library.android.material.custom.NumbersTextField>
             </LinearLayout>
 
             <LinearLayout

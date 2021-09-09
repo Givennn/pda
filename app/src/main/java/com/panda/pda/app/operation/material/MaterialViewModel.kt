@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.panda.pda.app.operation.data.model.MaterialModel
 import com.panda.pda.app.operation.data.model.ProductModel
+import com.panda.pda.app.operation.data.model.TaskBandedMaterialModel
 import com.panda.pda.app.task.data.model.TaskModel
 
 /**
@@ -13,4 +14,6 @@ class MaterialViewModel : ViewModel() {
     val scannedProductData = MutableLiveData<ProductModel>()
     val materialData = MutableLiveData<MaterialModel>()
     val selectedTaskData = MutableLiveData<TaskModel>()
+
+    val taskBandedMaterialData = MutableLiveData<TaskBandedMaterialModel>()
 }

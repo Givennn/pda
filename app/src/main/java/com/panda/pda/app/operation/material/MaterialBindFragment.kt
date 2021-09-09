@@ -76,8 +76,11 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
     private fun onItemActionClicked(data: TaskModel) {
         val viewModel by activityViewModels<MaterialViewModel>()
         viewModel.selectedTaskData.postValue(data)
-        navController.navigate(R.id.action_materialBindFragment_to_productScanBindFragment, Bundle().apply {
-            putString(ProductScanFragment.ACTION_KEY, ProductScanFragment.MaterialAction.Bind.name)
-        })
+        navController.navigate(R.id.action_materialBindFragment_to_productScanBindFragment,
+            Bundle().apply {
+                putString(ProductScanFragment.ACTION_KEY,
+                    ProductScanFragment.MaterialAction.Bind.name)
+                putInt(ProductScanFragment.TASK_ID, data.id)
+            })
     }
 }

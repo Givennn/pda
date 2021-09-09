@@ -68,7 +68,6 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         )
 
         val LogoutCodeList = listOf(
-            40001, //PwdChanged
             41101,
             50014, //LoseEfficacy
             50006

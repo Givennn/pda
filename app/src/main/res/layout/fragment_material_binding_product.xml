@@ -88,7 +88,7 @@
                     android:id="@+id/et_search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/task_scan_bar_hint"
+                    android:hint="@string/material_scan_bar_hint"
                     tools:text="" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_bind_material_code"/>
         </LinearLayout>
 

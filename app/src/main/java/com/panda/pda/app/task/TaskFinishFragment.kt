@@ -113,7 +113,10 @@ class TaskFinishFragment :
                 WebClient.request(TaskApi::class.java)
                     .taskCompleteConfirmPost(TaskIdRequest(data.id))
                     .bindToFragment()
-                    .subscribe({ toast(R.string.task_finish_success_toast) },
+                    .subscribe({
+                        toast(R.string.task_finish_success_toast)
+                        refreshData()
+                    },
                         { })
             })
         dialog.show(parentFragmentManager, TAG)

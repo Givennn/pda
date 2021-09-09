@@ -53,9 +53,13 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text = getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-                    tvProductInfo.text = getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
-                    tvSendDate.text = getString(R.string.report_time_formatter, data.issueTime?: "")
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode)
+                    tvSendDate.text =
+                        getString(R.string.report_time_formatter, data.issueTime ?: "")
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
@@ -84,7 +88,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
             .subscribe({ info ->
                 taskViewModel.taskInfoData.postValue(info)
                 navToDetailFragment(data.id)
-            }, {  })
+            }, { })
     }
 
     private fun navToDetailFragment(id: Int) {
@@ -99,7 +103,10 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
                 WebClient.request(TaskApi::class.java)
                     .taskReceiveConfirmPost(TaskIdRequest(data.id))
                     .bindToFragment()
-                    .subscribe({ toast(R.string.task_receive_success_toast) },
+                    .subscribe({
+                        toast(R.string.task_receive_success_toast)
+                        refreshData()
+                    },
                         { })
             })
         dialog.show(parentFragmentManager, TAG)

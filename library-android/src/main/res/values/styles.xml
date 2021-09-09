@@ -1,0 +1,35 @@
+<resources>
+
+    <style name="Widget.App.TextInputLayout.NumbersTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@android:color/white</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="endIconMode">custom</item>
+        <item name="hintEnabled">false</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout.NumbersTextField</item>
+        <!--        边框圆角    -->
+<!--        <item name="shapeAppearance">@style/ShapeAppearance.App.CustomComponent</item>-->
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputLayout.NumbersTextField" parent="">
+<!--        <item name="colorPrimary">@color/text_field_normal</item>-->
+<!--        <item name="colorOnSurface">@color/text_field_normal</item>-->
+<!--        <item name="colorError">@color/text_field_error</item>-->
+        <item name="editTextStyle">@style/Widget.App.TextInputEditText.NumbersTextField</item>
+    </style>
+
+    <style name="ShapeAppearance.App.CustomComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+<!--        <item name="cornerFamily">rounded</item>-->
+<!--        <item name="cornerSize">4dp</item>-->
+    </style>
+
+    <style name="Widget.App.TextInputEditText.NumbersTextField" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionDone</item>
+    </style>
+
+</resources>
