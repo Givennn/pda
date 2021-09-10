@@ -24,7 +24,7 @@ class MaterialReplaceFragment : CommonSearchListFragment<MaterialModel>() {
     private val productModel by lazy { materialViewModel.scannedProductData.value!! }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.etSearchBar.visibility = View.GONE
+        viewBinding.tilSearchBar.visibility = View.GONE
     }
 
     override fun createAdapter(): BaseRecycleViewAdapter<*, MaterialModel> {
@@ -42,8 +42,8 @@ class MaterialReplaceFragment : CommonSearchListFragment<MaterialModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvMaterialCode.text = data.materialCode
-                    tvMaterialDesc.text = data.materialName
+                    tvMaterialCode.text = data.materialSerialCode
+                    tvMaterialDesc.text = data.combineInfoStr()
                 }.btnAction.setOnClickListener {
                     replaceMaterial(data)
                 }

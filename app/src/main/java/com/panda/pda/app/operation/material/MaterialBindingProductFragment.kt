@@ -78,7 +78,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
                                 .color(requireContext().getColor(R.color.textHeaderLineColor)) {
                                     append("-")
                                 } else data.materialSerialCode
-                        tvMaterialDesc.text = data.materialName
+                        tvMaterialDesc.text = data.combineInfoStr()
                     }
                     Timber.e("banded item: ${data.materialName}, ${data.materialSerialCode}")
                 }
@@ -107,8 +107,8 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
         viewBinding.apply {
             tvBindCount.text = SpannableStringBuilder()
                 .append("已绑定 ")
-                .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.bindList.size.toString()) }
-                .append("/${data.totalBindCount + data.totalToBindCount}个")
+                .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.totalBindCount.toString()) }
+                .append("/${data.totalToBindCount}个")
         }
         bindingAdapter.refreshData(formatBandedData(data))
     }
@@ -116,7 +116,13 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
     private fun formatBandedData(data: TaskBandedMaterialModel): List<MaterialModel> {
         val result = mutableListOf<MaterialModel>()
         data.toBindList.forEach { model ->
-            result.addAll(List(model.materialNum) { model.deepCopy() })
+            val bandedCount =
+                data.bindList.map { bandedModel -> if (bandedModel.materialCode == model.materialCode) 1 else 0 }
+                    .sum()
+            val toBindCount = model.materialNum - bandedCount
+            if (toBindCount > 0) {
+                result.addAll(List(model.materialNum) { model.deepCopy() })
+            }
         }
         result.addAll(data.bindList)
         return result

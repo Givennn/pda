@@ -33,9 +33,6 @@ class GuidePdfPreviewFragment : BaseFragment(R.layout.fragment_guide_pdf_preview
 
         viewBinding.topAppBar.title = guideInfo.fileName
         downLoadPdf()
-//        viewBinding.pdfPreview.fromUri(getFileUrl(guideInfo).also { Timber.e(it.toString()) })
-//        viewBinding.pdfPreview.fromUri("http://www.chlingkong.com/PDFManualCH/manual-2f2015921626539363.pdf".toUri())
-//            .load()
     }
 
     private fun downLoadPdf() {
@@ -44,8 +41,7 @@ class GuidePdfPreviewFragment : BaseFragment(R.layout.fragment_guide_pdf_preview
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .bindToLifecycle(requireView())
-            .doOnSubscribe { showLoadingDialog() }
-            .doFinally { dismissLoadingDialog() }
+            .bindLoadingStatus()
             .subscribe({
                 try {
                     viewBinding.pdfPreview.fromStream(it.body()?.byteStream()).load()

@@ -60,7 +60,7 @@ class TaskReportInputPhotoAdapter :
         } else {
             val data = dataSource[holder.bindingAdapterPosition]
             holder.itemViewBinding.apply {
-                ivReportPhoto.setImageURI(data.fileUrl.toUri())
+                ivReportPhoto.setImageURI(data.fileLocalUri)
                 ivDelete.setOnClickListener {
                     dataSource.remove(data)
                     notifyItemRemoved(holder.bindingAdapterPosition)

@@ -12,7 +12,7 @@
         android:paddingTop="12dp">
 
             <TextView
-                android:id="@+id/tv_material_desc"
+                android:id="@+id/tv_material_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -23,7 +23,7 @@
                 style="@style/moduleTitleText"/>
 
             <TextView
-                android:id="@+id/tv_material_code"
+                android:id="@+id/tv_material_serial_code"
                 style="@style/contentText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

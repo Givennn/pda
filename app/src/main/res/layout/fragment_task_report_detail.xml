@@ -290,6 +290,7 @@
                 android:id="@+id/rv_pic_list"
                 android:layout_marginStart="56dp"
                 tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_task_report_detail_pic"/>
 
         </LinearLayout>

@@ -40,7 +40,6 @@ abstract class CommonSearchListFragment<TSource> :
             } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
                 onSearching()
                 (editText as EditText).selectAll()
-                return@setOnEditorActionListener true
             }
             false
         }

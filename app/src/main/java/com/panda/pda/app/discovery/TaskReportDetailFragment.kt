@@ -11,19 +11,25 @@ import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
 import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.databinding.FragmentTaskReportDetailBinding
 import com.panda.pda.app.databinding.ItemTaskReportDetailPicBinding
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/9/1
  */
 class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_detail) {
+    private lateinit var picAdapter: BaseRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
     private val viewBinding by viewBinding<FragmentTaskReportDetailBinding>()
     private val viewModel by activityViewModels<TaskReportViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(requireView()) }
         val detailData = viewModel.taskReportDetailData.value.also {
             if (it == null) {
                 toast("未取得报工详情数据")
@@ -42,22 +48,27 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
             tvReportNumber.text = detailData.taskNum.toString()
             tvManHour.text = detailData.reportTime.toString() // todo format man hour from int
             tvRemark.text = detailData.remark
-            rvPicList.adapter = object :
-                BaseRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
-                override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
-                    return ItemTaskReportDetailPicBinding.inflate(LayoutInflater.from(parent.context),
-                        parent,
-                        false)
-                }
+        }
 
-                override fun onBindViewHolderWithData(
-                    holder: ViewBindingHolder,
-                    data: FileInfoModel,
-                    position: Int,
-                ) {
-                    holder.itemViewBinding.ivTaskReportDetailPic.load(data.fileUrl)
-                }
+        picAdapter = object :
+            BaseRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
+            override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
+                return ItemTaskReportDetailPicBinding.inflate(LayoutInflater.from(parent.context),
+                    parent,
+                    false)
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: FileInfoModel,
+                position: Int,
+            ) {
+
+                holder.itemViewBinding.ivTaskReportDetailPic.load(CommonApi.getFIleUrl(data.fileUrl,
+                    data.fileName))
             }
         }
+        viewBinding.rvPicList.adapter = picAdapter
+        picAdapter.refreshData(detailData.fileList)
     }
 }

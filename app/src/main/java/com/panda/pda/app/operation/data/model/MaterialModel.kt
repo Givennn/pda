@@ -11,5 +11,11 @@ data class MaterialModel(
     val materialNo: String,
     val materialNum: Int,
     val bindProductBarCode: String?, //已绑定产品条码
-    val materialSerialCode: String?
-): Serializable
+    val materialSerialCode: String?,
+): Serializable {
+    fun combineInfoStr(): String {
+        return listOf(materialCode, materialName, materialNo)
+            .filter { it.isNotEmpty() }
+            .joinToString(separator = " | ")
+    }
+}

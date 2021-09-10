@@ -40,7 +40,8 @@
         app:layout_constraintTop_toBottomOf="@id/til_scan"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp">
+        android:layout_marginEnd="12dp"
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

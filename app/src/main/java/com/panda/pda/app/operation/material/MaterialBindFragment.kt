@@ -28,6 +28,7 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2021/8/30
  */
 class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
+    val viewModel by activityViewModels<MaterialViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,12 +75,12 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         get() = R.string.material_bind
 
     private fun onItemActionClicked(data: TaskModel) {
-        val viewModel by activityViewModels<MaterialViewModel>()
         viewModel.selectedTaskData.postValue(data)
+        viewModel.materialActionData.postValue(ProductScanFragment.MaterialAction.Bind)
         navController.navigate(R.id.action_materialBindFragment_to_productScanBindFragment,
             Bundle().apply {
-                putString(ProductScanFragment.ACTION_KEY,
-                    ProductScanFragment.MaterialAction.Bind.name)
+//                putString(ProductScanFragment.ACTION_KEY,
+//                    ProductScanFragment.MaterialAction.Bind.name)
                 putInt(ProductScanFragment.TASK_ID, data.id)
             })
     }

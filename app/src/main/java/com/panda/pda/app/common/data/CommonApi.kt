@@ -1,11 +1,14 @@
 package com.panda.pda.app.common.data
 
+import com.panda.pda.app.BuildConfig
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.common.data.model.DataParamModel
 import com.panda.pda.app.common.data.model.FileInfoModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 import java.io.File
@@ -21,13 +24,10 @@ interface CommonApi {
      * @param file (required)
      */
 
-    @Headers(
-        "Content-Type:  multipart/form-data"
-    )
-    @retrofit2.http.Multipart
+    @Multipart
     @POST("pda/common/upload-file")
     fun pdaCommonUploadFilePost(
-        @retrofit2.http.Part("file\"; filename=\"file") file: File,
+        @Part file: MultipartBody.Part
     ): Single<BaseResponse<FileInfoModel>>
 
     /**
@@ -39,36 +39,19 @@ interface CommonApi {
     fun pdaConfigSysParamListByParamGet(
     ): Single<BaseResponse<DataListNode<DataParamModel>>>
 
-//    var file: File = File(imageUri.getPath())
-//
-//    var fbody: RequestBody = create(MediaType.parse("image/*"),
-//        file)
-//
-//    var name: RequestBody = create(MediaType.parse("text/plain"),
-//        firstNameField.getText()
-//            .toString())
-//
-//    var id: RequestBody = create(MediaType.parse("text/plain"),
-//        AZUtils.getUserId(this))
-//
-//    var call: Call<com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User> =
-//        org.gradle.internal.impldep.org.bouncycastle.crypto.tls.ConnectionEnd.client.editUser(
-//            AZUtils.getToken(this),
-//            fbody,
-//            name,
-//            id)
 
-//    @Streaming
-//    @GET
-//    fun downloadFile(@Url fileUrl: String): Observable<retrofit2.Response<ResponseBody>>
-
-    @Headers(
-        "Content-Type: application/pdf"
-    )
     @Streaming
-    @GET("pda/common/get-file?")
+    @GET(DOWNLOAD_PATH)
     fun downloadFile(
         @retrofit2.http.Query("fileUrl") fileUrl: String,
         @retrofit2.http.Query("fileName") fileName: String,
     ): Observable<retrofit2.Response<ResponseBody>>
+
+    companion object {
+        const val DOWNLOAD_PATH = "pda/common/get-file"
+
+        fun getFIleUrl(fileUrl: String, fileName: String): String {
+            return "${BuildConfig.GRADLE_API_BASE_URL}$DOWNLOAD_PATH?fileUrl=$fileUrl&fileName=$fileName"
+        }
+    }
 }

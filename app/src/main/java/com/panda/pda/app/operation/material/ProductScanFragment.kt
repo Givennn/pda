@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.widget.editorActionEvents
 import com.jakewharton.rxbinding4.widget.editorActions
@@ -33,17 +34,22 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val actionName = requireArguments().getString(ACTION_KEY)
-        if (actionName == null || !MaterialAction.values().map { it.name }.contains(actionName)) {
-            toast("未定义物料操作")
-            return
-        } else {
-            materialAction = MaterialAction.valueOf(actionName)
-        }
+//        val actionName = arguments?.getString(ACTION_KEY)
+//
+//        if (actionName == null || !MaterialAction.values().map { it.name }.contains(actionName)) {
+//            toast("未定义物料操作")
+//            return
+//        } else {
+//            materialAction = MaterialAction.valueOf(actionName)
+//        }
+        materialViewModel.materialActionData.observe(viewLifecycleOwner, {
+            materialAction = it
+        })
+//        materialAction = materialViewModel.materialActionData.value!!
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
-        viewBinding.tilSearchBar.addOnEditTextAttachedListener {
-            Timber.e("text: ${it.editText?.text.toString()}")
-        }
+//        viewBinding.tilSearchBar.addOnEditTextAttachedListener {
+//            Timber.e("text: ${it.editText?.text.toString()}")
+//        }
         viewBinding.etSearchBar
 //            .editorActionEvents { it.actionId == KeyEvent.KEYCODE_ENTER || it.actionId == EditorInfo.IME_ACTION_DONE }
 //            .throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -70,14 +76,14 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
 
     private fun onProductInput(code: String) {
 
-        val taskId = requireArguments().getInt(TASK_ID, -1)
+        val taskId = arguments?.getInt(TASK_ID)
         val destination = when (materialAction) {
             MaterialAction.Bind -> R.id.materialBindingProductFragment
             MaterialAction.Unbind -> R.id.materialUnbindFragment
             MaterialAction.Replace -> R.id.materialReplaceFragment
         }
         WebClient.request(MaterialApi::class.java)
-            .materialTaskQueryBindByProductGet(code, if (taskId == -1) null else taskId)
+            .materialTaskQueryBindByProductGet(code, taskId)
             .bindToFragment()
             .subscribe({
                 materialViewModel.taskBandedMaterialData.postValue(it)

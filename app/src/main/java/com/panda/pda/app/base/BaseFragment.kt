@@ -97,16 +97,35 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 //    }
 
     protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
+        val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
+            isCancelable = false
+            loadingDialog = this
+        }
         return this
-            .doOnSubscribe { showLoadingDialog() }
-            .doFinally { dismissLoadingDialog() }
+            .doOnSubscribe { dialogFragment.show(parentFragmentManager, TAG) }
+            .doFinally { dialogFragment.dismiss() }
 
     }
 
-    protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
+    protected fun<T> Observable<T>.bindLoadingStatus(): Observable<T> {
+        val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
+            isCancelable = false
+            loadingDialog = this
+        }
         return this
-            .doOnSubscribe { showLoadingDialog() }
-            .doFinally { dismissLoadingDialog() }
+            .doOnSubscribe { dialogFragment.show(parentFragmentManager, TAG) }
+            .doFinally { dialogFragment.dismiss() }
+    }
+
+    protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
+        val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
+            isCancelable = false
+            loadingDialog = this
+        }
+        return this
+            .doOnSubscribe { dialogFragment.show(parentFragmentManager, TAG) }
+            .doFinally { dialogFragment.dismiss() }
+
     }
 
     protected fun <T> Single<T>.catchError(): Single<T> {

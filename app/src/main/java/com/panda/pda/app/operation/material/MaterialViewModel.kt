@@ -15,5 +15,6 @@ class MaterialViewModel : ViewModel() {
     val materialData = MutableLiveData<MaterialModel>()
     val selectedTaskData = MutableLiveData<TaskModel>()
 
+    val materialActionData = MutableLiveData<ProductScanFragment.MaterialAction>()
     val taskBandedMaterialData = MutableLiveData<TaskBandedMaterialModel>()
 }

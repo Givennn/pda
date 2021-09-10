@@ -1,12 +1,11 @@
 package com.panda.pda.app.task
 
-import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.widget.doOnTextChanged
+import androidx.core.net.toFile
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,10 +14,18 @@ import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.common.data.CommonApi
+import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.databinding.FragmentTaskReportInputBinding
 import com.panda.pda.app.task.data.TaskApi
 import com.panda.pda.app.task.data.model.TaskInfoModel
 import com.panda.pda.app.task.data.model.TaskReportRequest
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.internal.notify
+import timber.log.Timber
 import java.io.File
 
 /**
@@ -26,6 +33,7 @@ import java.io.File
  */
 class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input) {
 
+    private lateinit var tmpFile: File
     private lateinit var photoAdapter: TaskReportInputPhotoAdapter
     private val viewBinding by viewBinding<FragmentTaskReportInputBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
@@ -54,7 +62,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvProductDesc.text = detail.productName
                 tvTaskCount.text = detail.taskNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
-                tilReportNum.maxValue =  detail.taskNum - detail.reportNum
+                tilReportNum.maxValue = detail.taskNum - detail.reportNum
             }.btnConfirm.setOnClickListener {
                 report(info)
             }
@@ -62,7 +70,6 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     private fun report(info: TaskInfoModel) {
-        //todo 上传图片， 上传进度
         val request = TaskReportRequest(info.detail.id,
             viewBinding.etReportNum.text.toString().toInt(),
             viewBinding.etRemark.text.toString(),
@@ -95,8 +102,8 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     private fun getTmpFileUri(): Uri {
-        val tmpFile =
-            File.createTempFile("tmp_image_file", ".png", requireContext().cacheDir).apply {
+        tmpFile =
+            File.createTempFile("tmp_image_file", ".$IMAGE_TYPE", requireContext().cacheDir).apply {
                 createNewFile()
                 deleteOnExit()
             }
@@ -107,7 +114,21 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     private fun updatePhoto(uri: Uri) {
-        photoAdapter.addPhoto(uri)
+
+        WebClient.downLoader().create(CommonApi::class.java)
+            .pdaCommonUploadFilePost(MultipartBody.Part.createFormData("file",
+                tmpFile.name,
+                tmpFile.asRequestBody("image/$IMAGE_TYPE".toMediaType())))
+            .bindToFragment()
+            .subscribe({
+                it.fileLocalUri = uri
+                photoAdapter.getDataSource().add(it)
+                photoAdapter.notifyDataSetChanged()
+                Timber.d("url: ${it.fileUrl}")
+            }, {})
     }
 
+    companion object {
+        const val IMAGE_TYPE = "png"
+    }
 }

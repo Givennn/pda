@@ -28,7 +28,7 @@ class MaterialUnbindFragment :
     private val productModel by lazy { materialViewModel.scannedProductData.value!! }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.etSearchBar.visibility = View.GONE
+        viewBinding.tilSearchBar.visibility = View.GONE
     }
 
     override fun createAdapter(): BaseRecycleViewAdapter<*, MaterialModel> {
@@ -46,8 +46,8 @@ class MaterialUnbindFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvMaterialCode.text = data.materialCode
-                    tvMaterialDesc.text = data.materialName
+                    tvMaterialInfo.text = data.combineInfoStr()
+                    tvMaterialSerialCode.text = data.materialSerialCode
                 }.btnAction.setOnClickListener {
                     unbindMaterial(data)
                 }
@@ -60,7 +60,8 @@ class MaterialUnbindFragment :
         ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(MaterialApi::class.java)
-                    .materialUnbindPost(MaterialUnbindRequest(productModel.code, data.materialCode))
+                    .materialUnbindPost(MaterialUnbindRequest(productModel.code,
+                        data.materialSerialCode!!))
                     .bindToFragment()
                     .subscribe({
                         toast(getString(R.string.material_unbind_success_message))

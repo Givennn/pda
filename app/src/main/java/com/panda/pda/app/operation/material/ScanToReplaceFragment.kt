@@ -36,12 +36,11 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
                 } else if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
                     onSearching(editText.text.toString())
                     (editText as EditText).selectAll()
-                    return@setOnEditorActionListener true
                 }
                 false
             }
-            tvMaterialCodeOld.text = oldMaterialModel.materialCode
-            tvMaterialDescOld.text = oldMaterialModel.materialName
+            tvMaterialCodeOld.text = oldMaterialModel.materialSerialCode
+            tvMaterialDescOld.text = oldMaterialModel.combineInfoStr()
             btnConfirm.setOnClickListener {
                 replaceMaterialPost()
             }
@@ -56,8 +55,8 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
     }
 
     private fun updateNewMaterial(data: MaterialModel) {
-        viewBinding.tvMaterialCode.text = data.materialCode
-        viewBinding.tvMaterialDesc.text = data.materialName
+        viewBinding.tvMaterialCode.text = data.materialSerialCode
+        viewBinding.tvMaterialDesc.text = data.combineInfoStr()
         viewBinding.cvNewMaterial.visibility = View.VISIBLE
         newMaterialModel = data
     }
@@ -68,8 +67,8 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
         } else {
             WebClient.request(MaterialApi::class.java)
                 .pdaFmsTaskMaterialBindChangePost(MaterialReplaceBindRequest(productModel.code,
-                    newMaterialModel!!.materialCode,
-                    oldMaterialModel.materialCode))
+                    newMaterialModel!!.materialSerialCode!!,
+                    oldMaterialModel.materialSerialCode!!))
                 .bindToFragment()
                 .subscribe({
                     toast(R.string.material_replace_success_message)
