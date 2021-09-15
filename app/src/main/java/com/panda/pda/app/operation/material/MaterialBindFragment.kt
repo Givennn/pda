@@ -1,26 +1,20 @@
 package com.panda.pda.app.operation.material
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.BaseRecycleViewAdapter
-import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.*
+import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
-import com.panda.pda.app.databinding.FragmentMaterialBindBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemMaterialBindBinding
 import com.panda.pda.app.operation.data.MaterialApi
-import com.panda.pda.app.task.data.TaskApi
 import com.panda.pda.app.task.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 

@@ -1,4 +1,4 @@
-package com.panda.pda.library.android
+package com.panda.pda.library.android.utils
 
 import android.content.Context
 import android.content.Intent

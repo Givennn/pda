@@ -7,10 +7,6 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.panda.pda.app.R
-import com.panda.pda.app.base.extension.toast
-import com.panda.pda.library.android.LoadingDialog
 import timber.log.Timber
 
 /**

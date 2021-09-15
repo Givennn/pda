@@ -1,4 +1,4 @@
-package com.panda.pda.library.android
+package com.panda.pda.library.android.controls
 
 import android.content.Context
 import android.util.AttributeSet

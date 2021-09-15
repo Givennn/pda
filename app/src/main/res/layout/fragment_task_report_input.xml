@@ -11,7 +11,7 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/task_detail" />
+        app:title="@string/task_report" />
 
 
     <androidx.core.widget.NestedScrollView
@@ -208,7 +208,7 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:inputType="number"
-                        android:text="0"/>
+                        android:text="1"/>
                 </com.panda.pda.library.android.material.custom.NumbersTextField>
             </LinearLayout>
 
@@ -247,11 +247,13 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_remark"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="120dp"
+                        android:inputType="textMultiLine"
                         android:gravity="top"
                         android:padding="12dp"
+                        android:maxLength="200"
                         android:hint="@string/remark_hint"
-                        tools:text="" />
+                        tools:text="@string/long_text_test" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView

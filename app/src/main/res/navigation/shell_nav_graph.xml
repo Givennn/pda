@@ -28,23 +28,19 @@
     <fragment
         android:id="@+id/taskReportFragment"
         android:name="com.panda.pda.app.task.TaskReportFragment"
-        android:label="fragment_task_report"
-        tools:layout="@layout/fragment_task_report" />
+        android:label="fragment_task_report" />
     <fragment
         android:id="@+id/taskReceiveFragment"
         android:name="com.panda.pda.app.task.TaskReceiveFragment"
-        android:label="fragment_task_receive"
-        tools:layout="@layout/fragment_task_receive" />
+        android:label="fragment_task_receive" />
     <fragment
         android:id="@+id/taskExecuteFragment"
         android:name="com.panda.pda.app.task.TaskExecuteFragment"
-        android:label="fragment_task_execute"
-        tools:layout="@layout/fragment_task_execute" />
+        android:label="fragment_task_execute" />
     <fragment
         android:id="@+id/taskFinishFragment"
         android:name="com.panda.pda.app.task.TaskFinishFragment"
-        android:label="fragment_task_finish"
-        tools:layout="@layout/fragment_task_finish" />
+        android:label="fragment_task_finish" />
     <fragment
         android:id="@+id/taskFragment"
         android:name="com.panda.pda.app.task.TaskFragment"
@@ -52,42 +48,42 @@
         tools:layout="@layout/fragment_task" />
     <fragment
         android:id="@+id/discoveryFragment"
-        tools:layout="@layout/fragment_discovery"
         android:name="com.panda.pda.app.discovery.DiscoveryFragment"
-        android:label="DiscoveryFragment" />
+        android:label="DiscoveryFragment"
+        tools:layout="@layout/fragment_discovery" />
     <fragment
         android:id="@+id/operationFragment"
-        tools:layout="@layout/fragment_operation"
         android:name="com.panda.pda.app.operation.OperationFragment"
-        android:label="OperationFragment" />
+        android:label="OperationFragment"
+        tools:layout="@layout/fragment_operation" />
     <fragment
         android:id="@+id/splashFragment"
-        tools:layout="@layout/fragment_splash"
         android:name="com.panda.pda.app.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/shell_nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_taskFragment"
             app:destination="@id/taskFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/shell_nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        tools:layout="@layout/fragment_login"
         android:name="com.panda.pda.app.user.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_taskFragment"
             app:destination="@id/taskFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/shell_nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"

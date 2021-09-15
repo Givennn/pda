@@ -50,6 +50,7 @@ android {
     lintOptions {
         isWarningsAsErrors = true
         isAbortOnError = true
+        disable("ContentDescription")
     }
 }
 

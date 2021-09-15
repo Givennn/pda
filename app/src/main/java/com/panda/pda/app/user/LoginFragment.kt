@@ -15,7 +15,7 @@ import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentLoginBinding
 import com.panda.pda.app.user.data.UserApi
 import com.panda.pda.app.user.data.model.LoginRequest
-import com.panda.pda.library.android.AESUtils
+import com.panda.pda.library.android.utils.AESUtils
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
 

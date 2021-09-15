@@ -61,7 +61,7 @@ class TaskExecuteFragment :
                         data.productName,
                         data.productCode)
                     tvPlanFinishDate.text =
-                        getString(R.string.plan_finish_time_formatter, data.planStartTime)
+                        getString(R.string.plan_finish_time_formatter, data.planEndTime)
                     tvTaskSender.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)

@@ -3,6 +3,7 @@ package com.panda.pda.app.common.data
 import com.panda.pda.app.BuildConfig
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.common.data.model.AuthorityModel
 import com.panda.pda.app.common.data.model.DataParamModel
 import com.panda.pda.app.common.data.model.FileInfoModel
 import io.reactivex.rxjava3.core.Observable
@@ -54,4 +55,7 @@ interface CommonApi {
             return "${BuildConfig.GRADLE_API_BASE_URL}$DOWNLOAD_PATH?fileUrl=$fileUrl&fileName=$fileName"
         }
     }
+
+    @GET("pda/admin/menu/get-base")
+    fun getAuthorityTree(): Single<BaseResponse<DataListNode<AuthorityModel>>>
 }

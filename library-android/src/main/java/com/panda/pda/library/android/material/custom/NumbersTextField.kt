@@ -7,7 +7,6 @@ import android.text.Spanned
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
 import com.panda.pda.library.android.R
 
@@ -17,20 +16,13 @@ import com.panda.pda.library.android.R
  */
 class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout(context, attrs) {
 
-    private var minValue = 0
+    var minValue = 0
+
     var maxValue = 10
-        set(value) {
-            field = value
-            post {
-                updateIconStatus(value)
-                updateFilter(value)
-            }
 
-        }
-
-    private fun updateFilter(value: Int) {
+    private fun updateFilter() {
         editText?.filters = arrayOf(
-            InputFilterMinMax(minValue, value)
+            InputFilterMinMax(minValue, maxValue)
         )
     }
 
@@ -38,7 +30,7 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
         get() {
             return count
         }
-    private var count = 0
+    private var count = minValue
 
 
     @ColorInt
@@ -78,7 +70,9 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
             updateIconStatus(count)
         }
         post {
+            updateEditText(minValue)
             updateIconStatus(count)
+            updateFilter()
         }
         editText?.doAfterTextChanged { text ->
             try {
@@ -97,7 +91,7 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
 
     private fun updateEditText(number: Int) {
         count = when {
-            number < 0 -> 0
+            number < minValue -> minValue
             number > maxValue -> maxValue
             else -> number
         }

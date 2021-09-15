@@ -62,6 +62,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvProductDesc.text = detail.productName
                 tvTaskCount.text = detail.taskNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
+                tilReportNum.minValue = 1
                 tilReportNum.maxValue = detail.taskNum - detail.reportNum
             }.btnConfirm.setOnClickListener {
                 report(info)

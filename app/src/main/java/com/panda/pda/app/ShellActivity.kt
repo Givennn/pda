@@ -65,7 +65,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
                     R.id.profileFragment),
                 -> {
                     window.statusBarColor = getColor(R.color.white)
-                    if (destination.id != R.id.loginFragment) {
+                    if (destination.id !in arrayOf(R.id.loginFragment, R.id.splashFragment)) {
                         updateTaskCount()
                     }
                 }

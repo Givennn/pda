@@ -13,7 +13,7 @@ import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentChangePwdOldVerifyBinding
 import com.panda.pda.app.user.data.UserApi
 import com.panda.pda.app.user.data.model.PwdCheckRequest
-import com.panda.pda.library.android.AESUtils
+import com.panda.pda.library.android.utils.AESUtils
 
 /**
  * create by AnJiwei 2021/9/4

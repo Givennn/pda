@@ -23,6 +23,7 @@
         app:endIconTint="@color/scan_text_field_tint_color"
         app:startIconDrawable="@drawable/ic_scan"
         android:layout_marginEnd="12dp">
+        <requestFocus/>
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_search_bar"

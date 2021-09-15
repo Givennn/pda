@@ -3,9 +3,12 @@ package com.panda.pda.app
 import android.content.Context
 import androidx.fragment.app.activityViewModels
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.base.retrofit.onMainThread
 import com.panda.pda.app.base.retrofit.unWrapperData
+import com.panda.pda.app.common.CommonViewModel
+import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.user.UserViewModel
 import com.panda.pda.app.user.UserViewModel.Companion.SP_PASSWORD
 import com.panda.pda.app.user.UserViewModel.Companion.SP_USER_NAME
@@ -23,6 +26,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
 
     private val viewModel by activityViewModels<UserViewModel>()
 
+    private val commonViewModel by activityViewModels<CommonViewModel>()
     override fun onResume() {
         super.onResume()
         requestLocalUserInfo()
@@ -31,23 +35,29 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     private fun requestLocalUserInfo() {
         val loginRequest = getCacheLoginInfo()
         if (loginRequest == null) {
-            Completable.timer(1, TimeUnit.SECONDS)
-                .onMainThread()
-                .bindToLifecycle(requireView())
-                .subscribe {
-                    navController.navigate(R.id.action_splashFragment_to_loginFragment)
-                }
-        } else {
-
-            WebClient.request(UserApi::class.java)
-                .userNameLoginPost(loginRequest)
-                .zipWith(Single.timer(1, TimeUnit.SECONDS), { data, _ -> data })
+            WebClient.request(CommonApi::class.java).getAuthorityTree()
+                .delay(1, TimeUnit.SECONDS)
                 .onMainThread()
                 .unWrapperData()
                 .catchError()
                 .bindToLifecycle(requireView())
                 .subscribe({
-                    viewModel.updateLoginData(it, loginRequest)
+                    commonViewModel.authorityViewModel.postValue(it.dataList)
+                    navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                }, {})
+        } else {
+
+            Single.zip(WebClient.request(CommonApi::class.java).getAuthorityTree().unWrapperData(),
+                WebClient.request(UserApi::class.java)
+                    .userNameLoginPost(loginRequest).unWrapperData()) { auto, loginInfo ->
+                Pair(auto.dataList, loginInfo)
+            }.delay(1, TimeUnit.SECONDS)
+                .onMainThread()
+                .catchError()
+                .bindToLifecycle(requireView())
+                .subscribe({
+                    commonViewModel.authorityViewModel.postValue(it.first)
+                    viewModel.updateLoginData(it.second, loginRequest)
                     navController.navigate(R.id.action_splashFragment_to_taskFragment)
                 }, { })
         }

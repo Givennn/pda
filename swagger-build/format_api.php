@@ -14,13 +14,13 @@ unset($content['apiEnvs']);
 foreach ($paths as $key => $path) {
     // strpos($key, '/web/') !== false || 
     // 过滤接口
-    if (startsWith($key, '/pda/') !== true) {
-        unset($paths[$key]);
-    }
+    // if (startsWith($key, '/pda/') !== true) {
+        // unset($paths[$key]);
+    // }
     // } else {
     //     $paths[$key] = handlePath($key, $path);
     // }
-    // $paths[$key] = handlePath($key, $path);
+    $paths[$key] = handlePath($key, $path);
 
 }
 

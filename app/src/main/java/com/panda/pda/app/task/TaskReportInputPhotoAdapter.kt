@@ -30,7 +30,7 @@ class TaskReportInputPhotoAdapter :
 
     fun setData(photos: List<FileInfoModel>) {
         dataSource.clear()
-        dataSource.addAll(dataSource)
+        dataSource.addAll(photos)
         notifyDataSetChanged()
     }
 

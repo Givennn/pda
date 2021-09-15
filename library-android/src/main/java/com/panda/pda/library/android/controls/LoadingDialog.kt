@@ -1,4 +1,4 @@
-package com.panda.pda.library.android
+package com.panda.pda.library.android.controls
 
 import android.app.Dialog
 import android.content.Context

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.panda.pda.app.R
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
+import com.panda.pda.app.common.CommonViewModel
 import com.panda.pda.app.user.UserViewModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.*
@@ -24,11 +26,8 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     private var loadingDialog: DialogFragment? = null
 
-    //    private var permissionEmit: CompletableEmitter? = null
-//    private var openFileEmit: SingleEmitter<Uri>? = null
-//    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
-//    private lateinit var requestOpenFileLauncher: ActivityResultLauncher<Array<String>>
     private val userViewModel by activityViewModels<UserViewModel>()
+    private val commonViewModel by activityViewModels<CommonViewModel>()
 
     protected val TAG get() = this.javaClass.simpleName
     protected val sp: SharedPreferences by lazy {
@@ -45,56 +44,34 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         Timber.v("onCreate ${javaClass.simpleName}")
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        requestPermissionLauncher = registerForActivityResult(
-//            ActivityResultContracts.RequestPermission()
-//        ) { isGranted: Boolean ->
-//            if (isGranted) {
-//                permissionEmit?.onComplete()
-//            } else {
-//                permissionEmit?.onError(Exception("请允许"))
-//            }
-//        }
-//
-//        requestOpenFileLauncher =
-//            registerForActivityResult(
-//                ActivityResultContracts.OpenDocument()
-//            ) { uri ->
-//                if (uri == null) {
-//                    openFileEmit?.onError(NullPointerException())
-//                } else {
-//                    openFileEmit?.onSuccess(uri)
-//                }
-//            }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         Timber.v("onDestroy ${javaClass.simpleName}")
     }
 
-//    protected fun permissionRequest(permission: String): Completable {
-//        return Completable.create { emit ->
-//            if (ContextCompat.checkSelfPermission(requireContext(),
-//                    permission) == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                emit.onComplete()
-//            } else {
-//                permissionEmit = emit
-//                requestPermissionLauncher.launch(permission)
-//            }
-//        }
-//    }
-//
-//    protected fun openFileRequest(fileTypes: Array<String>): Single<Uri> {
-//        return permissionRequest(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//            .andThen(Single.create { emit ->
-//                openFileEmit = emit
-//                requestOpenFileLauncher.launch(fileTypes)
-//            })
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        userViewModel.loginData.observe(viewLifecycleOwner, {
+            setupUserAuth(it.menus)
+        })
+    }
+
+    private fun setupUserAuth(authorities: List<String>) {
+        val rootView = requireView()
+        val authorModel = commonViewModel.authorityViewModel.value ?: return
+        val tag = rootView.tag ?: return
+        val rootAuthor = authorModel.firstOrNull { it.id.toString() == tag } ?: return
+        rootAuthor.children.forEach {
+            val item = requireView().findViewWithTag<View>(it.id.toString()) ?: return@forEach
+            if (authorities.contains(it.id.toString())) {
+                item.visibility = View.VISIBLE
+
+            } else {
+                item.visibility = View.GONE
+            }
+        }
+    }
 
     protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
         val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
@@ -107,7 +84,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     }
 
-    protected fun<T> Observable<T>.bindLoadingStatus(): Observable<T> {
+    protected fun <T> Observable<T>.bindLoadingStatus(): Observable<T> {
         val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
             isCancelable = false
             loadingDialog = this

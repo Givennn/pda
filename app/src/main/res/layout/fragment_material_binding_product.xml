@@ -83,6 +83,7 @@
                 android:layout_height="36dp"
                 android:layout_marginTop="14dp"
                 app:startIconDrawable="@drawable/ic_scan">
+                <requestFocus/>
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_search_bar"

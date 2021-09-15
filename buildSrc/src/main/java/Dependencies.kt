@@ -12,7 +12,7 @@ object Versions {
     const val ANDROIDX_TEST = "1.2.0"
     const val APPCOMPAT = "1.3.0-alpha02"
     const val CONSTRAINT_LAYOUT = "2.0.0"
-    const val RECYCLER_VIEW = "1.1.0"
+    const val RECYCLER_VIEW = "1.2.1"
     const val COORDINATOR_LAYOUT = "1.1.0"
     const val NAVIGATION = "2.3.0"
     const val CORE_KTX = "1.2.0"

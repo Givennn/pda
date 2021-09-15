@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        tools:title="通用搜索页面" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search_bar"
+        style="@style/Widget.App.TextInputLayout.searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp">
+
+        <requestFocus />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_search_bar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            tools:title="通用搜索页面" />
+            android:layout_height="wrap_content"
+            android:hint="@string/material_search_bar_hint"
+            tools:text="" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.App.TextInputLayout.searchBar"
-            android:id="@+id/til_search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_search_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/material_search_bar_hint"
-                tools:text="" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_task_list"
@@ -42,6 +47,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="3"
             tools:listitem="@layout/item_material_bind" />
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

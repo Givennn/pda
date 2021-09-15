@@ -12,6 +12,7 @@ import com.panda.pda.app.databinding.FragmentDiscoveryBinding
  * created by AnJiwei 2021/8/16
  */
 class DiscoveryFragment: BaseFragment(R.layout.fragment_discovery) {
+
     private val viewBinding by viewBinding<FragmentDiscoveryBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

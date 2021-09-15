@@ -7,6 +7,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingStart="16dp"
+    android:tag="320000"
     android:paddingEnd="16dp">
 
     <!--    <TextView-->
@@ -41,9 +42,8 @@
             android:textColor="#4982FE"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/discovery_plan_nav_graph"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            android:enabled="false"/>
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             app:layout_constraintTop_toTopOf="@id/discovery_order_nav_graph"
@@ -70,6 +70,7 @@
             android:text="@string/task"
             android:textColor="#4982FE"
             android:textSize="14sp"
+            android:tag="320300"
             app:layout_constraintEnd_toStartOf="@+id/discovery_report_nav_graph"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/discovery_plan_nav_graph" />
@@ -84,6 +85,7 @@
             android:text="@string/report"
             android:textColor="#4982FE"
             android:textSize="14sp"
+            android:tag="320400"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/discovery_task_nav_graph" />

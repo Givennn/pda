@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.ConcatAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
@@ -30,7 +31,9 @@ abstract class CommonSearchListFragment<TSource> :
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.rvTaskList.adapter = itemListAdapter
-        viewBinding.root.setOnRefreshListener { refreshData() }
+
+
+        viewBinding.swipe.setOnRefreshListener { refreshData() }
         viewBinding.topAppBar.setTitle(titleResId)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
         viewBinding.etSearchBar.setHint(searchBarHintResId ?: R.string.common_search_bar_hint)
@@ -68,7 +71,7 @@ abstract class CommonSearchListFragment<TSource> :
     protected fun refreshData() {
         api(viewBinding.etSearchBar.text?.toString())
             .bindToFragment()
-            .doFinally { viewBinding.root.isRefreshing = false }
+            .doFinally { viewBinding.swipe.isRefreshing = false }
             .subscribe({ data -> itemListAdapter.refreshData(data.dataList) }, { })
     }
 }

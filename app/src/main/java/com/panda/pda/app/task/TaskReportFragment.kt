@@ -96,10 +96,7 @@ class TaskReportFragment :
     }
 
     private fun onItemInfoClicked(data: TaskModel) {
-        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
-            navToDetailFragment(data.id)
-            return
-        }
+
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
             .unWrapperData()
