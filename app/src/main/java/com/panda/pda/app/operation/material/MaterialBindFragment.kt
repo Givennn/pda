@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -29,9 +29,9 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         viewBinding.etSearchBar.setHint(R.string.material_search_bar_hint)
     }
 
-    override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
+    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskModel> {
         return object :
-            BaseRecycleViewAdapter<ItemMaterialBindBinding, TaskModel>(mutableListOf()) {
+            CommonRecycleViewAdapter<ItemMaterialBindBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemMaterialBindBinding {
                 return ItemMaterialBindBinding.inflate(LayoutInflater.from(parent.context),
                     parent,

@@ -4,15 +4,13 @@ import com.panda.pda.app.BuildConfig
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.common.data.model.AuthorityModel
-import com.panda.pda.app.common.data.model.DataParamModel
+import com.panda.pda.app.common.data.model.DataParameterModel
 import com.panda.pda.app.common.data.model.FileInfoModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
-import java.io.File
 
 
 /**
@@ -36,9 +34,9 @@ interface CommonApi {
      *
      * The endpoint is owned by docs service owner
      */
-    @GET("pda/config/sys-param/list-by-param")
+    @GET("pda/config/sys-param/list-all")
     fun pdaConfigSysParamListByParamGet(
-    ): Single<BaseResponse<DataListNode<DataParamModel>>>
+    ): Single<BaseResponse<DataParameterModel>>
 
 
     @Streaming

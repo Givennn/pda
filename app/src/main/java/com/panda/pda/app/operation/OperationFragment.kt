@@ -2,14 +2,12 @@ package com.panda.pda.app.operation
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.children
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.ModuleNavigationAdapter
+import com.panda.pda.app.common.adapter.ModuleNavigationAdapter
 import com.panda.pda.app.databinding.FragmentOperationBinding
 import com.panda.pda.app.operation.material.MaterialViewModel
 import com.panda.pda.app.operation.material.ProductScanFragment

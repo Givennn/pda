@@ -2,13 +2,11 @@ package com.panda.pda.app.task
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
@@ -35,8 +33,8 @@ class TaskExecuteFragment :
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
-        return object : BaseRecycleViewAdapter<ItemTaskExecuteBinding, TaskModel>(mutableListOf()) {
+    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskModel> {
+        return object : CommonRecycleViewAdapter<ItemTaskExecuteBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskExecuteBinding {
                 return ItemTaskExecuteBinding.inflate(LayoutInflater.from(parent.context),
                     parent,

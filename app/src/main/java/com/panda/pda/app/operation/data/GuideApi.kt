@@ -20,7 +20,7 @@ interface GuideApi {
     @GET("pda/fms/work-guide/list")
     fun pdaFmsWorkGuideListGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-        @retrofit2.http.Query("page") page: String? = null,
-        @retrofit2.http.Query("rows") rows: String? = null,
+        @retrofit2.http.Query("page") page: Int? = 1,
+        @retrofit2.http.Query("rows") rows: Int? = 10,
     ): Single<BaseResponse<GuideListModel>>
 }

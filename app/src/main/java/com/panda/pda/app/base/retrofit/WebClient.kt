@@ -1,6 +1,8 @@
 package com.panda.pda.app.base.retrofit
 
 import com.panda.pda.app.BuildConfig
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
@@ -45,6 +47,8 @@ object WebClient {
             })
             .build()
     }
+
+
 
     fun <TService> request(serviceClass: Class<TService>): TService {
         return Retrofit.Builder()

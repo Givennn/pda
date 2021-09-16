@@ -9,21 +9,19 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.api.load
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.common.DateUtils
 import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.databinding.FragmentTaskReportDetailBinding
 import com.panda.pda.app.databinding.ItemTaskReportDetailPicBinding
-import okhttp3.HttpUrl.Companion.toHttpUrl
-import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/9/1
  */
 class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_detail) {
-    private lateinit var picAdapter: BaseRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
+    private lateinit var picAdapter: CommonRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
     private val viewBinding by viewBinding<FragmentTaskReportDetailBinding>()
     private val viewModel by activityViewModels<TaskReportViewModel>()
 
@@ -46,12 +44,12 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
             tvProductCode.text = detailData.productCode
             tvProductDesc.text = detailData.productName
             tvReportNumber.text = detailData.taskNum.toString()
-            tvManHour.text = detailData.reportTime.toString() // todo format man hour from int
+            tvManHour.text =  DateUtils.getManHour(detailData.reportTime)
             tvRemark.text = detailData.remark
         }
 
         picAdapter = object :
-            BaseRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
+            CommonRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
                 return ItemTaskReportDetailPicBinding.inflate(LayoutInflater.from(parent.context),
                     parent,

@@ -6,11 +6,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.annotation.StringRes
-import androidx.recyclerview.widget.ConcatAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.databinding.*
@@ -25,14 +24,12 @@ abstract class CommonSearchListFragment<TSource> :
 
     protected val viewBinding by viewBinding<FragmentCommonSearchListBinding>()
 
-    private val itemListAdapter by lazy { createAdapter() }
+    protected val itemListAdapter by lazy { createAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.rvTaskList.adapter = itemListAdapter
-
-
         viewBinding.swipe.setOnRefreshListener { refreshData() }
         viewBinding.topAppBar.setTitle(titleResId)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
@@ -53,7 +50,7 @@ abstract class CommonSearchListFragment<TSource> :
         refreshData()
     }
 
-    abstract fun createAdapter(): BaseRecycleViewAdapter<*, TSource>
+    abstract fun createAdapter(): CommonRecycleViewAdapter<*, TSource>
 
     abstract fun api(key: String?): Single<BaseResponse<DataListNode<TSource>>>
 

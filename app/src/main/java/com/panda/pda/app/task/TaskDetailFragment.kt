@@ -8,8 +8,10 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.common.data.CommonParameters
+import com.panda.pda.app.common.data.DataParamType
 import com.panda.pda.app.databinding.FragmentTaskDetailBinding
 import com.panda.pda.app.databinding.ItemTaskDetailOperateRecordBinding
 import com.panda.pda.app.task.data.model.TaskInfoModel
@@ -21,7 +23,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     private val viewBinding by viewBinding<FragmentTaskDetailBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
 
-    private lateinit var adapter: BaseRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
+    private lateinit var adapter: CommonRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,34 +40,35 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     }
 
     private fun createRecordAdapter() {
-        adapter = object : BaseRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
-            mutableListOf()) {
-            override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
-                return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))
-            }
-
-            override fun onBindViewHolderWithData(
-                holder: ViewBindingHolder,
-                data: TaskRecordModel,
-                position: Int,
-            ) {
-                holder.itemViewBinding.apply {
-                    when (holder.layoutPosition) {
-                        0 -> {
-                            viewStepLineTop.visibility = View.INVISIBLE
-                        }
-                        itemCount - 1 -> {
-                            viewStepLineBottom.visibility = View.INVISIBLE
-                        }
-                    }
-                    tvRecordType.text = data.operateType
-                    tvOperator.text = data.operateName
-                    tvTime.text = data.createTime
-                    tvDesc.text = data.operateDetail
+        adapter =
+            object : CommonRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
+                mutableListOf()) {
+                override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
+                    return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))
                 }
-            }
 
-        }
+                override fun onBindViewHolderWithData(
+                    holder: ViewBindingHolder,
+                    data: TaskRecordModel,
+                    position: Int,
+                ) {
+                    holder.itemViewBinding.apply {
+                        when (holder.layoutPosition) {
+                            0 -> {
+                                viewStepLineTop.visibility = View.INVISIBLE
+                            }
+                            itemCount - 1 -> {
+                                viewStepLineBottom.visibility = View.INVISIBLE
+                            }
+                        }
+                        tvRecordType.text = data.operateType
+                        tvOperator.text = data.operateName
+                        tvTime.text = data.createTime
+                        tvDesc.text = data.operateDetail
+                    }
+                }
+
+            }
     }
 
     private fun bindData(info: TaskInfoModel) {
@@ -79,7 +82,8 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             tvPlanCode.text = taskDetail.planCode
             tvOrderCode.text = taskDetail.workNo
             tvBatchCode.text = taskDetail.batchNo
-            tvTaskStatus.text = taskDetail.taskStatus.toString() //TODO user moshi adapter
+            tvTaskStatus.text =
+                CommonParameters.getDesc(DataParamType.TASK_STATUS, taskDetail.taskStatus)
             tvPlanStartTime.text = taskDetail.planStartTime
             tvPlanFinishTime.text = taskDetail.planEndTime
             tvOperator.text = taskDetail.jockeyName

@@ -2,10 +2,13 @@ package com.panda.pda.app.operation
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -14,6 +17,7 @@ import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemGuideInfoBinding
 import com.panda.pda.app.operation.data.GuideApi
 import com.panda.pda.app.operation.data.model.GuideInfoModel
+import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -21,10 +25,28 @@ import io.reactivex.rxjava3.core.Single
  */
 class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
 
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
-    override fun createAdapter(): BaseRecycleViewAdapter<*, GuideInfoModel> {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return
+        scrollListener = object :
+            EndlessRecyclerViewScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                WebClient.request(GuideApi::class.java)
+                    .pdaFmsWorkGuideListGet(viewBinding.etSearchBar.text?.toString(), page)
+                    .bindToFragment()
+                    .subscribe({
+                        itemListAdapter.addData(it.dataList)
+                    }, { })
+            }
+        }
+        viewBinding.rvTaskList.addOnScrollListener(scrollListener)
+    }
+
+    override fun createAdapter(): CommonRecycleViewAdapter<*, GuideInfoModel> {
         return object :
-            BaseRecycleViewAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {
+            CommonRecycleViewAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemGuideInfoBinding {
                 return ItemGuideInfoBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -67,8 +89,12 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
                 BaseResponse(listModel.message,
                     DataListNode(listModel.data?.dataList ?: listOf()),
                     listModel.code)
+            }.doFinally {
+                scrollListener.resetState()
             }
 
     override val titleResId: Int
         get() = R.string.operate_guide
+
+
 }

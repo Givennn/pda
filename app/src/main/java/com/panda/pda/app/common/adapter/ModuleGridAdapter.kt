@@ -1,4 +1,4 @@
-package com.panda.pda.app.common
+package com.panda.pda.app.common.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

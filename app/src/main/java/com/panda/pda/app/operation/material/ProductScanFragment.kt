@@ -34,34 +34,11 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val actionName = arguments?.getString(ACTION_KEY)
-//
-//        if (actionName == null || !MaterialAction.values().map { it.name }.contains(actionName)) {
-//            toast("未定义物料操作")
-//            return
-//        } else {
-//            materialAction = MaterialAction.valueOf(actionName)
-//        }
         materialViewModel.materialActionData.observe(viewLifecycleOwner, {
             materialAction = it
         })
-//        materialAction = materialViewModel.materialActionData.value!!
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
-//        viewBinding.tilSearchBar.addOnEditTextAttachedListener {
-//            Timber.e("text: ${it.editText?.text.toString()}")
-//        }
         viewBinding.etSearchBar
-//            .editorActionEvents { it.actionId == KeyEvent.KEYCODE_ENTER || it.actionId == EditorInfo.IME_ACTION_DONE }
-//            .throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .bindToLifecycle(requireView())
-//            .subscribe { event ->
-//                if (event.actionId == EditorInfo.IME_ACTION_DONE) {
-//                    onProductInput(event.view.text.toString())
-//                } else if (event.actionId == KeyEvent.KEYCODE_ENTER) {
-//                    onProductInput(event.view.text.toString())
-//                    (event.view as EditText).selectAll()
-//                }
-//            }
             .setOnEditorActionListener { editText, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 onProductInput(editText.text.toString())
@@ -90,22 +67,6 @@ class ProductScanFragment : BaseFragment(R.layout.fragment_product_scan) {
                 materialViewModel.scannedProductData.postValue(ProductModel(code))
                 navController.navigate(destination)
             }, {})
-//        val textFieldHighlightTint = ColorStateList.valueOf(requireContext().getColor(R.color.text_field_search_bar_highlight))
-//        viewBinding.tilSearchBar.apply {
-//            setStartIconTintList(textFieldHighlightTint)
-//            setEndIconTintList(textFieldHighlightTint)
-//            boxBackgroundColor = requireContext().getColor(R.color.text_field_search_bar_highlight_background)
-//        }
-//        val navId = when (materialAction) {
-//            MaterialAction.Bind -> R.id.action_productScanBindFragment_to_materialBindingProductFragment
-//            MaterialAction.Unbind -> R.id.action_productScanUnbindFragment_to_materialUnbindFragment
-//            MaterialAction.Replace -> R.id.action_productScanReplaceFragment_to_materialReplaceFragment
-//        }
-
-//        //todo verify product code, api undefined
-//        navController.navigate(navId, Bundle().apply {
-//            putString(SCANNED_PRODUCT_CODE, viewBinding.etSearchBar.text.toString())
-//        })
     }
 
     enum class MaterialAction {

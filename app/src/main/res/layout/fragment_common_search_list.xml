@@ -48,5 +48,6 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_material_bind" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </LinearLayout>
 

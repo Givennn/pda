@@ -1,7 +1,6 @@
 package com.panda.pda.app.task
 
 import android.os.Bundle
-import android.text.Html
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,10 @@ import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.CommonSearchListFragment
+import com.panda.pda.app.common.DateUtils
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskReportBinding
 import com.panda.pda.app.task.data.TaskApi
@@ -34,8 +34,8 @@ class TaskReportFragment :
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
-        return object : BaseRecycleViewAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
+    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskModel> {
+        return object : CommonRecycleViewAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportBinding {
                 return ItemTaskReportBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -63,7 +63,7 @@ class TaskReportFragment :
                         getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskProgress.text = getColorTaskProgress(data)
                     tvTaskSender.text = data.issueName
-                    tvManHour.text = getManHour(data.totalReportTime ?: 0)
+                    tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
                     btnAction.visibility = if (data.taskNum > data.reportNum) View.VISIBLE else View.GONE
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
@@ -80,19 +80,6 @@ class TaskReportFragment :
         return SpannableStringBuilder()
             .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
             .append("/${data.taskNum}")
-    }
-
-    private fun getManHour(minute: Int): String {
-        var result = ""
-        val hours: Int = minute / 60
-        val minutes: Int = minute % 60
-        if (hours != 0) {
-            result += "${hours}h"
-        }
-        if (minutes != 0) {
-            result += "${minutes}min"
-        }
-        return if (result.isEmpty()) "0min" else result
     }
 
     private fun onItemInfoClicked(data: TaskModel) {

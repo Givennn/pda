@@ -8,7 +8,7 @@ import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.base.BaseRecycleViewAdapter
+import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
 import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
@@ -35,8 +35,8 @@ class TaskFinishFragment :
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): BaseRecycleViewAdapter<*, TaskModel> {
-        return object : BaseRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>(mutableListOf()) {
+    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskModel> {
+        return object : CommonRecycleViewAdapter<ItemTaskFinishBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskFinishBinding {
                 return ItemTaskFinishBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
