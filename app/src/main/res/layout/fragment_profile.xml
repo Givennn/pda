@@ -155,4 +155,24 @@
         android:text="@string/exit_login"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        tools:text="V1.0.0"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:textColor="#A2A2A2"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#A2A2A2"
+        android:text="@string/company"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"/>
+
 </LinearLayout>

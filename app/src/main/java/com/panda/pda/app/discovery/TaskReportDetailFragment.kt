@@ -44,7 +44,7 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
             tvProductCode.text = detailData.productCode
             tvProductDesc.text = detailData.productName
             tvReportNumber.text = detailData.taskNum.toString()
-            tvManHour.text =  DateUtils.getManHour(detailData.reportTime)
+//            tvManHour.text =  DateUtils.getManHour(detailData.reportTime)
             tvRemark.text = detailData.remark
         }
 

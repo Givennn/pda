@@ -10,7 +10,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * 
+ *
  * @property id id
  * @property userName 姓名
  * @property phoneNumber 手机号
@@ -24,5 +24,9 @@ data class UserInfoModel(
     @Json(name = "phoneNumber") @field:Json(name = "phoneNumber") var phoneNumber: String,
     @Json(name = "workCode") @field:Json(name = "workCode") var workCode: String,
     @Json(name = "orgName") @field:Json(name = "orgName") var orgName: String,
-    @Json(name = "orgFullName") @field:Json(name = "orgFullName") var orgFullName: String
-)
+    @Json(name = "orgFullName") @field:Json(name = "orgFullName") var orgFullName: String,
+) {
+    fun getDepartment(): String {
+        return orgName.split('/').last()
+    }
+}

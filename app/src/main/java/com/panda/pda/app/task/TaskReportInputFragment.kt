@@ -130,6 +130,6 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     companion object {
-        const val IMAGE_TYPE = "png"
+        const val IMAGE_TYPE = "jpg"
     }
 }

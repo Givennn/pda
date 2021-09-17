@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
+import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
-import com.panda.pda.app.base.retrofit.BaseResponse
-import com.panda.pda.app.base.retrofit.DataListNode
-import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemMaterialBindBinding
 import com.panda.pda.app.operation.data.MaterialApi
+import com.panda.pda.app.task.TaskViewModel
+import com.panda.pda.app.task.data.TaskApi
+import com.panda.pda.app.task.data.model.TaskInfoModel
 import com.panda.pda.app.task.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 
@@ -22,6 +23,7 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2021/8/30
  */
 class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
+    private val taskViewModel by activityViewModels<TaskViewModel>()
     val viewModel by activityViewModels<MaterialViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,10 +58,38 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
+                    clInfo.setOnClickListener {
+                        onItemInfoClicked(data)
+                    }
                 }
             }
         }
     }
+
+    private fun onItemInfoClicked(data: TaskModel) {
+        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
+            navToDetailFragment(data.id)
+            return
+        }
+        WebClient.request(TaskApi::class.java)
+            .taskGetByIdGet(data.id)
+            .unWrapperData()
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
+                .unWrapperData(),
+                { detail, records -> TaskInfoModel(detail, records.dataList) })
+            .onMainThread()
+            .bindLoadingStatus()
+            .subscribe({ info ->
+                taskViewModel.taskInfoData.postValue(info)
+                navToDetailFragment(data.id)
+            }, { })
+    }
+
+    private fun navToDetailFragment(id: Int) {
+        navController.navigate(R.id.taskDetailFragment,
+            Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
+    }
+
 
     override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
         WebClient.request(MaterialApi::class.java)

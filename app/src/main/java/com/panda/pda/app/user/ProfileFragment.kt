@@ -28,7 +28,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
             tvName.text = userInfoModel?.userName
             tvMyPhone.text = userInfoModel?.phoneNumber
-            tvDepartment.text = userInfoModel?.orgName
+            tvDepartment.text = userInfoModel?.getDepartment()
+            tvVersion.text = userViewModel.getAppVersionName(requireContext())
             llChangePwd.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(view)
