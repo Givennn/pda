@@ -27,7 +27,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     private var loadingDialog: DialogFragment? = null
 
     private val userViewModel by activityViewModels<UserViewModel>()
-    private val commonViewModel by activityViewModels<CommonViewModel>()
+//    private val commonViewModel by activityViewModels<CommonViewModel>()
 
     protected val TAG get() = this.javaClass.simpleName
     protected val sp: SharedPreferences by lazy {
@@ -49,29 +49,29 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         Timber.v("onDestroy ${javaClass.simpleName}")
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        userViewModel.loginData.observe(viewLifecycleOwner, {
+//            setupUserAuth(it.menus)
+//        })
+//    }
 
-        userViewModel.loginData.observe(viewLifecycleOwner, {
-            setupUserAuth(it.menus)
-        })
-    }
-
-    private fun setupUserAuth(authorities: List<String>) {
-        val rootView = requireView()
-        val authorModel = commonViewModel.authorityViewModel.value ?: return
-        val tag = rootView.tag ?: return
-        val rootAuthor = authorModel.firstOrNull { it.id.toString() == tag } ?: return
-        rootAuthor.children.forEach {
-            val item = requireView().findViewWithTag<View>(it.id.toString()) ?: return@forEach
-            if (authorities.contains(it.id.toString())) {
-                item.visibility = View.VISIBLE
-
-            } else {
-                item.visibility = View.GONE
-            }
-        }
-    }
+//    private fun setupUserAuth(authorities: List<String>) {
+//        val rootView = requireView()
+//        val authorModel = commonViewModel.authorityViewModel.value ?: return
+//        val tag = rootView.tag ?: return
+//        val rootAuthor = authorModel.firstOrNull { it.id.toString() == tag } ?: return
+//        rootAuthor.children.forEach {
+//            val item = requireView().findViewWithTag<View>(it.id.toString()) ?: return@forEach
+//            if (authorities.contains(it.id.toString())) {
+//                item.visibility = View.VISIBLE
+//
+//            } else {
+//                item.visibility = View.GONE
+//            }
+//        }
+//    }
 
     protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
         val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {

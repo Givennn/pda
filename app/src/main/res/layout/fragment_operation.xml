@@ -27,6 +27,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fms_area"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

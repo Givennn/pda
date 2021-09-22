@@ -113,5 +113,6 @@
     <string name="alarm_close_time">关闭时间</string>
     <string name="product_bar_code_formatter">产品条码：%s</string>
     <string name="material_scan_bar_hint">请扫描或输入物料条码</string>
+    <string name="serial_repeat_alert_message">条码重复，请重新扫码…</string>
 
 </resources>

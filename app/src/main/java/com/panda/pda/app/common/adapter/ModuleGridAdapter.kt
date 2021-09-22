@@ -1,13 +1,9 @@
 package com.panda.pda.app.common.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.ViewGroup
+import android.view.*
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.RecyclerView
 import com.panda.pda.app.databinding.ItemOperationModuleBinding
@@ -15,15 +11,22 @@ import com.panda.pda.app.databinding.ItemOperationModuleBinding
 /**
  * created by AnJiwei 2021/9/15
  */
-class ModuleNavigationAdapter(@MenuRes menuId: Int, context: Context) :
+class ModuleNavigationAdapter(
+    @MenuRes menuId: Int,
+    context: Context,
+    authorityFilter: (MenuItem) -> Boolean,
+) :
     RecyclerView.Adapter<ModuleNavigationAdapter.ViewBindingHolder>() {
 
     private var menu: Menu = PopupMenu(context, null).menu
+
+    private var dataSource: List<MenuItem>
 
     var navAction: ((navId: Int) -> Unit)? = null
 
     init {
         MenuInflater(context).inflate(menuId, menu)
+        dataSource = menu.iterator().asSequence().toList().filter(authorityFilter)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder {
@@ -33,7 +36,7 @@ class ModuleNavigationAdapter(@MenuRes menuId: Int, context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewBindingHolder, position: Int) {
-        val menuItem = menu.getItem(holder.bindingAdapterPosition)
+        val menuItem = dataSource[holder.bindingAdapterPosition]
         holder.viewBinding.apply {
             ivIcon.setImageDrawable(menuItem.icon)
             ivTitle.text = menuItem.title
@@ -44,7 +47,7 @@ class ModuleNavigationAdapter(@MenuRes menuId: Int, context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return menu.size()
+        return dataSource.size
     }
 
     inner class ViewBindingHolder(val viewBinding: ItemOperationModuleBinding) :

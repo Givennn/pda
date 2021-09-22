@@ -55,6 +55,7 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
     }
 
     private fun updateNewMaterial(data: MaterialModel) {
+
         viewBinding.tvMaterialCode.text = data.materialSerialCode
         viewBinding.tvMaterialDesc.text = data.combineInfoStr()
         viewBinding.cvNewMaterial.visibility = View.VISIBLE
@@ -62,18 +63,24 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
     }
 
     private fun replaceMaterialPost() {
+
         if (newMaterialModel == null) {
             toast(R.string.scan_material_code_message)
-        } else {
-            WebClient.request(MaterialApi::class.java)
-                .pdaFmsTaskMaterialBindChangePost(MaterialReplaceBindRequest(productModel.code,
-                    newMaterialModel!!.materialSerialCode!!,
-                    oldMaterialModel.materialSerialCode!!))
-                .bindToFragment()
-                .subscribe({
-                    toast(R.string.material_replace_success_message)
-                    navBackListener.invoke(requireView())
-                }, {})
+            return
         }
+        if (newMaterialModel?.materialSerialCode == oldMaterialModel.materialSerialCode) {
+            toast(getString(R.string.serial_repeat_alert_message))
+            return
+        }
+        WebClient.request(MaterialApi::class.java)
+            .pdaFmsTaskMaterialBindChangePost(MaterialReplaceBindRequest(productModel.code,
+                newMaterialModel!!.materialSerialCode!!,
+                oldMaterialModel.materialSerialCode!!))
+            .bindToFragment()
+            .subscribe({
+                toast(R.string.material_replace_success_message)
+                navBackListener.invoke(requireView())
+            }, {})
+
     }
 }

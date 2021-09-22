@@ -2,6 +2,7 @@ package com.panda.pda.app.common
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.panda.pda.app.R
 import com.panda.pda.app.common.data.model.AuthorityModel
 
 /**
@@ -10,4 +11,5 @@ import com.panda.pda.app.common.data.model.AuthorityModel
 class CommonViewModel : ViewModel() {
 
     val authorityViewModel = MutableLiveData<List<AuthorityModel>>()
+
 }

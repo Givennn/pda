@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.google.android.material.button.MaterialButton
 import com.panda.pda.app.R
 import com.panda.pda.app.common.data.model.FileInfoModel
@@ -60,7 +61,7 @@ class TaskReportInputPhotoAdapter :
         } else {
             val data = dataSource[holder.bindingAdapterPosition]
             holder.itemViewBinding.apply {
-                ivReportPhoto.setImageURI(data.fileLocalUri)
+                ivReportPhoto.load(data.fileLocalUri)
                 ivDelete.setOnClickListener {
                     dataSource.remove(data)
                     notifyItemRemoved(holder.bindingAdapterPosition)
