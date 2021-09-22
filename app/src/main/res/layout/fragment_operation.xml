@@ -15,15 +15,6 @@
         style="@style/Widget.App.Toolbar.main"
         app:title="@string/operation"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/factory_manage"
-        android:layout_gravity="start"
-        android:padding="16dp"
-        style="@style/headerLineText"
-        android:textSize="16sp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fms_area"
         android:layout_width="match_parent"

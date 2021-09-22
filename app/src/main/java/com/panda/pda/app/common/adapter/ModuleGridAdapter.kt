@@ -49,7 +49,7 @@ class ModuleNavigationAdapter(
     override fun getItemCount(): Int {
         return dataSource.size
     }
-
     inner class ViewBindingHolder(val viewBinding: ItemOperationModuleBinding) :
         RecyclerView.ViewHolder(viewBinding.root)
+
 }

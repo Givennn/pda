@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.common.data.CommonParameters
 import com.panda.pda.app.common.data.DataParamType
@@ -23,13 +23,13 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     private val viewBinding by viewBinding<FragmentTaskDetailBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
 
-    private lateinit var adapter: CommonRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
+    private lateinit var bindingAdapter: ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
         createRecordAdapter()
-        viewBinding.rvRecords.adapter = adapter
+        viewBinding.rvRecords.adapter = bindingAdapter
         val taskInfo = viewModel.taskInfoData.value
         if (taskInfo != null) {
             bindData(taskInfo)
@@ -40,8 +40,8 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     }
 
     private fun createRecordAdapter() {
-        adapter =
-            object : CommonRecycleViewAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
+        bindingAdapter =
+            object : ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
                 mutableListOf()) {
                 override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
                     return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))
@@ -90,7 +90,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             tvPrdEqp.text = taskDetail.equipmentDesc
             tvActualStartTime.text = taskDetail.realStartTime
             tvActualFinishTime.text = taskDetail.realEndTime
-            adapter.refreshData(info.recordList ?: listOf())
+            bindingAdapter.refreshData(info.recordList ?: listOf())
         }
     }
 

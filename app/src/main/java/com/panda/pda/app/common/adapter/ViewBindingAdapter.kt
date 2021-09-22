@@ -8,8 +8,8 @@ import androidx.viewbinding.ViewBinding
 /**
  * created by AnJiwei 2021/3/15
  */
-abstract class CommonRecycleViewAdapter<TBinding : ViewBinding, TSource>(protected val dataSource: MutableList<TSource>) :
-    RecyclerView.Adapter<CommonRecycleViewAdapter<TBinding, TSource>.ViewBindingHolder>() {
+abstract class ViewBindingAdapter<TBinding : ViewBinding, TSource>(protected val dataSource: MutableList<TSource>) :
+    RecyclerView.Adapter<ViewBindingAdapter<TBinding, TSource>.ViewBindingHolder>() {
 
     protected abstract fun createBinding(parent: ViewGroup): TBinding
 

@@ -9,7 +9,7 @@ import androidx.annotation.StringRes
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.databinding.*
@@ -50,7 +50,7 @@ abstract class CommonSearchListFragment<TSource> :
         refreshData()
     }
 
-    abstract fun createAdapter(): CommonRecycleViewAdapter<*, TSource>
+    abstract fun createAdapter(): ViewBindingAdapter<*, TSource>
 
     abstract fun api(key: String?): Single<BaseResponse<DataListNode<TSource>>>
 

@@ -9,7 +9,7 @@ import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.common.DateUtils
@@ -34,8 +34,8 @@ class TaskReportFragment :
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskModel> {
-        return object : CommonRecycleViewAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
+    override fun createAdapter(): ViewBindingAdapter<*, TaskModel> {
+        return object : ViewBindingAdapter<ItemTaskReportBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportBinding {
                 return ItemTaskReportBinding.inflate(LayoutInflater.from(parent.context),
                     parent,

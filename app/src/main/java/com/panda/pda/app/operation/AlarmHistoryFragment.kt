@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -28,8 +28,8 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
         viewBinding.tilSearchBar.visibility = View.GONE
     }
 
-    override fun createAdapter(): CommonRecycleViewAdapter<*, AlarmHistoryModel> {
-        return object : CommonRecycleViewAdapter<ItemAlarmHistoryBinding, AlarmHistoryModel>(
+    override fun createAdapter(): ViewBindingAdapter<*, AlarmHistoryModel> {
+        return object : ViewBindingAdapter<ItemAlarmHistoryBinding, AlarmHistoryModel>(
             mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemAlarmHistoryBinding {
                 return ItemAlarmHistoryBinding.inflate(LayoutInflater.from(parent.context),

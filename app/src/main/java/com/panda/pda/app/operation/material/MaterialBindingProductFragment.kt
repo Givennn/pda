@@ -13,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.extension.deepCopy
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentMaterialBindingProductBinding
@@ -33,7 +33,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
 
     private lateinit var taskModel: TaskModel
     private lateinit var productModel: ProductModel
-    private lateinit var bindingAdapter: CommonRecycleViewAdapter<ItemBindMaterialCodeBinding, MaterialModel>
+    private lateinit var bindingBindingAdapter: ViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>
     private val viewBinding by viewBinding<FragmentMaterialBindingProductBinding>()
 
     private val materialViewModel by activityViewModels<MaterialViewModel>()
@@ -59,7 +59,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
             false
         }
         viewBinding.rvBindList.adapter =
-            object : CommonRecycleViewAdapter<ItemBindMaterialCodeBinding, MaterialModel>(
+            object : ViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>(
                 mutableListOf()) {
                 override fun createBinding(parent: ViewGroup): ItemBindMaterialCodeBinding {
                     return ItemBindMaterialCodeBinding.inflate(LayoutInflater.from(parent.context),
@@ -82,7 +82,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
                     }
                     Timber.e("banded item: ${data.materialName}, ${data.materialSerialCode}")
                 }
-            }.also { bindingAdapter = it }
+            }.also { bindingBindingAdapter = it }
 
         materialViewModel.taskBandedMaterialData.observe(viewLifecycleOwner, {
             updateBindMaterial(it)
@@ -110,7 +110,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
                 .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.totalBindCount.toString()) }
                 .append("/${data.totalToBindCount}个")
         }
-        bindingAdapter.refreshData(formatBandedData(data))
+        bindingBindingAdapter.refreshData(formatBandedData(data))
     }
 
     private fun formatBandedData(data: TaskBandedMaterialModel): List<MaterialModel> {

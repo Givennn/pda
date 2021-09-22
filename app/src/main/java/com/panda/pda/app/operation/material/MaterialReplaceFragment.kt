@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -27,8 +27,8 @@ class MaterialReplaceFragment : CommonSearchListFragment<MaterialModel>() {
         viewBinding.tilSearchBar.visibility = View.GONE
     }
 
-    override fun createAdapter(): CommonRecycleViewAdapter<*, MaterialModel> {
-        return object : CommonRecycleViewAdapter<ItemMaterialReplaceBinding, MaterialModel>(
+    override fun createAdapter(): ViewBindingAdapter<*, MaterialModel> {
+        return object : ViewBindingAdapter<ItemMaterialReplaceBinding, MaterialModel>(
             mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemMaterialReplaceBinding {
                 return ItemMaterialReplaceBinding.inflate(LayoutInflater.from(parent.context),

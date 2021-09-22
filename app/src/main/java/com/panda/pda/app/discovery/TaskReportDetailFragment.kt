@@ -9,9 +9,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.api.load
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.common.DateUtils
 import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.databinding.FragmentTaskReportDetailBinding
@@ -21,7 +20,7 @@ import com.panda.pda.app.databinding.ItemTaskReportDetailPicBinding
  * created by AnJiwei 2021/9/1
  */
 class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_detail) {
-    private lateinit var picAdapter: CommonRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
+    private lateinit var picBindingAdapter: ViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
     private val viewBinding by viewBinding<FragmentTaskReportDetailBinding>()
     private val viewModel by activityViewModels<TaskReportViewModel>()
 
@@ -48,8 +47,8 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
             tvRemark.text = detailData.remark
         }
 
-        picAdapter = object :
-            CommonRecycleViewAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
+        picBindingAdapter = object :
+            ViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
                 return ItemTaskReportDetailPicBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -66,7 +65,7 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
                     data.fileName))
             }
         }
-        viewBinding.rvPicList.adapter = picAdapter
-        picAdapter.refreshData(detailData.fileList)
+        viewBinding.rvPicList.adapter = picBindingAdapter
+        picBindingAdapter.refreshData(detailData.fileList)
     }
 }

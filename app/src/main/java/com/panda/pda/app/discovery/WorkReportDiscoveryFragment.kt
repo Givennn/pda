@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.CommonRecycleViewAdapter
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -25,8 +25,8 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
 
     private val taskViewModel by activityViewModels<TaskReportViewModel>()
 
-    override fun createAdapter(): CommonRecycleViewAdapter<*, TaskReportModel> {
-        return object : CommonRecycleViewAdapter<ItemDiscoveryWorkReportBinding, TaskReportModel>(
+    override fun createAdapter(): ViewBindingAdapter<*, TaskReportModel> {
+        return object : ViewBindingAdapter<ItemDiscoveryWorkReportBinding, TaskReportModel>(
             mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemDiscoveryWorkReportBinding {
                 return ItemDiscoveryWorkReportBinding.inflate(LayoutInflater.from(parent.context),
