@@ -81,7 +81,7 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
 
-                Timber.e("viewType: ${fmsAdapter.getItemViewType(position)}")
+//                Timber.e("viewType: ${fmsAdapter.getItemViewType(position)}")
                 return when (fmsAdapter.getItemViewType(position)) {
                     0 -> layoutManager.spanCount
                     else -> 1

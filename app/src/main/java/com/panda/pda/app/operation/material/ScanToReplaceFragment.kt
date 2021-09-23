@@ -54,11 +54,23 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
             .subscribe({ data -> updateNewMaterial(data) }, {})
     }
 
-    private fun updateNewMaterial(data: MaterialModel) {
+    private fun updateNewMaterial(data: MaterialModel?) {
 
-        viewBinding.tvMaterialCode.text = data.materialSerialCode
-        viewBinding.tvMaterialDesc.text = data.combineInfoStr()
-        viewBinding.cvNewMaterial.visibility = View.VISIBLE
+        when {
+            data == null -> {
+                viewBinding.cvNewMaterial.visibility = View.GONE
+            }
+            data.materialSerialCode.equals(oldMaterialModel.materialSerialCode, true) -> {
+                toast(R.string.serial_repeat_alert_message)
+                newMaterialModel = null
+                return
+            }
+            else -> {
+                viewBinding.tvMaterialCode.text = data.materialSerialCode
+                viewBinding.tvMaterialDesc.text = data.combineInfoStr()
+                viewBinding.cvNewMaterial.visibility = View.VISIBLE
+            }
+        }
         newMaterialModel = data
     }
 
@@ -68,14 +80,15 @@ class ScanToReplaceFragment : BaseFragment(R.layout.fragment_material_scan_to_re
             toast(R.string.scan_material_code_message)
             return
         }
-        if (newMaterialModel?.materialSerialCode == oldMaterialModel.materialSerialCode) {
-            toast(getString(R.string.serial_repeat_alert_message))
-            return
-        }
+
         WebClient.request(MaterialApi::class.java)
-            .pdaFmsTaskMaterialBindChangePost(MaterialReplaceBindRequest(productModel.code,
-                newMaterialModel!!.materialSerialCode!!,
-                oldMaterialModel.materialSerialCode!!))
+            .pdaFmsTaskMaterialBindChangePost(
+                MaterialReplaceBindRequest(
+                    productModel.code,
+                    newMaterialModel!!.materialSerialCode!!,
+                    oldMaterialModel.materialSerialCode!!
+                )
+            )
             .bindToFragment()
             .subscribe({
                 toast(R.string.material_replace_success_message)

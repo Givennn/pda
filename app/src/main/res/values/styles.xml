@@ -11,7 +11,9 @@
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="actionBarSize">@dimen/tool_bar_height</item>
     </style>
 
     <!--    <style name="Widget.App.ActionMode" parent="Widget.AppCompat.ActionMode">-->
@@ -35,6 +37,8 @@
     </style>
 
     <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:elevation">0dp</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
     </style>
 
@@ -48,6 +52,7 @@
 
     <style name="Widget.App.Toolbar.main" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar.main</item>
+<!--        <item name="android:paddingTop">20dp</item>-->
         <item name="android:elevation">0dp</item>
     </style>
 

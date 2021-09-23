@@ -1,6 +1,7 @@
 package com.panda.pda.app
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -19,6 +20,7 @@ import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
 import com.panda.pda.library.android.material.extension.setupNavControllerToFinalStack
 
+
 class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     private lateinit var navController: NavController
@@ -32,19 +34,31 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTransparentStatusBar()
         createNavController()
         initBottomNavigation()
         initViewModel()
         initTokenEvent()
-        customThemes()
+        customNavAction()
     }
+
+    private fun setTransparentStatusBar() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+    }
+
 
     private fun initTokenEvent() {
         userViewModel.logoutActionData.observe(this, {
+            viewBinding.nvBottom.selectedItemId = R.id.taskFragment
 
-            navController.navigate(R.id.loginFragment,
+            navController.navigate(
+                R.id.loginFragment,
                 null,
-                NavOptions.Builder().setPopUpTo(R.id.shell_nav_graph, true).build())
+                NavOptions.Builder().setPopUpTo(R.id.shell_nav_graph, true).build()
+            )
         })
     }
 
@@ -54,25 +68,10 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
         navController = navHostFragment.navController
     }
 
-    private fun customThemes() {
+    private fun customNavAction() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                in arrayOf(R.id.splashFragment,
-                    R.id.loginFragment,
-                    R.id.taskFragment,
-                    R.id.operationFragment,
-                    R.id.discoveryFragment,
-                    R.id.profileFragment),
-                -> {
-                    window.statusBarColor = getColor(R.color.white)
-                    if (destination.id !in arrayOf(R.id.loginFragment, R.id.splashFragment)) {
-                        updateTaskCount()
-                    }
-                }
-                else -> {
-                    window.statusBarColor = getColor(R.color.colorPrimaryDark)
-                }
-
+            if (destination.id !in arrayOf(R.id.loginFragment, R.id.splashFragment)) {
+                updateTaskCount()
             }
         }
     }
