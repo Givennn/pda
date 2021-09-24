@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/alarmReportFragment"
-        android:name="com.panda.pda.app.operation.AlarmReportFragment"
+        android:name="com.panda.pda.app.operation.fms.alarm.AlarmReportFragment"
         android:label="AlarmReportFragment" >
         <action
             android:id="@+id/action_alarmReportFragment_to_alarmHistoryFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/alarmHistoryFragment"
-        android:name="com.panda.pda.app.operation.AlarmHistoryFragment"
+        android:name="com.panda.pda.app.operation.fms.alarm.AlarmHistoryFragment"
         android:label="AlarmHistoryFragment" />
 </navigation>

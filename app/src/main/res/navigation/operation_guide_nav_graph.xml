@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/operateGuideFragment"
-        android:name="com.panda.pda.app.operation.OperateGuideFragment"
+        android:name="com.panda.pda.app.operation.fms.guide.OperateGuideFragment"
         android:label="OperateGuideFragment" >
         <action
             android:id="@+id/action_operateGuideFragment_to_guidePdfPreviewFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/guidePdfPreviewFragment"
-        android:name="com.panda.pda.app.operation.GuidePdfPreviewFragment"
+        android:name="com.panda.pda.app.operation.fms.guide.GuidePdfPreviewFragment"
         android:label="GuidePdfPreviewFragment" />
 </navigation>

@@ -6,6 +6,7 @@ import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.common.data.model.AuthorityModel
 import com.panda.pda.app.common.data.model.DataParameterModel
 import com.panda.pda.app.common.data.model.FileInfoModel
+import com.panda.pda.app.common.data.model.TaskMessageCountModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
@@ -56,4 +57,14 @@ interface CommonApi {
 
     @GET("pda/admin/menu/get-base")
     fun getAuthorityTree(): Single<BaseResponse<DataListNode<AuthorityModel>>>
+
+    /**
+     * 任务/查询任务数量
+     *
+     * The endpoint is owned by docs service owner
+     * @param raw raw paramter (optional)
+     */
+    @GET("pda/task/msg-count")
+    fun pdaTaskMsgCountGet(
+    ): Single<BaseResponse<TaskMessageCountModel>>
 }

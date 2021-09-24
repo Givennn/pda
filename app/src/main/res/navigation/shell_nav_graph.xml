@@ -27,19 +27,19 @@
     </fragment>
     <fragment
         android:id="@+id/taskReportFragment"
-        android:name="com.panda.pda.app.task.TaskReportFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskReportFragment"
         android:label="fragment_task_report" />
     <fragment
         android:id="@+id/taskReceiveFragment"
-        android:name="com.panda.pda.app.task.TaskReceiveFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskReceiveFragment"
         android:label="fragment_task_receive" />
     <fragment
         android:id="@+id/taskExecuteFragment"
-        android:name="com.panda.pda.app.task.TaskExecuteFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskExecuteFragment"
         android:label="fragment_task_execute" />
     <fragment
         android:id="@+id/taskFinishFragment"
-        android:name="com.panda.pda.app.task.TaskFinishFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskFinishFragment"
         android:label="fragment_task_finish" />
     <fragment
         android:id="@+id/taskFragment"
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.panda.pda.app.task.TaskDetailFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
     <include app:graph="@navigation/material_bind_nav_graph" />
@@ -99,9 +99,44 @@
     <include app:graph="@navigation/discovery_report_nav_graph" />
     <fragment
         android:id="@+id/taskReportInputFragment"
-        android:name="com.panda.pda.app.task.TaskReportInputFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskReportInputFragment"
         android:label="TaskReportInputFragment" />
     <include app:graph="@navigation/profile_nav_graph" />
     <include app:graph="@navigation/material_replace_nav_graph" />
     <include app:graph="@navigation/operation_guide_nav_graph" />
+    <fragment
+        android:id="@+id/qualityDistributeFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
+        android:label="fragment_quality_distribute"
+        tools:layout="@layout/fragment_quality_distribute" />
+    <fragment
+        android:id="@+id/qualityExecuteFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityExecuteFragment"
+        android:label="fragment_quality_execute"
+        tools:layout="@layout/fragment_quality_execute" />
+    <fragment
+        android:id="@+id/qualityFinishFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityFinishFragment"
+        android:label="fragment_quality_finish"
+        tools:layout="@layout/fragment_quality_finish" />
+    <fragment
+        android:id="@+id/qualityProblemRecordFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityProblemRecordFragment"
+        android:label="fragment_quality_problem_record"
+        tools:layout="@layout/fragment_quality_problem_record" />
+    <fragment
+        android:id="@+id/qualityReceiveFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityReceiveFragment"
+        android:label="fragment_quality_receive"
+        tools:layout="@layout/fragment_quality_receive" />
+    <fragment
+        android:id="@+id/qualityReviewFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityReviewFragment"
+        android:label="fragment_quality_review"
+        tools:layout="@layout/fragment_quality_review" />
+    <fragment
+        android:id="@+id/qualityTaskFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityTaskFragment"
+        android:label="fragment_quality_task"
+        tools:layout="@layout/fragment_quality_task" />
 </navigation>

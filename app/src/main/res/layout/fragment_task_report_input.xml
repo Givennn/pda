@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".task.TaskDetailFragment">
+    tools:context=".operation.fms.mission.TaskDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -188,7 +188,7 @@
                     style="@style/detailText.label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/already_report_number"
+                    android:text="@string/report_number"
                     android:layout_weight="1"/>
 
                 <com.panda.pda.library.android.material.custom.NumbersTextField

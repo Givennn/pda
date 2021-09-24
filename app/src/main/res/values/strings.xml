@@ -1,21 +1,36 @@
 <resources>
+    <!--    common  -->
     <string name="app_name">MES平台</string>
-    <!--    <string name="title">This is just a template</string>-->
     <string name="description">Manufacturing Execution System</string>
     <string name="discovery">发现</string>
     <string name="profile">我的</string>
     <string name="task">任务</string>
     <string name="operation">业务服务</string>
-    <string name="forget_password_hint">忘记密码，请联系管理员！</string>
+    <string name="company">熊猫电子装备有限公司</string>
+    <string name="hello_blank_fragment">test</string>
+    <string name="long_text_test">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</string>
+    <string name="digits_password">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="input_user_name_alert">请输入账号</string>
+    <string name="input_password_alert">请输入密码</string>
+    <!--    user-->
     <string name="login">登录</string>
     <string name="login_user_name_field_hint">请输入账号</string>
     <string name="login_password_field_hint">请输入密码</string>
-    <string name="company">熊猫电子装备有限公司</string>
+    <string name="forget_password_hint">忘记密码，请联系管理员！</string>
+    <string name="exit_login">退出登录</string>
+    <string name="change_password">修改密码</string>
+    <string name="old_password">旧密码</string>
+    <string name="password_hint">由6~12位英文、数字组成</string>
+    <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="password_confirm">确认密码</string>
+    <string name="user_pwd_error">用户或密码错误，请重新输入！</string>
+
+    <!--    fms-->
     <string name="task_receive">任务接收</string>
     <string name="task_execute">任务执行</string>
     <string name="task_report">任务报工</string>
     <string name="task_finish">任务完工</string>
-    <string name="hello_blank_fragment">test</string>
     <string name="task_description">任务描述</string>
     <string name="already_report">已报工</string>
     <string name="sender">派工人</string>
@@ -69,7 +84,6 @@
     <string name="remark_hint">请输入备注信息，最多200个字</string>
     <string name="alarm_reporter">报警人</string>
     <string name="alarm_report_time">报警时间</string>
-    <string name="long_text_test">What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?</string>
     <string name="order">订单</string>
     <string name="plan">计划</string>
     <string name="report_number">报工数量</string>
@@ -80,18 +94,6 @@
     <string name="maintain_description">维修描述</string>
     <string name="picture">图片</string>
     <string name="common_search_bar_hint">请扫描或输入</string>
-    <string name="exit_login">退出登录</string>
-    <string name="change_password">修改密码</string>
-    <string name="old_password">旧密码</string>
-    <string name="password_hint">由6~12位英文、数字组成</string>
-    <string name="digits_password">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
-    <string name="next_step">下一步</string>
-    <string name="new_password">新密码</string>
-    <string name="password_confirm">确认密码</string>
-    <string name="forget_password_notice">忘记密码，请联系管理员！</string>
-    <string name="user_pwd_error">用户或密码错误，请重新输入！</string>
-    <string name="input_user_name_alert">请输入账号</string>
-    <string name="input_password_alert">请输入密码</string>
     <string name="task_execute_success_toast">任务执行成功</string>
     <string name="task_finish_success_toast">完成任务成功</string>
     <string name="task_execute_confirm">确定执行该任务？</string>
@@ -115,5 +117,17 @@
     <string name="material_scan_bar_hint">请扫描或输入物料条码</string>
     <string name="serial_repeat_alert_message">条码重复，请重新扫码…</string>
     <string name="remark_empty_message">请输入备注信息</string>
-
+    <!--QMS-->
+    <string name="quality_manage">质量管理</string>
+    <string name="inspect_number">送检数量</string>
+    <string name="quality_scheme">质检方案</string>
+    <string name="quality_review">质检审核</string>
+    <string name="quality_distribute">质检派发</string>
+    <string name="quality_receive">质检签收</string>
+    <string name="quality_execute">质检执行</string>
+    <string name="quality_problem_record">质检问题记录</string>
+    <string name="quality_finish">质检完工</string>
+    <string name="quality_task">质检任务</string>
+    <string name="need_quality_control">需质检</string>
+    <string name="commit">提交</string>
 </resources>

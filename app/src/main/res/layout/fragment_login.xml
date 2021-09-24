@@ -171,7 +171,7 @@
             android:layout_below="@+id/bt_login"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="@string/forget_password_notice"
+            android:text="@string/forget_password_hint"
             android:textColor="#ccffffff"
             android:textSize="14sp" />
 

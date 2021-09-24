@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDiscoveryDetailFragment"
-        android:name="com.panda.pda.app.task.TaskDetailFragment"
+        android:name="com.panda.pda.app.operation.fms.mission.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
 </navigation>

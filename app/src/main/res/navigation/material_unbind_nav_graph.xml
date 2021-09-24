@@ -6,11 +6,11 @@
     app:startDestination="@id/productScanUnbindFragment">
     <fragment
         android:id="@+id/materialUnbindFragment"
-        android:name="com.panda.pda.app.operation.material.MaterialUnbindFragment"
+        android:name="com.panda.pda.app.operation.fms.material.unbind.MaterialUnbindFragment"
         android:label="MaterialUnbindFragment" />
     <fragment
         android:id="@+id/productScanUnbindFragment"
-        android:name="com.panda.pda.app.operation.material.ProductScanFragment"
+        android:name="com.panda.pda.app.operation.fms.material.ProductScanFragment"
         android:label="ProductScanBindFragment">
         <action
             android:id="@+id/action_productScanUnbindFragment_to_materialUnbindFragment"

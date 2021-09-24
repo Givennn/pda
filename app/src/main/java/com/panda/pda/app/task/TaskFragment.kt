@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.databinding.FragmentTaskBinding
-import com.panda.pda.app.task.data.model.TaskMessageCountModel
+import com.panda.pda.app.operation.fms.mission.TaskViewModel
+import com.panda.pda.app.common.data.model.TaskMessageCountModel
 
 /**
  * created by AnJiwei 2021/8/16

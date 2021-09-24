@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".task.TaskDetailFragment">
+    tools:context=".operation.fms.mission.TaskDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"

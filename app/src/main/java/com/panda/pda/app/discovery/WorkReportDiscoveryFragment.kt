@@ -15,7 +15,7 @@ import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemDiscoveryWorkReportBinding
 import com.panda.pda.app.discovery.data.DiscoveryApi
 import com.panda.pda.app.discovery.data.TaskReportModel
-import com.panda.pda.app.task.TaskViewModel
+import com.panda.pda.app.operation.fms.mission.TaskViewModel
 import io.reactivex.rxjava3.core.Single
 
 /**

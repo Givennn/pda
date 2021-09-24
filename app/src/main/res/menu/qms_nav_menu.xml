@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/qualityTaskFragment"
+        android:title="@string/quality_task"
+        android:icon="@drawable/ic_op_qc_task" />
+    <item
+        android:id="@+id/qualityReviewFragment"
+        android:title="@string/quality_review"
+        android:icon="@drawable/ic_op_qc_review"/>
+    <item
+        android:id="@+id/qualityDistributeFragment"
+        android:title="@string/quality_distribute"
+        android:icon="@drawable/ic_op_qc_distribute"/>
+    <item
+        android:id="@+id/qualityReceiveFragment"
+        android:title="@string/quality_receive"
+        android:icon="@drawable/ic_op_qc_receive"/>
 
+    <item
+        android:id="@+id/qualityExecuteFragment"
+        android:title="@string/quality_execute"
+        android:icon="@drawable/ic_op_qc_execute" />
+    <item
+        android:id="@+id/qualityProblemRecordFragment"
+        android:title="@string/quality_problem_record"
+        android:icon="@drawable/ic_op_qc_problem_record"/>
+    <item
+        android:id="@+id/qualityFinishFragment"
+        android:title="@string/quality_finish"
+        android:icon="@drawable/ic_op_qc_finish"/>
 </menu>

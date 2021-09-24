@@ -183,7 +183,7 @@
     <style name="headerLineText" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/textHeaderLineColor</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
+<!--        <item name="android:textStyle">bold</item>-->
     </style>
 
     <style name="moduleTitleText"  parent="Widget.AppCompat.TextView">
