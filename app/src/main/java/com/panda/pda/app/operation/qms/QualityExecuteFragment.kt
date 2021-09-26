@@ -1,60 +1,139 @@
 package com.panda.pda.app.operation.qms
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
+import com.panda.pda.app.base.ConfirmDialogFragment
+import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.common.CommonSearchListFragment
+import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.databinding.*
+import com.panda.pda.app.operation.qms.data.QualityApi
+import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
+import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
+import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import io.reactivex.rxjava3.core.Single
+import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class QualityExecuteFragment : CommonSearchListFragment<QualityTaskModel>() {
+    private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QualityExecuteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class QualityExecuteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return
+        scrollListener = object :
+            EndlessRecyclerViewScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                WebClient.request(QualityApi::class.java)
+                    .pdaQmsDistributeListByPageGet(
+                        QualityTaskModelType.Finish.code,
+                        viewBinding.etSearchBar.text?.toString(),
+                        page
+                    )
+                    .bindToFragment()
+                    .subscribe({
+                        itemListAdapter.addData(it.dataList)
+                    }, { })
+            }
         }
+        viewBinding.rvTaskList.addOnScrollListener(scrollListener)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quality_execute, container, false)
-    }
+    override fun createAdapter(): ViewBindingAdapter<*, QualityTaskModel> {
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QualityExecuteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QualityExecuteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        return object : ViewBindingAdapter<ItemQualityExecuteBinding, QualityTaskModel>() {
+            override fun createBinding(parent: ViewGroup): ItemQualityExecuteBinding {
+                return ItemQualityExecuteBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
+                return FrameEmptyViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: QualityTaskModel,
+                position: Int
+            ) {
+                holder.itemViewBinding.apply {
+                    tvQualityInfo.text = getString(
+                        R.string.desc_and_code_formatter,
+                        data.qualityDesc,
+                        data.qualityCode
+                    )
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvPlanDateSection.text = getString(
+                        R.string.time_section_formatter,
+                        data.planStartTime,
+                        data.planEndTime
+                    )
+                    tvQualityNumber.text = data.qualityNum.toString()
+                    tvQualityScheme.text = data.qualitySolutionName
+                    root.clicks()
+                        .throttleFirst(500, TimeUnit.MILLISECONDS)
+                        .bindToLifecycle(holder.itemView)
+                        .subscribe { showDetail(data) }
+
+                    btnActionExecute.clicks()
+                        .throttleFirst(500, TimeUnit.MILLISECONDS)
+                        .bindToLifecycle(holder.itemView)
+                        .subscribe { execute(data) }
+
                 }
             }
+
+        }
+
     }
+
+    private fun showDetail(data: QualityTaskModel) {
+
+    }
+
+    private fun execute(data: QualityTaskModel) {
+
+        val dialog =
+            ConfirmDialogFragment().setTitle(getString(R.string.quality_task_receive_confirm))
+                .setConfirmButton({ _, _ ->
+                    WebClient.request(QualityApi::class.java)
+                        .pdaQmsQualitySubTaskFinishPost(IdRequest(data.id))
+                        .bindToFragment()
+                        .subscribe({
+                            toast(R.string.quality_task_receive_success)
+                            refreshData()
+                        }, {})
+                })
+        dialog.show(parentFragmentManager, TAG)
+
+    }
+
+    override fun api(key: String?): Single<DataListNode<QualityTaskModel>> {
+        return WebClient.request(QualityApi::class.java)
+            .pdaQmsDistributeListByPageGet(QualityTaskModelType.Finish.code, key)
+            .doFinally { scrollListener.resetState() }
+    }
+
+    override val titleResId: Int
+        get() = R.string.quality_execute
+
 }
+

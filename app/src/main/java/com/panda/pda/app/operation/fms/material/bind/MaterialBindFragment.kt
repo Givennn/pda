@@ -16,9 +16,9 @@ import com.panda.pda.app.operation.fms.data.MaterialApi
 import com.panda.pda.app.operation.fms.material.MaterialViewModel
 import com.panda.pda.app.operation.fms.material.ProductScanFragment
 import com.panda.pda.app.operation.fms.mission.TaskViewModel
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.TaskApi
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -37,15 +37,19 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         return object :
             ViewBindingAdapter<ItemMaterialBindBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemMaterialBindBinding {
-                return ItemMaterialBindBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemMaterialBindBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
-                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
+                return FrameEmptyViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun onBindViewHolderWithData(
@@ -75,9 +79,7 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         }
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
-            .unWrapperData()
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
-                .unWrapperData(),
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
             .bindLoadingStatus()
@@ -93,7 +95,7 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
     }
 
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
+    override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(MaterialApi::class.java)
             .materialTaskListByPageGet(key)
 

@@ -2,7 +2,7 @@ package com.panda.pda.app.operation.fms.mission
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
 import com.panda.pda.app.common.data.model.TaskMessageCountModel
 
 /**

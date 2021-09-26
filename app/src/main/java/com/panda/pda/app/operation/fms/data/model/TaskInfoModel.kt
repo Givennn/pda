@@ -1,4 +1,4 @@
-package com.panda.pda.app.operation.fms.mission.data.model
+package com.panda.pda.app.operation.fms.data.model
 
 /**
  * created by AnJiwei 2021/8/26

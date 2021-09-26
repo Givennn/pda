@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.panda.pda.app.operation.fms.data.model.MaterialModel
 import com.panda.pda.app.operation.fms.data.model.ProductModel
 import com.panda.pda.app.operation.fms.data.model.TaskBandedMaterialModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 
 /**
  * create by AnJiwei 2021/9/5

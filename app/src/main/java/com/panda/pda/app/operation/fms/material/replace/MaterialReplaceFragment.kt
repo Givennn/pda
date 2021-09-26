@@ -30,11 +30,14 @@ class MaterialReplaceFragment : CommonSearchListFragment<MaterialModel>() {
 
     override fun createAdapter(): ViewBindingAdapter<*, MaterialModel> {
         return object : ViewBindingAdapter<ItemMaterialReplaceBinding, MaterialModel>(
-            mutableListOf()) {
+            mutableListOf()
+        ) {
             override fun createBinding(parent: ViewGroup): ItemMaterialReplaceBinding {
-                return ItemMaterialReplaceBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemMaterialReplaceBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun onBindViewHolderWithData(
@@ -58,10 +61,12 @@ class MaterialReplaceFragment : CommonSearchListFragment<MaterialModel>() {
         navController.navigate(R.id.action_materialReplaceFragment_to_scanToReplaceFragment)
     }
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<MaterialModel>>> =
+    override fun api(key: String?): Single<DataListNode<MaterialModel>> =
         WebClient.request(MaterialApi::class.java)
-            .materialTaskQueryBindByProductGet( productModel.code)
-            .map { BaseResponse(it.message, DataListNode(it.data?.bindList ?: listOf()), it.code) }
+            .materialTaskQueryBindByProductGet(productModel.code)
+            .map {
+                DataListNode(it.bindList)
+            }
 
     override val titleResId: Int
         get() = R.string.material_replace

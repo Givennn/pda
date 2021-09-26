@@ -116,7 +116,7 @@
         tools:layout="@layout/fragment_quality_execute" />
     <fragment
         android:id="@+id/qualityFinishFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityFinishFragment"
+        android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
         android:label="fragment_quality_finish"
         tools:layout="@layout/fragment_quality_finish" />
     <fragment
@@ -126,7 +126,7 @@
         tools:layout="@layout/fragment_quality_problem_record" />
     <fragment
         android:id="@+id/qualityReceiveFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityReceiveFragment"
+        android:name="com.panda.pda.app.operation.qms.QualitySignFragment"
         android:label="fragment_quality_receive"
         tools:layout="@layout/fragment_quality_receive" />
     <fragment

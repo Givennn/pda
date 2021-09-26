@@ -13,9 +13,9 @@ import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemDiscoveryTaskBinding
 import com.panda.pda.app.discovery.data.DiscoveryApi
 import com.panda.pda.app.operation.fms.mission.TaskViewModel
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.TaskApi
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 
 /**
@@ -60,7 +60,7 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
     override val titleResId: Int
         get() = R.string.task
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
+    override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(DiscoveryApi::class.java).pdaFmsTaskListAllGet(key)
 
     private fun onItemInfoClicked(data: TaskModel) {
@@ -70,9 +70,7 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
         }
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
-            .unWrapperData()
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
-                .unWrapperData(),
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
             .bindLoadingStatus()

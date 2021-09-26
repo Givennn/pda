@@ -20,8 +20,12 @@ foreach ($paths as $key => $path) {
     // } else {
     //     $paths[$key] = handlePath($key, $path);
     // }
-    $paths[$key] = handlePath($key, $path);
-
+    if (startsWith($key, '/pda/qms/') !== true) {
+        printf("remove path: $key\n");
+        unset($paths[$key]);
+    } else {
+        $paths[$key] = handlePath($key, $path);
+    }
 }
 
 $content['paths'] = $paths;
@@ -165,7 +169,7 @@ function handleResponse($path, $method, $response) {
         $name .= "Response";
         $definition = removeRequiredField($response['schema']);
         if(isset($definition['properties']['data']['properties']) && empty($definition['properties']['data']['properties']) !== true) {
-            // $definition = $definition['properties']['data'];
+            $definition = $definition['properties']['data'];
             $definition['title'] = $name;
             global $definitions; 
             $definitions[$name] = $definition;

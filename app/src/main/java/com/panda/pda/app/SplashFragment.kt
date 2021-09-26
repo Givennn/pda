@@ -43,7 +43,6 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
             WebClient.request(CommonApi::class.java).getAuthorityTree()
                 .delay(1, TimeUnit.SECONDS)
                 .onMainThread()
-                .unWrapperData()
                 .catchError()
                 .bindToLifecycle(requireView())
                 .subscribe({
@@ -53,9 +52,9 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 }, {})
         } else {
 
-            Single.zip(WebClient.request(CommonApi::class.java).getAuthorityTree().unWrapperData(),
+            Single.zip(WebClient.request(CommonApi::class.java).getAuthorityTree(),
                 WebClient.request(UserApi::class.java)
-                    .userNameLoginPost(loginRequest).unWrapperData()) { auto, loginInfo ->
+                    .userNameLoginPost(loginRequest)) { auto, loginInfo ->
                 Pair(auto.dataList, loginInfo)
             }.delay(1, TimeUnit.SECONDS)
                 .onMainThread()
@@ -74,7 +73,6 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         WebClient.request(CommonApi::class.java)
             .pdaConfigSysParamListByParamGet()
             .onMainThread()
-            .unWrapperData()
             .catchError()
             .subscribe({
                 CommonParameters.pushParameters(it)

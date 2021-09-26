@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_op_qc_distribute"/>
     <item
         android:id="@+id/qualityReceiveFragment"
-        android:title="@string/quality_receive"
+        android:title="@string/quality_sign"
         android:icon="@drawable/ic_op_qc_receive"/>
 
     <item

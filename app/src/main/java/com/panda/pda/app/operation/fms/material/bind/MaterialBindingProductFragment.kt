@@ -24,7 +24,7 @@ import com.panda.pda.app.operation.fms.data.model.MaterialModel
 import com.panda.pda.app.operation.fms.data.model.ProductModel
 import com.panda.pda.app.operation.fms.data.model.TaskBandedMaterialModel
 import com.panda.pda.app.operation.fms.material.MaterialViewModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 import timber.log.Timber
 
 /**

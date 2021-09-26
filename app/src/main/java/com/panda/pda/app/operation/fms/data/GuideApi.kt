@@ -22,5 +22,5 @@ interface GuideApi {
         @retrofit2.http.Query("keywords") keywords: String?,
         @retrofit2.http.Query("page") page: Int? = 1,
         @retrofit2.http.Query("rows") rows: Int? = 10,
-    ): Single<BaseResponse<GuideListModel>>
+    ): Single<GuideListModel>
 }

@@ -34,11 +34,14 @@ class MaterialUnbindFragment :
 
     override fun createAdapter(): ViewBindingAdapter<*, MaterialModel> {
         return object : ViewBindingAdapter<ItemMaterialUnbindBinding, MaterialModel>(
-            mutableListOf()) {
+            mutableListOf()
+        ) {
             override fun createBinding(parent: ViewGroup): ItemMaterialUnbindBinding {
-                return ItemMaterialUnbindBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemMaterialUnbindBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun onBindViewHolderWithData(
@@ -61,8 +64,12 @@ class MaterialUnbindFragment :
         ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(MaterialApi::class.java)
-                    .materialUnbindPost(MaterialUnbindRequest(productModel.code,
-                        data.materialSerialCode!!))
+                    .materialUnbindPost(
+                        MaterialUnbindRequest(
+                            productModel.code,
+                            data.materialSerialCode!!
+                        )
+                    )
                     .bindToFragment()
                     .subscribe({
                         toast(getString(R.string.material_unbind_success_message))
@@ -71,10 +78,13 @@ class MaterialUnbindFragment :
             }).show(parentFragmentManager, TAG)
     }
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<MaterialModel>>> =
+    override fun api(key: String?): Single<DataListNode<MaterialModel>> =
         WebClient.request(MaterialApi::class.java)
             .materialTaskQueryBindByProductGet(productModel.code)
-            .map { BaseResponse(it.message, DataListNode(it.data?.bindList ?: listOf()), it.code) }
+            .map {
+                DataListNode(it.bindList)
+//                BaseResponse(it.message, DataListNode(it.data?.bindList ?: listOf()), it.code)
+            }
 
     override val titleResId: Int
         get() = R.string.material_unbind

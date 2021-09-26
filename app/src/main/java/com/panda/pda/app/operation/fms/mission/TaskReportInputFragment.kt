@@ -15,9 +15,9 @@ import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.databinding.FragmentTaskReportInputBinding
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskReportRequest
+import com.panda.pda.app.operation.fms.data.TaskApi
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskReportRequest
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -116,7 +116,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 
     private fun updatePhoto(uri: Uri) {
 
-        WebClient.downLoader().create(CommonApi::class.java)
+        WebClient.request(CommonApi::class.java)
             .pdaCommonUploadFilePost(MultipartBody.Part.createFormData("file",
                 tmpFile.name,
                 tmpFile.asRequestBody("image/$IMAGE_TYPE".toMediaType())))

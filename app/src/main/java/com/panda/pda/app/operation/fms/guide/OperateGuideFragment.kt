@@ -82,13 +82,11 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
             Bundle().apply { putSerializable(GuidePdfPreviewFragment.PDF_KEY, data) })
     }
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<GuideInfoModel>>> =
+    override fun api(key: String?): Single<DataListNode<GuideInfoModel>> =
         WebClient.request(GuideApi::class.java)
             .pdaFmsWorkGuideListGet(key)
             .map { listModel ->
-                BaseResponse(listModel.message,
-                    DataListNode(listModel.data?.dataList ?: listOf()),
-                    listModel.code)
+                DataListNode(listModel.dataList)
             }.doFinally {
                 scrollListener.resetState()
             }

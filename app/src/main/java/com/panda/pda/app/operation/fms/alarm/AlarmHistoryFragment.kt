@@ -68,13 +68,11 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
         }
     }
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<AlarmHistoryModel>>> =
+    override fun api(key: String?): Single<DataListNode<AlarmHistoryModel>> =
         WebClient.request(AlarmApi::class.java)
             .pdaFmsAlarmMyHistoryGet()
             .map {
-                BaseResponse(it.message,
-                    DataListNode(it.data?.dataList ?: listOf()),
-                    it.code)
+                DataListNode(it.dataList)
             }
 
 

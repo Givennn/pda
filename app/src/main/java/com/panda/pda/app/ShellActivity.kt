@@ -15,7 +15,6 @@ import com.panda.pda.app.base.retrofit.unWrapperData
 import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.databinding.ActivityShellBinding
 import com.panda.pda.app.operation.fms.mission.TaskViewModel
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
 import com.panda.pda.app.user.UserViewModel
 import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
@@ -89,7 +88,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
         WebClient.request(CommonApi::class.java)
             .pdaTaskMsgCountGet()
             .onMainThread()
-            .unWrapperData()
+//            .unWrapperData()
             .subscribe({
                 taskViewModel.taskMsgData.postValue(it)
             }, {})

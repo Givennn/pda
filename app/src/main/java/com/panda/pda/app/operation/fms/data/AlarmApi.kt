@@ -1,8 +1,8 @@
 package com.panda.pda.app.operation.fms.data
 
-import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.operation.fms.data.model.AlarmDetailRequest
 import com.panda.pda.app.operation.fms.data.model.AlarmHistoryListModel
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,7 +20,7 @@ interface AlarmApi {
     @POST("pda/fms/alarm/add")
     fun pdaFmsAlarmAddPost(
         @retrofit2.http.Body request: AlarmDetailRequest
-    ): Single<BaseResponse<Any>>
+    ): Completable
     /**
      * 警报历史查询
      * status  状态 1未关闭 2关闭
@@ -33,5 +33,5 @@ interface AlarmApi {
     fun pdaFmsAlarmMyHistoryGet(
         @retrofit2.http.Query("page") page: Int? = null,
         @retrofit2.http.Query("rows") rows: Int? = null,
-    ): Single<BaseResponse<AlarmHistoryListModel>>
+    ): Single<AlarmHistoryListModel>
 }

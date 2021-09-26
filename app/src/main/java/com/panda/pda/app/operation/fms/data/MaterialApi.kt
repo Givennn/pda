@@ -3,7 +3,8 @@ package com.panda.pda.app.operation.fms.data
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.operation.fms.data.model.*
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -22,7 +23,7 @@ interface MaterialApi {
     @POST("pda/fms/task/material/bind-change")
     fun pdaFmsTaskMaterialBindChangePost(
         @retrofit2.http.Body request: MaterialReplaceBindRequest
-    ): Single<BaseResponse<Any>>
+    ): Completable
     /**
      * 绑定产品物料
      *
@@ -33,7 +34,7 @@ interface MaterialApi {
     @POST("pda/fms/task/material/bind")
     fun taskMaterialBindPost(
         @retrofit2.http.Body request: MaterialBindRequest
-    ): Single<BaseResponse<Any>>
+    ):Completable
     /**
      * 任务列表
      * keywords：任务编号/产品编码/产品描述/派工人
@@ -45,7 +46,7 @@ interface MaterialApi {
     @GET("pda/fms/task/material/task/list-by-page")
     fun materialTaskListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    ): Single<DataListNode<TaskModel>>
     /**
      * 查询已绑定的物料
      * keywords：任务编号/产品编码/产品描述/派工人
@@ -59,7 +60,7 @@ interface MaterialApi {
     fun materialTaskQueryBindByProductGet(
         @retrofit2.http.Query("productBarCode") productBarCode: String,
         @retrofit2.http.Query("taskId") taskId: Int? = null,
-    ): Single<BaseResponse<TaskBandedMaterialModel>>
+    ): Single<TaskBandedMaterialModel>
     /**
      * 绑定/查询物料
      *
@@ -69,7 +70,7 @@ interface MaterialApi {
     @GET("pda/fms/task/material/task/query-material")
     fun materialTaskQueryMaterialGet(
         @retrofit2.http.Query("materielSerialCode") materielSerialCode: String,
-    ): Single<BaseResponse<MaterialModel>>
+    ): Single<MaterialModel>
     /**
      * 产品物料解绑
      *
@@ -80,5 +81,5 @@ interface MaterialApi {
     @POST("pda/fms/task/material/unbind")
     fun materialUnbindPost(
         @retrofit2.http.Body request: MaterialUnbindRequest
-    ): Single<BaseResponse<Any>>
+    ): Completable
 }

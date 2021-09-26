@@ -1,9 +1,9 @@
-package com.panda.pda.app.operation.fms.mission.data
+package com.panda.pda.app.operation.fms.data
 
-import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
-import com.panda.pda.app.common.data.model.TaskMessageCountModel
-import com.panda.pda.app.operation.fms.mission.data.model.*
+import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.operation.fms.data.model.*
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -20,8 +20,8 @@ interface TaskApi {
 
     @POST("pda/fms/task/complete/confirm")
     fun taskCompleteConfirmPost(
-        @retrofit2.http.Body request: TaskIdRequest,
-    ): Single<BaseResponse<Any>>
+        @retrofit2.http.Body request: IdRequest,
+    ): Completable
 
     /**
      * 任务完工列表
@@ -34,7 +34,7 @@ interface TaskApi {
     @GET("pda/fms/task/complete/list-by-page")
     fun taskCompleteListGet(
         @retrofit2.http.Query("keywords") keywords: String? = null,
-    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    ): Single<DataListNode<TaskModel>>
 
     /**
      * 执行任务
@@ -44,8 +44,8 @@ interface TaskApi {
      */
     @POST("pda/fms/task/execution/confirm")
     fun taskExecutionConfirmPost(
-        @retrofit2.http.Body request: TaskIdRequest,
-    ): Single<BaseResponse<Any>>
+        @retrofit2.http.Body request: IdRequest,
+    ): Completable
 
     /**
      * 任务执行列表
@@ -57,7 +57,7 @@ interface TaskApi {
     @GET("pda/fms/task/execution/list-by-page")
     fun taskExecutionListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    ): Single<DataListNode<TaskModel>>
 
     /**
      * 任务详情
@@ -69,7 +69,7 @@ interface TaskApi {
     @GET("pda/fms/task/get-by-id")
     fun taskGetByIdGet(
         @retrofit2.http.Query("id") id: Int,
-    ): Single<BaseResponse<TaskDetailModel>>
+    ): Single<TaskDetailModel>
 
     /**
      * 任务操作记录
@@ -80,7 +80,7 @@ interface TaskApi {
     @GET("pda/fms/task/operation-record")
     fun taskOperationRecordGet(
         @retrofit2.http.Query("id") id: Int,
-    ): Single<BaseResponse<DataListNode<TaskRecordModel>>>
+    ): Single<DataListNode<TaskRecordModel>>
 
     /**
      * 接收任务
@@ -90,8 +90,8 @@ interface TaskApi {
      */
     @POST("pda/fms/task/receive/confirm")
     fun taskReceiveConfirmPost(
-        @retrofit2.http.Body request: TaskIdRequest,
-    ): Single<BaseResponse<Any>>
+        @retrofit2.http.Body request: IdRequest,
+    ): Completable
 
     /**
      * 任务接收列表
@@ -103,7 +103,7 @@ interface TaskApi {
     @GET("pda/fms/task/receive/list-by-page")
     fun taskReceiveListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    ): Single<DataListNode<TaskModel>>
     /**
      * 任务报工
      *
@@ -112,7 +112,7 @@ interface TaskApi {
     @POST("pda/fms/task/report/confirm")
     fun pdaFmsTaskReportConfirmPost(
         @retrofit2.http.Body request: TaskReportRequest
-    ): Single<BaseResponse<Any>>
+    ): Completable
     /**
      * 任务报工列表
      * keywords：任务编号  产品编码或者描述  派工人工号或者姓名
@@ -122,6 +122,6 @@ interface TaskApi {
     @GET("pda/fms/task/report/list-by-page")
     fun pdaFmsTaskReportListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<BaseResponse<DataListNode<TaskModel>>>
+    ): Single<DataListNode<TaskModel>>
 
 }

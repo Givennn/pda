@@ -123,11 +123,27 @@
     <string name="quality_scheme">质检方案</string>
     <string name="quality_review">质检审核</string>
     <string name="quality_distribute">质检派发</string>
-    <string name="quality_receive">质检签收</string>
+    <string name="quality_sign">质检签收</string>
     <string name="quality_execute">质检执行</string>
     <string name="quality_problem_record">质检问题记录</string>
     <string name="quality_finish">质检完工</string>
     <string name="quality_task">质检任务</string>
     <string name="need_quality_control">需质检</string>
     <string name="commit">提交</string>
+    <string name="quality_task_receive_success">质检任务接收成功</string>
+    <string name="quality_task_receive_confirm">确认接受质检任务？</string>
+    <string name="time_section_formatter">%1$s～%2$s</string>
+    <string name="review">审核</string>
+    <string name="transfer_manage">转办</string>
+    <string name="sign">签收</string>
+    <string name="already_distribute_number">已派发</string>
+    <string name="distribute">派发</string>
+    <string name="back_out">撤销</string>
+    <string name="quality_problem">质量问题</string>
+    <string name="follower">跟踪人</string>
+    <string name="person_demo">张三</string>
+    <string name="quality_result">质检结论</string>
+    <string name="inspect_task_code">质检任务编号</string>
+    <string name="edit">编辑</string>
+
 </resources>

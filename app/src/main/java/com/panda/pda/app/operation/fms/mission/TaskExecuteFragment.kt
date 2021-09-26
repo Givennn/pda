@@ -13,17 +13,17 @@ import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskExecuteBinding
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
-import com.panda.pda.app.operation.fms.mission.data.model.TaskIdRequest
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.TaskApi
+import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 
 class TaskExecuteFragment :
     CommonSearchListFragment<TaskModel>() {
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
+    override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(TaskApi::class.java)
             .taskExecutionListByPageGet(key)
 
@@ -36,15 +36,19 @@ class TaskExecuteFragment :
     override fun createAdapter(): ViewBindingAdapter<*, TaskModel> {
         return object : ViewBindingAdapter<ItemTaskExecuteBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskExecuteBinding {
-                return ItemTaskExecuteBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemTaskExecuteBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
-                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
+                return FrameEmptyViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun onBindViewHolderWithData(
@@ -55,9 +59,11 @@ class TaskExecuteFragment :
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
                         getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
                         data.productName,
-                        data.productCode)
+                        data.productCode
+                    )
                     tvPlanFinishDate.text =
                         getString(R.string.plan_finish_time_formatter, data.planEndTime)
                     tvTaskSender.text = data.issueName
@@ -79,9 +85,7 @@ class TaskExecuteFragment :
         }
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
-            .unWrapperData()
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
-                .unWrapperData(),
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
             .bindLoadingStatus()
@@ -101,7 +105,7 @@ class TaskExecuteFragment :
         val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_execute_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(TaskApi::class.java)
-                    .taskExecutionConfirmPost(TaskIdRequest(data.id))
+                    .taskExecutionConfirmPost(IdRequest(data.id))
                     .bindToFragment()
                     .subscribe({
                         toast(R.string.task_execute_success_toast)

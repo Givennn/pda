@@ -49,13 +49,12 @@ object WebClient {
     }
 
 
-
     fun <TService> request(serviceClass: Class<TService>): TService {
         return Retrofit.Builder()
             .client(client)
-//            .baseUrl(NetworkParams.SERVICE_URL)
             .baseUrl(BuildConfig.GRADLE_API_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(BaseResponseConverterFactory())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(serviceClass)

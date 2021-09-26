@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -36,7 +35,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected val navController by lazy { findNavController() }
 
-    //todo handle back pressed twice
     protected val navBackListener = { _: View -> navController.popBackStack() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +71,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         }
     }
 
-    protected fun <T> Single<T>.bindLoadingStatus(loadMessage: String = ""): Single<T> {
+    protected fun <T> Single<T>.bindLoadingStatus(): Single<T> {
         val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
             isCancelable = false
             loadingDialog = this
@@ -94,7 +92,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             .doFinally { dialogFragment.dismiss() }
     }
 
-    protected fun Completable.bindLoadingStatus(loadMessage: String = ""): Completable {
+    protected fun Completable.bindLoadingStatus(): Completable {
         val dialogFragment = DialogFragment(R.layout.dialog_loading).apply {
             isCancelable = false
             loadingDialog = this
@@ -115,22 +113,38 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             .doOnError { this@BaseFragment.onNetworkError(it) }
     }
 
-    protected fun <T> Single<BaseResponse<T>>.bindToFragment(loadMessage: String = ""): Single<T> {
+//    protected fun <T> Single<BaseResponse<T>>.bindToFragment(): Single<T> {
+//        return this
+//            .onMainThread()
+//            .unWrapperData()
+//            .bindToLifecycle(this@BaseFragment.requireView())
+//            .catchError()
+//            .bindLoadingStatus()
+//    }
+
+//    protected fun Single<BaseResponse<Any>>.bindToFragment(): Completable {
+//        return this
+//            .onMainThread()
+//            .unWrapperData()
+//            .bindToLifecycle(this@BaseFragment.requireView())
+//            .catchError()
+//            .bindLoadingStatus()
+//    }
+
+    protected fun Completable.bindToFragment(): Completable {
         return this
             .onMainThread()
-            .unWrapperData()
             .bindToLifecycle(this@BaseFragment.requireView())
             .catchError()
-            .bindLoadingStatus(loadMessage)
+            .bindLoadingStatus()
     }
 
-    protected fun Single<BaseResponse<Any>>.bindToFragment(loadMessage: String = ""): Completable {
+    protected fun<T> Single<T>.bindToFragment(): Single<T> {
         return this
             .onMainThread()
-            .unWrapperData()
             .bindToLifecycle(this@BaseFragment.requireView())
             .catchError()
-            .bindLoadingStatus(loadMessage)
+            .bindLoadingStatus()
     }
 
     private fun onNetworkError(throwable: Throwable) {

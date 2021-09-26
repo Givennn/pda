@@ -14,8 +14,8 @@ import com.panda.pda.app.common.data.CommonParameters
 import com.panda.pda.app.common.data.DataParamType
 import com.panda.pda.app.databinding.FragmentTaskDetailBinding
 import com.panda.pda.app.databinding.ItemTaskDetailOperateRecordBinding
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskRecordModel
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskRecordModel
 
 
 class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {

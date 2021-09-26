@@ -13,17 +13,17 @@ import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemTaskReceiveBinding
-import com.panda.pda.app.operation.fms.mission.data.TaskApi
-import com.panda.pda.app.operation.fms.mission.data.model.TaskIdRequest
-import com.panda.pda.app.operation.fms.mission.data.model.TaskInfoModel
-import com.panda.pda.app.operation.fms.mission.data.model.TaskModel
+import com.panda.pda.app.operation.fms.data.TaskApi
+import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.operation.fms.data.model.TaskInfoModel
+import com.panda.pda.app.operation.fms.data.model.TaskModel
 import io.reactivex.rxjava3.core.Single
 
 class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
 
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskModel>>> =
+    override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(TaskApi::class.java)
             .taskReceiveListByPageGet(key)
 
@@ -36,15 +36,19 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
     override fun createAdapter(): ViewBindingAdapter<*, TaskModel> {
         return object : ViewBindingAdapter<ItemTaskReceiveBinding, TaskModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReceiveBinding {
-                return ItemTaskReceiveBinding.inflate(LayoutInflater.from(parent.context),
+                return ItemTaskReceiveBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
-                return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
+                return FrameEmptyViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
                     parent,
-                    false)
+                    false
+                )
             }
 
             override fun onBindViewHolderWithData(
@@ -55,9 +59,11 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
                         getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-                    tvProductInfo.text = getString(R.string.desc_and_code_formatter,
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
                         data.productName,
-                        data.productCode)
+                        data.productCode
+                    )
                     tvSendDate.text =
                         getString(R.string.report_time_formatter, data.issueTime ?: "")
                     tvTaskSender.text = data.issueName
@@ -79,9 +85,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
         }
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
-            .unWrapperData()
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
-                .unWrapperData(),
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
                 { detail, records -> TaskInfoModel(detail, records.dataList) })
             .onMainThread()
             .bindLoadingStatus()
@@ -101,7 +105,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
         val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(TaskApi::class.java)
-                    .taskReceiveConfirmPost(TaskIdRequest(data.id))
+                    .taskReceiveConfirmPost(IdRequest(data.id))
                     .bindToFragment()
                     .subscribe({
                         toast(R.string.task_receive_success_toast)

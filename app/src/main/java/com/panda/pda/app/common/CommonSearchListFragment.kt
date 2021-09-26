@@ -19,7 +19,6 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2021/9/1
  */
 abstract class CommonSearchListFragment<TSource> :
-
     BaseFragment(R.layout.fragment_common_search_list) {
 
     protected val viewBinding by viewBinding<FragmentCommonSearchListBinding>()
@@ -52,7 +51,7 @@ abstract class CommonSearchListFragment<TSource> :
 
     abstract fun createAdapter(): ViewBindingAdapter<*, TSource>
 
-    abstract fun api(key: String?): Single<BaseResponse<DataListNode<TSource>>>
+    abstract fun api(key: String?): Single<DataListNode<TSource>>
 
     @get:StringRes
     abstract val titleResId: Int

@@ -56,7 +56,7 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
         }
     }
 
-    override fun api(key: String?): Single<BaseResponse<DataListNode<TaskReportModel>>> =
+    override fun api(key: String?): Single<DataListNode<TaskReportModel>> =
         WebClient.request(DiscoveryApi::class.java).pdaFmsReportListAllGet(key)
 
     override val titleResId: Int

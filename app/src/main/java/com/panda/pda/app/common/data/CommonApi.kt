@@ -1,12 +1,8 @@
 package com.panda.pda.app.common.data
 
 import com.panda.pda.app.BuildConfig
-import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
-import com.panda.pda.app.common.data.model.AuthorityModel
-import com.panda.pda.app.common.data.model.DataParameterModel
-import com.panda.pda.app.common.data.model.FileInfoModel
-import com.panda.pda.app.common.data.model.TaskMessageCountModel
+import com.panda.pda.app.common.data.model.*
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
@@ -28,7 +24,7 @@ interface CommonApi {
     @POST("pda/common/upload-file")
     fun pdaCommonUploadFilePost(
         @Part file: MultipartBody.Part
-    ): Single<BaseResponse<FileInfoModel>>
+    ): Single<FileInfoModel>
 
     /**
      * 查询数据字典
@@ -37,7 +33,7 @@ interface CommonApi {
      */
     @GET("pda/config/sys-param/list-all")
     fun pdaConfigSysParamListByParamGet(
-    ): Single<BaseResponse<DataParameterModel>>
+    ): Single<DataParameterModel>
 
 
     @Streaming
@@ -56,7 +52,7 @@ interface CommonApi {
     }
 
     @GET("pda/admin/menu/get-base")
-    fun getAuthorityTree(): Single<BaseResponse<DataListNode<AuthorityModel>>>
+    fun getAuthorityTree(): Single<DataListNode<AuthorityModel>>
 
     /**
      * 任务/查询任务数量
@@ -66,5 +62,13 @@ interface CommonApi {
      */
     @GET("pda/task/msg-count")
     fun pdaTaskMsgCountGet(
-    ): Single<BaseResponse<TaskMessageCountModel>>
+//    ): Single<BaseResponse<TaskMessageCountModel>>
+    ): Single<TaskMessageCountModel>
+
+    /**
+     * 角色管理/根据部门Id查询子部门及人员信息
+     */
+
+    @GET("pda/user/list-org-node")
+    fun userListOrgNodeGet():Single<DataListNode<OrgNodeModel>>
 }

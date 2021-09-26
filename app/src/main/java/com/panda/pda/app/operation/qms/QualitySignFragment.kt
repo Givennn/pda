@@ -17,8 +17,7 @@ import com.panda.pda.app.common.CommonSearchListFragment
 import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
-import com.panda.pda.app.databinding.ItemQualityFinishBinding
-import com.panda.pda.app.databinding.ItemQualityTaskBinding
+import com.panda.pda.app.databinding.ItemQualitySignBinding
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
@@ -27,7 +26,7 @@ import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 
-class QualityFinishFragment : CommonSearchListFragment<QualityTaskModel>() {
+class QualitySignFragment : CommonSearchListFragment<QualityTaskModel>() {
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +37,7 @@ class QualityFinishFragment : CommonSearchListFragment<QualityTaskModel>() {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 WebClient.request(QualityApi::class.java)
                     .pdaQmsDistributeListByPageGet(
-                        QualityTaskModelType.Finish.code,
+                        QualityTaskModelType.Sign.code,
                         viewBinding.etSearchBar.text?.toString(),
                         page
                     )
@@ -53,9 +52,9 @@ class QualityFinishFragment : CommonSearchListFragment<QualityTaskModel>() {
 
     override fun createAdapter(): ViewBindingAdapter<*, QualityTaskModel> {
 
-        return object : ViewBindingAdapter<ItemQualityFinishBinding, QualityTaskModel>() {
-            override fun createBinding(parent: ViewGroup): ItemQualityFinishBinding {
-                return ItemQualityFinishBinding.inflate(
+        return object : ViewBindingAdapter<ItemQualitySignBinding, QualityTaskModel>() {
+            override fun createBinding(parent: ViewGroup): ItemQualitySignBinding {
+                return ItemQualitySignBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -95,27 +94,28 @@ class QualityFinishFragment : CommonSearchListFragment<QualityTaskModel>() {
                         .bindToLifecycle(holder.itemView)
                         .subscribe { showDetail(data) }
 
-                    btnActionFinish.clicks()
+                    btnActionReview.clicks()
                         .throttleFirst(500, TimeUnit.MILLISECONDS)
                         .bindToLifecycle(holder.itemView)
-                        .subscribe { finishQualityTask(data) }
-
+                        .subscribe { review(data) }
                 }
             }
+
         }
+
     }
 
     private fun showDetail(data: QualityTaskModel) {
 
     }
 
-    private fun finishQualityTask(data: QualityTaskModel) {
+    private fun review(data: QualityTaskModel) {
 
         val dialog =
             ConfirmDialogFragment().setTitle(getString(R.string.quality_task_receive_confirm))
                 .setConfirmButton({ _, _ ->
                     WebClient.request(QualityApi::class.java)
-                        .pdaQmsQualitySubTaskFinishPost(IdRequest(data.id))
+                        .pdaQmsTaskRevicePost(IdRequest(data.id))
                         .bindToFragment()
                         .subscribe({
                             toast(R.string.quality_task_receive_success)
@@ -126,13 +126,17 @@ class QualityFinishFragment : CommonSearchListFragment<QualityTaskModel>() {
 
     }
 
+    private fun commit(data: QualityTaskModel) {
+        TODO("nav 2 commit")
+    }
+
     override fun api(key: String?): Single<DataListNode<QualityTaskModel>> {
         return WebClient.request(QualityApi::class.java)
-            .pdaQmsDistributeListByPageGet(QualityTaskModelType.Finish.code, key)
+            .pdaQmsDistributeListByPageGet(QualityTaskModelType.Sign.code, key)
             .doFinally { scrollListener.resetState() }
     }
 
     override val titleResId: Int
-        get() = R.string.quality_finish
+        get() = R.string.quality_sign
 
 }

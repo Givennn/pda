@@ -1,26 +1,24 @@
-package com.panda.pda.app.operation.fms.mission.data.model
+package com.panda.pda.app.operation.fms.data.model
 
 /**
- * created by AnJiwei 2021/8/24
+ * created by AnJiwei 2021/8/26
  */
-data class TaskModel(
+data class TaskDetailModel(
     val batchNo: String,
+    val equipmentDesc: String,
     val id: Int,
-    val issueName: String,
+    val jockeyName: String,
     val planCode: String,
     val planEndTime: String,
     val planStartTime: String,
     val productCode: String,
     val productName: String,
+    val realEndTime: String,
     val realStartTime: String,
-    val reportNum: Int,
     val taskCode: String,
     val taskDesc: String,
     val taskNum: Int,
     val taskStatus: Int,
     val workNo: String,
-    var issueTime: String?,
-    var prepareFinishTime: String?,
-    val receiveTime: String?,
-    val totalReportTime: Int? //总工时min
+    val reportNum: Int
 )
