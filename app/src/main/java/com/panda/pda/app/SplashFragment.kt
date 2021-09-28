@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.fragment.app.activityViewModels
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.BaseResponse
-import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.base.retrofit.onMainThread
-import com.panda.pda.app.base.retrofit.unWrapperData
 import com.panda.pda.app.common.CommonViewModel
 import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.common.data.CommonParameters
@@ -41,6 +39,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         val loginRequest = getCacheLoginInfo()
         if (loginRequest == null) {
             WebClient.request(CommonApi::class.java).getAuthorityTree()
+                .onErrorReturn { DataListNode(listOf()) } //TODO mock test
                 .delay(1, TimeUnit.SECONDS)
                 .onMainThread()
                 .catchError()
@@ -52,9 +51,12 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 }, {})
         } else {
 
-            Single.zip(WebClient.request(CommonApi::class.java).getAuthorityTree(),
+            Single.zip(
+                WebClient.request(CommonApi::class.java).getAuthorityTree()
+                    .onErrorReturn { DataListNode(listOf()) }, //TODO mock test
                 WebClient.request(UserApi::class.java)
-                    .userNameLoginPost(loginRequest)) { auto, loginInfo ->
+                    .userNameLoginPost(loginRequest)
+            ) { auto, loginInfo ->
                 Pair(auto.dataList, loginInfo)
             }.delay(1, TimeUnit.SECONDS)
                 .onMainThread()
@@ -70,13 +72,14 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     }
 
     private fun queryCommonParameters() {
+        return //TODO mock test
         WebClient.request(CommonApi::class.java)
             .pdaConfigSysParamListByParamGet()
             .onMainThread()
             .catchError()
             .subscribe({
                 CommonParameters.pushParameters(it)
-            }, { toast(it.message?: "无法获取数据字典") })
+            }, { toast(it.message ?: "无法获取数据字典") })
     }
 
     private fun getCacheLoginInfo(): LoginRequest? {

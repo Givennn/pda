@@ -66,5 +66,8 @@ data class QualityProblemRecordModel(
     @Json(name = "remark") @field:Json(name = "remark") val remark: String,
     @Json(name = "updateId") @field:Json(name = "updateId") val updateId: Int,
     @Json(name = "updateName") @field:Json(name = "updateName") val updateName: String,
-    @Json(name = "updateTime") @field:Json(name = "updateTime") val updateTime: String
-)
+    @Json(name = "updateTime") @field:Json(name = "updateTime") val updateTime: String,
+    val traceUser: String,
+    val qualitySolutionCode: String,
+    val qualitySolutionName: String
+    )

@@ -9,22 +9,29 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.annotation.StringRes
+import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.retrofit.DataListNode
+import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentCommonSearchListBinding
 import com.panda.pda.app.databinding.FragmentQualityProblemRecordBinding
+import com.panda.pda.app.databinding.FrameEmptyViewBinding
+import com.panda.pda.app.databinding.ItemQualityProblemRecordBinding
+import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordModel
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
 
 class QualityProblemRecordFragment :
     BaseFragment(R.layout.fragment_quality_problem_record) {
 
-    val viewBinding by viewBinding<FragmentQualityProblemRecordBinding>()
+    private val viewBinding by viewBinding<FragmentQualityProblemRecordBinding>()
 
-    protected val itemListAdapter by lazy { createAdapter() }
+    private val itemListAdapter by lazy { createAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +54,16 @@ class QualityProblemRecordFragment :
                 }
             }
 
+        viewBinding.floatingActionButton.clicks()
+            .bindToLifecycle(requireView())
+            .subscribe {
+                addRecord()
+            }
+
+    }
+
+    private fun addRecord() {
+        // nav to add
     }
 
     override fun onResume() {
@@ -54,8 +71,56 @@ class QualityProblemRecordFragment :
         refreshData()
     }
 
-    fun createAdapter(): ViewBindingAdapter<*, QualityProblemRecordModel> {
-        TODO("nav 2 commit")
+    fun createAdapter(): ViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel> {
+        return object :
+            ViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel>() {
+            override fun createBinding(parent: ViewGroup): ItemQualityProblemRecordBinding {
+                return ItemQualityProblemRecordBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+
+            override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding? {
+                return FrameEmptyViewBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: QualityProblemRecordModel,
+                position: Int
+            ) {
+                holder.itemViewBinding.apply {
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
+                        data.productDesc,
+                        "${data.productBarCode} ${data.productCode}"
+                    )
+                    tvQualityProblemInfo.text =
+                        getString(
+                            R.string.desc_and_code_formatter,
+                            data.occurrencePlace,
+                            data.problemCode
+                        )
+                    tvFollower.text = data.traceUser
+                    tvInspectTaskCode.text = data.qualityCode
+//                    tvQualityScheme.text = data.qualitySolutionName
+                    tvQualityResult.text = data.conclusion
+                    btnActionEdit.clicks()
+                        .bindToLifecycle(holder.itemView)
+                        .subscribe { editRecord(data) }
+                }
+            }
+        }
+    }
+
+    private fun editRecord(data: QualityProblemRecordModel) {
+        TODO("Not yet implemented")
     }
 
     @get:StringRes
@@ -65,11 +130,16 @@ class QualityProblemRecordFragment :
     val searchBarHintResId: Int? = null
 
 
-    protected fun onSearching() {
+    private fun onSearching() {
         refreshData()
     }
 
-    protected fun refreshData() {
-        TODO("nav 2 commit")
+    private fun refreshData() {
+        WebClient.request(QualityApi::class.java)
+            .pdaQmsQualityProblemListByPageGet(viewBinding.commonLayout.etSearchBar.text.toString())
+            .bindToFragment()
+            .subscribe({
+                itemListAdapter.refreshData(it.dataList)
+            }, {})
     }
 }

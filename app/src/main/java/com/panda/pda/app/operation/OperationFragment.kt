@@ -75,7 +75,9 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
         addModuleGrid(
             R.menu.qms_nav_menu,
             R.string.quality_manage,
-        ) { }
+        ) { navId ->
+            navController.navigate(navId)
+        }
     }
 
     private fun addModuleGrid(

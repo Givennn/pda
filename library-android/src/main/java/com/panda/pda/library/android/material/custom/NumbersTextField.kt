@@ -42,19 +42,19 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
     init {
         context.theme.obtainStyledAttributes(
             attrs,
-            R.styleable.numbersTextField,
+            R.styleable.NumbersTextField,
             0, 0).apply {
             try {
-                if (hasValue(R.styleable.numbersTextField_iconEnableColor)) {
-                    iconEnableColor = getColor(R.styleable.numbersTextField_iconEnableColor,
+                if (hasValue(R.styleable.NumbersTextField_iconEnableColor)) {
+                    iconEnableColor = getColor(R.styleable.NumbersTextField_iconEnableColor,
                         context.getColor(R.color.design_default_color_primary))
                 }
-                if (hasValue(R.styleable.numbersTextField_iconDisableColor)) {
-                    iconDisableColor = getColor(R.styleable.numbersTextField_iconDisableColor,
+                if (hasValue(R.styleable.NumbersTextField_iconDisableColor)) {
+                    iconDisableColor = getColor(R.styleable.NumbersTextField_iconDisableColor,
                         context.getColor(R.color.design_default_color_primary))
                 }
-                if (hasValue(R.styleable.numbersTextField_maxNumber)) {
-                    maxValue = getInteger(R.styleable.numbersTextField_maxNumber, Int.MAX_VALUE)
+                if (hasValue(R.styleable.NumbersTextField_maxNumber)) {
+                    maxValue = getInteger(R.styleable.NumbersTextField_maxNumber, Int.MAX_VALUE)
                 }
             } finally {
                 recycle()

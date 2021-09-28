@@ -90,16 +90,16 @@ class QualityDistributeFragment : CommonSearchListFragment<QualityTaskModel>() {
                         data.planEndTime
                     )
                     tvQualityNumber.text = data.qualityNum.toString()
-                    tvQualityScheme.text = data.qualitySolutionName
+//                    tvQualityScheme.text = data.qualitySolutionName
                     root.clicks()
                         .throttleFirst(500, TimeUnit.MILLISECONDS)
                         .bindToLifecycle(holder.itemView)
                         .subscribe { showDetail(data) }
 
-                    btnActionDistribute.clicks()
-                        .throttleFirst(500, TimeUnit.MILLISECONDS)
-                        .bindToLifecycle(holder.itemView)
-                        .subscribe { finishQualityTask(data) }
+//                    btnActionDistribute.clicks()
+//                        .throttleFirst(500, TimeUnit.MILLISECONDS)
+//                        .bindToLifecycle(holder.itemView)
+//                        .subscribe { finishQualityTask(data) }
 
                 }
             }

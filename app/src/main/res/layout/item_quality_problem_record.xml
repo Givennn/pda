@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_task_info"
+                android:id="@+id/tv_product_info"
                 style="@style/headerLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -41,18 +41,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="机器人001机器人001机器" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_plan_date_section"-->
-<!--                style="@style/subHeaderLineText"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="end"-->
-<!--                android:includeFontPadding="false"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@id/tv_task_info"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:text="2019-01-22~2019-01-23" />-->
-
             <TextView
                 android:id="@+id/tv_quality_problem_info"
                 style="@style/contentText"
@@ -61,8 +49,8 @@
                 android:layout_marginTop="12.5dp"
                 app:layout_constraintEnd_toStartOf="@id/tv_follower"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@id/tv_task_info"
-                app:layout_constraintTop_toBottomOf="@id/tv_task_info"
+                app:layout_constraintStart_toStartOf="@id/tv_product_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_info"
                 tools:text="过程检验 00001" />
 
             <TextView
@@ -84,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/quality_problem"
-                app:layout_constraintStart_toStartOf="@id/tv_task_info"
+                app:layout_constraintStart_toStartOf="@id/tv_product_info"
                 app:layout_constraintTop_toBottomOf="@id/tv_quality_problem_info" />
 
             <TextView
@@ -117,16 +105,78 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
-                android:text="@string/quality_scheme" />
+                android:text="@string/inspect_task_code" />
 
             <TextView
-                android:id="@+id/tv_quality_scheme"
+                android:id="@+id/tv_inspect_task_code"
                 style="@style/headerLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                tools:text="YS生产检查 FQC" />
+                tools:text="0011" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:paddingBottom="8dp">-->
+
+<!--            <TextView-->
+<!--                style="@style/detailText.label"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="0dp"-->
+<!--                android:text="@string/quality_scheme" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_quality_scheme"-->
+<!--                style="@style/headerLineText"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="end"-->
+<!--                tools:text="YS生产检查 FQC" />-->
+<!--        </LinearLayout>-->
+
+<!--        <View-->
+<!--            style="@style/divider"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0.5dp" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/quality_result" />
+
+            <TextView
+                android:id="@+id/tv_quality_result"
+                style="@style/headerLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                tools:text="合格" />
         </LinearLayout>
 
         <View
@@ -140,13 +190,13 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_action_execute"
+                android:id="@+id/btn_action_edit"
                 style="@style/actionButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/execute"
-                app:icon="@drawable/ic_action_execute" />
+                android:text="@string/edit"
+                app:icon="@drawable/ic_action_edit" />
 
         </LinearLayout>
     </LinearLayout>

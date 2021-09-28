@@ -19,6 +19,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/model_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -31,202 +32,63 @@
                 android:layout_marginBottom="16dp"
                 android:text="@string/basic_info" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/order_code" />
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/order_code" />-->
 
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/tv_order_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="0011" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:id="@+id/tv_order_code"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/plan_code" />
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/plan_code" />-->
 
-                <TextView
-                    style="@style/detailText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_plan_code"
-                    tools:text="0011" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/tv_plan_code"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_order_code" />
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/work_order_code" />-->
 
-                <TextView
-                    style="@style/detailText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_work_order_code"
-                    tools:text="0011" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/unify_code" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_unify_code"
-                    tools:text="0011" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/task_code" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/tv_task_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="0011" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/task_description" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/tv_task_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="0011" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_code" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_product_code"
-                    tools:text="0011" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_description" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_product_desc"
-                    tools:text="0011" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/task_count" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/tv_task_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="0011" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/detailText.label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/report_number" />
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/tv_report_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="0011" />
-            </LinearLayout>
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/tv_work_order_code"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->
@@ -238,15 +100,134 @@
 <!--                    style="@style/detailText.label"-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/man_hour" />-->
+<!--                    android:text="@string/unify_code" />-->
 
 <!--                <TextView-->
 <!--                    style="@style/detailText"-->
-<!--                    android:id="@+id/tv_man_hour"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/tv_unify_code"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/task_code" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:id="@+id/tv_task_code"-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    tools:text="0011" />-->
 <!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/task_description" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:id="@+id/tv_task_desc"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/product_code" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/tv_product_code"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/product_description" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/tv_product_desc"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/bg_item_underline"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText.label"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/task_count" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/detailText"-->
+<!--                    android:id="@+id/tv_task_count"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    tools:text="0011" />-->
+<!--            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_underline"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/detailText.label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/man_hour" />
+
+                <TextView
+                    style="@style/detailText"
+                    android:id="@+id/tv_man_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="0011" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
