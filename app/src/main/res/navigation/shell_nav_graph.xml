@@ -139,4 +139,12 @@
         android:name="com.panda.pda.app.operation.qms.QualityTaskFragment"
         android:label="fragment_quality_task"
         tools:layout="@layout/fragment_quality_task" />
+    <fragment
+        android:id="@+id/qualityDetailFragment"
+        android:name="com.panda.pda.app.operation.qms.quality_task_detail.QualityDetailFragment"
+        android:label="QualityDetailFragment" />
+    <fragment
+        android:id="@+id/qualityFinishFragment2"
+        android:name="com.panda.pda.app.operation.qms.QualityFinishFragment"
+        android:label="QualityFinishFragment" />
 </navigation>

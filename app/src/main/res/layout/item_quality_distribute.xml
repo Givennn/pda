@@ -98,6 +98,74 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/quality_scheme" />
+
+            <TextView
+                android:id="@+id/tv_quality_scheme"
+                style="@style/headerLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                tools:text="YS生产检查 FQC" />
+        </LinearLayout>
+
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_distribute"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/distribute"
+                app:icon="@drawable/ic_action_distribute" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_transfer"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/transfer_manage"
+                app:icon="@drawable/ic_action_transfer" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_back_out"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back_out"
+                app:icon="@drawable/ic_action_back_out" />
+        </LinearLayout>
 
     </LinearLayout>
 

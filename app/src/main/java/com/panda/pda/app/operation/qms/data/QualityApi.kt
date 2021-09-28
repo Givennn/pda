@@ -38,7 +38,7 @@ interface QualityApi {
      */
     @GET("pda/qms/common/detail")
     fun pdaQmsCommonDetailGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<QualityDetailModel>
 
     /**
@@ -48,7 +48,7 @@ interface QualityApi {
      */
     @GET("pda/qms/common/operator-list")
     fun pdaQmsCommonOperatorListGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<DataListNode<QualityTaskRecordModel>>
 
     /**
@@ -100,6 +100,14 @@ interface QualityApi {
     fun pdaQmsQualityProblemListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String
     ): Single<DataListNode<QualityProblemRecordModel>>
+
+    /**
+     * 派发子任务撤销
+     */
+    @POST("/pda/pda/distribute/cancel")
+    fun qualityDistributeCancel(
+        @retrofit2.http.Body body: IdRequest
+    ): Completable
 
     /**
      * 完工质检任务

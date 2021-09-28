@@ -131,7 +131,15 @@
     <string name="need_quality_control">需质检</string>
     <string name="commit">提交</string>
     <string name="quality_task_receive_success">质检任务接收成功</string>
-    <string name="quality_task_receive_confirm">确认接受质检任务？</string>
+    <string name="quality_task_sign_success">质检任务接收成功</string>
+    <string name="quality_task_back_out_success">质检任务接收成功</string>
+    <string name="quality_task_execute_success">质检任务接收成功</string>
+    <string name="quality_task_finish_success">质检任务接收成功</string>
+    <string name="quality_task_receive_confirm">确认接收质检任务: %s？</string>
+    <string name="quality_task_sign_confirm" >确认签收质检任务: %s？</string>
+    <string name="quality_task_back_out_confirm" >确认撤销质检任务: %s？</string>
+    <string name="quality_task_execute_confirm" >确认撤销质检任务: %s？</string>
+    <string name="quality_task_finish_confirm" >确认撤销质检任务: %s？</string>
     <string name="time_section_formatter">%1$s～%2$s</string>
     <string name="review">审核</string>
     <string name="transfer_manage">转办</string>
@@ -145,5 +153,6 @@
     <string name="quality_result">质检结论</string>
     <string name="inspect_task_code">质检任务编号</string>
     <string name="edit">编辑</string>
+    <string name="quality_detail">质检详情</string>
 
 </resources>
