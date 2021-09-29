@@ -26,31 +26,31 @@ data class QualityDetailModel(
     val deliverNum: String,
     @ModelProperty(9, "需质检数量")
     val qualityNum: String,
-    @ModelProperty(10, "任务编号")
+    @ModelProperty(10, "任务编号", [QualityDetailTag])
     val taskCode: String,
-    @ModelProperty(11, "任务描述")
+    @ModelProperty(11, "任务描述", [QualityDetailTag])
     val taskDesc: String,
-    @ModelProperty(12, "计划编号")
+    @ModelProperty(12, "计划编号", [QualityDetailTag])
     val planCode: String,
-    @ModelProperty(13, "工作令号")
+    @ModelProperty(13, "工作令号", [QualityDetailTag])
     val workNo: String,
-    @ModelProperty(14, "批次号")
+    @ModelProperty(14, "批次号", [QualityDetailTag])
     val batchNo: String,
-    @ModelProperty(15, "订单编号")
+    @ModelProperty(15, "订单编号", [QualityDetailTag])
     val orderCode: String,
-    @ModelProperty(16, "状态")
+    @ModelProperty(16, "状态", [QualityDetailTag])
     val status: String,
-    @ModelProperty(17, "计划开始时间")
+    @ModelProperty(17, "计划开始时间", [QualityDetailTag])
     val planStartTime: String,
-    @ModelProperty(18, "计划完成时间")
+    @ModelProperty(18, "计划完成时间", [QualityDetailTag])
     val planEndTime: String,
     @ModelProperty(19, "送检人")
     val deliverName: String,
     @ModelProperty(20, "送检时间")
     val deliverTime: String,
-    @ModelProperty(21, "更新人")
+    @ModelProperty(21, "更新人", [QualityDetailTag])
     val updateTime: String,
-    @ModelProperty(22, "更新时间")
+    @ModelProperty(22, "更新时间", [QualityDetailTag])
     val updateName: String,
 //    val qualifiedNum: String? = null
 //    val reportNumber: Int,
@@ -65,6 +65,8 @@ data class QualityDetailModel(
 //    val updateId: Int,
 //    val inspectedNum: String,
 //    val qualityNotInspectedNum: String,
-
-
-)
+) {
+    companion object {
+        const val QualityDetailTag = "QualityDetail"
+    }
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/qualityTaskFragment"
+        android:id="@+id/quality_task_nav_graph"
         android:title="@string/quality_task"
         android:icon="@drawable/ic_op_qc_task" />
     <item

@@ -107,18 +107,15 @@
     <fragment
         android:id="@+id/qualityDistributeFragment"
         android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
-        android:label="fragment_quality_distribute"
-        tools:layout="@layout/fragment_quality_distribute" />
+        android:label="fragment_quality_distribute" />
     <fragment
         android:id="@+id/qualityExecuteFragment"
         android:name="com.panda.pda.app.operation.qms.QualityExecuteFragment"
-        android:label="fragment_quality_execute"
-        tools:layout="@layout/fragment_quality_execute" />
+        android:label="fragment_quality_execute" />
     <fragment
         android:id="@+id/qualityFinishFragment"
         android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
-        android:label="fragment_quality_finish"
-        tools:layout="@layout/fragment_quality_finish" />
+        android:label="fragment_quality_finish"/>
     <fragment
         android:id="@+id/qualityProblemRecordFragment"
         android:name="com.panda.pda.app.operation.qms.QualityProblemRecordFragment"
@@ -127,18 +124,12 @@
     <fragment
         android:id="@+id/qualityReceiveFragment"
         android:name="com.panda.pda.app.operation.qms.QualitySignFragment"
-        android:label="fragment_quality_receive"
-        tools:layout="@layout/fragment_quality_receive" />
+        android:label="fragment_quality_receive"/>
     <fragment
         android:id="@+id/qualityReviewFragment"
         android:name="com.panda.pda.app.operation.qms.QualityReviewFragment"
-        android:label="fragment_quality_review"
-        tools:layout="@layout/fragment_quality_review" />
-    <fragment
-        android:id="@+id/qualityTaskFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityTaskFragment"
-        android:label="fragment_quality_task"
-        tools:layout="@layout/fragment_quality_task" />
+        android:label="fragment_quality_review"/>
+
     <fragment
         android:id="@+id/qualityDetailFragment"
         android:name="com.panda.pda.app.operation.qms.quality_task_detail.QualityDetailFragment"
@@ -147,4 +138,5 @@
         android:id="@+id/qualityFinishFragment2"
         android:name="com.panda.pda.app.operation.qms.QualityFinishFragment"
         android:label="QualityFinishFragment" />
+    <include app:graph="@navigation/quality_task_nav_graph" />
 </navigation>

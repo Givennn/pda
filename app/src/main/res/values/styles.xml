@@ -110,11 +110,42 @@
         <item name="hintEnabled">false</item>
     </style>
 
+    <style name="Widget.App.TextInputLayout.qmsRemark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:background">@drawable/svg_remark_round_corner_2px</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout.qmsRemark</item>
+        <item name="counterEnabled">true</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="counterMaxLength">1000</item>
+        <item name="counterTextColor">@color/remark_counter_color</item>
+        <!--        边框圆角    -->
+<!--        <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>-->
+        <item name="hintEnabled">false</item>
+    </style>
+
     <style name="ThemeOverlay.App.TextInputLayout" parent="">
         <item name="colorPrimary">@color/text_field_normal</item>
         <item name="colorOnSurface">@color/text_field_normal</item>
         <item name="colorError">@color/text_field_error</item>
         <item name="editTextStyle">@style/Widget.App.TextInputEditText.searchBar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputLayout.qmsRemark" parent="">
+        <item name="colorPrimary">@color/text_field_normal</item>
+        <item name="colorOnSurface">@color/text_field_normal</item>
+        <item name="colorError">@color/text_field_error</item>
+        <item name="editTextStyle">@style/Widget.App.TextInputEditText.searchBar.qmsRemark</item>
+    </style>
+
+    <style name="Widget.App.TextInputEditText.searchBar.qmsRemark" parent="Widget.App.TextInputEditText.searchBar">
+        <item name="android:minHeight">70dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:hint">@string/input_hint</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:padding">8dp</item>
+
     </style>
 
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
@@ -226,4 +257,5 @@
         <item name="android:paddingBottom">16dp</item>
     </style>
 
+    <color name="remark_counter_color">#DCDCDC</color>
 </resources>

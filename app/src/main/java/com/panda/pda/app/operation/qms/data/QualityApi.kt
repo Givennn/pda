@@ -191,7 +191,7 @@ interface QualityApi {
      */
     @POST("pda/qms/task/commit")
     fun pdaQmsTaskCommitPost(
-//        @retrofit2.http.Body root: EmptyObject
+        @retrofit2.http.Body body: QualityTaskCommitRequest
     ): Completable
 
     /**

@@ -1,13 +1,16 @@
-package com.panda.pda.app.operation.qms
+package com.panda.pda.app.operation.qms.quality_task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.adapter.ViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.ItemQualityTaskBinding
+import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
+import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
@@ -17,6 +20,8 @@ import java.util.concurrent.TimeUnit
 class QualityTaskFragment : BaseQualitySearchListFragment<ItemQualityTaskBinding>() {
     override val qualityTaskModelType: QualityTaskModelType
         get() = QualityTaskModelType.Task
+
+    private val viewModel by activityViewModels<QualityViewModel>()
 
     override fun createViewBinding(parent: ViewGroup): ItemQualityTaskBinding {
         return ItemQualityTaskBinding.inflate(
@@ -74,6 +79,13 @@ class QualityTaskFragment : BaseQualitySearchListFragment<ItemQualityTaskBinding
     }
 
     private fun commit(data: QualityTaskModel) {
-        TODO("Not yet implemented")
+        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
+            .bindToFragment()
+            .subscribe(
+                {
+                    viewModel.qualityDetailInfoData.postValue(it)
+                    navController.navigate(R.id.action_qualityTaskFragment_to_qualityTaskCommitFragment)
+                },
+                {})
     }
 }

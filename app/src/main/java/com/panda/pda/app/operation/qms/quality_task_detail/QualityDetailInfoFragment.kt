@@ -23,7 +23,8 @@ class QualityDetailInfoFragment : BaseFragment(R.layout.fragment_quality_detail_
         super.onViewCreated(view, savedInstanceState)
         val modelProperty = ModelPropertyCreator(
             QualityDetailModel::class.java,
-            viewBinding.llPropertyInfo
+            viewBinding.llPropertyInfo,
+            tag = QualityDetailModel.QualityDetailTag
         )
         viewModel.qualityDetailInfoData.observe(viewLifecycleOwner, {
             modelProperty.setData(it)

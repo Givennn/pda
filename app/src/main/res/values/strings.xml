@@ -135,6 +135,7 @@
     <string name="quality_task_back_out_success">质检任务接收成功</string>
     <string name="quality_task_execute_success">质检任务接收成功</string>
     <string name="quality_task_finish_success">质检任务接收成功</string>
+    <string name="quality_task_commit_success" >质检任务提交成功</string>
     <string name="quality_task_receive_confirm">确认接收质检任务: %s？</string>
     <string name="quality_task_sign_confirm" >确认签收质检任务: %s？</string>
     <string name="quality_task_back_out_confirm" >确认撤销质检任务: %s？</string>
@@ -154,5 +155,9 @@
     <string name="inspect_task_code">质检任务编号</string>
     <string name="edit">编辑</string>
     <string name="quality_detail">质检详情</string>
+    <string name="quality_task_commit">提交质检任务</string>
+    <string name="input_hint">请输入</string>
+    <string name="select_hint">请选择</string>
+    <string name="verifier">审核人</string>
 
 </resources>
