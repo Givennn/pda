@@ -2,6 +2,7 @@ package com.panda.pda.app.base
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -37,6 +38,8 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
 
     protected val navBackListener = { _: View -> navController.popBackStack() }
 
+    protected open val isStatusBarLight = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.v("onCreate ${javaClass.simpleName}")
@@ -47,12 +50,23 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
         Timber.v("onDestroy ${javaClass.simpleName}")
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setStatusBarLightMode(isStatusBarLight)
         userViewModel.loginData.observe(viewLifecycleOwner, {
             setupUserAuth(it.menus)
         })
+    }
+
+    private fun setStatusBarLightMode(isLight: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activityDecorView.systemUiVisibility = if (isLight) {
+                activityDecorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                activityDecorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+            }
+        }
     }
 
     private fun setupUserAuth(authorities: List<String>) {
@@ -113,24 +127,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             .doOnError { this@BaseFragment.onNetworkError(it) }
     }
 
-//    protected fun <T> Single<BaseResponse<T>>.bindToFragment(): Single<T> {
-//        return this
-//            .onMainThread()
-//            .unWrapperData()
-//            .bindToLifecycle(this@BaseFragment.requireView())
-//            .catchError()
-//            .bindLoadingStatus()
-//    }
-
-//    protected fun Single<BaseResponse<Any>>.bindToFragment(): Completable {
-//        return this
-//            .onMainThread()
-//            .unWrapperData()
-//            .bindToLifecycle(this@BaseFragment.requireView())
-//            .catchError()
-//            .bindLoadingStatus()
-//    }
-
     protected fun Completable.bindToFragment(): Completable {
         return this
             .onMainThread()
@@ -167,7 +163,6 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             isCancelable = false
             loadingDialog = this
         }.show(parentFragmentManager, TAG)
+
     }
-
-
 }

@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--    <protected-broadcast android:name="com.pl.plscanservice" />-->
     <application
         android:name=".PdaApplication"
         android:allowBackup="true"
@@ -21,7 +20,7 @@
         <activity
             android:name=".ShellActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

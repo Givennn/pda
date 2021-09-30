@@ -19,8 +19,14 @@ import java.util.concurrent.TimeUnit
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val viewBinding by viewBinding<FragmentProfileBinding>()
+
     private val userViewModel by activityViewModels<UserViewModel>()
+
     private val userInfoModel by lazy { userViewModel.loginData.value?.userInfo }
+
+    override val isStatusBarLight: Boolean
+        get() = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

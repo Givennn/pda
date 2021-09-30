@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.app" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--底部导航-->
@@ -9,18 +9,11 @@
 
         <!--cardView-->
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+
         <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="actionBarSize">@dimen/tool_bar_height</item>
     </style>
-
-    <!--    <style name="Widget.App.ActionMode" parent="Widget.AppCompat.ActionMode">-->
-    <!--        <item name="titleTextStyle">?attr/textAppearanceHeadline6</item>-->
-    <!--        <item name="subtitleTextStyle">?attr/textAppearanceSubtitle1</item>-->
-    <!--        <item name="background">@color/colorPrimary</item>-->
-    <!--    </style>-->
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>

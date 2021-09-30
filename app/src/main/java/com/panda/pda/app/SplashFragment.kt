@@ -2,7 +2,9 @@ package com.panda.pda.app
 
 import android.content.Context
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.base.retrofit.onMainThread
@@ -30,6 +32,10 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     private val viewModel by activityViewModels<UserViewModel>()
 
     private val commonViewModel by activityViewModels<CommonViewModel>()
+
+    override val isStatusBarLight: Boolean
+        get() = true
+
     override fun onResume() {
         super.onResume()
         requestLocalUserInfo()

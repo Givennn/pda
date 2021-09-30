@@ -18,7 +18,8 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
 
     private val viewBinding by viewBinding<FragmentTaskBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
-
+    override val isStatusBarLight: Boolean
+        get() = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskMsgData.observe(viewLifecycleOwner, { msg ->

@@ -38,6 +38,8 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
 
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
+    override val searchBarHintResId: Int?
+        get() = R.string.quality_task_search_hint
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return

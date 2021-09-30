@@ -2,17 +2,27 @@ package com.panda.pda.app.base
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+import android.view.Window
+import android.view.WindowManager
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.databinding.DialogConfirmBinding
+import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/8/27
  */
+val Fragment.activityDecorView: View get() = requireActivity().window.decorView
+
 class ConfirmDialogFragment : DialogFragment(R.layout.dialog_confirm) {
 
     private var cancelTextResId: Int = R.string.cancel
@@ -28,11 +38,14 @@ class ConfirmDialogFragment : DialogFragment(R.layout.dialog_confirm) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewBinding.let { binding ->
             binding.cancelBt.setText(cancelTextResId)
             binding.cancelBt.setOnClickListener {
-                cancelAction?.onClick(requireDialog(),
-                    it.id)
+                cancelAction?.onClick(
+                    requireDialog(),
+                    it.id
+                )
                 dismiss()
             }
             binding.okBt.setText(confirmTextResId)
@@ -65,5 +78,13 @@ class ConfirmDialogFragment : DialogFragment(R.layout.dialog_confirm) {
     fun setTitle(message: String): ConfirmDialogFragment {
         title = message
         return this
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).also {
+            Timber.e("${it.window == null}")
+            it.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
+        }
     }
 }

@@ -35,6 +35,9 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
 
     private val commonViewModel by activityViewModels<CommonViewModel>()
 
+    override val isStatusBarLight: Boolean
+        get() = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initModuleList()

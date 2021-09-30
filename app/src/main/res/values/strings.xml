@@ -159,5 +159,6 @@
     <string name="input_hint">请输入</string>
     <string name="select_hint">请选择</string>
     <string name="verifier">审核人</string>
+    <string name="quality_task_search_hint">请输入质检任务编号/质检任务描述/质检方案编码/质检方案描述/产品编码/产品描述</string>
 
 </resources>

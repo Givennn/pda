@@ -34,21 +34,12 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTransparentStatusBar()
         createNavController()
         initBottomNavigation()
         initViewModel()
         initTokenEvent()
         customNavAction()
     }
-
-    private fun setTransparentStatusBar() {
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-    }
-
 
     private fun initTokenEvent() {
         userViewModel.logoutActionData.observe(this, {
