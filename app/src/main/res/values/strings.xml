@@ -140,7 +140,7 @@
     <string name="quality_task_sign_confirm" >确认签收质检任务: %s？</string>
     <string name="quality_task_back_out_confirm" >确认撤销质检任务: %s？</string>
     <string name="quality_task_execute_confirm" >确认撤销质检任务: %s？</string>
-    <string name="quality_task_finish_confirm" >确认撤销质检任务: %s？</string>
+    <string name="quality_task_finish_confirm" >确认完工质检任务: %s？</string>
     <string name="time_section_formatter">%1$s～%2$s</string>
     <string name="review">审核</string>
     <string name="transfer_manage">转办</string>
@@ -160,5 +160,16 @@
     <string name="select_hint">请选择</string>
     <string name="verifier">审核人</string>
     <string name="quality_task_search_hint">请输入质检任务编号/质检任务描述/质检方案编码/质检方案描述/产品编码/产品描述</string>
+    <string name="quality_task_review">审核质检任务</string>
+    <string name="verifier_result">审核结果</string>
+    <string name="org_node_select">人员选择</string>
+    <string name="quality_review_success_message">审核质检任务成功</string>
+    <string name="quality_task_transfer">转办质检任务</string>
+    <string name="quality_task_back_out">撤销质检任务</string>
+    <string name="back_out_reason">撤销原因</string>
+    <string name="distribute_number">派发数量</string>
+    <string name="plan_data">预计时间</string>
+    <string name="quality_task_distribute">派发质检任务</string>
+    <string name="ng_reason">不良原因</string>
 
 </resources>

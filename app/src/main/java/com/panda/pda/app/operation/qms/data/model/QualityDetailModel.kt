@@ -59,7 +59,7 @@ data class QualityDetailModel(
 //    val createTime: String,
 //    val deliverId: String,
 //    val distributedNum: Int,
-//    val id: Int,
+    val id: Int,
 //    val qualitySolutionCode: String,
 //    val taskId: Int,
 //    val updateId: Int,

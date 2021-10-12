@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.common.data.CommonParameters
 import com.panda.pda.app.common.data.DataParamType
@@ -23,7 +23,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     private val viewBinding by viewBinding<FragmentTaskDetailBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
 
-    private lateinit var bindingAdapter: ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
+    private lateinit var bindingAdapter: CommonViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +41,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
 
     private fun createRecordAdapter() {
         bindingAdapter =
-            object : ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
+            object : CommonViewBindingAdapter<ItemTaskDetailOperateRecordBinding, TaskRecordModel>(
                 mutableListOf()) {
                 override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
                     return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))

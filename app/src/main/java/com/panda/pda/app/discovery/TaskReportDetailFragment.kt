@@ -9,7 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.api.load
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.common.ModelPropertyCreator
 import com.panda.pda.app.common.data.CommonApi
@@ -22,7 +22,7 @@ import com.panda.pda.app.discovery.data.TaskReportDetailModel
  * created by AnJiwei 2021/9/1
  */
 class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_detail) {
-    private lateinit var picBindingAdapter: ViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
+    private lateinit var picBindingAdapter: CommonViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>
     private val viewBinding by viewBinding<FragmentTaskReportDetailBinding>()
     private val viewModel by activityViewModels<TaskReportViewModel>()
 
@@ -56,7 +56,7 @@ class TaskReportDetailFragment : BaseFragment(R.layout.fragment_task_report_deta
         }
 
         picBindingAdapter = object :
-            ViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
+            CommonViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detailData.fileList.toMutableList()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
                 return ItemTaskReportDetailPicBinding.inflate(
                     LayoutInflater.from(parent.context),

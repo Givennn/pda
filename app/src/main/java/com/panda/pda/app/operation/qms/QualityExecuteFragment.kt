@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.ItemQualityExecuteBinding
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
@@ -20,7 +20,7 @@ class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteB
     }
 
     override fun onBindViewHolder(
-        holder: ViewBindingAdapter<ItemQualityExecuteBinding, QualityTaskModel>.ViewBindingHolder,
+        holder: CommonViewBindingAdapter<ItemQualityExecuteBinding, QualityTaskModel>.ViewBindingHolder,
         data: QualityTaskModel,
         position: Int
     ) {

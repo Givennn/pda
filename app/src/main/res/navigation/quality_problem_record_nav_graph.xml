@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quality_problem_record_nav_graph"
+    app:startDestination="@id/problemDetailFragment">
+
+    <fragment
+        android:id="@+id/qualityProblemRecordFragment"
+        android:name="com.panda.pda.app.operation.qms.quality_problem_record.QualityProblemRecordFragment"
+        android:label="fragment_quality_problem_record"
+        tools:layout="@layout/fragment_quality_problem_record" />
+    <fragment
+        android:id="@+id/problemDetailFragment"
+        android:name="com.panda.pda.app.operation.qms.quality_problem_record.ProblemDetailFragment"
+        android:label="ProblemDetailFragment" />
+</navigation>

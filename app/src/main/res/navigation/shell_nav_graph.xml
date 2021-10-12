@@ -104,39 +104,30 @@
     <include app:graph="@navigation/profile_nav_graph" />
     <include app:graph="@navigation/material_replace_nav_graph" />
     <include app:graph="@navigation/operation_guide_nav_graph" />
-    <fragment
-        android:id="@+id/qualityDistributeFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
-        android:label="fragment_quality_distribute" />
+
     <fragment
         android:id="@+id/qualityExecuteFragment"
         android:name="com.panda.pda.app.operation.qms.QualityExecuteFragment"
         android:label="fragment_quality_execute" />
-    <fragment
-        android:id="@+id/qualityFinishFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityDistributeFragment"
-        android:label="fragment_quality_finish"/>
-    <fragment
-        android:id="@+id/qualityProblemRecordFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityProblemRecordFragment"
-        android:label="fragment_quality_problem_record"
-        tools:layout="@layout/fragment_quality_problem_record" />
+
     <fragment
         android:id="@+id/qualityReceiveFragment"
         android:name="com.panda.pda.app.operation.qms.QualitySignFragment"
         android:label="fragment_quality_receive"/>
-    <fragment
-        android:id="@+id/qualityReviewFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityReviewFragment"
-        android:label="fragment_quality_review"/>
 
     <fragment
         android:id="@+id/qualityDetailFragment"
         android:name="com.panda.pda.app.operation.qms.quality_task_detail.QualityDetailFragment"
         android:label="QualityDetailFragment" />
     <fragment
-        android:id="@+id/qualityFinishFragment2"
+        android:id="@+id/qualityFinishFragment"
         android:name="com.panda.pda.app.operation.qms.QualityFinishFragment"
         android:label="QualityFinishFragment" />
     <include app:graph="@navigation/quality_task_nav_graph" />
+    <fragment
+        android:id="@+id/orgNodeSelectFragment"
+        android:name="com.panda.pda.app.common.OrgNodeSelectFragment"
+        android:label="OrgNodeSelectFragment" />
+    <include app:graph="@navigation/quality_review_nav_graph" />
+    <include app:graph="@navigation/quality_distribute_nav_graph" />
 </navigation>

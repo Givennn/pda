@@ -3,6 +3,7 @@ package com.panda.pda.app.operation.qms.quality_task
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
@@ -10,6 +11,8 @@ import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.ModelPropertyCreator
+import com.panda.pda.app.common.OrgNodeSelectFragment
+import com.panda.pda.app.common.data.model.OrgNodeModel
 import com.panda.pda.app.databinding.FragmentQualityCommitBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
@@ -27,8 +30,18 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
 
     private val viewModel by activityViewModels<QualityViewModel>()
 
+    private var selectedVerifier: OrgNodeModel? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setFragmentResultListener(OrgNodeSelectFragment.ORG_NODE_RESULT) { requestKey, bundle ->
+            if (requestKey == OrgNodeSelectFragment.ORG_NODE_RESULT) {
+                val nodeModel =
+                    bundle.getSerializable(OrgNodeSelectFragment.PERSON_SELECT_KEY) as? OrgNodeModel
+                if (nodeModel != null) {
+                    updateVerifier(nodeModel)
+                }
+            }
+        }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         val modelProperty = ModelPropertyCreator(
             QualityDetailModel::class.java,
@@ -38,6 +51,19 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
             modelProperty.setData(it)
         }
 
+        viewBinding.llSelectVerifier.clicks()
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .bindToLifecycle(requireView())
+            .subscribe {
+                navController.navigate(
+                    R.id.orgNodeSelectFragment,
+                    Bundle().apply {
+                        putString(
+                            OrgNodeSelectFragment.TITLE_KEY,
+                            getString(R.string.verifier)
+                        )
+                    })
+            }
         viewBinding.btnConfirm.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
@@ -46,8 +72,17 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
             }
     }
 
+    private fun updateVerifier(verifier: OrgNodeModel) {
+        selectedVerifier = verifier
+        viewBinding.tvVerifier.text = verifier.nodeName
+    }
+
     private fun commit() {
-        val verifierId = 0 //TODO get verifierId
+        if (selectedVerifier == null) {
+            toast("请选择审核人")
+            return
+        }
+        val verifierId = selectedVerifier!!.nodeId!!
         val remark = viewBinding.etRemark.text.toString()
         WebClient.request(QualityApi::class.java)
             .pdaQmsTaskCommitPost(QualityTaskCommitRequest(verifierId, remark))

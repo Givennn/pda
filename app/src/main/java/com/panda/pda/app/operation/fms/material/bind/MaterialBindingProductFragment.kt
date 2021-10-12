@@ -13,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.extension.deepCopy
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.databinding.FragmentMaterialBindingProductBinding
@@ -34,7 +34,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
 
     private lateinit var taskModel: TaskModel
     private lateinit var productModel: ProductModel
-    private lateinit var bindingBindingAdapter: ViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>
+    private lateinit var bindingBindingAdapter: CommonViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>
     private val viewBinding by viewBinding<FragmentMaterialBindingProductBinding>()
 
     private val materialViewModel by activityViewModels<MaterialViewModel>()
@@ -60,7 +60,7 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
             false
         }
         viewBinding.rvBindList.adapter =
-            object : ViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>(
+            object : CommonViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>(
                 mutableListOf()) {
                 override fun createBinding(parent: ViewGroup): ItemBindMaterialCodeBinding {
                     return ItemBindMaterialCodeBinding.inflate(LayoutInflater.from(parent.context),

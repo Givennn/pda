@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
-import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
@@ -44,9 +43,9 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
         viewBinding.rvTaskList.addOnScrollListener(scrollListener)
     }
 
-    override fun createAdapter(): ViewBindingAdapter<*, GuideInfoModel> {
+    override fun createAdapter(): CommonViewBindingAdapter<*, GuideInfoModel> {
         return object :
-            ViewBindingAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {
+            CommonViewBindingAdapter<ItemGuideInfoBinding, GuideInfoModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemGuideInfoBinding {
                 return ItemGuideInfoBinding.inflate(LayoutInflater.from(parent.context),
                     parent,

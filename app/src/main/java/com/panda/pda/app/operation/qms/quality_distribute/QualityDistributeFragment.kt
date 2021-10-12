@@ -1,13 +1,16 @@
-package com.panda.pda.app.operation.qms
+package com.panda.pda.app.operation.qms.quality_distribute
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.retrofit.WebClient
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.ItemQualityDistributeBinding
+import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
+import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
@@ -15,6 +18,9 @@ import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
 
 class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistributeBinding>() {
+
+    private val viewModel by activityViewModels<QualityViewModel>()
+
     override val qualityTaskModelType: QualityTaskModelType
         get() = QualityTaskModelType.Distribute
 
@@ -27,7 +33,7 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
     }
 
     override fun onBindViewHolder(
-        holder: ViewBindingAdapter<ItemQualityDistributeBinding, QualityTaskModel>.ViewBindingHolder,
+        holder: CommonViewBindingAdapter<ItemQualityDistributeBinding, QualityTaskModel>.ViewBindingHolder,
         data: QualityTaskModel,
         position: Int
     ) {
@@ -57,32 +63,42 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
 
             btnActionBackOut.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    showActionRequestDialog(
-                        WebClient.request(QualityApi::class.java).qualityDistributeCancel(
-                            IdRequest(data.id)
-                        ),
-                        getString(
-                            R.string.quality_task_back_out_confirm,
-                            getString(
-                                R.string.desc_and_code_formatter,
-                                data.qualityDesc,
-                                data.qualityCode
-                            )
-                        ),
-                        getString(R.string.quality_task_back_out_success)
-                    )
-                }
+                .subscribe { backOut(data) }
 
         }
     }
 
     //转办
     private fun transfer(data: QualityTaskModel) {
-        TODO("Not yet implemented")
+        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
+            .bindToFragment()
+            .subscribe(
+                {
+                    viewModel.qualityDetailInfoData.postValue(it)
+                    navController.navigate(R.id.action_qualityDistributeFragment_to_qualityDistributeTransferFragment)
+                },
+                {})
     }
 
     private fun distribute(data: QualityTaskModel) {
-        TODO("Not yet implemented")
+        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
+            .bindToFragment()
+            .subscribe(
+                {
+                    viewModel.qualityDetailInfoData.postValue(it)
+                    navController.navigate(R.id.action_qualityDistributeFragment_to_qualityDistributeDistributeFragment)
+                },
+                {})
+    }
+
+    private fun backOut(data: QualityTaskModel) {
+        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
+            .bindToFragment()
+            .subscribe(
+                {
+                    viewModel.qualityDetailInfoData.postValue(it)
+                    navController.navigate(R.id.action_qualityDistributeFragment_to_qualityDistributeBackOutFragment)
+                },
+                {})
     }
 }

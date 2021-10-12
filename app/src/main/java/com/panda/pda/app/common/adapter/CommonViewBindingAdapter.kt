@@ -8,8 +8,8 @@ import androidx.viewbinding.ViewBinding
 /**
  * created by AnJiwei 2021/3/15
  */
-abstract class ViewBindingAdapter<TBinding : ViewBinding, TSource>(protected val dataSource: MutableList<TSource> = mutableListOf()) :
-    RecyclerView.Adapter<ViewBindingAdapter<TBinding, TSource>.ViewBindingHolder>() {
+abstract class CommonViewBindingAdapter<TBinding : ViewBinding, TSource>(protected val dataSource: MutableList<TSource> = mutableListOf()) :
+    RecyclerView.Adapter<CommonViewBindingAdapter<TBinding, TSource>.ViewBindingHolder>() {
 
     protected abstract fun createBinding(parent: ViewGroup): TBinding
 
@@ -34,6 +34,10 @@ abstract class ViewBindingAdapter<TBinding : ViewBinding, TSource>(protected val
         dataSource.addAll(newSource)
         notifyDataSetChanged()
         hasLoadedData = true
+    }
+
+    fun addData(newData: TSource) {
+        addData(listOf(newData))
     }
 
     override fun onBindViewHolder(holder: ViewBindingHolder, position: Int) {

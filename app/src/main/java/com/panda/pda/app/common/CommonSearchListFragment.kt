@@ -9,8 +9,7 @@ import androidx.annotation.StringRes
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
-import com.panda.pda.app.base.retrofit.BaseResponse
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.databinding.*
 import io.reactivex.rxjava3.core.Single
@@ -49,7 +48,7 @@ abstract class CommonSearchListFragment<TSource> :
         refreshData()
     }
 
-    abstract fun createAdapter(): ViewBindingAdapter<*, TSource>
+    abstract fun createAdapter(): CommonViewBindingAdapter<*, TSource>
 
     abstract fun api(key: String?): Single<DataListNode<TSource>>
 

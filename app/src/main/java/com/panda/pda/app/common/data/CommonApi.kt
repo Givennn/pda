@@ -70,5 +70,5 @@ interface CommonApi {
      */
 
     @GET("pda/user/list-org-node")
-    fun userListOrgNodeGet():Single<DataListNode<OrgNodeModel>>
+    fun userListOrgNodeGet(@retrofit2.http.Query("id") id: Int? = null):Single<DataListNode<OrgNodeModel>>
 }

@@ -15,8 +15,7 @@ import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
-import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
@@ -61,9 +60,9 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
         viewBinding.rvTaskList.addOnScrollListener(scrollListener)
     }
 
-    override fun createAdapter(): ViewBindingAdapter<*, QualityTaskModel> {
+    override fun createAdapter(): CommonViewBindingAdapter<*, QualityTaskModel> {
 
-        return object : ViewBindingAdapter<TItemViewBinding, QualityTaskModel>() {
+        return object : CommonViewBindingAdapter<TItemViewBinding, QualityTaskModel>() {
             override fun createBinding(parent: ViewGroup): TItemViewBinding {
                 return createViewBinding(parent)
             }
@@ -94,7 +93,7 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
     abstract fun createViewBinding(parent: ViewGroup): TItemViewBinding
 
     abstract fun onBindViewHolder(
-        holder: ViewBindingAdapter<TItemViewBinding, QualityTaskModel>.ViewBindingHolder,
+        holder: CommonViewBindingAdapter<TItemViewBinding, QualityTaskModel>.ViewBindingHolder,
         data: QualityTaskModel,
         position: Int
     )
@@ -124,7 +123,7 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
             QualityTaskModelType.Review -> R.string.quality_review
             QualityTaskModelType.Distribute -> R.string.quality_distribute
             QualityTaskModelType.Sign -> R.string.quality_sign
-            QualityTaskModelType.Execute -> R.string.quality_finish
+            QualityTaskModelType.Execute -> R.string.quality_execute
             QualityTaskModelType.Finish -> R.string.quality_finish
         }
 

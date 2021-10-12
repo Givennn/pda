@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.panda.pda.app.R
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
-import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.CommonSearchListFragment
@@ -32,8 +31,8 @@ class MaterialUnbindFragment :
         viewBinding.tilSearchBar.visibility = View.GONE
     }
 
-    override fun createAdapter(): ViewBindingAdapter<*, MaterialModel> {
-        return object : ViewBindingAdapter<ItemMaterialUnbindBinding, MaterialModel>(
+    override fun createAdapter(): CommonViewBindingAdapter<*, MaterialModel> {
+        return object : CommonViewBindingAdapter<ItemMaterialUnbindBinding, MaterialModel>(
             mutableListOf()
         ) {
             override fun createBinding(parent: ViewGroup): ItemMaterialUnbindBinding {

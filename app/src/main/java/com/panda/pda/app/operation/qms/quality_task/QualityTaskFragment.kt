@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.retrofit.WebClient
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.ItemQualityTaskBinding
 import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
@@ -32,7 +32,7 @@ class QualityTaskFragment : BaseQualitySearchListFragment<ItemQualityTaskBinding
     }
 
     override fun onBindViewHolder(
-        holder: ViewBindingAdapter<ItemQualityTaskBinding, QualityTaskModel>.ViewBindingHolder,
+        holder: CommonViewBindingAdapter<ItemQualityTaskBinding, QualityTaskModel>.ViewBindingHolder,
         data: QualityTaskModel,
         position: Int
     ) {

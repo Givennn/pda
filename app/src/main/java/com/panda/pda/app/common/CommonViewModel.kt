@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.panda.pda.app.R
 import com.panda.pda.app.common.data.model.AuthorityModel
+import com.panda.pda.app.common.data.model.OrgNodeModel
 
 /**
  * created by AnJiwei 2021/9/14

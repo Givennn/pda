@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentQualityDetailRecordBinding
 import com.panda.pda.app.databinding.ItemTaskDetailOperateRecordBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
@@ -32,9 +32,9 @@ class QualityDetailRecordFragment : BaseFragment(R.layout.fragment_quality_detai
         })
     }
 
-    private fun createRecordAdapter(): ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, QualityTaskRecordModel> {
+    private fun createRecordAdapter(): CommonViewBindingAdapter<ItemTaskDetailOperateRecordBinding, QualityTaskRecordModel> {
         return object :
-            ViewBindingAdapter<ItemTaskDetailOperateRecordBinding, QualityTaskRecordModel>() {
+            CommonViewBindingAdapter<ItemTaskDetailOperateRecordBinding, QualityTaskRecordModel>() {
             override fun createBinding(parent: ViewGroup): ItemTaskDetailOperateRecordBinding {
                 return ItemTaskDetailOperateRecordBinding.inflate(LayoutInflater.from(parent.context))
             }

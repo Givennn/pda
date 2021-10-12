@@ -2,6 +2,7 @@ package com.panda.pda.app
 
 import android.content.Context
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.ConfirmDialogFragment
@@ -39,6 +40,14 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     override fun onResume() {
         super.onResume()
         requestLocalUserInfo()
+        test()
+    }
+    // todo test
+    private fun test() {
+//        val datePicker =
+//            MaterialDatePicker.Builder.dateRangePicker().setTitleText(R.string.plan_data).build()
+//
+//        datePicker.show(parentFragmentManager, "tag")
     }
 
     private fun requestLocalUserInfo() {
@@ -95,6 +104,4 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         val pwd = viewModelSp.getString(SP_PASSWORD, null) ?: return null
         return LoginRequest(userName, pwd)
     }
-
-
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.retrofit.WebClient
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.ItemQualitySignBinding
 import com.panda.pda.app.operation.qms.data.QualityApi
@@ -27,7 +27,7 @@ class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding
     }
 
     override fun onBindViewHolder(
-        holder: ViewBindingAdapter<ItemQualitySignBinding, QualityTaskModel>.ViewBindingHolder,
+        holder: CommonViewBindingAdapter<ItemQualitySignBinding, QualityTaskModel>.ViewBindingHolder,
         data: QualityTaskModel,
         position: Int
     ) {
@@ -54,13 +54,13 @@ class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding
                         WebClient.request(QualityApi::class.java)
                             .pdaQmsQualitySubTaskSignPost(IdRequest(data.id)),
                         getString(
-                            R.string.quality_task_sign_confirm, getString(
+                            R.string.quality_task_finish_confirm, getString(
                                 R.string.desc_and_code_formatter,
                                 data.qualityDesc,
                                 data.qualityCode
                             )
                         ),
-                        getString(R.string.quality_task_receive_success)
+                        getString(R.string.quality_task_finish_success)
                     )
                 }
         }

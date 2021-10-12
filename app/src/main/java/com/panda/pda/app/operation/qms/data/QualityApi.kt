@@ -6,6 +6,7 @@ import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.operation.qms.data.model.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -166,7 +167,7 @@ interface QualityApi {
      */
     @POST("pda/qms/review/review")
     fun pdaQmsReviewReviewPost(
-//        @retrofit2.http.Body root: EmptyObject
+        @retrofit2.http.Body body: QualityTaskReviewRequest
     ): Completable
 
     /**
@@ -179,9 +180,7 @@ interface QualityApi {
      */
     @POST("pda/qms/review/transfer")
     fun pdaQmsReviewTransferPost(
-        @retrofit2.http.Query("id") id: String,
-        @retrofit2.http.Query("reviewerId") reviewerId: String,
-        @retrofit2.http.Query("remark") remark: String,
+        @Body body: QualityTaskTransferRequest
     ): Completable
 
     /**

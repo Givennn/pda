@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".operation.qms.QualityProblemRecordFragment">
+    tools:context=".operation.qms.quality_problem_record.QualityProblemRecordFragment">
 
     <include
         android:id="@+id/common_layout"

@@ -1,8 +1,7 @@
-package com.panda.pda.app.operation.qms
+package com.panda.pda.app.operation.qms.quality_problem_record
 
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +13,15 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
-import com.panda.pda.app.common.adapter.ViewBindingAdapter
-import com.panda.pda.app.databinding.FragmentCommonSearchListBinding
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentQualityProblemRecordBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemQualityProblemRecordBinding
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
-import io.reactivex.rxjava3.core.Single
+import java.util.concurrent.TimeUnit
 
 class QualityProblemRecordFragment :
     BaseFragment(R.layout.fragment_quality_problem_record) {
@@ -71,9 +68,9 @@ class QualityProblemRecordFragment :
         refreshData()
     }
 
-    fun createAdapter(): ViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel> {
+    fun createAdapter(): CommonViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel> {
         return object :
-            ViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel>() {
+            CommonViewBindingAdapter<ItemQualityProblemRecordBinding, QualityProblemRecordModel>() {
             override fun createBinding(parent: ViewGroup): ItemQualityProblemRecordBinding {
                 return ItemQualityProblemRecordBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -112,11 +109,20 @@ class QualityProblemRecordFragment :
 //                    tvQualityScheme.text = data.qualitySolutionName
                     tvQualityResult.text = data.conclusion
                     btnActionEdit.clicks()
+                        .throttleFirst(500, TimeUnit.MILLISECONDS)
                         .bindToLifecycle(holder.itemView)
                         .subscribe { editRecord(data) }
+                    root.clicks()
+                        .throttleFirst(500, TimeUnit.MILLISECONDS)
+                        .bindToLifecycle(holder.itemView)
+                        .subscribe{ showRecordDetail(data)}
                 }
             }
         }
+    }
+
+    private fun showRecordDetail(data: QualityProblemRecordModel) {
+        TODO("Not yet implemented")
     }
 
     private fun editRecord(data: QualityProblemRecordModel) {
@@ -140,6 +146,7 @@ class QualityProblemRecordFragment :
             .bindToFragment()
             .subscribe({
                 itemListAdapter.refreshData(it.dataList)
+                viewBinding.commonLayout.swipe.isRefreshing = false
             }, {})
     }
 }
