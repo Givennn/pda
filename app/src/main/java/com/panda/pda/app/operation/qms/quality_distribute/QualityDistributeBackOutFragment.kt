@@ -86,7 +86,7 @@ class QualityDistributeBackOutFragment: BaseFragment(R.layout.fragment_quality_d
             toast("请选择审核人")
             return
         }
-        val verifierId = selectedVerifier!!.nodeId!!
+        val verifierId = selectedVerifier!!.id
         val remark = viewBinding.etBackOutReason.text.toString()
         WebClient.request(QualityApi::class.java)
             .pdaQmsReviewTransferPost(

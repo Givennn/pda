@@ -18,4 +18,7 @@ data class QualityInspectItemModel(
     val qualityName: String,
     val standard: String,
     val valueType: Int
-)
+) {
+    @Transient
+    var conclusion = ""
+}

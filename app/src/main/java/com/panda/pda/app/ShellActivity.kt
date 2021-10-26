@@ -71,7 +71,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
         // update badge from viewModel
         taskViewModel.taskMsgData.observe(this, Observer {
             val badge = viewBinding.nvBottom.getOrCreateBadge(R.id.taskFragment)
-            badge.isVisible = it.hasNewMessage()
+            badge.isVisible = it.sumOf { msg -> msg.count } == 0
         })
     }
 

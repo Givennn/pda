@@ -9,21 +9,23 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/ng_reason" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/ng_reason" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ng_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:padding="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:itemCount="7"
         tools:listitem="@layout/item_ng_reason" />
 
@@ -32,11 +34,11 @@
         style="@style/Widget.App.Button.confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
-        android:layout_marginTop="24dp"
-        android:layout_gravity="center|bottom"
         android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

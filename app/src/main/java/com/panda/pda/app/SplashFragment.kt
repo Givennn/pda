@@ -5,7 +5,6 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.panda.pda.app.base.BaseFragment
-import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.*
 import com.panda.pda.app.base.retrofit.onMainThread
@@ -42,6 +41,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         requestLocalUserInfo()
         test()
     }
+
     // todo test
     private fun test() {
 //        val datePicker =
@@ -63,12 +63,14 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                     commonViewModel.authorityViewModel.postValue(it.dataList)
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
                     queryCommonParameters()
-                }, {})
+                }, {
+                    navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                })
         } else {
-
             Single.zip(
                 WebClient.request(CommonApi::class.java).getAuthorityTree()
-                    .onErrorReturn { DataListNode(listOf()) }, //TODO mock test
+                    .onErrorReturn { DataListNode(listOf()) } //TODO mock test
+                ,
                 WebClient.request(UserApi::class.java)
                     .userNameLoginPost(loginRequest)
             ) { auto, loginInfo ->
@@ -82,7 +84,9 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                     viewModel.updateLoginData(it.second, loginRequest)
                     navController.navigate(R.id.action_splashFragment_to_taskFragment)
                     queryCommonParameters()
-                }, { })
+                }, {
+                    navController.navigate(R.id.action_splashFragment_to_loginFragment)
+                })
         }
     }
 

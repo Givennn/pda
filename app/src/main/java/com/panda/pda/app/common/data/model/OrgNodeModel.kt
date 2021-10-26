@@ -6,8 +6,9 @@ import java.io.Serializable
  * created by AnJiwei 2021/9/26
  */
 data class OrgNodeModel(
+    val id: Int,
     var childNodeList: List<OrgNodeModel>,
-    val nodeId: Int?,
+    val nodeId: String,
     val nodeLevel: Int,
     val nodeName: String,
     val nodeType: Int,

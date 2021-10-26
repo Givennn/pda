@@ -1,19 +1,36 @@
-package com.panda.pda.app.operation.qms
+package com.panda.pda.app.operation.qms.quality_execute
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
+import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.ItemQualityExecuteBinding
+import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
+import com.panda.pda.app.operation.qms.data.QualityApi
+import com.panda.pda.app.operation.qms.data.model.QualityInspectItemModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 
 class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteBinding>() {
     override val qualityTaskModelType: QualityTaskModelType
         get() = QualityTaskModelType.Execute
+
+    private val inspectItemAdapter by lazy {
+        Moshi.Builder().build().adapter<List<QualityInspectItemModel>>(
+            Types.newParameterizedType(
+                List::class.java,
+                QualityInspectItemModel::class.java
+            )
+        )
+    }
 
     override fun createViewBinding(parent: ViewGroup): ItemQualityExecuteBinding {
         return ItemQualityExecuteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -44,9 +61,33 @@ class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteB
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(holder.itemView)
                 .subscribe {
-                    TODO("执行api未定义")
+                    execute(data)
                 }
         }
+    }
+
+    private fun execute(data: QualityTaskModel) {
+        Single.zip(
+            WebClient.request(QualityApi::class.java)
+                .pdaQmsQualitySubTaskGetByIdGet(data.id),
+            WebClient.request(QualityApi::class.java).pdaQmsQualityTaskGetQualityItemGet(data.id)
+        ) { subTaskDetail, qualityItems ->
+            Pair(subTaskDetail, qualityItems)
+        }.bindToFragment()
+            .subscribe({
+
+                val args = Bundle().apply {
+                    putSerializable(ExecuteInputFragment.DETAIL_KEY, it.first)
+                    putString(
+                        ExecuteInputFragment.QUALITY_ITEM_KEY,
+                        inspectItemAdapter.toJson(it.second.dataList)
+                    )
+                }
+                navController.navigate(
+                    R.id.action_qualityExecuteFragment_to_executeInputFragment,
+                    args
+                )
+            }, {})
     }
 }
 

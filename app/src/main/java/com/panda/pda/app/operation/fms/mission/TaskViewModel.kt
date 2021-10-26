@@ -11,7 +11,7 @@ import com.panda.pda.app.common.data.model.TaskMessageCountModel
 class TaskViewModel: ViewModel() {
 
     val taskInfoData = MutableLiveData<TaskInfoModel>()
-    val taskMsgData = MutableLiveData<TaskMessageCountModel>()
+    val taskMsgData = MutableLiveData<List<TaskMessageCountModel>>()
 
     companion object {
         const val TASK_ID = "taskID"

@@ -46,9 +46,10 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
             EndlessRecyclerViewScrollListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 WebClient.request(QualityApi::class.java)
-                    .pdaQmsDistributeListByPageGet(
+                    .pdaQmsCommonListByPageGet(
                         qualityTaskModelType.code,
                         viewBinding.etSearchBar.text?.toString(),
+                        10,
                         page
                     )
                     .bindToFragment()
@@ -113,7 +114,7 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
 
     override fun api(key: String?): Single<DataListNode<QualityTaskModel>> {
         return WebClient.request(QualityApi::class.java)
-            .pdaQmsDistributeListByPageGet(qualityTaskModelType.code, key)
+            .pdaQmsCommonListByPageGet(qualityTaskModelType.code, key)
             .doFinally { scrollListener.resetState() }
     }
 

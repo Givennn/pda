@@ -144,6 +144,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
     }
 
     private fun onNetworkError(throwable: Throwable) {
+        throwable.printStackTrace()
         if (throwable is HttpInnerException) {
             when (throwable.code) {
                 in UserViewModel.LogoutCodeList ->

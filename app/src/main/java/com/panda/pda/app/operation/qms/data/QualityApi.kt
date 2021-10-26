@@ -24,8 +24,8 @@ interface QualityApi {
      * @param rows 每页数量 (optional)
      * @param page 页码 (optional)
      */
-    @GET("pda/qms/distribute/list-by-page")
-    fun pdaQmsDistributeListByPageGet(
+    @GET("pda/qms/common/list-by-page")
+    fun pdaQmsCommonListByPageGet(
         @retrofit2.http.Query("modelType") modelType: Int,
         @retrofit2.http.Query("keyword") keyword: String?,
         @retrofit2.http.Query("rows") rows: Int = 10,
@@ -127,7 +127,7 @@ interface QualityApi {
      */
     @GET("pda/qms/qualitySubTask/get-by-id")
     fun pdaQmsQualitySubTaskGetByIdGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<QualitySubTaskDetailModel>
 
     /**
@@ -145,8 +145,8 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param id 质检子任务id (required)
      */
-    @GET("pda/qms/qualityTask/get-badness-list")
-    fun pdaQmsQualityTaskGetBadnessListGet(
+    @GET("pda/qms/qualitySubTask/get-badness-list")
+    fun pdaQmsQualitySubTaskGetBadnessListGet(
         @retrofit2.http.Query("id") id: String
     ): Single<DataListNode<QualityNgReasonModel>>
 
@@ -155,9 +155,9 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param id 质检子任务id (required)
      */
-    @GET("pda/qms/qualityTask/get-quality-item")
+    @GET("pda/qms/qualitySubTask/get-quality-item")
     fun pdaQmsQualityTaskGetQualityItemGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<DataListNode<QualityInspectItemModel>>
 
     /**

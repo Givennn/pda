@@ -1,5 +1,6 @@
 package com.panda.pda.app.operation.qms.quality_review
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -10,6 +11,7 @@ import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.ModelPropertyCreator
+import com.panda.pda.app.common.WheelPickerDialogFragment
 import com.panda.pda.app.databinding.FragmentQualityReviewVerifyBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
@@ -28,6 +30,8 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
     private val viewModel by activityViewModels<QualityViewModel>()
 
     private val verifyResult: Int? = null
+
+    private val verifyDialog by lazy { WheelPickerDialogFragment() }
 
     private lateinit var currentQualityDetail: QualityDetailModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +69,13 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
         }
         val remark = viewBinding.etRemark.text.toString()
         WebClient.request(QualityApi::class.java)
-            .pdaQmsReviewReviewPost(QualityTaskReviewRequest(currentQualityDetail.id, conclusion, remark))
+            .pdaQmsReviewReviewPost(
+                QualityTaskReviewRequest(
+                    currentQualityDetail.id,
+                    conclusion,
+                    remark
+                )
+            )
             .bindToFragment()
             .subscribe({
                 toast(R.string.quality_review_success_message)
@@ -74,6 +84,12 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
     }
 
     private fun showVerityDialog() {
-        TODO("Not yet implemented")
+        verifyDialog.also { picker ->
+            picker.pickerData = listOf("合格， 不合格")
+            picker.setConfirmButton({ _, _ ->
+
+            })
+        }
+            .show(parentFragmentManager, TAG)
     }
 }

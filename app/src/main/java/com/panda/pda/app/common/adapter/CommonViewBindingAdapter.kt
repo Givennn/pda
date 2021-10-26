@@ -70,10 +70,6 @@ abstract class CommonViewBindingAdapter<TBinding : ViewBinding, TSource>(protect
         } else dataSource.size
     }
 
-    override fun onViewRecycled(holder: ViewBindingHolder) {
-        super.onViewRecycled(holder)
-    }
-
     override fun getItemViewType(position: Int): Int {
         return if (dataSource.isEmpty()) {
             if (hasLoadedData) VIEW_TYPE_EMPTY else VIEW_TYPE_PLACEHOLDER

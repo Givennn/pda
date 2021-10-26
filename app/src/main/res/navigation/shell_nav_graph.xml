@@ -106,11 +106,6 @@
     <include app:graph="@navigation/operation_guide_nav_graph" />
 
     <fragment
-        android:id="@+id/qualityExecuteFragment"
-        android:name="com.panda.pda.app.operation.qms.QualityExecuteFragment"
-        android:label="fragment_quality_execute" />
-
-    <fragment
         android:id="@+id/qualityReceiveFragment"
         android:name="com.panda.pda.app.operation.qms.QualitySignFragment"
         android:label="fragment_quality_receive"/>
@@ -130,4 +125,10 @@
         android:label="OrgNodeSelectFragment" />
     <include app:graph="@navigation/quality_review_nav_graph" />
     <include app:graph="@navigation/quality_distribute_nav_graph" />
+    <fragment
+        android:id="@+id/ngReasonFragment"
+        android:name="com.panda.pda.app.operation.qms.NgReasonFragment"
+        android:label="NgReasonFragment" />
+    <include app:graph="@navigation/quality_execute_nav_graph" />
+    <include app:graph="@navigation/quality_problem_record_nav_graph" />
 </navigation>

@@ -63,12 +63,12 @@ interface CommonApi {
     @GET("pda/task/msg-count")
     fun pdaTaskMsgCountGet(
 //    ): Single<BaseResponse<TaskMessageCountModel>>
-    ): Single<TaskMessageCountModel>
+    ): Single<List<TaskMessageCountModel>>
 
     /**
      * 角色管理/根据部门Id查询子部门及人员信息
      */
 
-    @GET("pda/user/list-org-node")
-    fun userListOrgNodeGet(@retrofit2.http.Query("id") id: Int? = null):Single<DataListNode<OrgNodeModel>>
+    @GET("pda/admin/user/list-org-node")
+    fun userListOrgNodeGet(@retrofit2.http.Query("parentId") id: String):Single<DataListNode<OrgNodeModel>>
 }

@@ -5,13 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_item_underline">
     <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cb_ng_reason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:button="@drawable/ic_uncheck"
+        android:button="@drawable/selector_check_box"
         android:minWidth="15dp"
         android:minHeight="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingStart="12dp"
-        tools:text="001 表遍不良"/>
+        android:paddingEnd="12dp"
+        tools:text="@string/long_text_test"/>
 </LinearLayout>

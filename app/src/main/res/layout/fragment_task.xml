@@ -26,188 +26,150 @@
         style="@style/Widget.App.Toolbar.main"
         app:title="@string/task"/>
 
-    <LinearLayout
-        android:id="@+id/ll_task_receive"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_module_area"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:tag="310100"
-        android:orientation="horizontal">
+        android:overScrollMode="never"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_task_msg"/>
 
-        <ImageView
-            android:layout_width="@dimen/task_item_icon_size"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_task_receive" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_task_execute"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:tag="310200"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@string/task_receive"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/task_item_icon_size"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_task_execute" />-->
 
-        <TextView
-            android:id="@+id/tv_task_receive_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_badge"
-            android:minWidth="@dimen/task_item_icon_size"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:visibility="invisible"
-            tools:text="12" />
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="@string/task_execute"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="16sp" />-->
 
-        <ImageView
-            android:layout_width="@dimen/arrow_right_size"
-            android:layout_height="@dimen/arrow_right_size"
-            android:layout_marginStart="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_arrow_right" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_task_execute_badge"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:background="@drawable/bg_badge"-->
+<!--            android:minWidth="@dimen/task_item_icon_size"-->
+<!--            android:paddingStart="8dp"-->
+<!--            android:paddingEnd="8dp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            android:visibility="invisible"-->
+<!--            tools:text="12" />-->
 
-    <LinearLayout
-        android:id="@+id/ll_task_execute"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:tag="310200"
-        android:orientation="horizontal">
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/arrow_right_size"-->
+<!--            android:layout_height="@dimen/arrow_right_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_arrow_right" />-->
+<!--    </LinearLayout>-->
 
-        <ImageView
-            android:layout_width="@dimen/task_item_icon_size"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_task_execute" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_task_report"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:tag="310700"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@string/task_execute"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/task_item_icon_size"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_task_report" />-->
 
-        <TextView
-            android:id="@+id/tv_task_execute_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_badge"
-            android:minWidth="@dimen/task_item_icon_size"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:visibility="invisible"
-            tools:text="12" />
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="@string/task_report"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="16sp" />-->
 
-        <ImageView
-            android:layout_width="@dimen/arrow_right_size"
-            android:layout_height="@dimen/arrow_right_size"
-            android:layout_marginStart="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_arrow_right" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_task_report_badge"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:background="@drawable/bg_badge"-->
+<!--            android:minWidth="@dimen/task_item_icon_size"-->
+<!--            android:paddingStart="8dp"-->
+<!--            android:paddingEnd="8dp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            android:visibility="invisible"-->
+<!--            tools:text="12" />-->
 
-    <LinearLayout
-        android:id="@+id/ll_task_report"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:tag="310700"
-        android:orientation="horizontal">
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/arrow_right_size"-->
+<!--            android:layout_height="@dimen/arrow_right_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_arrow_right" />-->
+<!--    </LinearLayout>-->
 
-        <ImageView
-            android:layout_width="@dimen/task_item_icon_size"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_task_report" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_task_finish"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:tag="310800"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@string/task_report"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/task_item_icon_size"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_task_finish" />-->
 
-        <TextView
-            android:id="@+id/tv_task_report_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_badge"
-            android:minWidth="@dimen/task_item_icon_size"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:visibility="invisible"
-            tools:text="12" />
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="@string/task_finish"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="16sp" />-->
 
-        <ImageView
-            android:layout_width="@dimen/arrow_right_size"
-            android:layout_height="@dimen/arrow_right_size"
-            android:layout_marginStart="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_arrow_right" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_task_finish_badge"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="@dimen/task_item_icon_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:background="@drawable/bg_badge"-->
+<!--            android:minWidth="@dimen/task_item_icon_size"-->
+<!--            android:paddingStart="8dp"-->
+<!--            android:paddingEnd="8dp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            android:visibility="invisible"-->
+<!--            tools:text="12"-->
+<!--            tools:visibility="visible" />-->
 
-    <LinearLayout
-        android:id="@+id/ll_task_finish"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:tag="310800"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="@dimen/task_item_icon_size"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_task_finish" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@string/task_finish"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_task_finish_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/task_item_icon_size"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/bg_badge"
-            android:minWidth="@dimen/task_item_icon_size"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:visibility="invisible"
-            tools:text="12"
-            tools:visibility="visible" />
-
-        <ImageView
-            android:layout_width="@dimen/arrow_right_size"
-            android:layout_height="@dimen/arrow_right_size"
-            android:layout_marginStart="4dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_arrow_right" />
-    </LinearLayout>
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/arrow_right_size"-->
+<!--            android:layout_height="@dimen/arrow_right_size"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/ic_arrow_right" />-->
+<!--    </LinearLayout>-->
 </LinearLayout>

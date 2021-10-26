@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_task_receive"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginTop="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:tag="310100">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/task_item_icon_size"
+        android:layout_height="@dimen/task_item_icon_size"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_task_receive" />
+
+    <TextView
+        android:id="@+id/tv_module_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:text="@string/task_receive"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_badge"
+        tools:text="12"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/task_item_icon_size"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/bg_badge"
+        android:minWidth="@dimen/task_item_icon_size"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="@dimen/arrow_right_size"
+        android:layout_height="@dimen/arrow_right_size"
+        android:layout_marginStart="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_right" />
+</LinearLayout>

@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/quality_problem_record_nav_graph"
-    app:startDestination="@id/problemDetailFragment">
+    app:startDestination="@id/qualityProblemRecordFragment">
 
     <fragment
         android:id="@+id/qualityProblemRecordFragment"
         android:name="com.panda.pda.app.operation.qms.quality_problem_record.QualityProblemRecordFragment"
         android:label="fragment_quality_problem_record"
-        tools:layout="@layout/fragment_quality_problem_record" />
+        tools:layout="@layout/fragment_quality_problem_record" >
+        <action
+            android:id="@+id/action_qualityProblemRecordFragment_to_problemDetailFragment"
+            app:destination="@id/problemDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/problemDetailFragment"
         android:name="com.panda.pda.app.operation.qms.quality_problem_record.ProblemDetailFragment"

@@ -89,6 +89,8 @@ dependencies {
     implementation(SupportLibs.MATERIAL)
 //    implementation("com.github.chrisbanes:PhotoView:2.3.0")
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
+
+    implementation("cn.aigestudio.wheelpicker:WheelPicker:1.1.3")
     testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)

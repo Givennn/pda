@@ -171,5 +171,9 @@
     <string name="plan_data">预计时间</string>
     <string name="quality_task_distribute">派发质检任务</string>
     <string name="ng_reason">不良原因</string>
+    <string name="ng_reason_empty_message">请选择不良原因</string>
+    <string name="product_serial_code">产品条码</string>
+    <string name="verify_conclusion">审核结论</string>
+    <string name="input_or_scan_hint">请输入或扫描</string>
 
 </resources>

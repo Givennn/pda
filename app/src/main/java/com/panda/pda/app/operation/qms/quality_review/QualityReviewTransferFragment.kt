@@ -86,7 +86,7 @@ class QualityReviewTransferFragment : BaseFragment(R.layout.fragment_quality_rev
             toast("请选择审核人")
             return
         }
-        val verifierId = selectedVerifier!!.nodeId!!
+        val verifierId = selectedVerifier!!.id
         val remark = viewBinding.etRemark.text.toString()
         WebClient.request(QualityApi::class.java)
             .pdaQmsReviewTransferPost(

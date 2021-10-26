@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/taskReceiveFragment"
+        android:title="@string/task_receive"
+        android:icon="@drawable/ic_op_task_receive" />
+    <item
+        android:id="@+id/taskExecuteFragment"
+        android:title="@string/task_execute"
+        android:icon="@drawable/ic_op_task_execute"/>
+    <item
+        android:id="@+id/taskReportFragment"
+        android:title="@string/task_report"
+        android:icon="@drawable/ic_op_task_report"/>
+    <item
+        android:id="@+id/taskFinishFragment"
+        android:title="@string/task_finish"
+        android:icon="@drawable/ic_op_task_finish"/>
+    <item
         android:id="@+id/quality_task_nav_graph"
         android:title="@string/quality_task"
         android:icon="@drawable/ic_op_qc_task" />

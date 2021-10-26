@@ -58,7 +58,7 @@ class OrgNodeSelectFragment : BaseFragment(R.layout.fragment_org_node_select) {
 
     private fun getOrgNodes(node: OrgNodeModel? = null) {
         WebClient.request(CommonApi::class.java)
-            .userListOrgNodeGet(node?.nodeId)
+            .userListOrgNodeGet(node?.nodeId ?: "ORG_1")
             .bindToFragment()
             .subscribe({
                 orgNodeAdapter.refreshData(it.dataList)
@@ -67,7 +67,7 @@ class OrgNodeSelectFragment : BaseFragment(R.layout.fragment_org_node_select) {
                     titleAdapter.addData(node)
                     viewBinding.tvOrgTitles.scrollToPosition(titleAdapter.itemCount - 1)
                 } else {
-                    val rootNode = OrgNodeModel(it.dataList, null, 0, "部门选择", 1, "")
+                    val rootNode = OrgNodeModel(-1, it.dataList, "ORG_1", 0, "部门选择", 1, "")
                     titleAdapter.addData(rootNode)
                 }
             }, {})

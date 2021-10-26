@@ -95,7 +95,7 @@ class QualityProblemRecordFragment :
                 holder.itemViewBinding.apply {
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
-                        data.productDesc,
+                        data.productName,
                         "${data.productBarCode} ${data.productCode}"
                     )
                     tvQualityProblemInfo.text =
