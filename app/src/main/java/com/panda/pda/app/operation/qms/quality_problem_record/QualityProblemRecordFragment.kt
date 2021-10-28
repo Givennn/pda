@@ -65,7 +65,7 @@ class QualityProblemRecordFragment :
     }
 
     private fun addRecord() {
-        // nav to add
+        navController.navigate(R.id.action_qualityProblemRecordFragment_to_problemRecordEditFragment)
     }
 
     override fun onResume() {
@@ -142,7 +142,20 @@ class QualityProblemRecordFragment :
     }
 
     private fun editRecord(data: QualityProblemRecordModel) {
-        TODO("Not yet implemented")
+        WebClient.request(QualityApi::class.java)
+            .pdaQmsQualityProblemGetByIdGet(data.id)
+            .bindToFragment()
+            .subscribe({
+                navController.navigate(
+                    R.id.action_qualityProblemRecordFragment_to_problemRecordEditFragment,
+                    Bundle().apply {
+                        putString(
+                            ProblemRecordEditFragment.DETAIL_KEY,
+                            ProblemRecordEditFragment.getProblemRecordJsonAdapter().toJson(it)
+                        )
+                    })
+            }, {})
+
     }
 
     @get:StringRes

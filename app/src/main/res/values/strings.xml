@@ -177,5 +177,19 @@
     <string name="input_or_scan_hint">请输入或扫描</string>
     <string name="quality_problem_record_detail">质检问题记录详情</string>
     <string name="attachment">附件</string>
+    <string name="create_problem_record">新建质检问题记录</string>
+    <string name="optimization">优化建议</string>
+    <string name="cause_analysis">原因分析</string>
+    <string name="solution">解决对策</string>
+    <string name="occurrence_place">发生地</string>
+    <string name="quality_task_code">质检任务编号</string>
+    <string name="quality_problem_code">质检问题编号</string>
+    <string name="quality_check_info">质检信息</string>
+    <string name="inspector">质检人</string>
+    <string name="trace_department">跟踪部门</string>
+    <string name="inspector_time">质检时间</string>
+    <string name="trace_time">跟踪时间</string>
+    <string name="trace_user">跟踪人</string>
+    <string name="process_cycle">处理周期</string>
 
 </resources>

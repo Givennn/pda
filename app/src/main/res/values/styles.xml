@@ -261,5 +261,13 @@
         <item name="android:paddingBottom">16dp</item>
     </style>
 
-    <color name="remark_counter_color">#DCDCDC</color>
+    <style name="propertySingleLineEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/textSubHeaderLineColor</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:maxLength">32</item>
+    </style>
 </resources>

@@ -119,7 +119,7 @@
                 android:layout_height="16dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:button="@drawable/ic_password_toggle"
+                android:button="@drawable/select_password_toggle"
                 android:buttonTint="@color/white"
                 android:padding="2dp"
                 android:scaleType="fitCenter"
