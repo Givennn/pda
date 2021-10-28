@@ -40,7 +40,7 @@ data class QualityTaskModel(
     val planEndTime: String,
     val planStartTime: String,
     val qualitySolutionCode: String,
-    val status: String,
+    val status: Int,
     val taskCode: String,
     val taskDesc: String,
     val taskId: Int,

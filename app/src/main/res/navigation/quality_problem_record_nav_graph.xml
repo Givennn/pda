@@ -13,9 +13,16 @@
         <action
             android:id="@+id/action_qualityProblemRecordFragment_to_problemDetailFragment"
             app:destination="@id/problemDetailFragment" />
+        <action
+            android:id="@+id/action_qualityProblemRecordFragment_to_problemRecordEditFragment"
+            app:destination="@id/problemRecordEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/problemDetailFragment"
         android:name="com.panda.pda.app.operation.qms.quality_problem_record.ProblemDetailFragment"
         android:label="ProblemDetailFragment" />
+    <fragment
+        android:id="@+id/problemRecordEditFragment"
+        android:name="com.panda.pda.app.operation.qms.quality_problem_record.ProblemRecordEditFragment"
+        android:label="ProblemRecordEditFragment" />
 </navigation>

@@ -20,7 +20,7 @@ interface AlarmApi {
     @POST("pda/fms/alarm/add")
     fun pdaFmsAlarmAddPost(
         @retrofit2.http.Body request: AlarmDetailRequest
-    ): Completable
+    ): Single<Any>
     /**
      * 警报历史查询
      * status  状态 1未关闭 2关闭

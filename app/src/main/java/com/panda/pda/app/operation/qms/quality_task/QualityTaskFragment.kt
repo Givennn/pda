@@ -2,6 +2,7 @@ package com.panda.pda.app.operation.qms.quality_task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
@@ -53,6 +54,9 @@ class QualityTaskFragment : BaseQualitySearchListFragment<ItemQualityTaskBinding
             tvInspectNumber.text = data.deliverNum.toString()
             tvQualityScheme.text = data.qualitySolutionName
 
+            val hasReceive = data.status == QualityTaskModelType.Task.code
+            btnActionReceive.isVisible = !hasReceive
+            btnActionCommit.isVisible = hasReceive
             btnActionCommit.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(holder.itemView)
@@ -64,7 +68,7 @@ class QualityTaskFragment : BaseQualitySearchListFragment<ItemQualityTaskBinding
                 .subscribe {
                     showActionRequestDialog(
                         WebClient.request(QualityApi::class.java)
-                            .pdaQmsTaskRevicePost(IdRequest(data.id)),
+                            .pdaQmsTaskReceivePost(IdRequest(data.id)),
                         getString(
                             R.string.quality_task_receive_confirm, getString(
                                 R.string.desc_and_code_formatter,

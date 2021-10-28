@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.annotation.StringRes
+import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
@@ -18,15 +19,19 @@ import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentQualityProblemRecordBinding
 import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.databinding.ItemQualityProblemRecordBinding
+import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 
 class QualityProblemRecordFragment :
     BaseFragment(R.layout.fragment_quality_problem_record) {
 
     private val viewBinding by viewBinding<FragmentQualityProblemRecordBinding>()
+
+    private val viewModel by activityViewModels<QualityViewModel>()
 
     private val itemListAdapter by lazy { createAdapter() }
 
@@ -115,14 +120,25 @@ class QualityProblemRecordFragment :
                     root.clicks()
                         .throttleFirst(500, TimeUnit.MILLISECONDS)
                         .bindToLifecycle(holder.itemView)
-                        .subscribe{ showRecordDetail(data)}
+                        .subscribe { showRecordDetail(data) }
                 }
             }
         }
     }
 
     private fun showRecordDetail(data: QualityProblemRecordModel) {
-        TODO("Not yet implemented")
+        Single.zip(
+            WebClient.request(QualityApi::class.java)
+                .pdaQmsQualityProblemGetByIdGet(data.id),
+            WebClient.request(QualityApi::class.java)
+                .pdaQmsCommonOperatorListGet(data.taskId)
+        ) { detail, record -> Pair(detail, record) }
+            .bindToFragment()
+            .subscribe({
+                viewModel.problemRecordDetailData.postValue(it.first)
+                viewModel.qualityDetailRecordData.postValue(it.second)
+                navController.navigate(R.id.action_qualityProblemRecordFragment_to_problemDetailFragment)
+            }, {})
     }
 
     private fun editRecord(data: QualityProblemRecordModel) {

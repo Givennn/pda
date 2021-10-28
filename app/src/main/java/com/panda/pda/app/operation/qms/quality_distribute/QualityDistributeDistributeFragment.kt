@@ -9,12 +9,16 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.ModelPropertyCreator
 import com.panda.pda.app.common.OrgNodeSelectFragment
 import com.panda.pda.app.common.data.model.OrgNodeModel
 import com.panda.pda.app.databinding.FragmentQualityDistributeDistributeBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
+import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
+import com.panda.pda.app.operation.qms.data.model.QualityTaskDistributeRequest
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,6 +35,8 @@ class QualityDistributeDistributeFragment :
     private val viewModel by activityViewModels<QualityViewModel>()
 
     private var selectedVerifier: OrgNodeModel? = null
+
+    private var planTime: Pair<String, String>? = null
 
     private lateinit var currentQualityTask: QualityDetailModel
 
@@ -75,9 +81,9 @@ class QualityDistributeDistributeFragment :
 
         datePicker.addOnPositiveButtonClickListener {
 
+            planTime = Pair(convertLongToTime(it.first), convertLongToTime(it.second))
             viewBinding.tvPlanDate.text =
-                "${convertLongToTime(it.first)}~${convertLongToTime(it.second)}"
-
+                "${planTime!!.first}~${planTime!!.second}"
         }
         viewBinding.llSelectPlanDate.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -94,7 +100,29 @@ class QualityDistributeDistributeFragment :
     }
 
     private fun distribute() {
-        TODO("Not yet implemented")
+        if (selectedVerifier == null) {
+            toast("请选择审核人")
+            return
+        }
+        if (planTime == null) {
+            toast("请选择预计时间")
+            return
+        }
+        WebClient.request(QualityApi::class.java)
+            .pdaQmsDistributeDistributePost(
+                QualityTaskDistributeRequest(
+                    currentQualityTask.id,
+                    viewBinding.tilReportNum.getValue,
+                    selectedVerifier!!.id,
+                    planTime!!.first,
+                    planTime!!.second
+                )
+            )
+            .bindToFragment()
+            .subscribe({
+                toast("质检任务派发成功")
+                navBackListener.invoke(requireView())
+            }, {})
     }
 
     private fun updateVerifier(verifier: OrgNodeModel) {

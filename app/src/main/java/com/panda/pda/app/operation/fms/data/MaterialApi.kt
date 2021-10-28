@@ -23,7 +23,7 @@ interface MaterialApi {
     @POST("pda/fms/task/material/bind-change")
     fun pdaFmsTaskMaterialBindChangePost(
         @retrofit2.http.Body request: MaterialReplaceBindRequest
-    ): Completable
+    ): Single<Any>
     /**
      * 绑定产品物料
      *
@@ -34,7 +34,7 @@ interface MaterialApi {
     @POST("pda/fms/task/material/bind")
     fun taskMaterialBindPost(
         @retrofit2.http.Body request: MaterialBindRequest
-    ):Completable
+    ):Single<Any>
     /**
      * 任务列表
      * keywords：任务编号/产品编码/产品描述/派工人
@@ -81,5 +81,5 @@ interface MaterialApi {
     @POST("pda/fms/task/material/unbind")
     fun materialUnbindPost(
         @retrofit2.http.Body request: MaterialUnbindRequest
-    ): Completable
+    ): Single<Any>
 }

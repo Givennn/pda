@@ -175,5 +175,7 @@
     <string name="product_serial_code">产品条码</string>
     <string name="verify_conclusion">审核结论</string>
     <string name="input_or_scan_hint">请输入或扫描</string>
+    <string name="quality_problem_record_detail">质检问题记录详情</string>
+    <string name="attachment">附件</string>
 
 </resources>

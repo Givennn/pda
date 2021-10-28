@@ -91,7 +91,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     }
 
     private fun queryCommonParameters() {
-        return //TODO mock test
+//        return //TODO mock test
         WebClient.request(CommonApi::class.java)
             .pdaConfigSysParamListByParamGet()
             .onMainThread()

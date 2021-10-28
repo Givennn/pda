@@ -59,7 +59,7 @@
                     android:text="@string/verifier_result" />
 
                 <TextView
-                    android:id="@+id/tv_verifier"
+                    android:id="@+id/tv_verify_result"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

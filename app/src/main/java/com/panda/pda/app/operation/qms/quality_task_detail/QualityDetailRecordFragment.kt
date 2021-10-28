@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
@@ -45,14 +46,8 @@ class QualityDetailRecordFragment : BaseFragment(R.layout.fragment_quality_detai
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    when (holder.layoutPosition) {
-                        0 -> {
-                            viewStepLineTop.visibility = View.INVISIBLE
-                        }
-                        itemCount - 1 -> {
-                            viewStepLineBottom.visibility = View.INVISIBLE
-                        }
-                    }
+                    viewStepLineTop.isVisible = holder.layoutPosition != 0
+                    viewStepLineBottom.isVisible = holder.bindingAdapterPosition != itemCount - 1
                     tvRecordType.text = data.operateType
                     tvOperator.text = data.operateName
                     tvTime.text = data.createTime

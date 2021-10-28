@@ -33,12 +33,16 @@ class OrgNodeSelectFragment : BaseFragment(R.layout.fragment_org_node_select) {
     private lateinit var titleAdapter: CommonViewBindingAdapter<*, OrgNodeModel>
     private lateinit var orgNodeAdapter: CommonViewBindingAdapter<*, OrgNodeModel>
 
+    private var isSelectDepartment = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = arguments?.getString(TITLE_KEY)
         if (title != null) {
             viewBinding.topAppBar.title = title
         }
+        isSelectDepartment = arguments?.getBoolean(SELECT_TYPE_KEY) ?: false
+
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         setupTitleRv()
         setupNodeRv()
@@ -172,5 +176,6 @@ class OrgNodeSelectFragment : BaseFragment(R.layout.fragment_org_node_select) {
         const val TITLE_KEY = "ORG_SELECT_TITLE"
         const val ORG_NODE_RESULT = "ORG_NODE_RESULT"
         const val PERSON_SELECT_KEY = "ORG_PERSON_SELECTED"
+        const val SELECT_TYPE_KEY = "select_type_key"
     }
 }

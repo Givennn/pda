@@ -1,17 +1,15 @@
 package com.panda.pda.app.common
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.aigestudio.wheelpicker.WheelPicker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.panda.pda.app.R
-import com.panda.pda.app.base.ConfirmDialogFragment
 import com.panda.pda.app.databinding.DialogWheelPickerSelectBinding
 
 /**
@@ -23,22 +21,19 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
 
     private var cancelAction: DialogInterface.OnClickListener? = null
 
-    private lateinit var viewBinding: DialogWheelPickerSelectBinding
+    private val viewBinding by viewBinding<DialogWheelPickerSelectBinding>()
 
-    var pickerData = listOf("未定义")
+    var pickerData = listOf<String>()
 
-    var selectedItem = -1
+    var selectedItem = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = DialogWheelPickerSelectBinding.inflate(inflater, container, false)
-        .also {
-            viewBinding = it
-        }.root
-
-    //    }
+    ): View? {
+        return inflater.inflate(R.layout.dialog_wheel_picker_select, container)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,6 +55,7 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
         viewBinding.wheelPicker.setOnItemSelectedListener { _, _, position ->
             selectedItem = position
         }
+        viewBinding.wheelPicker.data = pickerData
     }
 
 
@@ -77,10 +73,6 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
         return this
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        viewBinding.wheelPicker.data = pickerData
-        return super.onCreateDialog(savedInstanceState)
-    }
 
     private fun setupWhealViewStyle(wheelView: WheelPicker) {
         wheelView.isCyclic = false

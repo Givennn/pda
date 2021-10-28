@@ -21,7 +21,7 @@ interface TaskApi {
     @POST("pda/fms/task/complete/confirm")
     fun taskCompleteConfirmPost(
         @retrofit2.http.Body request: IdRequest,
-    ): Completable
+    ): Single<Any>
 
     /**
      * 任务完工列表
@@ -45,7 +45,7 @@ interface TaskApi {
     @POST("pda/fms/task/execution/confirm")
     fun taskExecutionConfirmPost(
         @retrofit2.http.Body request: IdRequest,
-    ): Completable
+    ): Single<Any>
 
     /**
      * 任务执行列表
@@ -91,7 +91,7 @@ interface TaskApi {
     @POST("pda/fms/task/receive/confirm")
     fun taskReceiveConfirmPost(
         @retrofit2.http.Body request: IdRequest,
-    ): Completable
+    ): Single<Any>
 
     /**
      * 任务接收列表
@@ -112,7 +112,7 @@ interface TaskApi {
     @POST("pda/fms/task/report/confirm")
     fun pdaFmsTaskReportConfirmPost(
         @retrofit2.http.Body request: TaskReportRequest
-    ): Completable
+    ): Single<Any>
     /**
      * 任务报工列表
      * keywords：任务编号  产品编码或者描述  派工人工号或者姓名

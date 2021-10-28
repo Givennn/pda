@@ -129,7 +129,7 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
         }
 
     protected fun showActionRequestDialog(
-        request: Completable,
+        request: Single<*>,
         dialogTitle: String,
         successMessage: String
     ) {

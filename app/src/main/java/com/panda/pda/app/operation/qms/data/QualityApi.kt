@@ -70,7 +70,7 @@ interface QualityApi {
     @POST("pda/qms/qualityProblem/add")
     fun pdaQmsQualityProblemAddPost(
 //        @retrofit2.http.Body root: Root
-    ): Completable
+    ): Single<Any>
 
     /**
      * 编辑质检问题记录
@@ -80,7 +80,7 @@ interface QualityApi {
     @POST("pda/qms/qualityProblem/edit")
     fun pdaQmsQualityProblemEditPost(
 //        @retrofit2.http.Body root: Root1
-    ): Completable
+    ): Single<Any>
 
     /**
      * 质检问题详情
@@ -89,7 +89,7 @@ interface QualityApi {
      */
     @GET("pda/qms/qualityProblem/get-by-id")
     fun pdaQmsQualityProblemGetByIdGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<QualityProblemRecordDetailModel>
 
     /**
@@ -108,7 +108,7 @@ interface QualityApi {
     @POST("/pda/pda/distribute/cancel")
     fun qualityDistributeCancel(
         @retrofit2.http.Body body: IdRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 完工质检任务
@@ -118,7 +118,7 @@ interface QualityApi {
     @POST("pda/qms/qualitySubTask/finish")
     fun pdaQmsQualitySubTaskFinishPost(
         @retrofit2.http.Body body: IdRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 质检子任务详情
@@ -138,7 +138,7 @@ interface QualityApi {
     @POST("pda/qms/qualitySubTask/sign")
     fun pdaQmsQualitySubTaskSignPost(
         @retrofit2.http.Body body: IdRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 根据质检子任务id查询不良原因列表
@@ -168,7 +168,7 @@ interface QualityApi {
     @POST("pda/qms/review/review")
     fun pdaQmsReviewReviewPost(
         @retrofit2.http.Body body: QualityTaskReviewRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 质检任务转办
@@ -181,7 +181,7 @@ interface QualityApi {
     @POST("pda/qms/review/transfer")
     fun pdaQmsReviewTransferPost(
         @Body body: QualityTaskTransferRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 提交质检任务
@@ -191,7 +191,7 @@ interface QualityApi {
     @POST("pda/qms/task/commit")
     fun pdaQmsTaskCommitPost(
         @retrofit2.http.Body body: QualityTaskCommitRequest
-    ): Completable
+    ): Single<Any>
 
     /**
      * 接收质检任务
@@ -199,7 +199,7 @@ interface QualityApi {
      * @param root (optional)
      */
     @POST("pda/qms/task/revice")
-    fun pdaQmsTaskRevicePost(
+    fun pdaQmsTaskReceivePost(
         @retrofit2.http.Body body: IdRequest
-    ): Completable
+    ): Single<Any>
 }
