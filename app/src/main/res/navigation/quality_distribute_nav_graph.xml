@@ -7,9 +7,7 @@
         android:id="@+id/qualityDistributeFragment"
         android:name="com.panda.pda.app.operation.qms.quality_distribute.QualityDistributeFragment"
         android:label="fragment_quality_distribute" >
-        <action
-            android:id="@+id/action_qualityDistributeFragment_to_qualityDistributeBackOutFragment"
-            app:destination="@id/qualityDistributeBackOutFragment" />
+
         <action
             android:id="@+id/action_qualityDistributeFragment_to_qualityDistributeTransferFragment"
             app:destination="@id/qualityDistributeTransferFragment" />
@@ -17,10 +15,7 @@
             android:id="@+id/action_qualityDistributeFragment_to_qualityDistributeDistributeFragment"
             app:destination="@id/qualityDistributeDistributeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/qualityDistributeBackOutFragment"
-        android:name="com.panda.pda.app.operation.qms.quality_distribute.QualityDistributeBackOutFragment"
-        android:label="QualityDistributeBackOutFragment" />
+
     <fragment
         android:id="@+id/qualityDistributeDistributeFragment"
         android:name="com.panda.pda.app.operation.qms.quality_distribute.QualityDistributeDistributeFragment"

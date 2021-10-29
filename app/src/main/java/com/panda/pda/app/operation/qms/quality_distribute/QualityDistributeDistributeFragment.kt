@@ -111,7 +111,8 @@ class QualityDistributeDistributeFragment :
         WebClient.request(QualityApi::class.java)
             .pdaQmsDistributeDistributePost(
                 QualityTaskDistributeRequest(
-                    currentQualityTask.id,
+//                    currentQualityTask.id,
+                    -1,
                     viewBinding.tilReportNum.getValue,
                     selectedVerifier!!.id,
                     planTime!!.first,
@@ -132,7 +133,7 @@ class QualityDistributeDistributeFragment :
 
     private fun convertLongToTime(time: Long): String {
         val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return format.format(date)
     }
 

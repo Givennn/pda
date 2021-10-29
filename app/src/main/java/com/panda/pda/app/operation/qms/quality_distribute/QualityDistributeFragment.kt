@@ -60,11 +60,6 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(holder.itemView)
                 .subscribe { transfer(data) }
-
-            btnActionBackOut.clicks()
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe { backOut(data) }
-
         }
     }
 
@@ -91,14 +86,5 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
                 {})
     }
 
-    private fun backOut(data: QualityTaskModel) {
-        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
-            .bindToFragment()
-            .subscribe(
-                {
-                    viewModel.qualityDetailInfoData.postValue(it)
-                    navController.navigate(R.id.action_qualityDistributeFragment_to_qualityDistributeBackOutFragment)
-                },
-                {})
-    }
+
 }

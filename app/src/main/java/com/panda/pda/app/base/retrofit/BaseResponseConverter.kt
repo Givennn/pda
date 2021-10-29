@@ -22,6 +22,8 @@ class BaseResponseConverter(private val delegate: Converter<ResponseBody, BaseRe
             delegate.convert(value) ?: throw IOException("baseResponse convert error")
         if (baseResponse.code != NetworkParams.SUCCESS_CODE) {
             throw HttpInnerException(baseResponse)
+        } else if (baseResponse.data == null) {
+            return Unit
         }
         return baseResponse.data
     }

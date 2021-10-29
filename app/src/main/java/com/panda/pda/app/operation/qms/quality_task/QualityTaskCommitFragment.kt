@@ -31,6 +31,8 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
     private val viewModel by activityViewModels<QualityViewModel>()
 
     private var selectedVerifier: OrgNodeModel? = null
+
+    private lateinit var currentQualityTask: QualityDetailModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFragmentResultListener(OrgNodeSelectFragment.ORG_NODE_RESULT) { requestKey, bundle ->
@@ -49,6 +51,7 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
         )
         viewModel.qualityDetailInfoData.observe(viewLifecycleOwner) {
             modelProperty.setData(it)
+            currentQualityTask = it
         }
 
         viewBinding.llSelectVerifier.clicks()
@@ -85,7 +88,7 @@ class QualityTaskCommitFragment : BaseFragment(R.layout.fragment_quality_commit)
         val verifierId = selectedVerifier!!.id
         val remark = viewBinding.etRemark.text.toString()
         WebClient.request(QualityApi::class.java)
-            .pdaQmsTaskCommitPost(QualityTaskCommitRequest(verifierId, remark))
+            .pdaQmsTaskCommitPost(QualityTaskCommitRequest(currentQualityTask.id, verifierId, remark))
             .bindToFragment()
             .subscribe({
                 toast(R.string.quality_task_commit_success)

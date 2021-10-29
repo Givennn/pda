@@ -179,6 +179,15 @@
                 android:text="@string/sign"
                 app:icon="@drawable/ic_action_receive" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action_back_out"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back_out"
+                app:icon="@drawable/ic_action_back_out" />
+
         </LinearLayout>
     </LinearLayout>
 

@@ -65,7 +65,7 @@ object WebClient {
             .client(downLoadClient)
             .baseUrl(BuildConfig.GRADLE_API_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create().withNullSerialization())
             .build()
     }
 }

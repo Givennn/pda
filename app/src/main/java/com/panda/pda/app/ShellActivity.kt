@@ -61,7 +61,13 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     private fun customNavAction() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id !in arrayOf(R.id.loginFragment, R.id.splashFragment)) {
+            if (destination.id in arrayOf(
+                    R.id.operationFragment,
+                    R.id.taskFragment,
+                    R.id.profileFragment,
+                    R.id.operationFragment
+                )
+            ) {
                 updateTaskCount()
             }
         }

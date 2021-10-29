@@ -29,9 +29,13 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
 
     private val viewModel by activityViewModels<QualityViewModel>()
 
-    private var verifyResult: Int? = null
+    private var verifyResult: Pair<String, Int>? = null
 
-    private val verifyDialog by lazy { WheelPickerDialogFragment().also { it.pickerData = verifyData } }
+    private val verifyDialog by lazy {
+        WheelPickerDialogFragment().also {
+            it.pickerData = verifyData
+        }
+    }
 
     private val verifyData = listOf("驳回", "批准")
 
@@ -74,7 +78,7 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
             .pdaQmsReviewReviewPost(
                 QualityTaskReviewRequest(
                     currentQualityDetail.id,
-                    conclusion,
+                    conclusion.second,
                     remark
                 )
             )
@@ -86,10 +90,10 @@ class QualityReviewVerifyFragment : BaseFragment(R.layout.fragment_quality_revie
     }
 
     private fun showVerityDialog() {
-        verifyDialog.setConfirmButton { _, _ ->
-            verifyResult = verifyDialog.selectedItem
-            if (verifyResult in verifyData.indices) {
-                viewBinding.tvVerifyResult.text = verifyData[verifyResult!!]
+        verifyDialog.setConfirmButton { result ->
+            verifyResult = result
+            if (verifyResult != null) {
+                viewBinding.tvVerifyResult.text = result!!.first
             }
         }.show(parentFragmentManager, TAG)
     }

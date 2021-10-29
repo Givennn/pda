@@ -57,10 +57,10 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param body (optional)
      */
-    @POST("pda/qms/distribute/distribute")
+    @POST("pda/qms/qualityTask/distribute")
     fun pdaQmsDistributeDistributePost(
         @retrofit2.http.Body body: QualityTaskDistributeRequest
-    ): Single<Int>
+    ): Single<Any>
 
     /**
      * 新建质检问题记录
@@ -69,7 +69,7 @@ interface QualityApi {
      */
     @POST("pda/qms/qualityProblem/add")
     fun pdaQmsQualityProblemAddPost(
-//        @retrofit2.http.Body root: Root
+        @retrofit2.http.Body body: QualityProblemRecordDetailModel
     ): Single<Any>
 
     /**
@@ -79,7 +79,7 @@ interface QualityApi {
      */
     @POST("pda/qms/qualityProblem/edit")
     fun pdaQmsQualityProblemEditPost(
-//        @retrofit2.http.Body root: Root1
+        @retrofit2.http.Body body: QualityProblemRecordDetailModel
     ): Single<Any>
 
     /**
@@ -105,7 +105,7 @@ interface QualityApi {
     /**
      * 派发子任务撤销
      */
-    @POST("/pda/pda/distribute/cancel")
+    @POST("pda/qms/qualityTask/distribute-cancel")
     fun qualityDistributeCancel(
         @retrofit2.http.Body body: IdRequest
     ): Single<Any>
@@ -150,6 +150,16 @@ interface QualityApi {
         @retrofit2.http.Query("id") id: String
     ): Single<DataListNode<QualityNgReasonModel>>
 
+
+    /**
+     * 查询所有启用状态的不良原因
+     * The endpoint is owned by docs service owner
+     * @param id 质检子任务id (required)
+     */
+    @GET("pda/qms/qualityProblem/get-badness-reason")
+    fun pdaQmsQualityProblemGetBadnessListGet(
+    ): Single<DataListNode<QualityNgReasonModel>>
+
     /**
      * 根据质检子任务id查询质检项列表
      * The endpoint is owned by docs service owner
@@ -165,7 +175,7 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/qms/review/review")
+    @POST("pda/qms/qualityTask/review")
     fun pdaQmsReviewReviewPost(
         @retrofit2.http.Body body: QualityTaskReviewRequest
     ): Single<Any>
@@ -178,9 +188,22 @@ interface QualityApi {
      * @param 备注  (required)
      * @param root (optional)
      */
-    @POST("pda/qms/review/transfer")
+    @POST("pda/qms/qualityTask/review-transfer")
     fun pdaQmsReviewTransferPost(
         @Body body: QualityTaskTransferRequest
+    ): Single<Any>
+
+    /**
+     * 派发质检任务转办
+     * The endpoint is owned by docs service owner
+     * @param id  (required)
+     * @param reviewerId  (required)
+     * @param 备注  (required)
+     * @param root (optional)
+     */
+    @POST("pda/qms/qualityTask/distribute-transfer")
+    fun pdaQmsQualityTaskDistributeTransferPost(
+        @Body body: QualityTaskDistributeTransferRequest
     ): Single<Any>
 
     /**
@@ -188,7 +211,7 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/qms/task/commit")
+    @POST("pda/qms/qualityTask/commit")
     fun pdaQmsTaskCommitPost(
         @retrofit2.http.Body body: QualityTaskCommitRequest
     ): Single<Any>
@@ -198,7 +221,7 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/qms/task/revice")
+    @POST("pda/qms/qualityTask/receive")
     fun pdaQmsTaskReceivePost(
         @retrofit2.http.Body body: IdRequest
     ): Single<Any>

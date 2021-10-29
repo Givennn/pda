@@ -50,6 +50,9 @@ class OrgNodeSelectFragment : BaseFragment(R.layout.fragment_org_node_select) {
     }
 
     private fun onPersonSelected(node: OrgNodeModel) {
+        if (titleAdapter.dataSource.size > 1) {
+            node.department = titleAdapter.dataSource.last()
+        }
         setFragmentResult(ORG_NODE_RESULT, Bundle().apply {
             putSerializable(PERSON_SELECT_KEY, node)
         })

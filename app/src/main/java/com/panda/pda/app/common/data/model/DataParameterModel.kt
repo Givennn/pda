@@ -8,6 +8,11 @@ data class DataParameterModel(
     val ENABLE_STATUS: List<Parameter>,
     val SOURCE_TYPE: List<Parameter>,
     val TASK_STATUS: List<Parameter>,
+    val CONCLUSION_DECIDE_OPTION: List<Parameter>,
+    val QUALITY_PROBLEM_STATUS: List<Parameter>,
+    val VALUE_TYPE: List<Parameter>,
+    val QUALITY_TYPE: List<Parameter>,
+    val SUB_QUALITY_TASK_STATUS: List<Parameter>
 )
 
 data class Parameter(

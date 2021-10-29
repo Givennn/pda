@@ -10,10 +10,12 @@ import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.common.WheelPickerDialogFragment
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentNgReasonBinding
 import com.panda.pda.app.databinding.ItemNgReasonBinding
 import com.panda.pda.app.operation.qms.data.model.QualityNgReasonModel
+import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
@@ -28,14 +30,7 @@ class NgReasonFragment : BaseFragment(R.layout.fragment_ng_reason) {
 
     private lateinit var ngReasons: List<QualityNgReasonModel>
 
-    private val ngReasonAdapter by lazy {
-        Moshi.Builder().build().adapter<List<QualityNgReasonModel>>(
-            Types.newParameterizedType(
-                List::class.java,
-                QualityNgReasonModel::class.java
-            )
-        )
-    }
+    private val ngReasonAdapter = getNgReasonAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,5 +86,14 @@ class NgReasonFragment : BaseFragment(R.layout.fragment_ng_reason) {
     companion object {
         const val REQUEST_KEY = "NG_REASON_REQUEST"
         const val NG_REASON_ARG_KEY = "NG_REASON_ARGS"
+
+        fun getNgReasonAdapter(): JsonAdapter<List<QualityNgReasonModel>> {
+            return Moshi.Builder().build().adapter(
+                Types.newParameterizedType(
+                    List::class.java,
+                    QualityNgReasonModel::class.java
+                )
+            )
+        }
     }
 }

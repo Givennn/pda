@@ -16,4 +16,6 @@ data class OrgNodeModel(
 ) : Serializable {
 //    val isOrgNode: Boolean get() = nodeType != 2
     val isOrgNode: Boolean get() = nodeType == 1
+    @Transient
+    var department: OrgNodeModel? = null
 }

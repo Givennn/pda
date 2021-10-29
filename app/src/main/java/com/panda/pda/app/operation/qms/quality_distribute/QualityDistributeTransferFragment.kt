@@ -17,6 +17,7 @@ import com.panda.pda.app.databinding.FragmentQualityDistributeTransferBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
+import com.panda.pda.app.operation.qms.data.model.QualityTaskDistributeTransferRequest
 import com.panda.pda.app.operation.qms.data.model.QualityTaskTransferRequest
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
@@ -88,8 +89,8 @@ class QualityDistributeTransferFragment: BaseFragment(R.layout.fragment_quality_
         val verifierId = selectedVerifier!!.id
         val remark = viewBinding.etRemark.text.toString()
         WebClient.request(QualityApi::class.java)
-            .pdaQmsReviewTransferPost(
-                QualityTaskTransferRequest(
+            .pdaQmsQualityTaskDistributeTransferPost(
+                QualityTaskDistributeTransferRequest(
                     currentQualityTask.id,
                     verifierId,
                     remark
@@ -97,7 +98,7 @@ class QualityDistributeTransferFragment: BaseFragment(R.layout.fragment_quality_
             )
             .bindToFragment()
             .subscribe({
-                toast(R.string.quality_task_commit_success)
+                toast(R.string.quality_task_transfer_success)
                 navBackListener.invoke(requireView())
             }, {})
     }

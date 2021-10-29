@@ -9,64 +9,99 @@ import com.panda.pda.app.operation.qms.data.model.QualityDetailModel.Companion.Q
  */
 data class QualityProblemRecordDetailModel(
     @ModelProperty(1, "质检问题记录")
-    val problemCode: String,
-    val id: Int?,
+    var problemCode: String?,
     @ModelProperty(2, "产品条码")
-    val productBarCode: String?,
+    var productBarCode: String?,
     @ModelProperty(3, "产品编码")
-    val productCode: String?,
+    var productCode: String?,
     @ModelProperty(4, "产品描述")
-    val productName: String?,
+    var productName: String?,
     @ModelProperty(5, "发生地")
-    val occurrencePlace: String?,
+    var occurrencePlace: String?,
     @ModelProperty(6, "质检任务编号")
-    val qualityCode: String?,
+    var qualityCode: String?,
     @ModelProperty(7, "任务编号")
-    val taskCode: String?,
+    var taskCode: String?,
     @ModelProperty(8, "任务描述")
-    val taskDesc: String?,
+    var taskDesc: String?,
     @ModelProperty(9, "计划编号")
-    val planCode: String?,
+    var planCode: String?,
     @ModelProperty(10, "工作令号")
-    val workNo: String?,
+    var workNo: String?,
     @ModelProperty(11, "批次号")
-    val batchNo: String?,
+    var batchNo: String?,
     @ModelProperty(12, "订单编号")
-    val orderNo: String?,
+    var orderNo: String?,
     @ModelProperty(14, "质检结论")
-    val conclusion: String?,
+    var conclusion: String?,
     @ModelProperty(15, "质检人")
-    val inspector: String?,
+    var inspector: String?,
     @ModelProperty(16, "质检时间")
-    val inspectorTime: String?,
+    var inspectorTime: String?,
     @ModelProperty(20, "跟踪部门")
-    val traceDepartment: String?,
+    var traceDepartment: String?,
     @ModelProperty(21, "跟踪时间")
-    val traceTime: String?,
-    val traceDepartmentId: Int?,
+    var traceTime: String?,
+    var traceDepartmentId: Int?,
     @ModelProperty(22, "跟踪人")
-    val traceUser: String?,
+    var traceUser: String?,
     @ModelProperty(23, "原因分析")
-    val causeAnalysis: String?,
+    var causeAnalysis: String?,
     @ModelProperty(24, "解决对策")
-    val solution: String?,
+    var solution: String?,
     @ModelProperty(25, "状态")
-    val status: String?,
+    var status: String?,
     @ModelProperty(26, "优化建议")
-    val optimization: String?,
+    var optimization: String?,
     @ModelProperty(27, "处理周期")
-    val processCycle: String?,
-    val adverseCauseInfoList: List<QualityNgReasonModel>?,
-    val fileList: List<FileInfoModel>,
-    val pictureList: List<FileInfoModel>,
-    val productDesc: String,
-    val remark: String,
-    val taskId: Int,
-    val traceUserId: Int,
-    val updateId: String,
-    val updateName: String,
+    var processCycle: String?,
+    var adverseCauseInfoList: List<QualityNgReasonModel>?,
+    var fileList: List<FileInfoModel>?,
+    var pictureList: List<FileInfoModel>?,
+    var remark: String?,
+    var taskId: Int?,
+    var traceUserId: Int?,
+    var id: Int?
 ) {
-        @ModelProperty(12, "不良原因")
+    //        @ModelProperty(12, "不良原因")
     val ngReasons: String
         get() = (adverseCauseInfoList ?: listOf()).joinToString(";") { it.badnessReasonName }
+
+    companion object {
+        fun create(): QualityProblemRecordDetailModel {
+            return QualityProblemRecordDetailModel(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            )
+        }
+    }
 }

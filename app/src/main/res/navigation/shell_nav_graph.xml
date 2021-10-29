@@ -106,11 +106,6 @@
     <include app:graph="@navigation/operation_guide_nav_graph" />
 
     <fragment
-        android:id="@+id/qualityReceiveFragment"
-        android:name="com.panda.pda.app.operation.qms.QualitySignFragment"
-        android:label="fragment_quality_receive"/>
-
-    <fragment
         android:id="@+id/qualityDetailFragment"
         android:name="com.panda.pda.app.operation.qms.quality_task_detail.QualityDetailFragment"
         android:label="QualityDetailFragment" />

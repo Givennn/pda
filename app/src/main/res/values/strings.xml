@@ -191,5 +191,8 @@
     <string name="trace_time">跟踪时间</string>
     <string name="trace_user">跟踪人</string>
     <string name="process_cycle">处理周期</string>
+    <string name="edit_problem_record">编辑质检问题记录</string>
+    <string name="time_pick">选择时间</string>
+    <string name="quality_task_transfer_success">质检任务派发成功</string>
 
 </resources>

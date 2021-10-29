@@ -94,8 +94,8 @@ class ProblemDetailFragment: BaseFragment(R.layout.fragment_problem_detial) {
         viewModel.problemRecordDetailData.observe(viewLifecycleOwner, {
             modelProperty.setData(it)
             viewBinding.tvRemark.text = it.remark
-            picAdapter.refreshData(it.pictureList)
-            fileAdapter.refreshData(it.fileList)
+            picAdapter.refreshData(it.pictureList?: listOf())
+            fileAdapter.refreshData(it.fileList?: listOf())
         })
     }
 

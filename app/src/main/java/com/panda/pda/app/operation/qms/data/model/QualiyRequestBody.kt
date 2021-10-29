@@ -16,6 +16,7 @@ data class QualityTaskDistributeRequest(
 )
 
 data class QualityTaskCommitRequest(
+    val id: Int,
     @field:Json(name = "reviewerId") val verifierId: Int,
     val remark: String
 )
@@ -24,6 +25,12 @@ data class QualityTaskTransferRequest(
     val id: Int,
     val verifierId: Int,
     val remark: String
+)
+
+data class QualityTaskDistributeTransferRequest(
+    val id: Int,
+    val distributeId: Int,
+    val remark: String?
 )
 
 data class QualityTaskReviewRequest(

@@ -17,7 +17,7 @@ import com.panda.pda.app.databinding.DialogWheelPickerSelectBinding
  */
 class WheelPickerDialogFragment : BottomSheetDialogFragment() {
 
-    private var confirmAction: DialogInterface.OnClickListener? = null
+    private var confirmAction: ((Pair<String, Int>?) -> Unit)? = null
 
     private var cancelAction: DialogInterface.OnClickListener? = null
 
@@ -25,7 +25,7 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
 
     var pickerData = listOf<String>()
 
-    var selectedItem = 0
+    private var selectedItem: Pair<String, Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,7 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        isCancelable = false
         viewBinding.let { binding ->
             binding.btnCancel.setOnClickListener {
                 cancelAction?.onClick(
@@ -46,21 +47,24 @@ class WheelPickerDialogFragment : BottomSheetDialogFragment() {
                 dismiss()
             }
             binding.btnConfirm.setOnClickListener {
-                confirmAction?.onClick(requireDialog(), it.id)
+                confirmAction?.invoke(selectedItem)
                 dismiss()
             }
         }
 
         setupWhealViewStyle(viewBinding.wheelPicker)
-        viewBinding.wheelPicker.setOnItemSelectedListener { _, _, position ->
-            selectedItem = position
+        viewBinding.wheelPicker.setOnItemSelectedListener { _, data, position ->
+            selectedItem = Pair(data.toString(), position)
         }
         viewBinding.wheelPicker.data = pickerData
+        if (pickerData.isNotEmpty()) {
+            selectedItem = Pair(pickerData.first(), 0)
+        }
     }
 
 
     fun setConfirmButton(
-        listener: DialogInterface.OnClickListener,
+        listener: (Pair<String, Int>?) -> Unit,
     ): WheelPickerDialogFragment {
         confirmAction = listener
         return this
