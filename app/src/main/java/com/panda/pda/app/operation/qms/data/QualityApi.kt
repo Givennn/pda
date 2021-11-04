@@ -33,6 +33,19 @@ interface QualityApi {
     ): Single<DataListNode<QualityTaskModel>>
 
     /**
+     * 获取子任务列表
+     *
+     * The endpoint is owned by docs service owner
+     * @param keyword 搜索关键字 (required)
+     * @param modelType 1-质检签收，2-质检执行
+     */
+    @GET("pda/qms/common/sub-task-list")
+    fun pdaQmsCommonSubTaskListGet(
+        @retrofit2.http.Query("modelType") modelType: Int,
+        @retrofit2.http.Query("keyword") keyword: String?,
+    ): Single<DataListNode<QualitySubTaskModel>>
+
+    /**
      * 根据质检任务id查询质检任务详情
      * The endpoint is owned by docs service owner
      * @param id 质检任务id (required)
@@ -115,8 +128,8 @@ interface QualityApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/qms/qualitySubTask/finish")
-    fun pdaQmsQualitySubTaskFinishPost(
+    @POST("pda/qms/qualityTask/finish")
+    fun pdaQmsQualityTaskFinishPost(
         @retrofit2.http.Body body: IdRequest
     ): Single<Any>
 
@@ -147,7 +160,7 @@ interface QualityApi {
      */
     @GET("pda/qms/qualitySubTask/get-badness-list")
     fun pdaQmsQualitySubTaskGetBadnessListGet(
-        @retrofit2.http.Query("id") id: String
+        @retrofit2.http.Query("id") id: Int
     ): Single<DataListNode<QualityNgReasonModel>>
 
 
@@ -216,6 +229,7 @@ interface QualityApi {
         @retrofit2.http.Body body: QualityTaskCommitRequest
     ): Single<Any>
 
+
     /**
      * 接收质检任务
      * The endpoint is owned by docs service owner
@@ -224,5 +238,21 @@ interface QualityApi {
     @POST("pda/qms/qualityTask/receive")
     fun pdaQmsTaskReceivePost(
         @retrofit2.http.Body body: IdRequest
+    ): Single<Any>
+
+    /**
+     * 根据质检子任务id查询质检方案的结论判定选项
+     */
+    @GET("pda/qms/qualitySubTask/get-conclusion-option")
+    fun pdaQmsQualitySubTaskGetConclusionOptionGet(
+        @retrofit2.http.Query("id") id: Int
+    ): Single<DataListNode<String>>
+
+    /**
+     * 执行质检子任务
+     */
+    @POST("pda/qms/qualitySubTask/execute")
+    fun pdaQmsQualitySubTaskExecutePost(
+        @retrofit2.http.Body body: QualityTaskExecuteRequest
     ): Single<Any>
 }

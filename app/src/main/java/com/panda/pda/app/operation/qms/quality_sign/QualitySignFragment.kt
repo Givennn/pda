@@ -10,14 +10,16 @@ import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.common.data.model.IdRequest
 import com.panda.pda.app.databinding.ItemQualitySignBinding
 import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
+import com.panda.pda.app.operation.qms.BaseQualitySubTaskSearchListFragment
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
+import com.panda.pda.app.operation.qms.data.model.QualitySubTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
 
-class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding>() {
+class QualitySignFragment : BaseQualitySubTaskSearchListFragment<ItemQualitySignBinding>() {
     override val qualityTaskModelType: QualityTaskModelType
         get() = QualityTaskModelType.Sign
 
@@ -32,24 +34,26 @@ class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding
     }
 
     override fun onBindViewHolder(
-        holder: CommonViewBindingAdapter<ItemQualitySignBinding, QualityTaskModel>.ViewBindingHolder,
-        data: QualityTaskModel,
+        holder: CommonViewBindingAdapter<ItemQualitySignBinding, QualitySubTaskModel>.ViewBindingHolder,
+        data: QualitySubTaskModel,
         position: Int
     ) {
         holder.itemViewBinding.apply {
             tvQualityInfo.text = getString(
                 R.string.desc_and_code_formatter,
                 data.qualityDesc,
-                data.qualityCode
+                data.qualityTaskCode
             )
             tvTaskInfo.text =
-                getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-            tvPlanDateSection.text = getString(
-                R.string.time_section_formatter,
-                data.planStartTime,
-                data.planEndTime
-            )
-            tvQualityNumber.text = data.qualityNum.toString()
+                getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
+            if (!data.planStartTime.isNullOrEmpty() && !data.planEndTime.isNullOrEmpty()) {
+                tvPlanDateSection.text = getString(
+                    R.string.time_section_formatter,
+                    data.planStartTime,
+                    data.planEndTime
+                )
+            }
+            tvQualityNumber.text = data.qualityNotInspectedNum.toString()
             tvQualityScheme.text = data.qualitySolutionName
             btnActionSign.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -62,7 +66,7 @@ class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding
                             R.string.quality_task_finish_confirm, getString(
                                 R.string.desc_and_code_formatter,
                                 data.qualityDesc,
-                                data.qualityCode
+                                data.qualityTaskCode
                             )
                         ),
                         getString(R.string.quality_task_finish_success)
@@ -74,12 +78,12 @@ class QualitySignFragment : BaseQualitySearchListFragment<ItemQualitySignBinding
         }
     }
 
-    private fun backOut(data: QualityTaskModel) {
-        WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id)
+    private fun backOut(data: QualitySubTaskModel) {
+        WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskGetByIdGet(data.id)
             .bindToFragment()
             .subscribe(
                 {
-                    viewModel.qualityDetailInfoData.postValue(it)
+                    viewModel.qualityDetailSubTaskData.postValue(it)
                     navController.navigate(R.id.action_qualitySignFragment_to_qualityDistributeBackOutFragment)
                 },
                 {})

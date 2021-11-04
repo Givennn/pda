@@ -28,6 +28,9 @@ object CommonParameters {
         dictionary[DataParamType.VALUE_TYPE] = data.VALUE_TYPE
         dictionary[DataParamType.QUALITY_TYPE] = data.QUALITY_TYPE
         dictionary[DataParamType.SUB_QUALITY_TASK_STATUS] = data.SUB_QUALITY_TASK_STATUS
+        dictionary[DataParamType.RECORD_METHOD] = data.RECORD_METHOD
+        dictionary[DataParamType.QUALITY_TASK_STATUS] = data.QUALITY_TASK_STATUS
+        dictionary[DataParamType.QUALITY_METHOD] = data.QUALITY_METHOD
     }
 }
 
@@ -40,5 +43,8 @@ enum class DataParamType {
     QUALITY_PROBLEM_STATUS,
     VALUE_TYPE,
     QUALITY_TYPE,
-    SUB_QUALITY_TASK_STATUS
+    SUB_QUALITY_TASK_STATUS,
+    RECORD_METHOD,
+    QUALITY_TASK_STATUS,
+    QUALITY_METHOD
 }

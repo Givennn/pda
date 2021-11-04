@@ -103,12 +103,7 @@
 
                 <TextView
                     android:id="@+id/tv_ng_reason"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="@string/select_hint"
-                    android:textColorHint="@color/text_field_hint" />
+                    style="@style/updatablePropertyTextView"  />
 
                 <ImageView
                     android:layout_width="12dp"
@@ -142,13 +137,8 @@
                     android:text="@string/verify_conclusion" />
 
                 <TextView
-                    android:id="@+id/tv_verifier"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="@string/select_hint"
-                    android:textColorHint="@color/text_field_hint" />
+                    android:id="@+id/tv_verify_result"
+                    style="@style/updatablePropertyTextView" />
 
                 <ImageView
                     android:layout_width="12dp"

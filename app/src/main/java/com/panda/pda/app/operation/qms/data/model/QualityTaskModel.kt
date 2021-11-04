@@ -37,8 +37,8 @@ data class QualityTaskModel(
     val id: Int,
     val orderCode: String,
     val planCode: String,
-    val planEndTime: String,
-    val planStartTime: String,
+    val planEndTime: String?,
+    val planStartTime: String?,
     val qualitySolutionCode: String,
     val status: Int,
     val taskCode: String,
@@ -54,7 +54,7 @@ enum class QualityTaskModelType(val code: Int) {
     Task(1),
     Review(2),
     Distribute(3),
-    Sign(4),
-    Execute(5),
+    Sign(1),
+    Execute(2),
     Finish(6)
 }

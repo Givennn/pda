@@ -79,14 +79,10 @@
                         android:layout_height="wrap_content"
                         android:text="@string/quality_problem_code" />
 
-                    <EditText
-                        android:id="@+id/et_quality_problem_code"
-                        style="@style/propertySingleLineEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:hint="@string/input_hint"
-                        android:inputType="text"
-                        tools:text="10011" />
+                    <TextView
+                        android:id="@+id/tv_quality_problem_code"
+                        style="@style/updatablePropertyTextView"
+                        android:hint=""/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -372,13 +368,7 @@
 
                 <TextView
                     android:id="@+id/tv_ng_reason"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="@string/select_hint"
-                    android:freezesText="true"
-                    android:textColorHint="@color/text_field_hint" />
+                    style="@style/updatablePropertyTextView" />
 
                 <ImageView
                     android:layout_width="12dp"
@@ -414,13 +404,7 @@
 
                 <TextView
                     android:id="@+id/tv_verify_result"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:freezesText="true"
-                    android:hint="@string/select_hint"
-                    android:textColorHint="@color/text_field_hint" />
+                    style="@style/updatablePropertyTextView" />
 
                 <ImageView
                     android:layout_width="12dp"
@@ -506,16 +490,12 @@
 
                     <TextView
                         android:id="@+id/tv_inspector_time"
-                        style="@style/detailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:freezesText="true"
-                        android:hint="@string/select_hint" />
+                        style="@style/updatablePropertyTextView" />
 
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -535,16 +515,12 @@
 
                     <TextView
                         android:id="@+id/tv_trace_time"
-                        style="@style/detailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:freezesText="true"
-                        android:hint="@string/select_hint" />
+                        style="@style/updatablePropertyTextView" />
 
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -564,16 +540,12 @@
 
                     <TextView
                         android:id="@+id/tv_trace_user"
-                        style="@style/detailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:freezesText="true"
-                        android:hint="@string/select_hint" />
+                        style="@style/updatablePropertyTextView" />
 
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -592,11 +564,7 @@
 
                     <TextView
                         android:id="@+id/tv_trace_department"
-                        style="@style/detailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:freezesText="true"
+                        style="@style/updatablePropertyTextView"
                         android:hint="请选择跟踪人" />
 
                 </LinearLayout>
@@ -730,8 +698,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_item_underline"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_picture_label"
@@ -739,20 +706,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
                         android:padding="0dp"
                         android:text="@string/picture"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_pic_list"
                         style="@style/detailText"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -760,13 +727,21 @@
                         app:layout_constraintStart_toEndOf="@+id/tv_picture_label"
                         app:layout_constraintTop_toTopOf="@+id/tv_picture_label"
                         tools:itemCount="3"
-                        tools:listitem="@layout/item_problem_record_detail_pic" />
+                        tools:listitem="@layout/item_task_report_photo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="40dp"
+                        android:textColor="@color/textDescColor"
+                        android:text="@string/upload_pic_hint"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_item_underline">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_files_label"
@@ -774,20 +749,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
                         android:padding="0dp"
                         android:text="@string/attachment"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_upload_file"
+                        android:layout_width="70dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/ic_upload_file"
+                        app:backgroundTint="@color/textDescColor"/>
+
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_files_list"
                         style="@style/detailText"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -796,10 +780,17 @@
                         app:layout_constraintTop_toTopOf="@+id/tv_files_label"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_problem_record_detail_file" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="100dp"
+                        android:textColor="@color/textDescColor"
+                        android:textSize="12sp"
+                        android:text="@string/upload_file_hint"/>
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -814,4 +805,5 @@
         android:layout_marginTop="24dp"
         android:layout_gravity="center|bottom"
         android:text="@string/confirm"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

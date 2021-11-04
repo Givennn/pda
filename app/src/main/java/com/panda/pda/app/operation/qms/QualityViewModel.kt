@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordDetailModel
+import com.panda.pda.app.operation.qms.data.model.QualitySubTaskDetailModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskRecordModel
 
 /**
@@ -15,6 +16,8 @@ class QualityViewModel : ViewModel() {
     val qualityDetailInfoData by lazy { MutableLiveData<QualityDetailModel>() }
 
     val qualityDetailRecordData by lazy { MutableLiveData<DataListNode<QualityTaskRecordModel>>() }
+
+    val qualityDetailSubTaskData by lazy { MutableLiveData<QualitySubTaskDetailModel>() }
 
     val problemRecordDetailData by lazy { MutableLiveData<QualityProblemRecordDetailModel>() }
 }

@@ -310,6 +310,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/confirm"
                 app:layout_constraintBottom_toBottomOf="parent" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

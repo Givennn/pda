@@ -14,10 +14,10 @@ data class QualityDetailModel(
     val qualityDesc: String,
     @ModelProperty(3, "质检方案")
     val qualitySolutionName: String,
-    @ModelProperty(4, "质检类型")
-    val qualityType: String,
-    @ModelProperty(5, "质检方式")
-    val qualityMethod: String,
+    @ModelProperty(4, "质检类型", dataParameterType = "QUALITY_TYPE")
+    val qualityType: Int,
+    @ModelProperty(5, "质检方式", dataParameterType = "QUALITY_METHOD")
+    val qualityMethod: Int,
     @ModelProperty(6, "产品编码")
     val productCode: String,
     @ModelProperty(7, "产品描述")
@@ -37,9 +37,9 @@ data class QualityDetailModel(
     @ModelProperty(14, "批次号", [QualityDetailTag])
     val batchNo: String,
     @ModelProperty(15, "订单编号", [QualityDetailTag])
-    val orderCode: String,
-    @ModelProperty(16, "状态", [QualityDetailTag])
-    val status: String,
+    val orderNo: String,
+    @ModelProperty(16, "状态", [QualityDetailTag], "QUALITY_TASK_STATUS")
+    val status: Int,
     @ModelProperty(17, "计划开始时间", [QualityDetailTag])
     val planStartTime: String,
     @ModelProperty(18, "计划完成时间", [QualityDetailTag])

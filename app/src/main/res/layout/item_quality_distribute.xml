@@ -71,6 +71,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
+                android:textColor="@color/textSubHeaderLineColor"
                 app:layout_constraintBottom_toBottomOf="@id/tv_quality_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_quality_info"

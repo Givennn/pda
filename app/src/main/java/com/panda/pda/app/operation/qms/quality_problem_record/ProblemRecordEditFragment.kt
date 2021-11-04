@@ -1,35 +1,51 @@
 package com.panda.pda.app.operation.qms.quality_problem_record
 
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.SingleDateSelector
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.checkedChanges
+import com.panda.pda.app.BuildConfig
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
 import com.panda.pda.app.base.extension.toast
+import com.panda.pda.app.base.retrofit.ContentUriRequestBody
 import com.panda.pda.app.base.retrofit.WebClient
+import com.panda.pda.app.base.retrofit.getFileName
 import com.panda.pda.app.common.OrgNodeSelectFragment
 import com.panda.pda.app.common.WheelPickerDialogFragment
+import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.app.common.data.CommonApi
 import com.panda.pda.app.common.data.CommonParameters
 import com.panda.pda.app.common.data.DataParamType
+import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.common.data.model.OrgNodeModel
 import com.panda.pda.app.databinding.FragmentProblemRecordEditBinding
+import com.panda.pda.app.databinding.ItemProblemRecordDetailFileBinding
+import com.panda.pda.app.operation.fms.mission.TaskReportInputFragment
+import com.panda.pda.app.operation.fms.mission.TaskReportInputPhotoAdapter
 import com.panda.pda.app.operation.qms.NgReasonFragment
 import com.panda.pda.app.operation.qms.data.QualityApi
-import com.panda.pda.app.operation.qms.data.model.QualityNgReasonModel
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordDetailModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
-import io.reactivex.rxjava3.core.Single
-import org.w3c.dom.Text
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -39,6 +55,10 @@ import java.util.concurrent.TimeUnit
  */
 class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_edit) {
 
+    private lateinit var fileAdapter: CommonViewBindingAdapter<*, FileInfoModel>
+    private lateinit var photoAdapter: TaskReportInputPhotoAdapter
+    private lateinit var tmpFile: File
+    private var latestTmpUri: Uri? = null
     private lateinit var detailModel: QualityProblemRecordDetailModel
 
     private val viewBinding by viewBinding<FragmentProblemRecordEditBinding>()
@@ -60,6 +80,42 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private var selectedDateProperty: TextView? = null
 
     private var isEditProblem = false
+
+    private val takeImageResult =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                latestTmpUri?.let { uri ->
+                    updatePhoto(uri)
+                }
+            }
+        }
+
+    private val selectFileResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uploadFile(uri)
+        }
+
+    private fun uploadFile(uri: Uri?) {
+        if (uri == null) {
+            return
+        }
+        WebClient.request(CommonApi::class.java)
+            .pdaCommonUploadFilePost(
+                MultipartBody.Part.createFormData(
+                    "file",
+                    uri.getFileName(requireActivity().contentResolver),
+                    ContentUriRequestBody(requireActivity().contentResolver, uri)
+                )
+            )
+            .bindToFragment()
+            .subscribe({
+                it.fileLocalUri = uri
+                fileAdapter.dataSource.add(it)
+                fileAdapter.notifyDataSetChanged()
+                Timber.d("url: ${it.fileUrl}")
+            }, {})
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val detailStr = arguments?.getString(DETAIL_KEY)
@@ -74,7 +130,6 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
                 ?: QualityProblemRecordDetailModel.create()
         }
 
-        updateDetail(detailModel)
         verifyData = CommonParameters.getParameters(DataParamType.CONCLUSION_DECIDE_OPTION)
             .sortedBy { it.paramValue }.map { it.paramDesc }
         viewBinding.apply {
@@ -159,6 +214,22 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
                 }
             }
         }
+
+        setupPhotoAdapter()
+        fileAdapter = createFileAdapter(detailModel.fileList)
+        viewBinding.rvFilesList.adapter = fileAdapter
+        viewBinding.btnUploadFile.clicks()
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .bindToLifecycle(requireView())
+            .subscribe { selectFileRequest() }
+
+        updateDetail(detailModel)
+    }
+
+    private fun selectFileRequest() {
+        lifecycleScope.launchWhenStarted {
+            selectFileResult.launch("*/*")
+        }
     }
 
     private fun updateTraceUser(nodeModel: OrgNodeModel) {
@@ -216,7 +287,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private fun getDetailModel(): QualityProblemRecordDetailModel {
         viewBinding.apply {
 
-            detailModel.problemCode = etQualityProblemCode.text.toString()
+            detailModel.problemCode = tvQualityProblemCode.text.toString()
             detailModel.productBarCode = etProductSerialCode.text.toString()
             detailModel.productCode = etProductCode.text.toString()
             detailModel.productName = etProductDesc.text.toString()
@@ -233,6 +304,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             detailModel.solution = etSolution.text.toString()
             detailModel.optimization = etOptimization.text.toString()
             detailModel.remark = etRemark.text.toString()
+            detailModel.pictureList = photoAdapter.getDataSource()
+            detailModel.fileList = fileAdapter.dataSource
         }
         return detailModel
     }
@@ -240,7 +313,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private fun updateDetail(model: QualityProblemRecordDetailModel) {
         viewBinding.apply {
 
-            etQualityProblemCode.setText(model.problemCode)
+            tvQualityProblemCode.text = model.problemCode
             etProductSerialCode.setText(model.productBarCode)
             etProductCode.setText(model.productCode)
             etProductDesc.setText(model.productName)
@@ -262,6 +335,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             }
             tvVerifyResult.text = model.conclusion
             etProcessCycle.setText(model.processCycle)
+            photoAdapter.setData(model.pictureList ?: listOf())
+            fileAdapter.refreshData(model.fileList ?: listOf())
         }
     }
 
@@ -284,9 +359,94 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             }, {})
     }
 
-    //    private fun buildDetailModel(): QualityProblemRecordDetailModel {
-//        val result = QualityProblemRecordDetailModel
-//    }
+    private fun setupPhotoAdapter() {
+        photoAdapter = TaskReportInputPhotoAdapter()
+        photoAdapter.onTakePhotoAction = { takePhoto() }
+        viewBinding.rvPicList.adapter = photoAdapter
+    }
+
+    private fun takePhoto() {
+
+        lifecycleScope.launchWhenStarted {
+            getTmpFileUri().let { uri ->
+                latestTmpUri = uri
+                takeImageResult.launch(uri)
+            }
+        }
+    }
+
+    private fun updatePhoto(uri: Uri) {
+
+        WebClient.request(CommonApi::class.java)
+            .pdaCommonUploadFilePost(
+                MultipartBody.Part.createFormData(
+                    "file",
+                    tmpFile.name,
+                    tmpFile.asRequestBody("image/${TaskReportInputFragment.IMAGE_TYPE}".toMediaType())
+                )
+            )
+            .bindToFragment()
+            .subscribe({
+                it.fileLocalUri = uri
+                photoAdapter.getDataSource().add(it)
+                photoAdapter.notifyDataSetChanged()
+                Timber.d("url: ${it.fileUrl}")
+            }, {})
+    }
+
+    private fun getTmpFileUri(): Uri {
+        tmpFile =
+            File.createTempFile(
+                "tmp_image_file",
+                ".${TaskReportInputFragment.IMAGE_TYPE}",
+                requireContext().cacheDir
+            ).apply {
+                createNewFile()
+                deleteOnExit()
+            }
+
+        return FileProvider.getUriForFile(
+            requireActivity().applicationContext,
+            "${BuildConfig.APPLICATION_ID}.provider",
+            tmpFile
+        )
+    }
+
+    private fun createFileAdapter(fileList: List<FileInfoModel>?): CommonViewBindingAdapter<*, FileInfoModel> {
+        return object : CommonViewBindingAdapter<ItemProblemRecordDetailFileBinding, FileInfoModel>(
+            fileList?.toMutableList() ?: mutableListOf()
+        ) {
+            override fun createBinding(parent: ViewGroup): ItemProblemRecordDetailFileBinding {
+                return ItemProblemRecordDetailFileBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: FileInfoModel,
+                position: Int
+            ) {
+                holder.itemViewBinding.btnFile.text = data.fileName
+                holder.itemViewBinding.root.setOnClickListener {
+                    openFileRequest(data)
+                }
+                holder.itemViewBinding.ivDelete.setOnClickListener {
+                    dataSource.remove(data)
+                    notifyDataSetChanged()
+                }
+            }
+
+        }
+    }
+
+    private fun openFileRequest(data: FileInfoModel) {
+
+    }
+
     companion object {
         const val DETAIL_KEY = "detail_key"
 

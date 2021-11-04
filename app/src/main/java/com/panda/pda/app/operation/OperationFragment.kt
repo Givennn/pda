@@ -93,21 +93,20 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
             ModuleNavigationAdapter(
                 menuRes,
                 requireContext()
-            ) { filterFmsAuthority(it) }
+            ) { filterAuthority(it) }
                 .also {
                     it.navAction = navAction
                 })
     }
 
-    private fun filterFmsAuthority(item: MenuItem): Boolean {
-//        val userAuthor = userViewModel.loginData.value?.menus ?: return true
-//        val authorTree =
-//            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operation) }
-//                ?: return false
-//
-//        val authorCode =
-//            authorTree.children.firstOrNull { it.name == item.title }?.id ?: return false
-//        return userAuthor.contains(authorCode.toString())
-        return true
+    private fun filterAuthority(item: MenuItem): Boolean {
+        val userAuthor = userViewModel.loginData.value?.menus ?: return true
+        val authorTree =
+            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operation) }
+                ?: return false
+
+        val authorCode =
+            authorTree.children.firstOrNull { it.name == item.title }?.id ?: return false
+        return userAuthor.contains(authorCode.toString())
     }
 }

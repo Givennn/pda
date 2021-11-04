@@ -8,5 +8,6 @@ data class QualityTaskRecordModel(
     val id: Int,
     val operateDetail: String,
     val operateName: String,
-    val operateType: String
+    val operateType: String,
+    val remark: String
 )

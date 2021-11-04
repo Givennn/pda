@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -81,6 +82,7 @@ class ProblemDetailFragment: BaseFragment(R.layout.fragment_problem_detial) {
                     data: FileInfoModel,
                     position: Int
                 ) {
+                    holder.itemViewBinding.ivDelete.isVisible = false
                     holder.itemViewBinding.btnFile.text = data.fileName
                     holder.itemViewBinding.root.setOnClickListener {
                         showFileView(data)
@@ -106,28 +108,4 @@ class ProblemDetailFragment: BaseFragment(R.layout.fragment_problem_detial) {
     private fun showImageView(data: FileInfoModel) {
 
     }
-//        viewBinding.apply {
-//            viewPage.adapter = object : FragmentStateAdapter(parentFragmentManager, lifecycle) {
-//                override fun getItemCount(): Int {
-//                    return 2
-//                }
-//
-//                override fun createFragment(position: Int): Fragment {
-//                    return when (position) {
-//                        0 -> ProblemDetailInfoFragment()
-//                        1 -> ProblemDetailRecordFragment()
-//                        else -> throw IndexOutOfBoundsException()
-//                    }
-//                }
-//
-//            }
-//            TabLayoutMediator(tabLayout, viewPage) { tab, position ->
-//                tab.text = when (position) {
-//                    0 -> getString(R.string.basic_info)
-//                    1 -> getString(R.string.operate_record)
-//                    else -> ""
-//                }
-//            }.attach()
-//        }
-//    }
 }

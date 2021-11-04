@@ -51,7 +51,7 @@ class QualityDetailRecordFragment : BaseFragment(R.layout.fragment_quality_detai
                     tvRecordType.text = data.operateType
                     tvOperator.text = data.operateName
                     tvTime.text = data.createTime
-                    tvDesc.text = data.operateDetail
+                    tvDesc.text = data.remark
                 }
             }
         }

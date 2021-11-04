@@ -126,4 +126,5 @@
         android:label="NgReasonFragment" />
     <include app:graph="@navigation/quality_execute_nav_graph" />
     <include app:graph="@navigation/quality_problem_record_nav_graph" />
+    <include app:graph="@navigation/quality_sign_nav_graph" />
 </navigation>

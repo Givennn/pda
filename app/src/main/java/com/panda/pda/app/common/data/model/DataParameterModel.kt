@@ -12,7 +12,10 @@ data class DataParameterModel(
     val QUALITY_PROBLEM_STATUS: List<Parameter>,
     val VALUE_TYPE: List<Parameter>,
     val QUALITY_TYPE: List<Parameter>,
-    val SUB_QUALITY_TASK_STATUS: List<Parameter>
+    val SUB_QUALITY_TASK_STATUS: List<Parameter>,
+    val RECORD_METHOD: List<Parameter>,
+    val QUALITY_TASK_STATUS: List<Parameter>,
+    val QUALITY_METHOD: List<Parameter>
 )
 
 data class Parameter(

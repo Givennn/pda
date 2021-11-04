@@ -48,7 +48,7 @@ class QualityFinishFragment : BaseQualitySearchListFragment<ItemQualityFinishBin
                 .bindToLifecycle(holder.itemView)
                 .subscribe {
                     showActionRequestDialog(
-                        WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskFinishPost(
+                        WebClient.request(QualityApi::class.java).pdaQmsQualityTaskFinishPost(
                             IdRequest(data.id)
                         ),
                         getString(

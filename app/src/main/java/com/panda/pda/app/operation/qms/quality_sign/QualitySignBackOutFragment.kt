@@ -18,6 +18,7 @@ import com.panda.pda.app.databinding.FragmentQualityDistributeBackOutBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
+import com.panda.pda.app.operation.qms.data.model.QualitySubTaskDetailModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
 
@@ -33,7 +34,7 @@ class QualitySignBackOutFragment :
 
     private var selectedVerifier: OrgNodeModel? = null
 
-    private lateinit var currentQualityTask: QualityDetailModel
+    private lateinit var currentQualityTask: QualitySubTaskDetailModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,10 +49,10 @@ class QualitySignBackOutFragment :
         }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         val modelProperty = ModelPropertyCreator(
-            QualityDetailModel::class.java,
+            QualitySubTaskDetailModel::class.java,
             viewBinding.llPropertyInfo
         )
-        viewModel.qualityDetailInfoData.observe(viewLifecycleOwner) {
+        viewModel.qualityDetailSubTaskData.observe(viewLifecycleOwner) {
             modelProperty.setData(it)
             currentQualityTask = it
         }
@@ -93,7 +94,7 @@ class QualitySignBackOutFragment :
             )
             .bindToFragment()
             .subscribe({
-                toast(R.string.quality_task_commit_success)
+                toast(R.string.quality_task_back_out_success)
                 navBackListener.invoke(requireView())
             }, {})
     }

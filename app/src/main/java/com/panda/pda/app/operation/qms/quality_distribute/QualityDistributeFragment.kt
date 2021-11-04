@@ -44,13 +44,16 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
                 data.qualityCode
             )
             tvTaskInfo.text =
-                getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-            tvPlanDateSection.text = getString(
-                R.string.time_section_formatter,
-                data.planStartTime,
-                data.planEndTime
-            )
-            tvQualityNumber.text = data.qualityNum.toString()
+                getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
+            if (!data.planStartTime.isNullOrEmpty() && !data.planEndTime.isNullOrEmpty()) {
+                tvPlanDateSection.text = getString(
+                    R.string.time_section_formatter,
+                    data.planStartTime,
+                    data.planEndTime
+                )
+            }
+            tvQualityNumber.text = "${data.distributedNum}/${data.qualityNum}"
+
             btnActionDistribute.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(holder.itemView)

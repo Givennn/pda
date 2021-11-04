@@ -16,7 +16,7 @@ import com.panda.pda.library.android.R
  */
 class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout(context, attrs) {
 
-    var minValue = 0
+    var minValue = 1
 
     var maxValue = 10
 

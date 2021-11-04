@@ -1,6 +1,7 @@
 package com.panda.pda.app.base
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -135,7 +136,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             .bindLoadingStatus()
     }
 
-    protected fun<T> Single<T>.bindToFragment(): Single<T> {
+    protected fun <T> Single<T>.bindToFragment(): Single<T> {
         return this
             .onMainThread()
             .bindToLifecycle(this@BaseFragment.requireView())
@@ -164,6 +165,7 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentL
             isCancelable = false
             loadingDialog = this
         }.show(parentFragmentManager, TAG)
-
     }
+
+
 }

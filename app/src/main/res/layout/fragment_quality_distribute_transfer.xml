@@ -60,12 +60,7 @@
 
                 <TextView
                     android:id="@+id/tv_verifier"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:hint="@string/select_hint"
-                    android:textColorHint="@color/text_field_hint" />
+                    style="@style/updatablePropertyTextView"  />
 
                 <ImageView
                     android:layout_width="12dp"
@@ -82,22 +77,13 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="64dp">
-
-                <ImageView
-                    android:layout_width="8dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_import"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_subTitle" />
 
                 <TextView
                     style="@style/detailText.label"
@@ -111,7 +97,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText

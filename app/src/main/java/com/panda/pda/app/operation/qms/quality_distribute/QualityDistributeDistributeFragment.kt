@@ -111,8 +111,7 @@ class QualityDistributeDistributeFragment :
         WebClient.request(QualityApi::class.java)
             .pdaQmsDistributeDistributePost(
                 QualityTaskDistributeRequest(
-//                    currentQualityTask.id,
-                    -1,
+                    currentQualityTask.id,
                     viewBinding.tilReportNum.getValue,
                     selectedVerifier!!.id,
                     planTime!!.first,

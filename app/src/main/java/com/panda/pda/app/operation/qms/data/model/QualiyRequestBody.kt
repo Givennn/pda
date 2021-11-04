@@ -39,3 +39,16 @@ data class QualityTaskReviewRequest(
     val remark: String
 )
 
+data class QualityTaskExecuteRequest(
+    val id: Int,
+    val conclusion: String,
+    val productBarCode: String,
+    val badnessReasonIds: List<Int>?,
+    val qualityItems: List<QualityItem>
+)
+
+data class QualityItem(
+    val id: Int,
+    val conclusion: String
+)
+

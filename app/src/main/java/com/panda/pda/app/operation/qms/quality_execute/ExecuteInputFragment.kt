@@ -4,20 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.ModelPropertyCreator
+import com.panda.pda.app.common.WheelPickerDialogFragment
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentExecuteInputBinding
 import com.panda.pda.app.databinding.ItemQualityCheckItemBinding
+import com.panda.pda.app.operation.qms.NgReasonFragment
 import com.panda.pda.app.operation.qms.data.QualityApi
-import com.panda.pda.app.operation.qms.data.model.QualityInspectItemModel
-import com.panda.pda.app.operation.qms.data.model.QualitySubTaskDetailModel
+import com.panda.pda.app.operation.qms.data.model.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
@@ -28,9 +32,26 @@ import java.util.concurrent.TimeUnit
  */
 class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
+    private var selectedNgList: List<QualityNgReasonModel>? = null
     private val viewBinding by viewBinding<FragmentExecuteInputBinding>()
 
     private lateinit var subTaskDetailModel: QualitySubTaskDetailModel
+
+    private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
+
+    private val qualityConclusionMap by lazy { mutableMapOf<Int, String>() }
+
+    private val conclusionDialog by lazy {
+        WheelPickerDialogFragment().also {
+            it.pickerData = listOf("合格", "不合格")
+        }
+    }
+
+    private val verifyOptionDialog by lazy {
+        WheelPickerDialogFragment().also {
+            it.pickerData = verifyResultList ?: listOf()
+        }
+    }
 
     private val inspectItemAdapter by lazy {
         Moshi.Builder().build().adapter<List<QualityInspectItemModel>>(
@@ -42,6 +63,10 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
     }
 
     private lateinit var inspectItems: List<QualityInspectItemModel>
+
+    private var verifyResultList: List<String>? = null
+
+    private var selectedVerifyResult: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,14 +101,14 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
                 holder.itemViewBinding.ivArrow.isVisible = !isValueType
                 holder.itemViewBinding.tvSelectValue.isVisible = !isValueType
                 holder.itemViewBinding.tvInputValue.isVisible = isValueType
-
+                holder.itemViewBinding.tvLabel.text = data.qualityName
                 holder.itemViewBinding.tvInputValue.doAfterTextChanged {
                     data.conclusion = it.toString()
                 }
 
                 if (!isValueType) {
                     holder.itemViewBinding.root.setOnClickListener {
-                        showConclusionSelectDialog(data, holder.bindingAdapterPosition)
+                        showConclusionSelectDialog(data, holder.itemViewBinding.tvSelectValue)
                     }
                 }
             }
@@ -93,12 +118,80 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
             .subscribe { navToNgReasonSelect() }
+
+
+        viewBinding.llVerifyResult.clicks()
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .bindToLifecycle(requireView())
+            .subscribe { showVerifyResultDialog() }
+
+        viewBinding.btnConfirm.clicks()
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .bindToLifecycle(requireView())
+            .subscribe { confirm() }
+
+        setFragmentResultListener(NgReasonFragment.REQUEST_KEY) { requestKey, bundle ->
+            if (requestKey == NgReasonFragment.REQUEST_KEY) {
+                val ngReasonsStr = bundle.getString(NgReasonFragment.NG_REASON_ARG_KEY, "")
+                selectedNgList = ngReasonAdapter.fromJson(ngReasonsStr)
+                viewBinding.tvNgReason.text = selectedNgList?.joinToString(";") {
+                    it.badnessReasonName
+                }
+            }
+        }
+    }
+
+    private fun confirm() {
+
+        val productSerialCode = viewBinding.etProductSerialCode.text.toString()
+        if (productSerialCode.isEmpty()) {
+            toast("请输入产品条码！")
+            return
+        }
+        if (selectedVerifyResult == null) {
+            toast("请选择审核结论！")
+            return
+        }
+        val requestBody = QualityTaskExecuteRequest(subTaskDetailModel.id,
+            selectedVerifyResult!!,
+            productSerialCode,
+            selectedNgList?.map { it.id },
+            qualityConclusionMap.map { QualityItem(it.key, it.value) }
+        )
+        WebClient.request(QualityApi::class.java)
+            .pdaQmsQualitySubTaskExecutePost(requestBody)
+            .bindToFragment()
+            .subscribe({
+                toast(R.string.quality_task_execute_success)
+                navBackListener.invoke(requireView())
+            }, {})
+    }
+
+    private fun showVerifyResultDialog() {
+        if (verifyResultList == null) {
+            WebClient.request(QualityApi::class.java)
+                .pdaQmsQualitySubTaskGetConclusionOptionGet(subTaskDetailModel.id)
+                .bindToFragment()
+                .subscribe({
+                    verifyResultList = it.dataList
+                    showVerifyResultDialog()
+                }, {})
+        } else {
+            verifyOptionDialog.setConfirmButton { result ->
+                selectedVerifyResult = result!!.first
+                viewBinding.tvVerifyResult.text = selectedVerifyResult
+            }.show(parentFragmentManager, TAG)
+        }
     }
 
     private fun showConclusionSelectDialog(
         data: QualityInspectItemModel,
-        bindingAdapterPosition: Int
+        tvSelectValue: TextView
     ) {
+        conclusionDialog.setConfirmButton { result ->
+            qualityConclusionMap[data.id] = result!!.first
+            tvSelectValue.text = result!!.first
+        }.show(parentFragmentManager, TAG)
 
     }
 
@@ -107,7 +200,15 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             .pdaQmsQualitySubTaskGetBadnessListGet(subTaskDetailModel.id)
             .bindToFragment()
             .subscribe({
-
+                if (it.dataList.isEmpty()) {
+                    toast("请配置不良原因。")
+                } else {
+                    val ngReasons = ngReasonAdapter.toJson(it.dataList)
+                    navController.navigate(
+                        R.id.ngReasonFragment,
+                        Bundle().apply { putString(NgReasonFragment.NG_REASON_ARG_KEY, ngReasons) }
+                    )
+                }
             }, {})
     }
 

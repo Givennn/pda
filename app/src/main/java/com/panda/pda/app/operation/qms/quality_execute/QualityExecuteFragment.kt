@@ -9,8 +9,10 @@ import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.ItemQualityExecuteBinding
 import com.panda.pda.app.operation.qms.BaseQualitySearchListFragment
+import com.panda.pda.app.operation.qms.BaseQualitySubTaskSearchListFragment
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityInspectItemModel
+import com.panda.pda.app.operation.qms.data.model.QualitySubTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
 import com.squareup.moshi.Moshi
@@ -19,7 +21,7 @@ import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 
-class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteBinding>() {
+class QualityExecuteFragment : BaseQualitySubTaskSearchListFragment<ItemQualityExecuteBinding>() {
     override val qualityTaskModelType: QualityTaskModelType
         get() = QualityTaskModelType.Execute
 
@@ -37,24 +39,26 @@ class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteB
     }
 
     override fun onBindViewHolder(
-        holder: CommonViewBindingAdapter<ItemQualityExecuteBinding, QualityTaskModel>.ViewBindingHolder,
-        data: QualityTaskModel,
+        holder: CommonViewBindingAdapter<ItemQualityExecuteBinding, QualitySubTaskModel>.ViewBindingHolder,
+        data: QualitySubTaskModel,
         position: Int
     ) {
         holder.itemViewBinding.apply {
             tvQualityInfo.text = getString(
                 R.string.desc_and_code_formatter,
                 data.qualityDesc,
-                data.qualityCode
+                data.qualityTaskCode
             )
             tvTaskInfo.text =
-                getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
-            tvPlanDateSection.text = getString(
-                R.string.time_section_formatter,
-                data.planStartTime,
-                data.planEndTime
-            )
-            tvQualityNumber.text = data.qualityNum.toString()
+                getString(R.string.desc_and_code_formatter, data.productName, data.productCode)
+            if (!data.planStartTime.isNullOrEmpty() && !data.planEndTime.isNullOrEmpty()) {
+                tvPlanDateSection.text = getString(
+                    R.string.time_section_formatter,
+                    data.planStartTime,
+                    data.planEndTime
+                )
+            }
+            tvQualityNumber.text = "${data.inspectedNum}/${data.distributedNum}"
             tvQualityScheme.text = data.qualitySolutionName
 
             btnActionExecute.clicks()
@@ -66,7 +70,7 @@ class QualityExecuteFragment : BaseQualitySearchListFragment<ItemQualityExecuteB
         }
     }
 
-    private fun execute(data: QualityTaskModel) {
+    private fun execute(data: QualitySubTaskModel) {
         Single.zip(
             WebClient.request(QualityApi::class.java)
                 .pdaQmsQualitySubTaskGetByIdGet(data.id),

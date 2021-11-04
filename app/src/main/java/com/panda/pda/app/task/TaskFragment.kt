@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.ConcatAdapter
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.common.CommonViewModel
 import com.panda.pda.app.common.adapter.HeaderAdapter
 import com.panda.pda.app.common.adapter.ModuleNavigationAdapter
 import com.panda.pda.app.databinding.FragmentTaskBinding
 import com.panda.pda.app.operation.fms.mission.TaskViewModel
 import com.panda.pda.app.common.data.model.TaskMessageCountModel
+import com.panda.pda.app.user.UserViewModel
 
 /**
  * created by AnJiwei 2021/8/16
@@ -23,6 +25,9 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
 
     private val viewBinding by viewBinding<FragmentTaskBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
+    private val userViewModel by activityViewModels<UserViewModel>()
+    private val commonViewModel by activityViewModels<CommonViewModel>()
+
     override val isStatusBarLight: Boolean
         get() = true
     private lateinit var taskMessageNavigationAdapter: TaskMessageNavigationAdapter
@@ -47,7 +52,7 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
     private fun filterAuthority(item: MenuItem): Boolean {
 //        val userAuthor = userViewModel.loginData.value?.menus ?: return true
 //        val authorTree =
-//            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operation) }
+//            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operate_record) }
 //                ?: return false
 //
 //        val authorCode =

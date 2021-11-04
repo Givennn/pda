@@ -29,7 +29,7 @@ data class QualitySubTaskDetailModel(
     val inspectedNum: String,
     val expectEndTime: String,
     val expectStartTime: String,
-    val id: String,
+    val id: Int,
     val notInspectedNum: String,
     val qualifiedNum: String,
     val concessionNum: String,
