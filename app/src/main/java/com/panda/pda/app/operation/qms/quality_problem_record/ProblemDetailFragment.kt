@@ -23,6 +23,7 @@ import com.panda.pda.app.databinding.ItemProblemRecordDetailFileBinding
 import com.panda.pda.app.databinding.ItemProblemRecordDetailPicBinding
 import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.model.QualityProblemRecordDetailModel
+import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/10/11
@@ -94,6 +95,7 @@ class ProblemDetailFragment: BaseFragment(R.layout.fragment_problem_detial) {
         viewBinding.rvPicList.adapter = picAdapter
         viewBinding.rvFilesList.adapter = fileAdapter
         viewModel.problemRecordDetailData.observe(viewLifecycleOwner, {
+            it.reInit()
             modelProperty.setData(it)
             viewBinding.tvRemark.text = it.remark
             picAdapter.refreshData(it.pictureList?: listOf())

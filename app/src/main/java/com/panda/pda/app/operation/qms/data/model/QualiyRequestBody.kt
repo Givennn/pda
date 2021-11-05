@@ -11,8 +11,8 @@ data class QualityTaskDistributeRequest(
     val id: Int,
     val inspectorId: Int,
     val distributedNum: Int,
-    val expectStartTime: String,
-    val expectEndTime: String
+    val expectStartTime: String?,
+    val expectEndTime: String?
 )
 
 data class QualityTaskCommitRequest(
@@ -23,7 +23,7 @@ data class QualityTaskCommitRequest(
 
 data class QualityTaskTransferRequest(
     val id: Int,
-    val verifierId: Int,
+    val reviewerId: Int,
     val remark: String
 )
 

@@ -11,6 +11,8 @@ import androidx.viewbinding.ViewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.ConfirmDialogFragment
+import com.panda.pda.app.base.extension.putGenericObjectString
+import com.panda.pda.app.base.extension.putObjectString
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -20,10 +22,13 @@ import com.panda.pda.app.databinding.FrameEmptyViewBinding
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
+import com.panda.pda.app.operation.qms.data.model.QualityTaskRecordModel
 import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
+import com.squareup.moshi.Types
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 
 /**
@@ -39,6 +44,7 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
 
     override val searchBarHintResId: Int?
         get() = R.string.quality_task_search_hint
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return
@@ -106,9 +112,18 @@ abstract class BaseQualitySearchListFragment<TItemViewBinding : ViewBinding> :
             { info, record -> Pair(info, record) })
             .bindToFragment()
             .subscribe({
-                qualityViewModel.qualityDetailInfoData.postValue(it.first)
-                qualityViewModel.qualityDetailRecordData.postValue(it.second)
-                navController.navigate(R.id.qualityDetailFragment)
+//                qualityViewModel.qualityDetailInfoData.postValue(it.first)
+//                qualityViewModel.qualityDetailRecordData.postValue(it.second)
+                navController.navigate(R.id.qualityDetailFragment, Bundle().apply {
+                    putObjectString(it.first)
+                    putGenericObjectString(
+                        it.second,
+                        Types.newParameterizedType(
+                            DataListNode::class.java,
+                            QualityTaskRecordModel::class.java
+                        )
+                    )
+                })
             }, {})
     }
 

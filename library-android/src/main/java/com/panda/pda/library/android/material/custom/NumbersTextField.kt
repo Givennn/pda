@@ -2,6 +2,7 @@ package com.panda.pda.library.android.material.custom
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.os.Parcelable
 import android.text.InputFilter
 import android.text.Spanned
 import android.util.AttributeSet
@@ -43,15 +44,20 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
         context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.NumbersTextField,
-            0, 0).apply {
+            0, 0
+        ).apply {
             try {
                 if (hasValue(R.styleable.NumbersTextField_iconEnableColor)) {
-                    iconEnableColor = getColor(R.styleable.NumbersTextField_iconEnableColor,
-                        context.getColor(R.color.design_default_color_primary))
+                    iconEnableColor = getColor(
+                        R.styleable.NumbersTextField_iconEnableColor,
+                        context.getColor(R.color.design_default_color_primary)
+                    )
                 }
                 if (hasValue(R.styleable.NumbersTextField_iconDisableColor)) {
-                    iconDisableColor = getColor(R.styleable.NumbersTextField_iconDisableColor,
-                        context.getColor(R.color.design_default_color_primary))
+                    iconDisableColor = getColor(
+                        R.styleable.NumbersTextField_iconDisableColor,
+                        context.getColor(R.color.design_default_color_primary)
+                    )
                 }
                 if (hasValue(R.styleable.NumbersTextField_maxNumber)) {
                     maxValue = getInteger(R.styleable.NumbersTextField_maxNumber, Int.MAX_VALUE)
@@ -70,7 +76,7 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
             updateIconStatus(count)
         }
         post {
-            updateEditText(minValue)
+            updateEditText(count)
             updateIconStatus(count)
             updateFilter()
         }
@@ -119,6 +125,14 @@ class NumbersTextField(context: Context, attrs: AttributeSet?) : TextInputLayout
             if (iconDisableColor != null) {
                 setEndIconTintList(ColorStateList.valueOf(iconDisableColor!!))
             }
+        }
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        super.onRestoreInstanceState(state)
+        post {
+            updateEditText(count)
+            updateIconStatus(count)
         }
     }
 }

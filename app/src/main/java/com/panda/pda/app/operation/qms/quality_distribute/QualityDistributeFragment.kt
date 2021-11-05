@@ -54,6 +54,7 @@ class QualityDistributeFragment : BaseQualitySearchListFragment<ItemQualityDistr
             }
             tvQualityNumber.text = "${data.distributedNum}/${data.qualityNum}"
 
+            tvQualityScheme.text = data.qualitySolutionName
             btnActionDistribute.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(holder.itemView)

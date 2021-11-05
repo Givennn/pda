@@ -22,6 +22,7 @@
         android:gravity="center_vertical|end"
         android:background="@android:color/transparent"
         android:hint="@string/input_hint"
+        android:freezesText="true"
         android:visibility="gone"/>
 
     <TextView

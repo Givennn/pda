@@ -11,6 +11,8 @@ import androidx.viewbinding.ViewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.app.R
 import com.panda.pda.app.base.ConfirmDialogFragment
+import com.panda.pda.app.base.extension.putGenericObjectString
+import com.panda.pda.app.base.extension.putObjectString
 import com.panda.pda.app.base.extension.toast
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.base.retrofit.WebClient
@@ -21,7 +23,9 @@ import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualitySubTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskModelType
+import com.panda.pda.app.operation.qms.data.model.QualityTaskRecordModel
 import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
+import com.squareup.moshi.Types
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
@@ -77,16 +81,21 @@ abstract class BaseQualitySubTaskSearchListFragment<TItemViewBinding : ViewBindi
 
     private fun showDetail(data: QualitySubTaskModel) {
         Single.zip(
-            WebClient.request(QualityApi::class.java).pdaQmsCommonDetailGet(data.id),
+            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskGetByIdGet(data.id),
             WebClient.request(QualityApi::class.java).pdaQmsCommonOperatorListGet(data.id),
             { info, record -> Pair(info, record) })
             .bindToFragment()
             .subscribe({
-//                qualityViewModel.qualityDetailInfoData.postValue(it.first)
-//                qualityViewModel.qualityDetailRecordData.postValue(it.second)
-//                navController.navigate(R.id.qualityDetailFragment)
-
-                       // todo add subDetail view
+                navController.navigate(R.id.qualityDetailFragment, Bundle().apply {
+                    putObjectString(it.first)
+                    putGenericObjectString(
+                        it.second,
+                        Types.newParameterizedType(
+                            DataListNode::class.java,
+                            QualityTaskRecordModel::class.java
+                        )
+                    )
+                })
             }, {})
     }
 

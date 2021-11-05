@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -299,7 +298,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             detailModel.workNo = etWorkOrderCode.text.toString()
             detailModel.batchNo = etBatchCode.text.toString()
             detailModel.orderNo = etOrderCode.text.toString()
-            detailModel.inspector = etInspector.text.toString()
+            detailModel.inspectorName = etInspector.text.toString()
             detailModel.causeAnalysis = etCauseAnalysis.text.toString()
             detailModel.solution = etSolution.text.toString()
             detailModel.optimization = etOptimization.text.toString()
@@ -325,7 +324,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             etWorkOrderCode.setText(model.workNo)
             etBatchCode.setText(model.batchNo)
             etOrderCode.setText(model.orderNo)
-            etInspector.setText(model.inspector)
+            etInspector.setText(model.inspectorName)
             etCauseAnalysis.setText(model.causeAnalysis)
             etSolution.setText(model.solution)
             etOptimization.setText(model.optimization)

@@ -17,6 +17,8 @@ import com.panda.pda.app.base.retrofit.WebClient
 import com.panda.pda.app.common.ModelPropertyCreator
 import com.panda.pda.app.common.WheelPickerDialogFragment
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.app.common.data.CommonParameters
+import com.panda.pda.app.common.data.DataParamType
 import com.panda.pda.app.databinding.FragmentExecuteInputBinding
 import com.panda.pda.app.databinding.ItemQualityCheckItemBinding
 import com.panda.pda.app.operation.qms.NgReasonFragment
@@ -32,14 +34,13 @@ import java.util.concurrent.TimeUnit
  */
 class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
+    private lateinit var qualityItemsAdapter: CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel>
     private var selectedNgList: List<QualityNgReasonModel>? = null
     private val viewBinding by viewBinding<FragmentExecuteInputBinding>()
 
     private lateinit var subTaskDetailModel: QualitySubTaskDetailModel
 
     private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
-
-    private val qualityConclusionMap by lazy { mutableMapOf<Int, String>() }
 
     private val conclusionDialog by lazy {
         WheelPickerDialogFragment().also {
@@ -80,7 +81,7 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
         val modelProperty =
             ModelPropertyCreator(QualitySubTaskDetailModel::class.java, viewBinding.llPropertyInfo)
         modelProperty.setData(subTaskDetailModel)
-        viewBinding.rvQualityItem.adapter = object :
+        qualityItemsAdapter = object :
             CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel>(
                 inspectItems.toMutableList()
             ) {
@@ -97,7 +98,9 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
                 data: QualityInspectItemModel,
                 position: Int
             ) {
-                val isValueType = data.valueType == 1
+                val isValueType =
+                    data.valueType == CommonParameters.getParameters(DataParamType.VALUE_TYPE)
+                        .firstOrNull { it.paramDesc == "数值型" }?.paramValue
                 holder.itemViewBinding.ivArrow.isVisible = !isValueType
                 holder.itemViewBinding.tvSelectValue.isVisible = !isValueType
                 holder.itemViewBinding.tvInputValue.isVisible = isValueType
@@ -113,6 +116,8 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
                 }
             }
         }
+
+        viewBinding.rvQualityItem.adapter = qualityItemsAdapter
 
         viewBinding.llNgReason.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
@@ -152,11 +157,12 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             toast("请选择审核结论！")
             return
         }
+        val qualityItems = qualityItemsAdapter.dataSource.filter { !it.conclusion.isNullOrEmpty() }.map { QualityItem(it.id, it.conclusion!!) }
         val requestBody = QualityTaskExecuteRequest(subTaskDetailModel.id,
             selectedVerifyResult!!,
             productSerialCode,
             selectedNgList?.map { it.id },
-            qualityConclusionMap.map { QualityItem(it.key, it.value) }
+            qualityItems
         )
         WebClient.request(QualityApi::class.java)
             .pdaQmsQualitySubTaskExecutePost(requestBody)
@@ -189,8 +195,8 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
         tvSelectValue: TextView
     ) {
         conclusionDialog.setConfirmButton { result ->
-            qualityConclusionMap[data.id] = result!!.first
-            tvSelectValue.text = result!!.first
+            data.conclusion = result!!.first
+            tvSelectValue.text = result.first
         }.show(parentFragmentManager, TAG)
 
     }

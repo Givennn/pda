@@ -32,7 +32,8 @@
         android:overScrollMode="never"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_task_msg"/>
+        tools:listitem="@layout/item_task_msg"
+        android:layout_marginBottom="60dp"/>
 
 <!--    <LinearLayout-->
 <!--        android:id="@+id/ll_task_execute"-->

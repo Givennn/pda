@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.app.R
 import com.panda.pda.app.base.BaseFragment
+import com.panda.pda.app.base.extension.getStringObject
+import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.app.databinding.FragmentQualityDetailRecordBinding
 import com.panda.pda.app.databinding.ItemTaskDetailOperateRecordBinding
@@ -18,19 +20,22 @@ import com.panda.pda.app.operation.qms.data.model.QualityTaskRecordModel
 /**
  * created by AnJiwei 2021/9/28
  */
-class QualityDetailRecordFragment : BaseFragment(R.layout.fragment_quality_detail_record) {
+class QualityDetailRecordFragment(private val recordList: DataListNode<QualityTaskRecordModel>?) :
+    BaseFragment(R.layout.fragment_quality_detail_record) {
 
     private val bindingAdapter by lazy { createRecordAdapter() }
     private val viewBinding by viewBinding<FragmentQualityDetailRecordBinding>()
-    private val viewModel by activityViewModels<QualityViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.rvRecords.adapter = bindingAdapter
-        viewModel.qualityDetailRecordData.observe(viewLifecycleOwner, {
-            bindingAdapter.refreshData(it.dataList)
-        })
+        if (recordList != null) {
+            bindingAdapter.refreshData(recordList.dataList)
+        }
+//        viewModel.qualityDetailRecordData.observe(viewLifecycleOwner, {
+//            bindingAdapter.refreshData(it.dataList)
+//        })
     }
 
     private fun createRecordAdapter(): CommonViewBindingAdapter<ItemTaskDetailOperateRecordBinding, QualityTaskRecordModel> {

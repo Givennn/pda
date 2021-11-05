@@ -20,6 +20,7 @@ import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
 import com.panda.pda.app.operation.qms.data.model.QualityTaskDistributeRequest
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -104,18 +105,15 @@ class QualityDistributeDistributeFragment :
             toast("请选择审核人")
             return
         }
-        if (planTime == null) {
-            toast("请选择预计时间")
-            return
-        }
+
         WebClient.request(QualityApi::class.java)
             .pdaQmsDistributeDistributePost(
                 QualityTaskDistributeRequest(
                     currentQualityTask.id,
-                    viewBinding.tilReportNum.getValue,
                     selectedVerifier!!.id,
-                    planTime!!.first,
-                    planTime!!.second
+                    viewBinding.tilReportNum.getValue,
+                    planTime?.first,
+                    planTime?.second
                 )
             )
             .bindToFragment()
@@ -127,6 +125,7 @@ class QualityDistributeDistributeFragment :
 
     private fun updateVerifier(verifier: OrgNodeModel) {
         selectedVerifier = verifier
+        Timber.e(selectedVerifier?.id.toString() ?: "unknow")
         viewBinding.tvVerifier.text = verifier.nodeName
     }
 

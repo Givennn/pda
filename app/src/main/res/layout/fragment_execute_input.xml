@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/ng_reason" />
+            app:title="@string/quality_execute" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -53,7 +53,7 @@ class QualitySignFragment : BaseQualitySubTaskSearchListFragment<ItemQualitySign
                     data.planEndTime
                 )
             }
-            tvQualityNumber.text = data.qualityNotInspectedNum.toString()
+            tvQualityNumber.text = data.distributedNum.toString()
             tvQualityScheme.text = data.qualitySolutionName
             btnActionSign.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)

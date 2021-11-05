@@ -3,6 +3,7 @@ package com.panda.pda.app.operation.qms.data.model
 import com.panda.pda.app.common.ModelProperty
 import com.panda.pda.app.common.data.model.FileInfoModel
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel.Companion.QualityDetailTag
+import timber.log.Timber
 
 /**
  * created by AnJiwei 2021/9/26
@@ -35,7 +36,7 @@ data class QualityProblemRecordDetailModel(
     @ModelProperty(14, "质检结论")
     var conclusion: String?,
     @ModelProperty(15, "质检人")
-    var inspector: String?,
+    var inspectorName: String?,
     @ModelProperty(16, "质检时间")
     var inspectorTime: String?,
     @ModelProperty(20, "跟踪部门")
@@ -63,9 +64,14 @@ data class QualityProblemRecordDetailModel(
     var traceUserId: Int?,
     var id: Int?
 ) {
-    //        @ModelProperty(12, "不良原因")
-    val ngReasons: String
-        get() = (adverseCauseInfoList ?: listOf()).joinToString(";") { it.badnessReasonName }
+    @Transient
+    @ModelProperty(12, "不良原因")
+    var ngReasons: String? = null
+
+    fun reInit() {
+        ngReasons = (adverseCauseInfoList ?: listOf()).joinToString(";")
+        { it.badnessReasonName }
+    }
 
     companion object {
         fun create(): QualityProblemRecordDetailModel {

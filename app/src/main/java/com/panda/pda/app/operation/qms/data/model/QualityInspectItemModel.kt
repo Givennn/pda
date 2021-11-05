@@ -20,5 +20,5 @@ data class QualityInspectItemModel(
     val valueType: Int
 ) {
     @Transient
-    var conclusion = ""
+    var conclusion: String? = null
 }

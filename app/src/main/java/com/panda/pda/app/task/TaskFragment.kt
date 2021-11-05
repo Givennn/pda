@@ -50,14 +50,14 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
     }
 
     private fun filterAuthority(item: MenuItem): Boolean {
-//        val userAuthor = userViewModel.loginData.value?.menus ?: return true
-//        val authorTree =
-//            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operate_record) }
-//                ?: return false
-//
-//        val authorCode =
-//            authorTree.children.firstOrNull { it.name == item.title }?.id ?: return false
-//        return userAuthor.contains(authorCode.toString())
-        return true
+        val userAuthor = userViewModel.loginData.value?.menus ?: return true
+        val authorTree =
+            commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operation) }
+                ?: return false
+
+        val authorCode =
+            authorTree.children.firstOrNull { it.name == item.title }?.id ?: return false
+        return userAuthor.contains(authorCode.toString())
+//        return true
     }
 }
