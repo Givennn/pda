@@ -82,7 +82,7 @@ abstract class BaseQualitySubTaskSearchListFragment<TItemViewBinding : ViewBindi
     private fun showDetail(data: QualitySubTaskModel) {
         Single.zip(
             WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskGetByIdGet(data.id),
-            WebClient.request(QualityApi::class.java).pdaQmsCommonOperatorListGet(data.id),
+            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskOperationRecordGet(data.id),
             { info, record -> Pair(info, record) })
             .bindToFragment()
             .subscribe({

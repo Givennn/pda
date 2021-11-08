@@ -3,6 +3,7 @@ package com.panda.pda.app.operation.qms.data
 import com.panda.pda.app.base.retrofit.BaseResponse
 import com.panda.pda.app.base.retrofit.DataListNode
 import com.panda.pda.app.common.data.model.IdRequest
+import com.panda.pda.app.operation.fms.data.model.ProductModel
 import com.panda.pda.app.operation.qms.data.model.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
@@ -120,7 +121,7 @@ interface QualityApi {
      */
     @POST("pda/qms/qualityTask/distribute-cancel")
     fun qualityDistributeCancel(
-        @retrofit2.http.Body body: IdRequest
+        @retrofit2.http.Body body: QualityTaskDistributeCancelRequest
     ): Single<Any>
 
     /**
@@ -255,4 +256,20 @@ interface QualityApi {
     fun pdaQmsQualitySubTaskExecutePost(
         @retrofit2.http.Body body: QualityTaskExecuteRequest
     ): Single<Any>
+
+    /**
+     * 质检子任务操作记录
+     */
+    @GET("pda/qms/qualitySubTask/operation-record")
+    fun pdaQmsQualitySubTaskOperationRecordGet(
+        @retrofit2.http.Query("id") id: Int
+    ): Single<DataListNode<QualityTaskRecordModel>>
+
+    /**
+     * 根据产品条码查询关联内容
+     */
+    @GET("pda/qms/qualityProblem/get-by-productBarCode")
+    fun pdaQmsQualityProblemGetByProductBarCodeGet(
+        @retrofit2.http.Query("productBarCode") barCode: String
+    ): Single<ProductInfoModel>
 }

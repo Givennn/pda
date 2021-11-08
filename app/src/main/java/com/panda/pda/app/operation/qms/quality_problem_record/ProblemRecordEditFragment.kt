@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.jakewharton.rxbinding4.view.clicks
+import com.jakewharton.rxbinding4.view.focusChanges
 import com.jakewharton.rxbinding4.widget.checkedChanges
 import com.panda.pda.app.BuildConfig
 import com.panda.pda.app.R
@@ -129,6 +130,13 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
                 ?: QualityProblemRecordDetailModel.create()
         }
 
+        if (isEditProblem) {
+            viewBinding.etQualityProblemCode.isEnabled = false
+        }
+        viewBinding.etProductSerialCode.focusChanges()
+            .bindToLifecycle(requireView())
+            .subscribe { onSearchingProduct(it) }
+
         verifyData = CommonParameters.getParameters(DataParamType.CONCLUSION_DECIDE_OPTION)
             .sortedBy { it.paramValue }.map { it.paramDesc }
         viewBinding.apply {
@@ -225,6 +233,25 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
         updateDetail(detailModel)
     }
 
+    private fun onSearchingProduct(isFocus: Boolean) {
+        if (isFocus)
+            return
+        val barCode = viewBinding.etProductSerialCode.text.toString()
+        if (barCode.isEmpty())
+            return
+
+        WebClient.request(QualityApi::class.java)
+            .pdaQmsQualityProblemGetByProductBarCodeGet(barCode)
+            .bindToFragment()
+            .subscribe({
+                       viewBinding.apply {
+                           etProductCode.setText(it.productCode)
+                           etProductDesc.setText(it.productName)
+                       }
+            }, {})
+
+    }
+
     private fun selectFileRequest() {
         lifecycleScope.launchWhenStarted {
             selectFileResult.launch("*/*")
@@ -286,7 +313,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private fun getDetailModel(): QualityProblemRecordDetailModel {
         viewBinding.apply {
 
-            detailModel.problemCode = tvQualityProblemCode.text.toString()
+            detailModel.problemCode = etQualityProblemCode.text.toString()
             detailModel.productBarCode = etProductSerialCode.text.toString()
             detailModel.productCode = etProductCode.text.toString()
             detailModel.productName = etProductDesc.text.toString()
@@ -312,7 +339,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private fun updateDetail(model: QualityProblemRecordDetailModel) {
         viewBinding.apply {
 
-            tvQualityProblemCode.text = model.problemCode
+            etQualityProblemCode.setText(model.problemCode)
             etProductSerialCode.setText(model.productBarCode)
             etProductCode.setText(model.productCode)
             etProductDesc.setText(model.productName)
@@ -340,6 +367,10 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     }
 
     private fun commit(model: QualityProblemRecordDetailModel) {
+        if (model.productBarCode.isNullOrEmpty()) {
+            toast("参数不完整, 请输入产品条码")
+        }
+
         val api = if (isEditProblem) {
             WebClient.request(QualityApi::class.java).pdaQmsQualityProblemEditPost(model)
         } else {

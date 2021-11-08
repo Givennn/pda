@@ -19,6 +19,7 @@ import com.panda.pda.app.operation.qms.QualityViewModel
 import com.panda.pda.app.operation.qms.data.QualityApi
 import com.panda.pda.app.operation.qms.data.model.QualityDetailModel
 import com.panda.pda.app.operation.qms.data.model.QualitySubTaskDetailModel
+import com.panda.pda.app.operation.qms.data.model.QualityTaskDistributeCancelRequest
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import java.util.concurrent.TimeUnit
 
@@ -88,9 +89,16 @@ class QualitySignBackOutFragment :
             toast("请选择审核人")
             return
         }
+
+        val reason = viewBinding.etBackOutReason.text.toString()
+        if (reason.isEmpty()) {
+            toast("请输入撤销原因")
+            return
+        }
+
         WebClient.request(QualityApi::class.java)
             .qualityDistributeCancel(
-                IdRequest(currentQualityTask.id)
+                QualityTaskDistributeCancelRequest(currentQualityTask.id, reason)
             )
             .bindToFragment()
             .subscribe({

@@ -269,6 +269,8 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:inputType">textNoSuggestions</item>
         <item name="android:maxLength">32</item>
+        <item name="android:hint">@string/input_hint</item>
+
     </style>
 
     <style name="updatablePropertyTextView" parent="Widget.AppCompat.TextView">

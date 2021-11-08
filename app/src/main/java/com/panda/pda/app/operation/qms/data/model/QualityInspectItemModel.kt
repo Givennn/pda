@@ -17,7 +17,8 @@ data class QualityInspectItemModel(
     val qualityMethod: String,
     val qualityName: String,
     val standard: String,
-    val valueType: Int
+    val valueType: Int,
+    val qualityFillInRegulation: Int?
 ) {
     @Transient
     var conclusion: String? = null

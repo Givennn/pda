@@ -27,6 +27,11 @@ data class QualityTaskTransferRequest(
     val remark: String
 )
 
+data class QualityTaskDistributeCancelRequest(
+    val id: Int,
+    val cancelReason: String
+)
+
 data class QualityTaskDistributeTransferRequest(
     val id: Int,
     val distributeId: Int,

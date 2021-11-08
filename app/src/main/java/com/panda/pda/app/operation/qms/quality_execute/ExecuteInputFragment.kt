@@ -157,8 +157,9 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             toast("请选择审核结论！")
             return
         }
-        val qualityItems = qualityItemsAdapter.dataSource.filter { !it.conclusion.isNullOrEmpty() }.map { QualityItem(it.id, it.conclusion!!) }
-        val requestBody = QualityTaskExecuteRequest(subTaskDetailModel.id,
+        val qualityItems = readQualityItems() ?: return
+        val requestBody = QualityTaskExecuteRequest(
+            subTaskDetailModel.id,
             selectedVerifyResult!!,
             productSerialCode,
             selectedNgList?.map { it.id },
@@ -171,6 +172,58 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
                 toast(R.string.quality_task_execute_success)
                 navBackListener.invoke(requireView())
             }, {})
+    }
+
+    /**
+     * "QUALITY_FILL_IN_REGULATION": [
+    {
+    "paramName": "QUALITY_FILL_IN_REGULATION",
+    "paramValue": "0",
+    "paramDesc": "全部填写"
+    },
+    {
+    "paramName": "QUALITY_FILL_IN_REGULATION",
+    "paramValue": "1",
+    "paramDesc": "可以为空"
+    },
+    {
+    "paramName": "QUALITY_FILL_IN_REGULATION",
+    "paramValue": "2",
+    "paramDesc": "不选时默认为合格"
+    }
+    ]
+     */
+    private fun readQualityItems(): List<QualityItem>? {
+        val result = mutableListOf<QualityItem>()
+        qualityItemsAdapter.dataSource.forEach { model ->
+            when (model.qualityFillInRegulation) {
+                0 -> {
+                    if (model.conclusion.isNullOrEmpty()) {
+                        toast("请填写或选择质检项:${model.qualityName}结果")
+                        return null
+                    } else {
+                        result.add(QualityItem(model.id, model.conclusion!!))
+                    }
+                }
+                1 -> {
+                    if (!model.conclusion.isNullOrEmpty()) {
+                        result.add(QualityItem(model.id, model.conclusion!!))
+                    }
+                }
+                2 -> {
+                    result.add(
+                        QualityItem(
+                            model.id,
+                            if (model.conclusion.isNullOrEmpty()) "合格" else model.conclusion!!
+                        )
+                    )
+                }
+
+                else -> {
+                }
+            }
+        }
+        return result
     }
 
     private fun showVerifyResultDialog() {

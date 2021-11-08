@@ -15,14 +15,12 @@
         tools:text="质检项" />
 
     <EditText
-        style="@style/detailText"
+        style="@style/propertySingleLineEditText"
         android:id="@+id/tv_input_value"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
-        android:background="@android:color/transparent"
-        android:hint="@string/input_hint"
-        android:freezesText="true"
+        android:digits="@string/number_char_limit"
         android:visibility="gone"/>
 
     <TextView
