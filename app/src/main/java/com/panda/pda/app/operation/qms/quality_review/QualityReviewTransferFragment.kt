@@ -98,7 +98,7 @@ class QualityReviewTransferFragment : BaseFragment(R.layout.fragment_quality_rev
             )
             .bindToFragment()
             .subscribe({
-                toast(R.string.quality_task_commit_success)
+                toast(R.string.quality_task_transfer_success)
                 navBackListener.invoke(requireView())
             }, {})
     }

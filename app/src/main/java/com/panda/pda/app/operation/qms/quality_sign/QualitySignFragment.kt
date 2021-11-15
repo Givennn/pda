@@ -69,7 +69,7 @@ class QualitySignFragment : BaseQualitySubTaskSearchListFragment<ItemQualitySign
                                 data.qualityTaskCode
                             )
                         ),
-                        getString(R.string.quality_task_finish_success)
+                        getString(R.string.quality_task_sign_success)
                     )
                 }
             btnActionBackOut.clicks()

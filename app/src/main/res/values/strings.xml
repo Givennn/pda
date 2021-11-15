@@ -131,7 +131,7 @@
     <string name="need_quality_control">需质检</string>
     <string name="commit">提交</string>
     <string name="quality_task_receive_success">质检任务接收成功</string>
-    <string name="quality_task_sign_success">质检任务接收成功</string>
+    <string name="quality_task_sign_success">质检任务签收成功</string>
     <string name="quality_task_back_out_success">质检任务撤销成功</string>
     <string name="quality_task_execute_success">质检任务执行成功</string>
     <string name="quality_task_finish_success">质检任务完工成功</string>
@@ -193,7 +193,7 @@
     <string name="process_cycle">处理周期</string>
     <string name="edit_problem_record">编辑质检问题记录</string>
     <string name="time_pick">选择时间</string>
-    <string name="quality_task_transfer_success">质检任务派发成功</string>
+    <string name="quality_task_transfer_success">质检任务转办成功</string>
     <string name="upload_pic_hint">最多可上传3张图，每张最大5M，支持bmp、jpg、jpeg、png格式</string>
     <string name="upload_file_hint">最多上传3个，单个文档不超过50M</string>
     <string name="number_char_limit">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>

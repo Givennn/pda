@@ -88,6 +88,7 @@
                         style="@style/propertySingleLineEditText"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:digits="@string/number_char_limit"
                         android:hint="请输入，默认自动编码"
                         android:inputType="text" />
                 </LinearLayout>
