@@ -67,10 +67,10 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     private fun report(info: TaskInfoModel) {
-        val remark = viewBinding.etRemark.text.toString()
-        if (remark.isEmpty()) {
-            toast(R.string.remark_empty_message)
-        }
+//        val remark = viewBinding.etRemark.text.toString()
+//        if (remark.isEmpty()) {
+//            toast(R.string.remark_empty_message)
+//        }
         val request = TaskReportRequest(info.detail.id,
             viewBinding.etReportNum.text.toString().toInt(),
             viewBinding.etRemark.text.toString(),

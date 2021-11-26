@@ -26,6 +26,9 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
 
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
+    override val searchBarHintResId: Int?
+        get() = R.string.operate_guide_search_hint
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return
@@ -64,10 +67,10 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvProductCode.text = data.productCode
+                    tvProductCode.text = getString(R.string.desc_and_code_formatter, data.productName ?: "", data.productCode ?: "")
                     tvFileName.text = data.fileName
-                    tvTechDesc.text = data.technicsDesc
-                    tvProcedureDesc.text = data.procedureDesc
+                    tvTechDesc.text = getString(R.string.desc_and_code_formatter, data.technicsDesc ?: "", data.technicsVersion ?: "")
+                    tvProcedureDesc.text = getString(R.string.desc_and_code_formatter, data.procedureDesc ?: "", data.procedureCode ?: "")
                 }.clInfo.setOnClickListener {
                     onItemClicked(data)
                 }

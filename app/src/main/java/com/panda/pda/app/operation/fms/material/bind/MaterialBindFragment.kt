@@ -58,8 +58,13 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode
+                    )
                     tvTaskNumber.text = data.taskNum.toString()
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)

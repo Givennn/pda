@@ -197,5 +197,8 @@
     <string name="upload_pic_hint">最多可上传3张图，每张最大5M，支持bmp、jpg、jpeg、png格式</string>
     <string name="upload_file_hint">最多上传3个，单个文档不超过50M</string>
     <string name="number_char_limit">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="task_unbind_confirm">确认解绑物料</string>
+    <string name="operate_guide_search_hint">请输入作业指导书名称/产品编码/产品描述</string>
+    <string name="discovery_search_hint">请输入任务编号/任务描述</string>
 
 </resources>

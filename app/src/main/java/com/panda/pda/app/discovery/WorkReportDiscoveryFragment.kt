@@ -24,6 +24,9 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
 
     private val taskViewModel by activityViewModels<TaskReportViewModel>()
 
+    override val searchBarHintResId: Int?
+        get() = R.string.discovery_search_hint
+
     override fun createAdapter(): CommonViewBindingAdapter<*, TaskReportModel> {
         return object : CommonViewBindingAdapter<ItemDiscoveryWorkReportBinding, TaskReportModel>(
             mutableListOf()) {
@@ -44,9 +47,14 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvTaskDesc.text = data.taskDesc
-                    tvReportTime.text = data.createTime
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc ?: "", data.taskCode ?: "")
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
+                        data.productName ?: "",
+                        data.productCode ?: ""
+                    )
+                    tvReportTime.text = "报工时间: ${data.createTime}"
                     tvTaskReporter.text = data.createName
                     tvReportNumber.text = data.reportNumber.toString()
                 }.clInfo.setOnClickListener { onItemInfoClicked(data) }

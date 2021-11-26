@@ -25,6 +25,8 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
 
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
+    override val searchBarHintResId: Int?
+        get() = R.string.discovery_search_hint
     override fun createAdapter(): CommonViewBindingAdapter<*, TaskModel> {
 
         return object :
@@ -46,10 +48,15 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskCode.text = data.taskCode
-                    tvTaskDesc.text = data.taskDesc
+                    tvTaskInfo.text =
+                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                    tvProductInfo.text = getString(
+                        R.string.desc_and_code_formatter,
+                        data.productName,
+                        data.productCode
+                    )
                     tvTaskSender.text = data.issueName
-                    tvPlanIssueDate.text = data.issueTime
+                    tvPlanIssueDate.text = "派工时间: ${data.issueTime}"
                 }.clInfo.setOnClickListener { onItemInfoClicked(data) }
             }
 

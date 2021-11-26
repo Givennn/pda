@@ -60,7 +60,7 @@ class MaterialUnbindFragment :
     }
 
     private fun unbindMaterial(data: MaterialModel) {
-        ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
+        ConfirmDialogFragment().setTitle(getString(R.string.task_unbind_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(MaterialApi::class.java)
                     .materialUnbindPost(
