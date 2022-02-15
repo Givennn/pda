@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shell_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/changePwdOldVerifyFragment"
+        android:name="com.panda.pda.mes.user.ChangePwdOldVerifyFragment"
+        android:label="ChangePwdOldVerifyFragment">
+        <action
+            android:id="@+id/action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment"
+            app:destination="@id/changePwdNewVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePwdNewVerifyFragment"
+        android:name="com.panda.pda.mes.user.ChangePwdNewVerifyFragment"
+        android:label="ChangePwdNewVerifyFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.panda.pda.mes.user.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_changePwdOldVerifyFragment"
+            app:destination="@id/changePwdOldVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskReportFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportFragment"
+        android:label="fragment_task_report" />
+    <fragment
+        android:id="@+id/taskReceiveFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskReceiveFragment"
+        android:label="fragment_task_receive" />
+    <fragment
+        android:id="@+id/taskExecuteFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskExecuteFragment"
+        android:label="fragment_task_execute" />
+    <fragment
+        android:id="@+id/taskFinishFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskFinishFragment"
+        android:label="fragment_task_finish" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.panda.pda.mes.task.TaskFragment"
+        android:label="TaskFragment"
+        tools:layout="@layout/fragment_task" />
+    <fragment
+        android:id="@+id/discoveryFragment"
+        android:name="com.panda.pda.mes.discovery.DiscoveryFragment"
+        android:label="DiscoveryFragment"
+        tools:layout="@layout/fragment_discovery" />
+    <fragment
+        android:id="@+id/operationFragment"
+        android:name="com.panda.pda.mes.operation.OperationFragment"
+        android:label="OperationFragment"
+        tools:layout="@layout/fragment_operation" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.panda.pda.mes.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/shell_nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/shell_nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.panda.pda.mes.user.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/shell_nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskDetailFragment"
+        android:label="fragment_task_detail"
+        tools:layout="@layout/fragment_task_detail" />
+    <include app:graph="@navigation/material_bind_nav_graph" />
+    <include app:graph="@navigation/material_unbind_nav_graph" />
+    <include app:graph="@navigation/alarm_nav_graph" />
+    <include app:graph="@navigation/discovery_order_nav_graph" />
+    <include app:graph="@navigation/discovery_task_nav_graph" />
+    <include app:graph="@navigation/discovery_plan_nav_graph" />
+    <include app:graph="@navigation/discovery_report_nav_graph" />
+    <fragment
+        android:id="@+id/taskReportInputFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"
+        android:label="TaskReportInputFragment" />
+    <include app:graph="@navigation/profile_nav_graph" />
+    <include app:graph="@navigation/material_replace_nav_graph" />
+    <include app:graph="@navigation/operation_guide_nav_graph" />
+
+    <fragment
+        android:id="@+id/qualityDetailFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_task_detail.QualityDetailFragment"
+        android:label="QualityDetailFragment" />
+    <fragment
+        android:id="@+id/qualityFinishFragment"
+        android:name="com.panda.pda.mes.operation.qms.QualityFinishFragment"
+        android:label="QualityFinishFragment" />
+    <include app:graph="@navigation/quality_task_nav_graph" />
+    <fragment
+        android:id="@+id/orgNodeSelectFragment"
+        android:name="com.panda.pda.mes.common.OrgNodeSelectFragment"
+        android:label="OrgNodeSelectFragment" />
+    <include app:graph="@navigation/quality_review_nav_graph" />
+    <include app:graph="@navigation/quality_distribute_nav_graph" />
+    <fragment
+        android:id="@+id/ngReasonFragment"
+        android:name="com.panda.pda.mes.operation.qms.NgReasonFragment"
+        android:label="NgReasonFragment" />
+    <include app:graph="@navigation/quality_execute_nav_graph" />
+    <include app:graph="@navigation/quality_problem_record_nav_graph" />
+    <include app:graph="@navigation/quality_sign_nav_graph" />
+</navigation>

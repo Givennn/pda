@@ -1,7 +1,7 @@
 const val PUBLISHING_GROUP = "com.panda.pda"
 
 object AppCoordinates {
-    const val APP_ID = "com.panda.pda.app"
+    const val APP_ID = "com.panda.pda.mes"
 
     const val APP_VERSION_NAME = "1.0.1"
     const val APP_VERSION_CODE = 1

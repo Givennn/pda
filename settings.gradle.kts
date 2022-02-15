@@ -19,7 +19,7 @@ pluginManagement {
 rootProject.name = ("MES-PDA")
 
 include(
-    "app",
+    "mes",
     "library-android",
     "library-kotlin"
 //    ,"api-client"

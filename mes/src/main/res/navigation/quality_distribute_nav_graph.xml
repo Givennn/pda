@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quality_distribute_nav_graph"
+    app:startDestination="@id/qualityDistributeFragment">
+    <fragment
+        android:id="@+id/qualityDistributeFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_distribute.QualityDistributeFragment"
+        android:label="fragment_quality_distribute" >
+
+        <action
+            android:id="@+id/action_qualityDistributeFragment_to_qualityDistributeTransferFragment"
+            app:destination="@id/qualityDistributeTransferFragment" />
+        <action
+            android:id="@+id/action_qualityDistributeFragment_to_qualityDistributeDistributeFragment"
+            app:destination="@id/qualityDistributeDistributeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/qualityDistributeDistributeFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_distribute.QualityDistributeDistributeFragment"
+        android:label="QualityDistributeDistributeFragment" />
+    <fragment
+        android:id="@+id/qualityDistributeTransferFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_distribute.QualityDistributeTransferFragment"
+        android:label="QualityDistributeTransferFragment" />
+</navigation>

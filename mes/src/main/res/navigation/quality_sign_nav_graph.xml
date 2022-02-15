@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quality_sign_nav_graph"
+    app:startDestination="@id/qualitySignFragment">
+    <fragment
+        android:id="@+id/qualitySignFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_sign.QualitySignFragment"
+        android:label="fragment_quality_receive" >
+        <action
+            android:id="@+id/action_qualitySignFragment_to_qualityDistributeBackOutFragment"
+            app:destination="@id/qualityDistributeBackOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualityDistributeBackOutFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_sign.QualitySignBackOutFragment"
+        android:label="QualityDistributeBackOutFragment" />
+</navigation>

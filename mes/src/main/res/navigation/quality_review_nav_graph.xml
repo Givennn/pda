@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/quality_review_nav_graph"
+    app:startDestination="@id/qualityReviewFragment">
+    <fragment
+        android:id="@+id/qualityReviewFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_review.QualityReviewFragment"
+        android:label="fragment_quality_review">
+        <action
+            android:id="@+id/action_qualityReviewFragment_to_qualityReviewTransferFragment"
+            app:destination="@id/qualityReviewTransferFragment" />
+        <action
+            android:id="@+id/action_qualityReviewFragment_to_qualityReviewVerifyFragment"
+            app:destination="@id/qualityReviewVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualityReviewTransferFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_review.QualityReviewTransferFragment"
+        android:label="QualityReviewTransferFragment" />
+    <fragment
+        android:id="@+id/qualityReviewVerifyFragment"
+        android:name="com.panda.pda.mes.operation.qms.quality_review.QualityReviewVerifyFragment"
+        android:label="QualityReviewVerifyFragment" />
+</navigation>
