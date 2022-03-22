@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--维保任务-->
+    <item
+        android:id="@+id/equipmentTaskFragment"
+        android:title="@string/equipment_task"
+        android:icon="@drawable/ic_op_qc_task" />
+    <!--设备信息-->
+    <item
+        android:id="@+id/equipmentInfoFragment"
+        android:title="@string/equipment_info"
+        android:icon="@drawable/ic_op_qc_task"/>
+    <!--维保工单-->
+    <item
+        android:id="@+id/equipmentWorkOrderFragment"
+        android:title="@string/equipment_workorder"
+        android:icon="@drawable/ic_op_qc_task"/>
+</menu>

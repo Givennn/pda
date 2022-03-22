@@ -113,7 +113,6 @@
         <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>
         <item name="hintEnabled">false</item>
     </style>
-
     <style name="Widget.App.TextInputLayout.qmsRemark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:background">@drawable/svg_remark_round_corner_2px</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout.qmsRemark</item>
@@ -280,6 +279,53 @@
         <item name="android:gravity">end|center_vertical</item>
         <item name="android:hint">@string/select_hint</item>
         <item name="android:textColorHint">@color/text_field_hint</item>
+        <item name="android:freezesText">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textHeaderLineColor</item>
+    </style>
+    <style name="contentBlackText" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textHeaderLineColor</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Widget.App.TextInputLayout.emsRemark200" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:background">@drawable/svg_remark_round_corner_2px</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout.qmsRemark</item>
+        <item name="counterEnabled">true</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="counterMaxLength">200</item>
+        <item name="counterTextColor">@color/remark_counter_color</item>
+        <!--        边框圆角    -->
+        <!--        <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>-->
+        <item name="hintEnabled">false</item>
+    </style>
+    <!--选择是/否文字样式-->
+    <style name="detailCheckText.label" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/textDetailLabelColor</item>
+    </style>
+    <!--白底搜索框-->
+    <style name="Widget.App.WhiteTextInputLayout.searchBar" parent="Widget.App.WhiteTextInputLayout">
+        <item name="startIconDrawable">@drawable/ic_text_field_search</item>
+        <item name="endIconDrawable">@drawable/ic_delete_dark</item>
+        <item name="endIconTint">@color/text_field_icon</item>
+        <item name="startIconTint">@color/text_field_icon</item>
+        <item name="endIconMode">clear_text</item>
+    </style>
+    <style name="Widget.App.WhiteTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
+        <!--        边框圆角    -->
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MiddleComponent</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="equipmentDetailTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end|center_vertical</item>
         <item name="android:freezesText">true</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/textHeaderLineColor</item>

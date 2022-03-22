@@ -135,12 +135,12 @@
     <string name="quality_task_back_out_success">质检任务撤销成功</string>
     <string name="quality_task_execute_success">质检任务执行成功</string>
     <string name="quality_task_finish_success">质检任务完工成功</string>
-    <string name="quality_task_commit_success" >质检任务提交成功</string>
+    <string name="quality_task_commit_success">质检任务提交成功</string>
     <string name="quality_task_receive_confirm">确认接收质检任务: %s？</string>
-    <string name="quality_task_sign_confirm" >确认签收质检任务: %s？</string>
-    <string name="quality_task_back_out_confirm" >确认撤销质检任务: %s？</string>
-    <string name="quality_task_execute_confirm" >确认撤销质检任务: %s？</string>
-    <string name="quality_task_finish_confirm" >确认完工质检任务: %s？</string>
+    <string name="quality_task_sign_confirm">确认签收质检任务: %s？</string>
+    <string name="quality_task_back_out_confirm">确认撤销质检任务: %s？</string>
+    <string name="quality_task_execute_confirm">确认撤销质检任务: %s？</string>
+    <string name="quality_task_finish_confirm">确认完工质检任务: %s？</string>
     <string name="time_section_formatter">%1$s～%2$s</string>
     <string name="review">审核</string>
     <string name="transfer_manage">转办</string>
@@ -200,5 +200,76 @@
     <string name="task_unbind_confirm">确认解绑物料</string>
     <string name="operate_guide_search_hint">请输入作业指导书名称/产品编码/产品描述</string>
     <string name="discovery_search_hint">请输入任务编号/任务描述</string>
+    <!--设备管理系统ems add by yinzhilin-->
+    <string name="equipment_manage">设备管理</string>
+    <string name="equipment_task">维保任务</string>
+    <string name="equipment_info">设备信息</string>
+    <string name="equipment_workorder">维保工单</string>
+    <string name="equipment_type_name">设备型号</string>
+    <string name="equipment_repairman">维修人</string>
+    <string name="equipment_workorder_id">工单号</string>
+    <string name="equipment_workorder_bh">编号</string>
+    <string name="equipment_workorder_tbr">填报人</string>
+    <string name="equipment_workorder_tbtime">填报时间</string>
+    <string name="equipment_workorder_name">名称</string>
+    <string name="equipment_workorder_marking">型号</string>
+    <string name="equipment_workorder_bm">部门</string>
+    <string name="equipment_workorder_location">位置</string>
+    <string name="equipment_workorder_type">类型</string>
+    <string name="equipment_workorder_status">处理状态</string>
+    <string name="equipment_workorder_detail_title">工单详情</string>
+    <string name="equipment_workorder_operate_detail_title">操作内容详情</string>
+    <string name="equipment_description">描述</string>
+    <string name="equipment_workorder_handle">工单处理</string>
+    <string name="equipment_workorder_person_select">人员选择</string>
+    <string name="equipment_workorder_date_select">预计完工日期</string>
+    <string name="equipment_workorder_time_select">预计完工时间</string>
+    <string name="equipment_workorder_time_count">预计工时</string>
+    <string name="equipment_workorder_is_sample">是否提供样品</string>
 
+    <string name="equipment_info_detail_title">模具详情</string>
+    <string name="equipment_info_device_detail_title">设备详情</string>
+    <string name="equipment_info_cj">车间</string>
+    <string name="equipment_info_area">区域</string>
+    <string name="equipment_info_location">坐标</string>
+    <string name="equipment_info_work_status">功能状态</string>
+    <string name="equipment_info_location_status">位置状态</string>
+    <string name="equipment_info_factory">厂家</string>
+    <string name="equipment_info_mcs">模次数</string>
+    <string name="equipment_number_limit">0123456789</string>
+    <string name="equipment_upload_pic_8_hint">最多可上传8张图，每张最大5M，支持bmp、jpg、jpeg、png格式</string>
+    <string name="equipment_process_result">处理结果</string>
+    <string name="equipment_process_result_true">合格</string>
+    <string name="equipment_process_result_false">不合格</string>
+    <string name="equipment_process_result_delay">申请延期</string>
+    <string name="equipment_supplier">厂商</string>
+    <string name="equipment_info_search_hint">请扫码或输入编码、条码</string>
+    <string name="equipment_info_person_search_hint">请输入人员姓名</string>
+    <string name="equipment_info_device_search_hint">请输入设备编号</string>
+    <string name="equipment_info_supplier_search_hint">请输入厂商名称</string>
+    <string name="equipment_info_product_search_hint">请输入产品名称</string>
+    <string name="equipment_take_photo_hint">上传图片\n(最多8张)</string>
+    <string name="equipment_title_supplier">厂商列表</string>
+    <string name="equipment_title_device">设备列表</string>
+    <string name="equipment_title_product_choose">生产产品选择</string>
+    <string name="equipment_title_person_choose">人员选择</string>
+    <!--工单功能状态-->
+    <string name="equipment_workorder_status_daifenpei">待分配</string>
+    <string name="equipment_workorder_status_daiwangong">待完工</string>
+    <string name="equipment_workorder_status_daiqueren">待确认</string>
+    <string name="equipment_workorder_status_chukuqueren">出库确认</string>
+    <string name="equipment_workorder_status_dairuku">待入库</string>
+    <string name="equipment_workorder_status_rukuqueren">入库确认</string>
+    <string name="equipment_workorder_status_zuofei">作废</string>
+    <string name="equipment_workorder_status_xdsc">限度生产</string>
+    <string name="equipment_workorder_status_zaiku">在库</string>
+    <string name="equipment_workorder_status_hege">合格</string>
+    <!--工单类型-->
+    <string name="equipment_workorder_type_baoyang">保养</string>
+    <string name="equipment_workorder_type_weixiu">维修</string>
+    <string name="equipment_workorder_type_store">出库</string>
+    <!--设备类型-->
+    <string name="equipment_device">设备</string>
+    <string name="equipment_device_mj">模具</string>
+    <!--设备管理系统ems end-->
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/equipment_task_nav_graph"
+    app:startDestination="@id/equipmentTaskFragment">
+    <fragment
+        android:id="@+id/equipmentTaskFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_task.EquipmentWorkOrderTaskFragment"
+        android:label="fragment_equipment_task">
+    </fragment>
+
+
+</navigation>

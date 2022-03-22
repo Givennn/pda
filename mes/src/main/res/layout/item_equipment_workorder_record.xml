@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--任务单号及单号日期-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_task_id"
+                style="@style/subHeaderLineText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                tools:text="单号：6554" />
+
+            <TextView
+                android:id="@+id/tv_task_date_section"
+                style="@style/subHeaderLineText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:visibility="gone"
+                android:includeFontPadding="false"
+                tools:ignore="RelativeOverlap"
+                tools:text="2021-04-15" />
+
+        </RelativeLayout>
+        <!--日期下的分割线-->
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <!--工单基本信息-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/iv_header_bullet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_header_bullet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_task_info"
+                style="@style/headerLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:gravity="top"
+                android:includeFontPadding="false"
+                android:maxWidth="240dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_task_status"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@id/iv_header_bullet"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="模具-导光板8寸" />
+
+            <ImageView
+                android:id="@+id/iv_task_status"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon_equipment_info_status_baoyang"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_task_number"
+                style="@style/contentText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12.5dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_task_member_name"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@id/tv_task_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_info"
+                tools:text="LA08" />
+
+            <TextView
+                android:id="@+id/tv_task_member_name"
+                style="@style/contentBlackText"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/tv_task_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_task_number"
+                app:layout_constraintTop_toTopOf="@id/tv_task_number"
+                tools:text="张三" />
+
+            <TextView
+                android:id="@+id/tv_task_number_laber"
+                style="@style/descText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/equipment_type_name"
+                app:layout_constraintStart_toStartOf="@id/tv_task_info"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_number" />
+
+            <TextView
+                android:id="@+id/tv_update_label"
+                style="@style/descText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="@string/equipment_repairman"
+                app:layout_constraintEnd_toEndOf="@id/tv_task_member_name"
+                app:layout_constraintTop_toTopOf="@id/tv_task_number_laber" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:src="@drawable/icon_equipment_msg" />
+
+            <TextView
+                android:id="@+id/tv_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="1、检查模具的定位圈、限位开关、热流、限位开关、热流道和1、检查模具的定位圈、限位开关、热流道和1、检查模具的定位圈、限位开关、热流道和" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -15,7 +15,20 @@ data class DataParameterModel(
     val SUB_QUALITY_TASK_STATUS: List<Parameter>,
     val RECORD_METHOD: List<Parameter>,
     val QUALITY_TASK_STATUS: List<Parameter>,
-    val QUALITY_METHOD: List<Parameter>
+    val QUALITY_METHOD: List<Parameter>,
+    //EMS新增配置  start by yinzl
+    //设备功能状态
+    val FUNCTION_STATUS: List<Parameter>,
+    //设备详情中位置状态
+    val LOCATION_STATUS: List<Parameter>,
+    //设备类型   设备/模具
+    val FACILITY_TYPE: List<Parameter>,
+    //功能类型
+    val FUNCTION_TYPE: List<Parameter>,
+    //工单状态
+    val WORK_ORDER_STATUS: List<Parameter>,
+    //工单状态对应的文字
+    val WORK_ORDER_OPERATE: List<Parameter>,
 )
 
 data class Parameter(

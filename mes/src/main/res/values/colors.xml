@@ -23,4 +23,5 @@
     <color name="numberEditTextBtnDisable">#CCCCCC</color>
     <color name="numberEditTextBtnEnable">#FF9A00</color>
     <color name="remark_counter_color">#DCDCDC</color>
+    <color name="search_bg_color">#F8F8F8</color>
 </resources>

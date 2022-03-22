@@ -8,16 +8,20 @@ import com.panda.pda.mes.common.data.model.Parameter
  */
 object CommonParameters {
     private var dictionary = mutableMapOf<DataParamType, List<Parameter>>()
-
+    //根据id获取内容
     fun getDesc(paramType: DataParamType, value: Int): String {
         return dictionary[paramType]?.firstOrNull { it.paramValue == value }?.paramDesc
             ?: "undefined"
+    }
+    //根据内容获取id
+    fun getValue(paramType: DataParamType, desc: String): Int {
+        return dictionary[paramType]?.firstOrNull { it.paramDesc == desc }?.paramValue
+            ?: -1
     }
 
     fun getParameters(paramType: DataParamType): List<Parameter> {
         return dictionary[paramType] ?: listOf()
     }
-
     fun pushParameters(data: DataParameterModel) {
         dictionary[DataParamType.ENABLE_STATUS] = data.ENABLE_STATUS
         dictionary[DataParamType.TASK_STATUS] = data.TASK_STATUS
@@ -31,6 +35,12 @@ object CommonParameters {
         dictionary[DataParamType.RECORD_METHOD] = data.RECORD_METHOD
         dictionary[DataParamType.QUALITY_TASK_STATUS] = data.QUALITY_TASK_STATUS
         dictionary[DataParamType.QUALITY_METHOD] = data.QUALITY_METHOD
+        dictionary[DataParamType.FUNCTION_STATUS] = data.FUNCTION_STATUS
+        dictionary[DataParamType.LOCATION_STATUS] = data.LOCATION_STATUS
+        dictionary[DataParamType.FACILITY_TYPE] = data.FACILITY_TYPE
+        dictionary[DataParamType.FUNCTION_TYPE] = data.FUNCTION_TYPE
+        dictionary[DataParamType.WORK_ORDER_STATUS] = data.WORK_ORDER_STATUS
+        dictionary[DataParamType.WORK_ORDER_OPERATE] = data.WORK_ORDER_OPERATE
     }
 }
 
@@ -46,5 +56,12 @@ enum class DataParamType {
     SUB_QUALITY_TASK_STATUS,
     RECORD_METHOD,
     QUALITY_TASK_STATUS,
-    QUALITY_METHOD
+    QUALITY_METHOD,
+    FUNCTION_STATUS,
+    LOCATION_STATUS,
+    FACILITY_TYPE,
+    FUNCTION_TYPE,
+    WORK_ORDER_STATUS,
+    WORK_ORDER_OPERATE
+
 }

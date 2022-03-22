@@ -32,7 +32,7 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
         taskMessageNavigationAdapter = TaskMessageNavigationAdapter(
             R.menu.task_msg_nav_menu,
             requireContext()
-        ) { filterAuthority(it) }
+        ) { filterAuthority(it)||it.title==getString(R.string.equipment_task) }
             .also {
                 it.navAction = {navId -> navController.navigate(navId)}
             }

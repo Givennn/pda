@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--操作标题-->
+    <TextView
+        android:id="@+id/tv_record_type"
+        style="@style/headerLineText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_step_indicate"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry"
+        tools:text="模具保养确认" />
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="14dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:adjustViewBounds="true"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/icon_equipment_operate_pic"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_record_type" />
+    <!--操作人-->
+    <TextView
+        android:id="@+id/tv_operator"
+        style="@style/headerLineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_record_type"
+        tools:text="张三" />
+    <!--操作时间-->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operator"
+        tools:text="2019-01-22 10:12:40" />
+    <!--是否提供样品-->
+    <TextView
+        android:id="@+id/tv_simple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+        tools:text="是否提供样品：是" />
+    <!--是否超期-->
+    <TextView
+        android:id="@+id/tv_timeout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_simple"
+        tools:text="是否超期：是" />
+    <!--是否超期-->
+    <TextView
+        android:id="@+id/tv_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timeout"
+        tools:text="是否完工：是" />
+    <!--工时-->
+    <TextView
+        android:id="@+id/tv_worktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_complete"
+        tools:text="工时：5" />
+    <!--是否合格-->
+    <TextView
+        android:id="@+id/tv_hege"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_worktime"
+        tools:text="是否合格：5" />
+    <!--设备-->
+    <TextView
+        android:id="@+id/tv_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hege"
+        tools:text="设备：5" />
+    <!--厂商-->
+    <TextView
+        android:id="@+id/tv_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_device"
+        tools:text="厂商：5" />
+    <!--生产产品-->
+    <TextView
+        android:id="@+id/tv_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_supplier"
+        tools:text="生产产品：5" />
+    <!--被分配人-->
+    <TextView
+        android:id="@+id/tv_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_product"
+        tools:text="被分配人：5" />
+    <!--预计完工时间-->
+    <TextView
+        android:id="@+id/tv_plantime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_member"
+        tools:text="预计完工时间：5" />
+    <!--描述-->
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:minHeight="46dp"
+        android:paddingEnd="20dp"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_record_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_plantime"
+        tools:text="描述：完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1完成准备1" />
+
+    <ImageView
+        android:id="@+id/iv_step_indicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:src="@drawable/ic_point_indicate"
+        app:layout_constraintBottom_toBottomOf="@id/tv_record_type"
+        app:layout_constraintEnd_toStartOf="@+id/tv_record_type"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_record_type" />
+
+    <View
+        android:id="@+id/view_step_line_top"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/iv_step_indicate"
+        app:layout_constraintEnd_toEndOf="@+id/iv_step_indicate"
+        app:layout_constraintStart_toStartOf="@+id/iv_step_indicate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_step_line_bottom"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_step_indicate"
+        app:layout_constraintStart_toStartOf="@+id/iv_step_indicate"
+        app:layout_constraintTop_toBottomOf="@+id/iv_step_indicate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

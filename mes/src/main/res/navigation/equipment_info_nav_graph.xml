@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/equipment_info_nav_graph"
+    app:startDestination="@id/equipmentInfoFragment">
+    <fragment
+        android:id="@+id/equipmentInfoFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_info.EquipmentInfoFragment"
+        android:label="fragment_equipment_info">
+        <action
+            android:id="@+id/action_equipmentInfoFragment_to_equipmentInfoDetailFragment"
+            app:destination="@id/equipmentInfoDetailFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_equipmentInfoFragment_to_equipmentInfoWorkOrderWaitInStoreFragment"-->
+<!--            app:destination="@id/equipmentInfoWorkOrderWaitInStoreFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/equipmentInfoDetailFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_info.EquipmentInfoDetailFragment"
+        android:label="EquipmentInfoDetailFragment" />
+    <!--确认入库-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderWaitInStoreFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderWaitInStoreFragment"
+        android:label="EquipmentInfoWorkOrderWaitInStoreFragment" />
+
+</navigation>

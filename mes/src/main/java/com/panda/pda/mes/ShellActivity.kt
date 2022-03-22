@@ -11,12 +11,19 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
 import com.panda.pda.library.android.material.extension.setupNavControllerToFinalStack
+import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.base.retrofit.onMainThread
 import com.panda.pda.mes.common.data.CommonApi
+import com.panda.pda.mes.common.data.model.TaskMessageCountModel
 import com.panda.pda.mes.databinding.ActivityShellBinding
+import com.panda.pda.mes.operation.ems.data.EquipmentApi
 import com.panda.pda.mes.operation.fms.mission.TaskViewModel
 import com.panda.pda.mes.user.UserViewModel
+import com.panda.pda.mes.user.data.UserApi
+import com.trello.rxlifecycle4.kotlin.bindToLifecycle
+import io.reactivex.rxjava3.core.Single
+import java.util.concurrent.TimeUnit
 
 
 class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
@@ -82,11 +89,20 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     private fun updateTaskCount() {
         WebClient.request(CommonApi::class.java)
             .pdaTaskMsgCountGet()
+            .concatMap { old ->
+                //ems待处理任务数量获取，如果获取到的数量为0，则不展示维保任务
+                WebClient.request(EquipmentApi::class.java)
+                    .pdaEquipmentTaskMsgCountGet().map {
+                        old + it
+                    } // ems api
+            }
             .onMainThread()
 //            .unWrapperData()
             .subscribe({
                 taskViewModel.taskMsgData.postValue(it)
-            }, {})
+            }, { })
+
+
     }
 
     private fun initBottomNavigation() {

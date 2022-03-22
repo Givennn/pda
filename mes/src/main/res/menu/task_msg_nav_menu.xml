@@ -45,4 +45,8 @@
         android:id="@+id/qualityFinishFragment"
         android:title="@string/quality_finish"
         android:icon="@drawable/ic_op_qc_finish"/>
+    <item
+        android:id="@+id/equipmentTaskFragment"
+        android:title="@string/equipment_task"
+        android:icon="@drawable/ic_op_qc_finish"/>
 </menu>

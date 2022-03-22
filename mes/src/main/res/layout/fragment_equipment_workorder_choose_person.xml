@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="人员选择" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <!--搜索  不支持扫码-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/search_bg_color"
+        android:paddingStart="8dp">
+
+        <TextView
+            android:id="@+id/til_search_bar_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/til_search_bar"
+            android:layout_alignBottom="@+id/til_search_bar"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="10dp"
+            android:text="搜索"
+            android:textColor="@color/text_field_search_bar_highlight"
+            android:textSize="15sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search_bar"
+            style="@style/Widget.App.WhiteTextInputLayout.searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_margin="8dp"
+            android:layout_toStartOf="@id/til_search_bar_btn"
+            app:endIconTint="@color/text_field_icon"
+            app:startIconTint="@color/text_field_icon">
+
+            <requestFocus />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/task_scan_bar_hint"
+                android:textColor="@color/text_field_search_bar_highlight"
+                tools:text="" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line_search"
+        style="@style/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_choose_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_choose_person" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm"
+        style="@style/Widget.App.Button.confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/confirm"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>

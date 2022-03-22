@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.panda.pda.mes.R
 import com.panda.pda.mes.common.data.model.TaskMessageCountModel
 import com.panda.pda.mes.databinding.ItemTaskMsgBinding
+import okhttp3.internal.filterList
 
 /**
  * created by AnJiwei 2021/10/25
@@ -36,7 +37,9 @@ class TaskMessageNavigationAdapter(
         Pair(R.id.quality_sign_nav_graph, "qmsSubTaskToReceive"),
         Pair(R.id.quality_execute_nav_graph, "qmsSubTaskToRun"),
         Pair(R.id.qualityFinishFragment, "qmsTaskToFinish"),
-        Pair(R.id.quality_problem_record_nav_graph, "qmsProblem")
+        Pair(R.id.quality_problem_record_nav_graph, "qmsProblem"),
+        //ems任务
+        Pair(R.id.equipmentTaskFragment, "emsTaskToRun")
     )
 
     var navAction: ((navId: Int) -> Unit)? = null
@@ -82,15 +85,17 @@ class TaskMessageNavigationAdapter(
     }
 
     fun updateBadge(msg: List<TaskMessageCountModel>?) {
-
         if (msg == null || msg.isEmpty()) {
             return
         }
         dataSource = dataSource.map { item ->
-            val badgeCount = msg.firstOrNull { msg -> msg.key == msgKeyMap[item.first.itemId] }?.count
+            val badgeCount =
+                msg.firstOrNull { msg -> msg.key == msgKeyMap[item.first.itemId] }?.count
 
             Pair(item.first, badgeCount ?: 0)
         }
+        //过滤维保任务为0时的入口
+        dataSource=dataSource.filter { !(it.first.title=="维保任务"&&it.second==0)}
         notifyDataSetChanged()
     }
 

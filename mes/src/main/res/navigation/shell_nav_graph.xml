@@ -127,4 +127,154 @@
     <include app:graph="@navigation/quality_execute_nav_graph" />
     <include app:graph="@navigation/quality_problem_record_nav_graph" />
     <include app:graph="@navigation/quality_sign_nav_graph" />
+
+    <!--设备管理模块  add by 殷志林-->
+    <!--维保任务模块-->
+    <!--    <include app:graph="@navigation/equipment_task_nav_graph" />-->
+    <!--设备信息模块-->
+    <!--    <include app:graph="@navigation/equipment_info_nav_graph" />-->
+    <!--    &lt;!&ndash;维保工单模块&ndash;&gt;-->
+    <!--    <include app:graph="@navigation/equipment_workorder_nav_graph" />-->
+    <!--ems任务-->
+    <fragment
+        android:id="@+id/equipmentTaskFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_task.EquipmentWorkOrderTaskFragment"
+        android:label="fragment_equipment_task">
+    </fragment>
+    <!--ems维保页面-->
+    <fragment
+        android:id="@+id/equipmentWorkOrderFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentWorkOrderListFragment"
+        android:label="fragment_equipment_task">
+        <!--工单填报-->
+        <action
+            android:id="@+id/action_equipmentWorkOrderFragment_to_equipmentInfoWorkOrderAddFragment"
+            app:destination="@id/equipmentInfoWorkOrderAddFragment" />
+        <!--去分配-->
+        <action
+            android:id="@+id/action_equipmentWorkOrderFragment_to_EquipmentWorkOrderWaitFenpeiFragment"
+            app:destination="@id/equipmentWorkOrderWaitFenpeiFragment" />
+        <!--待完工-->
+        <action
+            android:id="@+id/action_equipmentWorkOrderFragment_to_equipmentWorkOrderWaitCompleteFragment"
+            app:destination="@id/equipmentWorkOrderWaitCompleteFragment" />
+        <!--维保完成去确认-->
+        <action
+            android:id="@+id/action_equipmentWorkOrderFragment_to_equipmentInfoWorkOrderWaitInStoreFragment"
+            app:destination="@id/equipmentInfoWorkOrderWaitInStoreFragment" />
+        <!--维保完成去确认-->
+        <action
+            android:id="@+id/action_equipmentWorkOrderFragment_to_equipmentInfoWorkOrderMaintenanceCompleteFragment"
+            app:destination="@id/equipmentInfoWorkOrderMaintenanceCompleteFragment" />
+
+    </fragment>
+    <!--维保列表-->
+    <fragment
+        android:id="@+id/equipmentMaintenanceHistoryFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentMaintenanceHistoryFragment"
+        android:label="EquipmentMaintenanceHistoryFragment" />
+    <!--出入库记录列表-->
+    <fragment
+        android:id="@+id/equipmentStoreHistoryListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentStoreHistoryListFragment"
+        android:label="EquipmentStoreHistoryListFragment" />
+    <!--生产数列表-->
+    <fragment
+        android:id="@+id/equipmentProduceHistoryListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentProduceHistoryListFragment"
+        android:label="EquipmentProduceHistoryListFragment" />
+    <!--工单添加-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderAddFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentInfoWorkOrderAddFragment"
+        android:label="EquipmentInfoWorkOrderAddFragment" />
+    <!--去分配-->
+    <fragment
+        android:id="@+id/equipmentWorkOrderWaitFenpeiFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.EquipmentWorkOrderWaitFenpeiFragment"
+        android:label="EquipmentWorkOrderWaitFenpeiFragment" />
+    <!--去完工-->
+    <fragment
+        android:id="@+id/equipmentWorkOrderWaitCompleteFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.EquipmentWorkOrderWaitCompleteFragment"
+        android:label="EquipmentWorkOrderWaitCompleteFragment" />
+    <!--维保完成去确认-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderMaintenanceCompleteFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.EquipmentInfoWorkOrderMaintenanceCompleteFragment"
+        android:label="EquipmentInfoWorkOrderMaintenanceCompleteFragment" />
+    <!--人员选择-->
+    <fragment
+        android:id="@+id/equipmentPersonChooseListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.EquipmentPersonChooseListFragment"
+        android:label="EquipmentPersonChooseListFragment" />
+    <!--出库时厂商选择-->
+    <fragment
+        android:id="@+id/equipmentSupplierChooseListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentSupplierChooseListFragment"
+        android:label="EquipmentSupplierChooseListFragment" />
+    <!--出库时设备选择-->
+    <fragment
+        android:id="@+id/equipmentDeviceChooseListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentDeviceChooseListFragment"
+        android:label="EquipmentDeviceChooseListFragment" />
+    <!--工单详情-->
+    <fragment
+        android:id="@+id/equipmentWorkOrderDetailFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentWorkOrderDetailFragment"
+        android:label="EquipmentWorkOrderDetailFragment" />
+    <!--入库时产品选择-->
+    <fragment
+        android:id="@+id/equipmentProductChooseListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentProductChooseListFragment"
+        android:label="EquipmentProductChooseListFragment" />
+    <!--提交入库-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderWaitInStoreFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderWaitInStoreFragment"
+        android:label="EquipmentInfoWorkOrderWaitInStoreFragment" />
+    <!--确认出库-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderConfirmOutStoreFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderConfirmOutStoreFragment"
+        android:label="EquipmentInfoWorkOrderConfirmOutStoreFragment" />
+    <!--确认入库-->
+    <fragment
+        android:id="@+id/equipmentInfoWorkOrderInStoreCompleteFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderInStoreCompleteFragment"
+        android:label="EquipmentInfoWorkOrderInStoreCompleteFragment" />
+    <!--操作记录列表-->
+    <fragment
+        android:id="@+id/equipmentOperationHistoryListFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentOperationHistoryListFragment"
+        android:label="EquipmentOperationHistoryListFragment" />
+    <!--操作记录图文详情-->
+    <fragment
+        android:id="@+id/equipmentOperationDetailFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_workorder.EquipmentOperationDetailFragment"
+        android:label="EquipmentOperationDetailFragment" />
+
+    <!--ems设备列表-->
+    <fragment
+        android:id="@+id/equipmentInfoFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_info.EquipmentInfoFragment"
+        android:label="fragment_equipment_info">
+        <action
+            android:id="@+id/action_equipmentInfoFragment_to_equipmentInfoDetailFragment"
+            app:destination="@id/equipmentInfoDetailFragment" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_equipmentInfoFragment_to_equipmentInfoWorkOrderWaitInStoreFragment"-->
+        <!--            app:destination="@id/equipmentInfoWorkOrderWaitInStoreFragment" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/equipmentInfoDetailFragment"
+        android:name="com.panda.pda.mes.operation.ems.equipment_info.EquipmentInfoDetailFragment"
+        android:label="EquipmentInfoDetailFragment" />
+    <fragment
+        android:id="@+id/equipmentGuidePdfPreviewFragment"
+        android:name="com.panda.pda.mes.operation.ems.EquipmentGuidePdfPreviewFragment"
+        android:label="EquipmentInfoDetailFragment" />
+
+
+    <!--设备管理模块  end by 殷志林-->
 </navigation>
