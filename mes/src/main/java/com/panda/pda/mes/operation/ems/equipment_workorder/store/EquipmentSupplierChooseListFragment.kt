@@ -143,23 +143,6 @@ class EquipmentSupplierChooseListFragment :
     override val titleResId: Int
         get() = R.string.equipment_title_supplier
 
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
-
     companion object {
         const val REQUEST_KEY = "CHOOSESUPLLIER_REASON_REQUEST"
         const val NG_REASON_ARG_KEY = "CHOOSESUPLLIER_REASON_ARGS"

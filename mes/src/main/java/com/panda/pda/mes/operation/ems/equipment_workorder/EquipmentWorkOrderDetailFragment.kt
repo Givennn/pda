@@ -193,6 +193,9 @@ class EquipmentWorkOrderDetailFragment :
                                     Bundle().apply {
                                         putString(EquipmentInfoWorkOrderWaitInStoreFragment.WORKORDERID,
                                             data.id)
+                                        //设备id
+                                        putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYID,
+                                            data.facilityId.toString())
                                         //设备类型
                                         putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYTYPE,
                                             data.facilityType)

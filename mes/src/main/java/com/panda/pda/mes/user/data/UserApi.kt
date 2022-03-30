@@ -4,7 +4,6 @@ import com.panda.pda.mes.user.data.model.LoginDataModel
 import com.panda.pda.mes.user.data.model.LoginRequest
 import com.panda.pda.mes.user.data.model.PwdCheckRequest
 import com.panda.pda.mes.user.data.model.PwdModifyRequest
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.POST
 
@@ -29,7 +28,7 @@ interface UserApi {
      */
     @POST("pda/admin/user/logout")
     fun pdaAdminUserLogoutPost(
-    ): Completable
+    ): Single<Any>
     /**
      * 登陆
      *
@@ -49,7 +48,7 @@ interface UserApi {
     @POST("pda/admin/user/password/check")
     fun pdaAdminUserPasswordCheckPost(
         @retrofit2.http.Body request: PwdCheckRequest
-    ): Completable
+    ): Single<Any>
     /**
      * 修改密码/修改
      *
@@ -59,5 +58,5 @@ interface UserApi {
     @POST("pda/admin/user/password/modify")
     fun pdaAdminUserPasswordModifyPost(
         @retrofit2.http.Body request: PwdModifyRequest
-    ): Completable
+    ): Single<Any>
 }

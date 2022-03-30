@@ -1,7 +1,5 @@
 package com.panda.pda.mes.operation.ems.data.model
 
-import com.panda.pda.mes.common.data.model.FileInfoModel
-
 /**
  * outhor:yinzhilin
  * 创建时间：2022/2/22 1:47 下午

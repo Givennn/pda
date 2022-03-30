@@ -18,7 +18,7 @@ data class DataParameterModel(
     val QUALITY_METHOD: List<Parameter>,
     //EMS新增配置  start by yinzl
     //设备功能状态
-    val FUNCTION_STATUS: List<Parameter>,
+    val FUNCTION_STATUS_PDA: List<Parameter>,
     //设备详情中位置状态
     val LOCATION_STATUS: List<Parameter>,
     //设备类型   设备/模具

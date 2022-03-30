@@ -11,9 +11,8 @@ import com.panda.pda.mes.operation.ems.data.model.EmsModelType
 import com.panda.pda.mes.operation.ems.data.model.EquipmentInfoDeviceModel
 
 class EquipmentInfoFragment : EquipmentDeviceSearchListFragment<ItemEquipmentInfoBinding>() {
-    override val qualityTaskModelType: EmsModelType
-        get() = EmsModelType.INFO
-
+    override val searchBarHintResId: Int?
+        get() = R.string.equipment_search_hint_devicelist
     override fun createViewBinding(parent: ViewGroup): ItemEquipmentInfoBinding {
         return ItemEquipmentInfoBinding.inflate(
             LayoutInflater.from(parent.context),

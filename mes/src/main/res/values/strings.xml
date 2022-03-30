@@ -271,5 +271,8 @@
     <!--设备类型-->
     <string name="equipment_device">设备</string>
     <string name="equipment_device_mj">模具</string>
+    <string name="equipment_search_hint_workorderlist">请输入工单号/设施名/设施号</string>
+    <string name="equipment_search_hint_devicelist">请扫码或输入编号/名称/产品名称</string>
+    <string name="picture_problem">问题图片</string>
     <!--设备管理系统ems end-->
 </resources>

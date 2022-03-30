@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jakewharton.rxbinding4.view.clicks
+import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.ConfirmDialogFragment
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.mes.common.data.MesStringUtils
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
-import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import com.panda.pda.mes.databinding.ItemEquipmentChooseSingleBinding
 import com.panda.pda.mes.operation.ems.EquipmentCommonChooseSearchListFragment
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
@@ -34,7 +35,8 @@ import java.util.concurrent.TimeUnit
  */
 class EquipmentProductChooseListFragment :
     EquipmentCommonChooseSearchListFragment<EquipmentProductChooseModel>() {
-
+    //设备id
+    var facilityId: String = ""
     private val bindingAdapter = getNgReasonAdapter()
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
@@ -43,13 +45,18 @@ class EquipmentProductChooseListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        facilityId =
+            arguments?.getString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYID).toString()
         val layoutManager = viewBinding.rvTaskList.layoutManager as? LinearLayoutManager ?: return
         scrollListener = object :
             EndlessRecyclerViewScrollListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 WebClient.request(EquipmentApi::class.java)
                     .pdaEmsProductChooseListGet(
-                        viewBinding.etSearchBar.text?.toString(), 10, page
+                        viewBinding.etSearchBar.text?.toString(),
+                        MesStringUtils.stringToInt(facilityId),
+                        10,
+                        page
                     )
                     .bindToFragment()
                     .subscribe({
@@ -98,8 +105,10 @@ class EquipmentProductChooseListFragment :
                 position: Int,
             ) {
 
-                holder.itemViewBinding.cbNgReason.text = dataList[holder.bindingAdapterPosition].productName
-                holder.itemViewBinding.cbNgReason.isChecked = dataList[holder.bindingAdapterPosition].isChecked
+                holder.itemViewBinding.cbNgReason.text =
+                    dataList[holder.bindingAdapterPosition].productName
+                holder.itemViewBinding.cbNgReason.isChecked =
+                    dataList[holder.bindingAdapterPosition].isChecked
 //                holder.itemViewBinding.cbNgReason.setOnCheckedChangeListener { _, isChecked ->
 //                    Timber.e("当前点击：$position")
 //
@@ -126,7 +135,7 @@ class EquipmentProductChooseListFragment :
 
     override fun api(key: String?): Single<DataListNode<EquipmentProductChooseModel>> {
         return WebClient.request(EquipmentApi::class.java)
-            .pdaEmsProductChooseListGet(key)
+            .pdaEmsProductChooseListGet(key, MesStringUtils.stringToInt(facilityId))
             .doFinally { scrollListener.resetState() }
     }
 
@@ -134,22 +143,6 @@ class EquipmentProductChooseListFragment :
     override val titleResId: Int
         get() = R.string.equipment_title_product_choose
 
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
 
     companion object {
         const val REQUEST_KEY = "CHOOSEPRODUCT_REASON_REQUEST"

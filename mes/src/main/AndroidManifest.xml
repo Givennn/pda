@@ -16,6 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.app"
+        android:networkSecurityConfig="@xml/network_config"
         tools:ignore="AllowBackup">
         <activity
             android:name=".ShellActivity"

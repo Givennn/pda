@@ -36,8 +36,8 @@ data class EquipmentWorkOrderModel(
     val workShopName: String,
     //位置(部门+区域拼接)
     val locationName: String,
-    //坐标（设备/模具的独立属性）
-    val coordinate: String,
+    //坐标（模具的独立属性）
+    val coordinate: String?,
     //类型
     val functionType: String,
     //状态
@@ -68,6 +68,5 @@ data class EquipmentWorkOrderModel(
 
 enum class EmsModelType(val code: Int) {
     Task(1),
-    INFO(2),
     WORKORDER(3),
 }

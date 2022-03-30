@@ -38,12 +38,20 @@ class EquipmentOperationDetailFragment :
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(requireView()) }
         val operateModel = arguments?.getStringObject<EquipmentOperateModel>()
         if (operateModel == null) {
-            toast("未取得报工详情数据")
+            toast("未取得操作详情数据")
             navBackListener.invoke(requireView())
             return
         }
         viewBinding.apply {
             tvOperation.text = operateModel.remark
+            //有图片列表，展示图片标题及列表
+            if (operateModel.fileList.isEmpty()) {
+                tvPictitle.isVisible=false
+                rvPicList.isVisible=false
+            }else{
+                tvPictitle.isVisible=true
+                rvPicList.isVisible=true
+            }
         }
 
         picBindingAdapter = object :

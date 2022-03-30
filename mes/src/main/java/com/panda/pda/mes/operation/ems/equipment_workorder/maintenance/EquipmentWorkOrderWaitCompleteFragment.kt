@@ -6,26 +6,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
-import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
-import com.panda.pda.mes.common.OrgNodeSelectFragment
 import com.panda.pda.mes.common.data.CommonApi
-import com.panda.pda.mes.databinding.*
+import com.panda.pda.mes.databinding.FragmentEquipmentWorkorderWaitcompleteBinding
 import com.panda.pda.mes.operation.ems.adapter.EquipmentInputPhotoAdapter
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
-import com.panda.pda.mes.operation.ems.data.model.EquipmentInfoDeviceModel
-import com.panda.pda.mes.operation.ems.data.model.WorkOrderAddRequest
 import com.panda.pda.mes.operation.ems.data.model.WorkOrderWangongRequest
-import com.panda.pda.mes.operation.qms.QualityViewModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -37,8 +30,9 @@ import java.io.File
  */
 class EquipmentWorkOrderWaitCompleteFragment :
     BaseFragment(R.layout.fragment_equipment_workorder_waitcomplete) {
-
     private val viewBinding by viewBinding<FragmentEquipmentWorkorderWaitcompleteBinding>()
+
+    //图片相关---start
     private lateinit var tmpFile: File
     private lateinit var photoAdapter: EquipmentInputPhotoAdapter
     private val takeImageResult =
@@ -51,8 +45,10 @@ class EquipmentWorkOrderWaitCompleteFragment :
         }
     private var latestTmpUri: Uri? = null
 
+    //图片相关---end
     //工单id
     var workOrderId = ""
+
     //设备type 1设备  2模具
     var facilityType: String = ""
 
@@ -65,9 +61,13 @@ class EquipmentWorkOrderWaitCompleteFragment :
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //设备type
         facilityType = arguments?.getString(FACILITYTYPE).toString()
+        //设备名称
         facilityDesc = arguments?.getString(FACILITYDESC).toString()
+        //设备型号
         facilityModel = arguments?.getString(FACILITYMODEL).toString()
+        //设置顶部设备基本信息
         viewBinding.tvDeviceTitle.text = "${
             if (facilityType == "1") {
                 "设备"
@@ -75,11 +75,14 @@ class EquipmentWorkOrderWaitCompleteFragment :
                 "模具"
             }
         }-${facilityDesc}-${facilityModel}"
-        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+        //工单id
         workOrderId = arguments?.getString(WORKORDERID).toString()
         viewBinding.btnConfirm.setOnClickListener {
+            //提交
             submit()
         }
+        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+        //初始化图片列表
         setupPhotoAdapter()
     }
 
@@ -88,10 +91,6 @@ class EquipmentWorkOrderWaitCompleteFragment :
      */
     private fun submit() {
         val remark = viewBinding.etRemark.text.toString()
-        if (remark.isEmpty()) {
-            toast(R.string.remark_empty_message)
-            return
-        }
         val request = WorkOrderWangongRequest(workOrderId,
             remark,
             photoAdapter.getDataSource())
@@ -105,6 +104,7 @@ class EquipmentWorkOrderWaitCompleteFragment :
     }
 
     private fun setupPhotoAdapter() {
+        viewBinding.rvPicList.layoutManager = GridLayoutManager(requireContext(), 4)
         viewBinding.rvPicList.adapter = EquipmentInputPhotoAdapter()
             .also {
                 it.onTakePhotoAction = { takePhoto() }
@@ -113,7 +113,6 @@ class EquipmentWorkOrderWaitCompleteFragment :
     }
 
     private fun takePhoto() {
-
         lifecycleScope.launchWhenStarted {
             getTmpFileUri().let { uri ->
                 latestTmpUri = uri
@@ -135,7 +134,6 @@ class EquipmentWorkOrderWaitCompleteFragment :
     }
 
     private fun updatePhoto(uri: Uri) {
-
         WebClient.request(CommonApi::class.java)
             .pdaCommonUploadFilePost(MultipartBody.Part.createFormData("file",
                 tmpFile.name,
@@ -151,10 +149,13 @@ class EquipmentWorkOrderWaitCompleteFragment :
 
     companion object {
         const val IMAGE_TYPE = "jpg"
+        //工单id
         const val WORKORDERID = "workOrderId"
+        //设备类型
         const val FACILITYTYPE = "facilityType"
         //设备名称
         const val FACILITYDESC = "facilityDesc"
+
         //设备型号代号
         const val FACILITYMODEL = "facilityModel"
     }

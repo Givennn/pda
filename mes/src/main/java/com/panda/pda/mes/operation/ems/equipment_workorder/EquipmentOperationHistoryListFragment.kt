@@ -38,7 +38,7 @@ class EquipmentOperationHistoryListFragment :
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(requireView()) }
         val detailStr = arguments?.getString(DETAIL_KEY)
-        val recordList = getProduceRecordJsonAdapter().fromJson(detailStr)
+        val recordList = detailStr?.let { getProduceRecordJsonAdapter().fromJson(it) }
             ?: listOf()
         bindingAdapter.refreshData(recordList)
         viewBinding.rvRecords.adapter = bindingAdapter
@@ -135,7 +135,12 @@ class EquipmentOperationHistoryListFragment :
                             }
                             tvSimple.text = "是否提供样品：${sampleText}"
                             tvPlantime.text = "预计完工时间：${data.expectWorkTime}"
-                            tvMember.text = "被分配人员：还没有实现还没有实现还没有实现还没有实现还没有实现"
+                            if (data.userNames != null&&data.userNames.isNotEmpty()) {
+                                var textMember="被分配人员："
+                                tvMember.text = textMember+data.userNames.joinToString(";") {
+                                    it
+                                }
+                            }
                         }
                         3 -> {
                             //已完工也就是待确认状态，需要展示是否超期、是否完工、工时

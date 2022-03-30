@@ -3,33 +3,23 @@ package com.panda.pda.mes.operation.ems.equipment_workorder.maintenance
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.TextUtils
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.api.load
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
-import com.panda.pda.mes.common.ModelPropertyCreator
-import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.CommonApi
-import com.panda.pda.mes.common.data.model.FileInfoModel
-import com.panda.pda.mes.databinding.*
+import com.panda.pda.mes.databinding.FragmentEquipmentWorkorderCompleteBinding
 import com.panda.pda.mes.operation.ems.adapter.EquipmentInputPhotoAdapter
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
-import com.panda.pda.mes.operation.ems.data.model.EquipmentInfoDeviceModel
 import com.panda.pda.mes.operation.ems.data.model.WorkOrderWBConfirmRequest
-import com.panda.pda.mes.operation.ems.data.model.WorkOrderWangongRequest
-import com.panda.pda.mes.operation.qms.QualityViewModel
-import com.panda.pda.mes.operation.qms.data.model.QualityProblemRecordDetailModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -58,6 +48,7 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
 
     //工单id
     var workOrderId: String = ""
+
     //设备type 1设备  2模具
     var facilityType: String = ""
 
@@ -66,6 +57,7 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
 
     //设备型号代号
     var facilityModel: String = ""
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,7 +73,7 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
         }-${facilityDesc}-${facilityModel}"
         workOrderId = arguments?.getString(WORKORDERID).toString()
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
-        viewBinding.btnConfirm.setOnClickListener{
+        viewBinding.btnConfirm.setOnClickListener {
             submit()
         }
         setupPhotoAdapter()
@@ -135,10 +127,12 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
      */
     private fun submit() {
         val remark = viewBinding.etRemark.text.toString()
-        if (remark.isEmpty()) {
+        //不合格时，备注时必填项
+        if (remark.isEmpty() && result != 1) {
             toast(R.string.remark_empty_message)
             return
         }
+        //创建入参
         val request = WorkOrderWBConfirmRequest(workOrderId,
             result,
             remark,
@@ -152,7 +146,9 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
             }, {})
     }
 
+    //初始化图片列表
     private fun setupPhotoAdapter() {
+        viewBinding.rvPicList.layoutManager = GridLayoutManager(requireContext(), 4)
         viewBinding.rvPicList.adapter = EquipmentInputPhotoAdapter()
             .also {
                 it.onTakePhotoAction = { takePhoto() }
@@ -160,8 +156,8 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
             }
     }
 
+    //拍照
     private fun takePhoto() {
-
         lifecycleScope.launchWhenStarted {
             getTmpFileUri().let { uri ->
                 latestTmpUri = uri
@@ -201,8 +197,10 @@ class EquipmentInfoWorkOrderMaintenanceCompleteFragment :
         const val IMAGE_TYPE = "jpg"
         const val WORKORDERID = "workOrderId"
         const val FACILITYTYPE = "facilityType"
+
         //设备名称
         const val FACILITYDESC = "facilityDesc"
+
         //设备型号代号
         const val FACILITYMODEL = "facilityModel"
     }

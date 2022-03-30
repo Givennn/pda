@@ -2,9 +2,11 @@ package com.panda.pda.mes.operation.ems.equipment_workorder.maintenance
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,19 +71,6 @@ class EquipmentPersonChooseListFragment :
 
     override fun createAdapter(): CommonViewBindingAdapter<*, EquipmentPersonChooseModel> {
         //适配器中的列表，已选也包含未选
-        //这段是测试代码
-//        if (dataList.isEmpty()) {
-//            for (index in 0..30) {
-//                var item =
-//                    EquipmentPersonChooseModel(index,
-//                        "name$index",
-//                        "rolename$index",
-//                        "部门$index",
-//                        "workshopNames$index",
-//                        false)
-//                dataList.add(item)
-//            }
-//        }
         return object :
             CommonViewBindingAdapter<ItemChoosePersonBinding, EquipmentPersonChooseModel>(
                 dataList) {
@@ -108,12 +97,29 @@ class EquipmentPersonChooseListFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-//                    cbPerson.text = data.realName
+//                    待完工单数：0，预计总工时：0小时
+                    //待完工单数，默认是0
+                    var totalNum = "0"
+                    //预计总工时，默认是0
+                    var totalTime = "0"
+                    //用户的工单对象，保存有工时与工单数量
+                    if (null != data.emsUserWorkOrderReport) {
+                        //提取工单数量
+                        if (!TextUtils.isEmpty(data.emsUserWorkOrderReport!!.totalWorkOrderNum)) {
+                            totalNum = data.emsUserWorkOrderReport!!.totalWorkOrderNum
+                        }
+                        //提取总工时
+                        if (!TextUtils.isEmpty(data.emsUserWorkOrderReport!!.totalExpectWorkTime)) {
+                            totalTime = data.emsUserWorkOrderReport!!.totalExpectWorkTime
+                        }
+                        tvDetail.isVisible = true
+                        tvDetail.text = "待完工单数：${totalNum}，预计总工时：${totalTime}小时"
+                    } else {
+                        tvDetail.isVisible = false
+                    }
+                    //展示人员姓名+部门
                     cbPerson.text = "${data.userName}-${data.orgName}"
                     cbPerson.isSelected = data.isChecked
-//                    cbPerson.setOnCheckedChangeListener { _, isChecked ->
-//                        data.isChecked = isChecked
-//                    }
                     rootView.setOnClickListener {
                         val isChecked = data.isChecked
                         cbPerson.isSelected = !isChecked
@@ -124,6 +130,7 @@ class EquipmentPersonChooseListFragment :
         }
     }
 
+    //确认选择人员列表，将人员带入上游页面
     private fun confirm(reasons: List<EquipmentPersonChooseModel>) {
         setFragmentResult(REQUEST_KEY, Bundle().apply {
             putString(NG_REASON_ARG_KEY,
@@ -133,6 +140,7 @@ class EquipmentPersonChooseListFragment :
         navBackListener.invoke(requireView())
     }
 
+    //设置进入页面的接口获取人员列表
     override fun api(key: String?): Single<DataListNode<EquipmentPersonChooseModel>> {
         return WebClient.request(EquipmentApi::class.java)
             .pdaEmsPersonChooseListGet(teamId, key)
@@ -142,22 +150,6 @@ class EquipmentPersonChooseListFragment :
     //产品列表
     override val titleResId: Int
         get() = R.string.equipment_title_person_choose
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
 
     companion object {
         const val REQUEST_KEY = "CHOOSEPERSON_REASON_REQUEST"
@@ -172,6 +164,7 @@ class EquipmentPersonChooseListFragment :
         }
     }
 
+    //由于是多选，展示底部确认按钮
     override val showBottomBtm: Boolean
         get() = true
 }

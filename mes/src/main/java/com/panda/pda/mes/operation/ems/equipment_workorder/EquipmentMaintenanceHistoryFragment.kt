@@ -28,7 +28,9 @@ class EquipmentMaintenanceHistoryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+        //设备id
         val facilityId = arguments?.getString("facilityId") ?: ""
+        //设备类型
         val facilityType = arguments?.getString("facilityType") ?: ""
         viewBinding.apply {
             viewPage.adapter = object : FragmentStateAdapter(childFragmentManager, lifecycle) {
@@ -38,7 +40,9 @@ class EquipmentMaintenanceHistoryFragment :
 
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
+                        //维修记录列表
                         0 -> EquipmentMaintenanceHistoryListFragment(facilityId, facilityType)
+                        //保养记录列表
                         1 -> EquipmentUpkeepHistoryListFragment(facilityId, facilityType)
                         else -> throw IndexOutOfBoundsException()
                     }

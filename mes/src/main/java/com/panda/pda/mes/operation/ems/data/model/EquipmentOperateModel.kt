@@ -17,6 +17,7 @@ data class EquipmentOperateModel(
     val createTime: String,
     val expectWorkTime: Int,
     val fileList: List<FileInfoModel>,
+    val userNames: List<String>?,
     val id: Int,
     val intactFlag: Int,
     val locationname: String,

@@ -14,6 +14,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
@@ -279,6 +280,7 @@ class EquipmentInfoWorkOrderAddFragment : BaseFragment(R.layout.fragment_equipme
     }
 
     private fun setupPhotoAdapter() {
+        viewBinding.rvPicList.layoutManager=GridLayoutManager(requireContext(), 4)
         viewBinding.rvPicList.adapter = EquipmentInputPhotoAdapter()
             .also {
                 it.onTakePhotoAction = { takePhoto() }

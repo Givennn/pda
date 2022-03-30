@@ -330,4 +330,13 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/textHeaderLineColor</item>
     </style>
+
+    <style name="contentTextEquipment" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/textHighLightColor</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="contentBlackTextEquipment" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/textHeaderLineColor</item>
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>

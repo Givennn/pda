@@ -47,9 +47,10 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
     private var workorderStatus: String = ""
 
     //部门选择
-    private var organizationId: String =""
+    private var organizationId: String = ""
     private var headTypeData: MutableList<String> = mutableListOf()
     private var headStatusData: MutableList<String> = mutableListOf()
+
     //部门列表
     private var headOrgData: MutableList<EquipmentOrgModel> = mutableListOf()
 
@@ -105,6 +106,7 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
             Timber.e("dialog关闭")
         }.show(parentFragmentManager, TAG)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -121,6 +123,7 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
         getOrgList()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.e("navController.graph${navController.graph}")
@@ -199,7 +202,7 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
                 data: EquipmentWorkOrderModel,
                 position: Int,
             ) {
-                holder.itemViewBinding. root.clicks()
+                holder.itemViewBinding.root.clicks()
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .bindToLifecycle(holder.itemView)
 //                    .subscribe { showDetail(data) }
@@ -273,10 +276,12 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
 
     override fun api(key: String?): Single<DataListNode<EquipmentWorkOrderModel>> {
         return if (qualityTaskModelType == EmsModelType.Task) {
+            //待处理任务列表接口请求
             WebClient.request(EquipmentApi::class.java)
                 .pdaEmsWorkOrderTaskByPageGet()
                 .doFinally { scrollListener.resetState() }
         } else {
+            //工单列表接口请求
             WebClient.request(EquipmentApi::class.java)
                 .pdaEmsWorkOrderListByPageGet(facilityType, workorderStatus, organizationId, key)
                 .doFinally { scrollListener.resetState() }
@@ -284,36 +289,20 @@ abstract class EquipmentWorkOrderSearchListFragment<TItemViewBinding : ViewBindi
 
     }
 
+    //页面标题
     override val titleResId: Int
         get() = when (qualityTaskModelType) {
             EmsModelType.Task -> R.string.equipment_task
-            EmsModelType.INFO -> R.string.equipment_info
             EmsModelType.WORKORDER -> R.string.equipment_workorder
         }
 
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
     //获取部门列表
     private fun getOrgList() {
         WebClient.request(EquipmentApi::class.java)
             .pdaEmsOrgListGet()
             .subscribe({
                 //顶部列表
-                headOrgData =  it.dataList.toMutableList()
+                headOrgData = it.dataList.toMutableList()
                 headOrgStringData.clear()
                 if (headOrgData.isNotEmpty()) {
                     headOrgStringData.add("全部")

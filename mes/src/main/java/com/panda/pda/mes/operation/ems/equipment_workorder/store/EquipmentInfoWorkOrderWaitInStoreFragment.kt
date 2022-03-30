@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
@@ -64,11 +65,14 @@ class EquipmentInfoWorkOrderWaitInStoreFragment :
 
     //设备型号代号
     var facilityModel: String = ""
+    //设备id
+    var facilityId: String = ""
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPhotoAdapter()
+        facilityId = arguments?.getString(FACILITYID).toString()
         facilityType = arguments?.getString(FACILITYTYPE).toString()
         facilityDesc = arguments?.getString(FACILITYDESC).toString()
         facilityModel = arguments?.getString(FACILITYMODEL).toString()
@@ -124,10 +128,10 @@ class EquipmentInfoWorkOrderWaitInStoreFragment :
             toast("请输入生产次数")
             return
         }
-        if (remark.isEmpty()) {
-            toast(R.string.remark_empty_message)
-            return
-        }
+//        if (remark.isEmpty()) {
+//            toast(R.string.remark_empty_message)
+//            return
+//        }
         val request = WorkOrderInStoreSubmitRequest(workOrderId,
             selecteProductIdList,
             MesStringUtils.stringToInt(viewBinding.etProductTimes.text.toString().trim()),
@@ -144,36 +148,19 @@ class EquipmentInfoWorkOrderWaitInStoreFragment :
 
     //跳转至产品选择列表
     private fun navToProductSelect() {
-//        WebClient.request(QualityApi::class.java)
-//            .pdaQmsQualitySubTaskGetBadnessListGet(subTaskDetailModel.id)
-//            .bindToFragment()
-//            .subscribe({
-//                if (it.dataList.isEmpty()) {
-//                    toast("请配置不良原因。")
-//                } else {
-//                    val ngReasons = ngReasonAdapter.toJson(it.dataList)
-//                    navController.navigate(
-//                        R.id.ngReasonFragment,
-//                        Bundle().apply { putString(NgReasonFragment.NG_REASON_ARG_KEY, ngReasons) }
-//                    )
-//                }
-//            }, {})
         navController.navigate(
             R.id.equipmentProductChooseListFragment,
             Bundle().apply {
-                putGenericObjectString(
-                    selecteProductList,
-                    Types.newParameterizedType(
-                        List::class.java,
-                        EquipmentProductChooseModel::class.java
-                    ), EquipmentProductChooseListFragment.NG_REASON_ARG_KEY
-                )
+                //设备id
+                putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYID,
+                    facilityId)
             }
         )
 
     }
 
     private fun setupPhotoAdapter() {
+        viewBinding.rvPicList.layoutManager= GridLayoutManager(requireContext(), 4)
         viewBinding.rvPicList.adapter = EquipmentInputPhotoAdapter()
             .also {
                 it.onTakePhotoAction = { takePhoto() }
@@ -225,6 +212,8 @@ class EquipmentInfoWorkOrderWaitInStoreFragment :
 
         //设备名称
         const val FACILITYDESC = "facilityDesc"
+        //设备id
+        const val FACILITYID = "facilityId"
 
         //设备型号代号
         const val FACILITYMODEL = "facilityModel"

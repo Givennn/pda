@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.retrofit.WebClient
@@ -21,7 +22,8 @@ class EquipmentWorkOrderListFragment :
     EquipmentWorkOrderSearchListFragment<ItemEquipmentTaskBinding>() {
     override val qualityTaskModelType: EmsModelType
         get() = EmsModelType.WORKORDER
-
+    override val searchBarHintResId: Int?
+        get() = R.string.equipment_search_hint_workorderlist
 
     override fun createViewBinding(parent: ViewGroup): ItemEquipmentTaskBinding {
         return ItemEquipmentTaskBinding.inflate(
@@ -60,6 +62,11 @@ class EquipmentWorkOrderListFragment :
                 tvTaskMemberLabel.visibility = View.VISIBLE
             }
             tvRemark.text = data.remark
+            //位置信息
+            tvLocation.text="${data.orgName}-${data.locationName}"
+            if (data.facilityType=="2"&&!TextUtils.isEmpty(data.coordinate)) {
+                tvLocation.text= "${data.orgName}-${data.locationName}-${data.coordinate}"
+            }
             ivTaskStatus.visibility = View.VISIBLE
             when (data.workOrderStatus) {
                 "1" -> {

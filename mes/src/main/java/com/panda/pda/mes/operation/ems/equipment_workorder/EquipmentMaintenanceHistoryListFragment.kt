@@ -61,6 +61,7 @@ class EquipmentMaintenanceHistoryListFragment(
             EndlessRecyclerViewScrollListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 if (facilityType == "1") {
+                    //设备的维修列表
                     WebClient.request(EquipmentApi::class.java)
                         .pdaEmsEquipmentRepairOrderListGet(MesStringUtils.stringToInt(facilityId),
                             10,
@@ -71,8 +72,9 @@ class EquipmentMaintenanceHistoryListFragment(
                             bindingAdapter.addData(it.dataList)
                         }, { })
                 } else {
+                    //模具的维修列表
                     WebClient.request(EquipmentApi::class.java)
-                        .pdaEmsEquipmentRepairOrderListGet(MesStringUtils.stringToInt(facilityId),
+                        .pdaEmsModuleRepairOrderListGet(MesStringUtils.stringToInt(facilityId),
                             10,
                             page
                         )

@@ -3,35 +3,24 @@ package com.panda.pda.mes.operation.ems.equipment_workorder.store
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.api.load
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
-import com.panda.pda.mes.common.ModelPropertyCreator
-import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.CommonApi
-import com.panda.pda.mes.common.data.model.FileInfoModel
-import com.panda.pda.mes.databinding.*
+import com.panda.pda.mes.databinding.FragmentEquipmentWorkorderWaitcompleteBinding
 import com.panda.pda.mes.operation.ems.adapter.EquipmentInputPhotoAdapter
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
 import com.panda.pda.mes.operation.ems.data.model.EquipmentInfoDeviceModel
 import com.panda.pda.mes.operation.ems.data.model.WorkOrderOutStoreConfirmRequest
-import com.panda.pda.mes.operation.ems.data.model.WorkOrderWangongRequest
-import com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.EquipmentWorkOrderWaitFenpeiFragment
-import com.panda.pda.mes.operation.qms.QualityViewModel
-import com.panda.pda.mes.operation.qms.data.model.QualityProblemRecordDetailModel
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -98,10 +87,10 @@ class EquipmentInfoWorkOrderConfirmOutStoreFragment :
      */
     private fun submit() {
         val remark = viewBinding.etRemark.text.toString()
-        if (remark.isEmpty()) {
-            toast(R.string.remark_empty_message)
-            return
-        }
+//        if (remark.isEmpty()) {
+//            toast(R.string.remark_empty_message)
+//            return
+//        }
         val request = WorkOrderOutStoreConfirmRequest(workOrderId,
             remark,
             photoAdapter.getDataSource())
@@ -114,6 +103,7 @@ class EquipmentInfoWorkOrderConfirmOutStoreFragment :
             }, {})
     }
     private fun setupPhotoAdapter() {
+        viewBinding.rvPicList.layoutManager= GridLayoutManager(requireContext(), 4)
         viewBinding.rvPicList.adapter = EquipmentInputPhotoAdapter()
             .also {
                 it.onTakePhotoAction = { takePhoto() }
@@ -122,7 +112,6 @@ class EquipmentInfoWorkOrderConfirmOutStoreFragment :
     }
 
     private fun takePhoto() {
-
         lifecycleScope.launchWhenStarted {
             getTmpFileUri().let { uri ->
                 latestTmpUri = uri

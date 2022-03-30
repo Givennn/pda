@@ -35,7 +35,7 @@ object CommonParameters {
         dictionary[DataParamType.RECORD_METHOD] = data.RECORD_METHOD
         dictionary[DataParamType.QUALITY_TASK_STATUS] = data.QUALITY_TASK_STATUS
         dictionary[DataParamType.QUALITY_METHOD] = data.QUALITY_METHOD
-        dictionary[DataParamType.FUNCTION_STATUS] = data.FUNCTION_STATUS
+        dictionary[DataParamType.FUNCTION_STATUS_PDA] = data.FUNCTION_STATUS_PDA
         dictionary[DataParamType.LOCATION_STATUS] = data.LOCATION_STATUS
         dictionary[DataParamType.FACILITY_TYPE] = data.FACILITY_TYPE
         dictionary[DataParamType.FUNCTION_TYPE] = data.FUNCTION_TYPE
@@ -57,7 +57,7 @@ enum class DataParamType {
     RECORD_METHOD,
     QUALITY_TASK_STATUS,
     QUALITY_METHOD,
-    FUNCTION_STATUS,
+    FUNCTION_STATUS_PDA,
     LOCATION_STATUS,
     FACILITY_TYPE,
     FUNCTION_TYPE,

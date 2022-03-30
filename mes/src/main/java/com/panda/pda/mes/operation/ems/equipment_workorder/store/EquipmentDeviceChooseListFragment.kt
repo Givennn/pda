@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jakewharton.rxbinding4.view.clicks
+import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.ConfirmDialogFragment
 import com.panda.pda.mes.base.extension.putObjectString
@@ -18,7 +19,6 @@ import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
-import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import com.panda.pda.mes.databinding.ItemEquipmentChooseSingleBinding
 import com.panda.pda.mes.operation.ems.EquipmentCommonChooseSearchListFragment
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
@@ -142,22 +142,6 @@ class EquipmentDeviceChooseListFragment :
     override val titleResId: Int
         get() = R.string.equipment_title_device
 
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
 
     override val showBottomBtm: Boolean
         get() = false

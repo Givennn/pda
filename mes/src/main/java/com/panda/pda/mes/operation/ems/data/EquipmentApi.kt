@@ -57,6 +57,7 @@ interface EquipmentApi {
         @retrofit2.http.Query("page") page: Int = 1,
 
         ): Single<DataListNode<EquipmentWorkOrderModel>>
+
     /**
      * 分页查询待处理工单列表
      *
@@ -69,6 +70,7 @@ interface EquipmentApi {
         @retrofit2.http.Query("page") page: Int = 1,
 
         ): Single<DataListNode<EquipmentWorkOrderModel>>
+
     /**
      * 根据设备id查询详情
      * The endpoint is owned by docs service owner
@@ -78,6 +80,7 @@ interface EquipmentApi {
     fun pdaEmsDeviceDetailGet(
         @retrofit2.http.Query("id") id: Int,
     ): Single<EquipmentInfoDeviceModel>
+
     /**
      * 根据工单id查询详情
      * The endpoint is owned by docs service owner
@@ -87,6 +90,7 @@ interface EquipmentApi {
     fun pdaEmsWorkOrderDetailGet(
         @retrofit2.http.Query("id") id: String,
     ): Single<EquipmentWorkOrderModel>
+
     /**
      * 根据模具id查询详情
      * The endpoint is owned by docs service owner
@@ -185,13 +189,16 @@ interface EquipmentApi {
      *
      * The endpoint is owned by docs service owner
      * @param keyword 搜索关键字 (required)
+     * @param facilityId 模具id
      */
     @GET("pda/ems/product/list")
     fun pdaEmsProductChooseListGet(
         @retrofit2.http.Query("searchKey") keyword: String?,
+        @retrofit2.http.Query("facilityId") facilityId: Int,
         @retrofit2.http.Query("rows") rows: Int = 20,
         @retrofit2.http.Query("page") page: Int = 1,
     ): Single<DataListNode<EquipmentProductChooseModel>>
+
     /**
      * 获取产品列表
      *
@@ -201,10 +208,11 @@ interface EquipmentApi {
     @GET("pda/ems/sys/group/detail-list")
     fun pdaEmsPersonChooseListGet(
         @retrofit2.http.Query("id") id: String?,
-        @retrofit2.http.Query("searchKey") keyword: String?,
+        @retrofit2.http.Query("key") keyword: String?,
         @retrofit2.http.Query("rows") rows: Int = 20,
         @retrofit2.http.Query("page") page: Int = 1,
     ): Single<DataListNode<EquipmentPersonChooseModel>>
+
     /**
      * 获取模具生产数记录
      *
@@ -214,6 +222,7 @@ interface EquipmentApi {
     fun pdaEmsProcedureListGet(
         @retrofit2.http.Query("id") id: String,
     ): Single<DataListNode<EquipmentProcedureModel>>
+
     /**
      * 获取工单操作记录
      *
@@ -223,6 +232,7 @@ interface EquipmentApi {
     fun pdaEmsWorkOrderOperateListGet(
         @retrofit2.http.Query("id") id: String,
     ): Single<DataListNode<EquipmentOperateModel>>
+
     /**
      * 获取二级部门列表
      *
@@ -231,6 +241,7 @@ interface EquipmentApi {
     @GET("pda/ems/org/list")
     fun pdaEmsOrgListGet(
     ): Single<DataListNode<EquipmentOrgModel>>
+
     /**
      * 条件查询功能类型列表
      *
@@ -239,6 +250,7 @@ interface EquipmentApi {
     @GET("pda/ems/function-dict/list")
     fun pdaFunctionTypeListGet(
     ): Single<DataListNode<EquipmentFunctionTypeChooseModel>>
+
     /**
      * 获取模具出入库记录
      *
@@ -263,12 +275,12 @@ interface EquipmentApi {
         @retrofit2.http.Query("page") page: Int = 1,
     ): Single<DataListNode<EquipmentInfoMatrixMaintainRepairItemModel>>
 
-    /**
-     * 获取模具维修记录
-     *
-     * The endpoint is owned by docs service owner
-     */
     @GET("pda/ems/mould/repair-order-list")
+            /**
+             * 获取模具维修记录
+             *
+             * The endpoint is owned by docs service owner
+             */
     fun pdaEmsModuleRepairOrderListGet(
         @retrofit2.http.Query("id") id: Int,
         @retrofit2.http.Query("rows") rows: Int = 20,
@@ -298,6 +310,7 @@ interface EquipmentApi {
         @retrofit2.http.Query("rows") rows: Int = 20,
         @retrofit2.http.Query("page") page: Int = 1,
     ): Single<DataListNode<EquipmentInfoMatrixMaintainRepairItemModel>>
+
     /**
      * 设备管理/查询待处理任务数量
      *
@@ -306,245 +319,6 @@ interface EquipmentApi {
      */
     @GET("pda/ems/work-order/process-number")
     fun pdaEquipmentTaskMsgCountGet(
-//    ): Single<BaseResponse<TaskMessageCountModel>>
     ): Single<List<TaskMessageCountModel>>
-    /**
-     * 获取子任务列表
-     *
-     * The endpoint is owned by docs service owner
-     * @param keyword 搜索关键字 (required)
-     * @param modelType 1-质检签收，2-质检执行
-     */
-    @GET("pda/qms/common/sub-task-list")
-    fun pdaQmsCommonSubTaskListGet(
-        @retrofit2.http.Query("modelType") modelType: Int,
-        @retrofit2.http.Query("keyword") keyword: String?,
-    ): Single<DataListNode<QualitySubTaskModel>>
 
-    /**
-     * 根据质检任务id查询质检任务详情
-     * The endpoint is owned by docs service owner
-     * @param id 质检任务id (required)
-     */
-    @GET("pda/qms/common/detail")
-    fun pdaQmsCommonDetailGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<QualityDetailModel>
-
-    /**
-     * 查询质检任务操作列表
-     * The endpoint is owned by docs service owner
-     * @param id 质检任务id (required)
-     */
-    @GET("pda/qms/common/operator-list")
-    fun pdaQmsCommonOperatorListGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<DataListNode<QualityTaskRecordModel>>
-
-    /**
-     * 质检任务派发
-     * The endpoint is owned by docs service owner
-     * @param body (optional)
-     */
-    @POST("pda/qms/qualityTask/distribute")
-    fun pdaQmsDistributeDistributePost(
-        @retrofit2.http.Body body: QualityTaskDistributeRequest,
-    ): Single<Any>
-
-    /**
-     * 新建质检问题记录
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityProblem/add")
-    fun pdaQmsQualityProblemAddPost(
-        @retrofit2.http.Body body: QualityProblemRecordDetailModel,
-    ): Single<Any>
-
-    /**
-     * 编辑质检问题记录
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityProblem/edit")
-    fun pdaQmsQualityProblemEditPost(
-        @retrofit2.http.Body body: QualityProblemRecordDetailModel,
-    ): Single<Any>
-
-    /**
-     * 质检问题详情
-     * The endpoint is owned by docs service owner
-     * @param id  (required)
-     */
-    @GET("pda/qms/qualityProblem/get-by-id")
-    fun pdaQmsQualityProblemGetByIdGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<QualityProblemRecordDetailModel>
-
-    /**
-     * 质检问题记录列表
-     * The endpoint is owned by docs service owner
-     * @param keywords 质检任务编号/质检任务描述/质检方案编码/质检方案描述/产品条码/产品编码/产品描述 (required)
-     */
-    @GET("pda/qms/qualityProblem/list-by-page")
-    fun pdaQmsQualityProblemListByPageGet(
-        @retrofit2.http.Query("keywords") keywords: String,
-    ): Single<DataListNode<QualityProblemRecordModel>>
-
-    /**
-     * 派发子任务撤销
-     */
-    @POST("pda/qms/qualityTask/distribute-cancel")
-    fun qualityDistributeCancel(
-        @retrofit2.http.Body body: QualityTaskDistributeCancelRequest,
-    ): Single<Any>
-
-    /**
-     * 完工质检任务
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/finish")
-    fun pdaQmsQualityTaskFinishPost(
-        @retrofit2.http.Body body: IdRequest,
-    ): Single<Any>
-
-    /**
-     * 质检子任务详情
-     * The endpoint is owned by docs service owner
-     * @param id 质检子任务id (required)
-     */
-    @GET("pda/qms/qualitySubTask/get-by-id")
-    fun pdaQmsQualitySubTaskGetByIdGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<QualitySubTaskDetailModel>
-
-    /**
-     * 签收质检任务
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualitySubTask/sign")
-    fun pdaQmsQualitySubTaskSignPost(
-        @retrofit2.http.Body body: IdRequest,
-    ): Single<Any>
-
-    /**
-     * 根据质检子任务id查询不良原因列表
-     * The endpoint is owned by docs service owner
-     * @param id 质检子任务id (required)
-     */
-    @GET("pda/qms/qualitySubTask/get-badness-list")
-    fun pdaQmsQualitySubTaskGetBadnessListGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<DataListNode<QualityNgReasonModel>>
-
-
-    /**
-     * 查询所有启用状态的不良原因
-     * The endpoint is owned by docs service owner
-     * @param id 质检子任务id (required)
-     */
-    @GET("pda/qms/qualityProblem/get-badness-reason")
-    fun pdaQmsQualityProblemGetBadnessListGet(
-    ): Single<DataListNode<QualityNgReasonModel>>
-
-    /**
-     * 根据质检子任务id查询质检项列表
-     * The endpoint is owned by docs service owner
-     * @param id 质检子任务id (required)
-     */
-    @GET("pda/qms/qualitySubTask/get-quality-item")
-    fun pdaQmsQualityTaskGetQualityItemGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<DataListNode<QualityInspectItemModel>>
-
-    /**
-     * 质检任务审核
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/review")
-    fun pdaQmsReviewReviewPost(
-        @retrofit2.http.Body body: QualityTaskReviewRequest,
-    ): Single<Any>
-
-    /**
-     * 质检任务转办
-     * The endpoint is owned by docs service owner
-     * @param id  (required)
-     * @param reviewerId  (required)
-     * @param 备注  (required)
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/review-transfer")
-    fun pdaQmsReviewTransferPost(
-        @Body body: QualityTaskTransferRequest,
-    ): Single<Any>
-
-    /**
-     * 派发质检任务转办
-     * The endpoint is owned by docs service owner
-     * @param id  (required)
-     * @param reviewerId  (required)
-     * @param 备注  (required)
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/distribute-transfer")
-    fun pdaQmsQualityTaskDistributeTransferPost(
-        @Body body: QualityTaskDistributeTransferRequest,
-    ): Single<Any>
-
-    /**
-     * 提交质检任务
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/commit")
-    fun pdaQmsTaskCommitPost(
-        @retrofit2.http.Body body: QualityTaskCommitRequest,
-    ): Single<Any>
-
-
-    /**
-     * 接收质检任务
-     * The endpoint is owned by docs service owner
-     * @param root (optional)
-     */
-    @POST("pda/qms/qualityTask/receive")
-    fun pdaQmsTaskReceivePost(
-        @retrofit2.http.Body body: IdRequest,
-    ): Single<Any>
-
-    /**
-     * 根据质检子任务id查询质检方案的结论判定选项
-     */
-    @GET("pda/qms/qualitySubTask/get-conclusion-option")
-    fun pdaQmsQualitySubTaskGetConclusionOptionGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<DataListNode<String>>
-
-    /**
-     * 执行质检子任务
-     */
-    @POST("pda/qms/qualitySubTask/execute")
-    fun pdaQmsQualitySubTaskExecutePost(
-        @retrofit2.http.Body body: QualityTaskExecuteRequest,
-    ): Single<Any>
-
-    /**
-     * 质检子任务操作记录
-     */
-    @GET("pda/qms/qualitySubTask/operation-record")
-    fun pdaQmsQualitySubTaskOperationRecordGet(
-        @retrofit2.http.Query("id") id: Int,
-    ): Single<DataListNode<QualityTaskRecordModel>>
-
-    /**
-     * 根据产品条码查询关联内容
-     */
-    @GET("pda/qms/qualityProblem/get-by-productBarCode")
-    fun pdaQmsQualityProblemGetByProductBarCodeGet(
-        @retrofit2.http.Query("productBarCode") barCode: String,
-    ): Single<ProductInfoModel>
 }

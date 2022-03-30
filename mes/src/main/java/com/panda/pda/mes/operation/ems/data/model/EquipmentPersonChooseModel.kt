@@ -19,4 +19,14 @@ data class EquipmentPersonChooseModel(
     val workshopNames: String,
     //是否选中
     var isChecked: Boolean,
+    //人员的总工单数与工时
+    var emsUserWorkOrderReport:EmsUserWorkOrderReport?,
+
 )
+data class EmsUserWorkOrderReport(
+    //总工单数
+    val totalWorkOrderNum: String,
+    //工时
+    val totalExpectWorkTime: String,
+
+    )

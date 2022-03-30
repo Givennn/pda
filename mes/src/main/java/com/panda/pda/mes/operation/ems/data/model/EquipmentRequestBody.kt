@@ -1,8 +1,6 @@
 package com.panda.pda.mes.operation.ems.data.model
 
 import com.panda.pda.mes.common.data.model.FileInfoModel
-import com.squareup.moshi.Json
-import java.io.StringBufferInputStream
 
 //ems中所有requestbody
 //工单填报入参
@@ -36,7 +34,7 @@ data class WorkOrderFenpeiRequest(
     //预计工时
     val expectWorkTime: Int,
     //1-有样品，2-无
-    val simpleProvided: Int,
+    val sampleProvided: Int,
     //描述
     val remark: String,
 )

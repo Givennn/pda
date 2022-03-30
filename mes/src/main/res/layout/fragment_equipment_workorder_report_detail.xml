@@ -25,17 +25,12 @@
             android:orientation="vertical"
             android:padding="16dp">
             <!--描述-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item_underline">
 
                 <TextView
                     android:id="@+id/tv_remark_label"
-                    style="@style/detailText.label"
+                    style="@style/headerLineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:padding="0dp"
                     android:text="@string/equipment_description"
                     app:layout_constraintStart_toStartOf="parent"
@@ -43,29 +38,26 @@
 
                 <TextView
                     android:id="@+id/tv_operation"
-                    style="@style/detailText"
-                    android:layout_width="0dp"
+                    android:textColor="@color/textSubHeaderLineColor"
+                    android:textSize="12sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_remark_label"
-                    app:layout_constraintTop_toTopOf="@+id/tv_remark_label"
                     tools:text="@string/long_text_test" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
             <!--图片-->
             <TextView
-                style="@style/detailText.label"
+                android:id="@+id/tv_pictitle"
+                style="@style/headerLineText"
+                android:paddingBottom="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/picture" />
+                android:text="@string/picture_problem" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_pic_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="4"
                 tools:listitem="@layout/item_task_report_detail_pic" />

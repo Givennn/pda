@@ -29,15 +29,24 @@ class EquipmentWorkOrderWaitFenpeiFragment :
 
     //是否提供样品
     var isSimple: Boolean = true
+
+    //完工日期
     var completeDate: Long = 0
+
+    //完工时间，都是log型，提交前会转换成date型
     var completeTime: Long = 0
+
+    //日期选择器
     private val datePicker by lazy {
         MaterialDatePicker.Builder.datePicker().setTitleText(R.string.time_pick).build()
-//        MaterialDatePicker.Builder.datePicker().setTitleText(R.string.time_pick).build()
     }
+    var datePickerClickAble = true
+    var timePickerClickAble = true
+
+
+    //时间选择器
     private val timePicker by lazy {
         MaterialTimePicker.Builder().setTitleText("时间选择").build()
-//        MaterialTimePicker.Builder().setTitleText("时间选择").build()
     }
 
     //人员适配器
@@ -49,6 +58,8 @@ class EquipmentWorkOrderWaitFenpeiFragment :
 
     //工单id
     var workOrderId: String = ""
+
+    //小组id，用于查询人员列表使用
     var teamId: String = ""
 
     //设备type 1设备  2模具
@@ -77,18 +88,29 @@ class EquipmentWorkOrderWaitFenpeiFragment :
         teamId = arguments?.getString(TEAMID).toString()
         viewBinding.apply {
             topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+            //日期点击
             llWorkorderCompleteDate.setOnClickListener {
-                datePicker.show(parentFragmentManager, TAG)
+                if (datePickerClickAble) {
+                    datePicker.show(childFragmentManager, TAG)
+                    datePickerClickAble = false
+                }
+
             }
+            //时间点击
             llWorkorderCompleteTime.setOnClickListener {
-                timePicker.show(parentFragmentManager, TAG);
+                if (timePickerClickAble) {
+                    timePicker.show(parentFragmentManager, TAG)
+                    timePickerClickAble = false
+                }
             }
+            //是否提供样品：是点击
             llSampleYes.setOnClickListener {
                 //提供样品点击
                 ivSampleYes.setImageResource(R.drawable.icon_equipment_check_selected)
                 ivSampleNo.setImageResource(R.drawable.icon_equipment_check_unselect)
                 isSimple = true
             }
+            //是否提供样品：否点击
             llSampleNo.setOnClickListener {
                 //不提供样品点击
                 ivSampleYes.setImageResource(R.drawable.icon_equipment_check_unselect)
@@ -103,36 +125,48 @@ class EquipmentWorkOrderWaitFenpeiFragment :
                 ivSampleYes.setImageResource(R.drawable.icon_equipment_check_unselect)
                 ivSampleNo.setImageResource(R.drawable.icon_equipment_check_selected)
             }
+            //人员选择点击
             llWorkorderPerson.setOnClickListener {
+                //跳转人员选择列表
                 navToPersonSelect()
             }
+            //确认按钮
             btnConfirm.setOnClickListener {
+                //工单提交
                 submit()
             }
 
         }
-
+        //日期选择器添加回调
         datePicker.addOnPositiveButtonClickListener {
             onTimePicked(it)
-            //此处有日期的偏移量，需要注意相差8小时
+            //此处有日期的偏移量（系统的datepicker会有时区，跟东8区相差8小时），需要注意相差8小时
             completeDate = it - 8 * 60 * 60 * 1000
         }
+        datePicker.addOnDismissListener {
+            datePickerClickAble = true
+        }
+        //时间选择器添加回调
         timePicker.addOnPositiveButtonClickListener {
             viewBinding.tvCompleteTime.text = convertHMToTime(timePicker.hour, timePicker.minute)
             completeTime =
                 (timePicker.hour * 60 * 60 * 1000 + timePicker.minute * 60 * 1000).toLong()
         }
+        timePicker.addOnDismissListener {
+            timePickerClickAble = true
+        }
+        //人员选择回调
         setFragmentResultListener(EquipmentPersonChooseListFragment.REQUEST_KEY) { requestKey, bundle ->
             if (requestKey == EquipmentPersonChooseListFragment.REQUEST_KEY) {
                 val ngReasonsStr =
                     bundle.getString(EquipmentPersonChooseListFragment.NG_REASON_ARG_KEY, "")
                 selectePersonList =
                     ngReasonAdapter.fromJson(ngReasonsStr)?.toMutableList() ?: mutableListOf()
-
+                //人员列表过滤出已选的
                 val reasons = selectePersonList.filter { it.isChecked }
                 if (!reasons.isEmpty()) {
+                    //展示人员名称
                     viewBinding.tvName.text = reasons?.joinToString(";") {
-//                        it.realName
                         it.userName
                     }
                 }
@@ -143,20 +177,6 @@ class EquipmentWorkOrderWaitFenpeiFragment :
 
     //跳转至人员选择列表
     private fun navToPersonSelect() {
-//        WebClient.request(QualityApi::class.java)
-//            .pdaQmsQualitySubTaskGetBadnessListGet(subTaskDetailModel.id)
-//            .bindToFragment()
-//            .subscribe({
-//                if (it.dataList.isEmpty()) {
-//                    toast("请配置不良原因。")
-//                } else {
-//                    val ngReasons = ngReasonAdapter.toJson(it.dataList)
-//                    navController.navigate(
-//                        R.id.ngReasonFragment,
-//                        Bundle().apply { putString(NgReasonFragment.NG_REASON_ARG_KEY, ngReasons) }
-//                    )
-//                }
-//            }, {})
         navController.navigate(
             R.id.equipmentPersonChooseListFragment, Bundle().apply {
                 putString(TEAMID,
@@ -205,12 +225,14 @@ class EquipmentWorkOrderWaitFenpeiFragment :
     private fun submit() {
         var dateTime = completeDate + completeTime
         Timber.e("dateTime${convertLongToCompleteTime(dateTime)}")
-        val remark = viewBinding.etRemark.text.toString().trim()
-        val time = viewBinding.etTimecount.text.toString().trim()
-        if (remark.isEmpty()) {
-            toast(R.string.remark_empty_message)
+        Timber.e("currentTime${System.currentTimeMillis()}")
+        if(dateTime<=System.currentTimeMillis()){
+            toast("选择的时间不得小于当前时间")
             return
         }
+
+        val remark = viewBinding.etRemark.text.toString().trim()
+        val time = viewBinding.etTimecount.text.toString().trim()
         if (time.isEmpty()) {
             toast("请出入预计完成工时")
             return
@@ -243,7 +265,7 @@ class EquipmentWorkOrderWaitFenpeiFragment :
             .pdaEmsWBFenpeiPost(request)
             .bindToFragment()
             .subscribe({
-                toast("工单填报成功")
+                toast("工单分配成功")
                 navBackListener.invoke(requireView())
             }, {})
     }
@@ -254,6 +276,8 @@ class EquipmentWorkOrderWaitFenpeiFragment :
 
         //小组id
         const val TEAMID = "teamId"
+
+        //设备类型
         const val FACILITYTYPE = "facilityType"
 
         //设备名称

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.panda.pda.mes.R
 import com.panda.pda.mes.common.data.model.FileInfoModel
-import com.panda.pda.mes.databinding.ItemTaskReportPhotoBinding
+import com.panda.pda.mes.databinding.ItemEquipmentPhotoBinding
 
 /**
  * created by AnJiwei 2021/9/3
@@ -37,7 +37,7 @@ class EquipmentInputPhotoAdapter :
 
     inner class PhotoHolder(itemView: View, val viewType: Int) :
         RecyclerView.ViewHolder(itemView) {
-        lateinit var itemViewBinding: ItemTaskReportPhotoBinding
+        lateinit var itemViewBinding: ItemEquipmentPhotoBinding
     }
 
 
@@ -47,7 +47,7 @@ class EquipmentInputPhotoAdapter :
                 .inflate(R.layout.item_equipment_take_photo, parent, false), viewType)
         } else {
             val viewBinding =
-                ItemTaskReportPhotoBinding.inflate(LayoutInflater.from(parent.context),
+                ItemEquipmentPhotoBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
                     false)
             PhotoHolder(viewBinding.root, viewType).apply { itemViewBinding = viewBinding }

@@ -11,9 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.library.android.controls.EndlessRecyclerViewScrollListener
 import com.panda.pda.mes.R
-import com.panda.pda.mes.base.ConfirmDialogFragment
 import com.panda.pda.mes.base.extension.putObjectString
-import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.WheelPickerDialogFragment
@@ -22,7 +20,6 @@ import com.panda.pda.mes.common.data.CommonParameters
 import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.operation.ems.data.EquipmentApi
-import com.panda.pda.mes.operation.ems.data.model.EmsModelType
 import com.panda.pda.mes.operation.ems.data.model.EquipmentInfoDeviceModel
 import com.panda.pda.mes.operation.ems.data.model.EquipmentOrgModel
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
@@ -36,7 +33,6 @@ import java.util.concurrent.TimeUnit
 abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding> :
     EquipmentCommonSearchListFragment<EquipmentInfoDeviceModel>() {
 
-    abstract val qualityTaskModelType: EmsModelType
 
     //类型列表
     private lateinit var headTypeData: List<String>
@@ -61,19 +57,21 @@ abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding>
 
     private lateinit var scrollListener: EndlessRecyclerViewScrollListener
 
-    override val searchBarHintResId: Int?
-        get() = R.string.equipment_info_search_hint
-
+    //类型弹窗
     private val headTypeDialog by lazy {
         WheelPickerDialogFragment().also {
             it.pickerData = headTypeData
         }
     }
+
+    //功能状态弹窗
     private val headStatusDialog by lazy {
         WheelPickerDialogFragment().also {
             it.pickerData = headStatusData
         }
     }
+
+    //部门弹窗
     private val headTeamDialog: WheelPickerDialogFragment by lazy {
         WheelPickerDialogFragment().also {
             it.pickerData = headOrgStringData
@@ -101,7 +99,7 @@ abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding>
                     functionStatus = if (result.first == "全部") {
                         0.toString()
                     } else
-                        CommonParameters.getValue(DataParamType.FUNCTION_STATUS, result.first)
+                        CommonParameters.getValue(DataParamType.FUNCTION_STATUS_PDA, result.first)
                             .toString()
                 }
                 3 -> {
@@ -131,7 +129,7 @@ abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding>
         headOrgData.clear()
         headStatusData.clear()
         headStatusData.add("全部")
-        headStatusData.addAll(CommonParameters.getParameters(DataParamType.FUNCTION_STATUS)
+        headStatusData.addAll(CommonParameters.getParameters(DataParamType.FUNCTION_STATUS_PDA)
             .sortedBy { it.paramValue }.map { it.paramDesc }.toMutableList())
         getOrgList()
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -216,10 +214,12 @@ abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding>
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .bindToLifecycle(holder.itemView)
 //                    .subscribe { showDetail(data) }
-                    .subscribe{navController.navigate(R.id.equipmentInfoDetailFragment, Bundle().apply {
-                        //带入详情页的数据
-                        putObjectString(data)
-                    })}
+                    .subscribe {
+                        navController.navigate(R.id.equipmentInfoDetailFragment, Bundle().apply {
+                            //带入详情页的数据
+                            putObjectString(data)
+                        })
+                    }
                 onBindViewHolder(holder, data, position)
             }
         }
@@ -284,28 +284,8 @@ abstract class EquipmentDeviceSearchListFragment<TItemViewBinding : ViewBinding>
     }
 
     override val titleResId: Int
-        get() = when (qualityTaskModelType) {
-            EmsModelType.Task -> R.string.equipment_task
-            EmsModelType.INFO -> R.string.equipment_info
-            EmsModelType.WORKORDER -> R.string.equipment_workorder
-        }
+        get() = R.string.equipment_info
 
-    protected fun showActionRequestDialog(
-        request: Single<*>,
-        dialogTitle: String,
-        successMessage: String,
-    ) {
-        val dialog =
-            ConfirmDialogFragment().setTitle(dialogTitle)
-                .setConfirmButton({ _, _ ->
-                    request.bindToFragment()
-                        .subscribe({
-                            toast(successMessage)
-                            refreshData()
-                        }, {})
-                })
-        dialog.show(parentFragmentManager, TAG)
-    }
 
     //获取部门列表
     private fun getOrgList() {

@@ -33,7 +33,6 @@ import com.panda.pda.mes.operation.ems.equipment_workorder.maintenance.Equipment
 import com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderConfirmOutStoreFragment
 import com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderInStoreCompleteFragment
 import com.panda.pda.mes.operation.ems.equipment_workorder.store.EquipmentInfoWorkOrderWaitInStoreFragment
-import com.panda.pda.mes.operation.fms.guide.GuidePdfPreviewFragment
 import java.util.concurrent.TimeUnit
 
 /**
@@ -61,6 +60,7 @@ class EquipmentInfoDetailFragment : BaseFragment(R.layout.fragment_equipment_inf
             }
         }
     }
+
     //获取模次数列表
     private fun getRecord(deviceModel: EquipmentInfoDeviceModel) {
         WebClient.request(EquipmentApi::class.java)
@@ -218,6 +218,9 @@ class EquipmentInfoDetailFragment : BaseFragment(R.layout.fragment_equipment_inf
                             Bundle().apply {
                                 putString(EquipmentInfoWorkOrderWaitInStoreFragment.WORKORDERID,
                                     deviceModel.workOrderId)
+                                //设备id
+                                putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYID,
+                                    deviceModel.facilityId.toString())
                                 //设备类型
                                 putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYTYPE,
                                     deviceModel.facilityType)
@@ -327,7 +330,7 @@ class EquipmentInfoDetailFragment : BaseFragment(R.layout.fragment_equipment_inf
                     //正常、归还、报废
                     1, 4, 5 -> {
                         tvInfoWorkStatus.text =
-                            CommonParameters.getDesc(DataParamType.FUNCTION_STATUS,
+                            CommonParameters.getDesc(DataParamType.FUNCTION_STATUS_PDA,
                                 deviceModel.functionStatus)
                     }
                     else -> {
@@ -379,40 +382,32 @@ class EquipmentInfoDetailFragment : BaseFragment(R.layout.fragment_equipment_inf
                     //设备不展示坐标
                     llInfoLocation.visibility = View.GONE
                 }
+                //出入库点击
                 llWorkorderLocationStatus.setOnClickListener {
                     //跳转出入库记录页面
                     navController.navigate(R.id.equipmentStoreHistoryListFragment, Bundle().apply {
-                        //带入详情页的数据val facilityId = arguments?.getString("facilityId") ?: ""
-                        //        val facilityType = arguments?.getString("facilityType") ?: ""
+                        //带入详情页的数据
                         putString(EquipmentStoreHistoryListFragment.FACILITYID,
                             deviceModel.facilityId.toString())
-//                            putObjectString(deviceModel)
                     })
                 }
-//                llInfoModulus.setOnClickListener {
-//                    //跳转生产次数记录页面
-////                    navController.navigate(R.id.equipmentProduceHistoryListFragment,
-////                        Bundle().apply {
-////                            //带入详情页的数据
-////                            putObjectString(deviceModel)
-////                        })
-//                    getRecord(deviceModel)
-//                }
-
+                //模次数记录点击
                 llInfoModulus.clicks()
                     .throttleFirst(500, TimeUnit.MILLISECONDS)
                     .subscribe {
                         getRecord(deviceModel)
                     }
-                showBottomBtn(deviceModel)
+                //判断是否展示底部文件列表
                 if (null != deviceModel.fileList && deviceModel.fileList.isNotEmpty()) {
                     //展示附件
                     llFiles.isVisible = true
                     //创建文件列表适配并渲染
                     createFileAdapter(deviceModel)
-                }else{
+                } else {
                     llFiles.isVisible = false
                 }
+                //初始化底部可操作按钮
+                showBottomBtn(deviceModel)
             }
         }
 

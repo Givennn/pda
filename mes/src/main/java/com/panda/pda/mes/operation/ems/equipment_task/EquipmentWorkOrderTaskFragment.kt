@@ -64,6 +64,11 @@ class EquipmentWorkOrderTaskFragment :
             }
             //描述
             tvRemark.text = data.remark
+            //位置信息
+            tvLocation.text="${data.orgName}-${data.locationName}"
+            if (data.facilityType=="2"&&!TextUtils.isEmpty(data.coordinate)) {
+                tvLocation.text= "${data.orgName}-${data.locationName}-${data.coordinate}"
+            }
             //状态设置，根据workorderstatus字段来判断
             var statusRes: Int
             ivTaskStatus.visibility = View.VISIBLE
@@ -190,6 +195,9 @@ class EquipmentWorkOrderTaskFragment :
                             Bundle().apply {
                                 putString(EquipmentInfoWorkOrderWaitInStoreFragment.WORKORDERID,
                                     data.id)
+                                //设备id
+                                putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYID,
+                                    data.facilityId.toString())
                                 //设备类型
                                 putString(EquipmentInfoWorkOrderWaitInStoreFragment.FACILITYTYPE,
                                     data.facilityType)
