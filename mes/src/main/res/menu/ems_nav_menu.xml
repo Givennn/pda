@@ -4,15 +4,15 @@
     <item
         android:id="@+id/equipmentTaskFragment"
         android:title="@string/equipment_task"
-        android:icon="@drawable/ic_op_qc_task" />
+        android:icon="@drawable/ic_op_equipment_task" />
     <!--设备信息-->
     <item
         android:id="@+id/equipmentInfoFragment"
         android:title="@string/equipment_info"
-        android:icon="@drawable/ic_op_qc_task"/>
+        android:icon="@drawable/ic_op_equipment_device"/>
     <!--维保工单-->
     <item
         android:id="@+id/equipmentWorkOrderFragment"
         android:title="@string/equipment_workorder"
-        android:icon="@drawable/ic_op_qc_task"/>
+        android:icon="@drawable/ic_op_equipment_workorder"/>
 </menu>
