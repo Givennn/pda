@@ -5,6 +5,10 @@
         android:title="@string/task_receive"
         android:icon="@drawable/ic_op_task_receive" />
     <item
+        android:id="@+id/taskPrepareFragment"
+        android:title="@string/task_prepare"
+        android:icon="@drawable/ic_op_task_receive" />
+    <item
         android:id="@+id/taskExecuteFragment"
         android:title="@string/task_execute"
         android:icon="@drawable/ic_op_task_execute"/>

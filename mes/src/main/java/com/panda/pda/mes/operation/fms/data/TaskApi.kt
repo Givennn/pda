@@ -123,4 +123,17 @@ interface TaskApi {
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<TaskModel>>
 
+    /**
+     * 生产准备派工单列表
+     */
+    @GET("pda/fms/dispatch-order/prepare/list-by-page")
+    fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?):Single<DataListNode<TaskModel>>
+
+    /**
+     * 生产准备列表
+     */
+    @GET("pda/fms/dispatch-order/prepare/items")
+    fun prepareListGetByDispatchOrderId(@retrofit2.http.Query("id") id: Int):Single<DataListNode<ProducePrepareItem>>
+
+    fun finishPrepareItem(@retrofit2.http.Query("id") id: Int): Single<Any>
 }

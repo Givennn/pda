@@ -52,14 +52,14 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
             val detail = info.detail
             viewBinding.apply {
                 tvPlanCode.text = detail.planCode
-                tvTaskCode.text = detail.taskCode
-                tvTaskDesc.text = detail.taskDesc
+                tvTaskCode.text = detail.dispatchOrderCode
+                tvTaskDesc.text = detail.dispatchOrderDesc
                 tvProductCode.text = detail.productCode
                 tvProductDesc.text = detail.productName
-                tvTaskCount.text = detail.taskNum.toString()
+                tvTaskCount.text = detail.dispatchOrderNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
                 tilReportNum.minValue = 1
-                tilReportNum.maxValue = detail.taskNum - detail.reportNum
+                tilReportNum.maxValue = detail.dispatchOrderNum - detail.reportNum
             }.btnConfirm.setOnClickListener {
                 report(info)
             }

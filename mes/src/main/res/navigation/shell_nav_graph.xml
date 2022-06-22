@@ -274,6 +274,14 @@
         android:id="@+id/equipmentGuidePdfPreviewFragment"
         android:name="com.panda.pda.mes.operation.ems.EquipmentGuidePdfPreviewFragment"
         android:label="EquipmentInfoDetailFragment" />
+    <fragment
+        android:id="@+id/taskPrepareFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskPrepareFragment"
+        android:label="TaskPrepareFragment" />
+    <fragment
+        android:id="@+id/producePrepareFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.ProducePrepareFragment"
+        android:label="ProducePrepareFragment" />
 
 
     <!--设备管理模块  end by 殷志林-->

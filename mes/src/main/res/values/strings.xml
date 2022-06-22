@@ -27,51 +27,52 @@
     <string name="user_pwd_error">用户或密码错误，请重新输入！</string>
 
     <!--    fms-->
-    <string name="task_receive">任务接收</string>
-    <string name="task_execute">任务执行</string>
-    <string name="task_report">任务报工</string>
-    <string name="task_finish">任务完工</string>
-    <string name="task_description">任务描述</string>
+    <string name="task_receive">派工单接收</string>
+    <string name="task_execute">派工单执行</string>
+    <string name="task_prepare">生产准备</string>
+    <string name="task_report">派工单报工</string>
+    <string name="task_finish">派工单完工</string>
+    <string name="task_description">派工单描述</string>
     <string name="already_report">已报工</string>
     <string name="sender">派工人</string>
     <string name="finish">完成</string>
     <string name="report">报工</string>
-    <string name="task_search_bar_hint">请输入任务编号/产品编码/产品描述/派工人</string>
+    <string name="task_search_bar_hint">请输入派工单编号/产品编码/产品描述/派工人</string>
     <string name="receive">接收</string>
     <string name="execute">执行</string>
     <string name="basic_info">基本信息</string>
-    <string name="task_code">任务编号</string>
-    <string name="task_count">任务数量</string>
+    <string name="task_code">派工单编号</string>
+    <string name="task_count">派工单数量</string>
     <string name="product_code">产品编号</string>
     <string name="product_description">产品描述</string>
     <string name="plan_code">计划编号</string>
     <string name="work_order_code">工作令号</string>
     <string name="batch_code">批次号</string>
-    <string name="task_status">任务状态</string>
+    <string name="task_status">派工单状态</string>
     <string name="plan_start_time">计划开始时间</string>
     <string name="plan_finish_time">计划完成时间</string>
     <string name="operator">操作工</string>
     <string name="prd_equipment">生产设备</string>
     <string name="actual_start_time">实际开始时间</string>
     <string name="actual_finish_time">实际完成时间</string>
-    <string name="get_task_detail_failed">获取任务详情失败</string>
+    <string name="get_task_detail_failed">获取派工单详情失败</string>
     <string name="operate_record">操作记录</string>
-    <string name="task_detail">任务详情</string>
+    <string name="task_detail">派工单详情</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
-    <string name="task_finish_confirm">确定完成该任务？</string>
+    <string name="task_finish_confirm">确定完成该派工单？</string>
     <string name="net_work_error">系统数据异常</string>
     <string name="loading_data">正在加载数据</string>
-    <string name="task_receive_success_toast">接收任务成功</string>
-    <string name="task_receive_confirm">确认接受该任务？</string>
+    <string name="task_receive_success_toast">接收派工单成功</string>
+    <string name="task_receive_confirm">确认接受该派工单？</string>
     <string name="operate_guide">作业指导书</string>
     <string name="material_bind">物料绑定</string>
     <string name="material_unbind">物料解绑</string>
     <string name="material_replace">物料替换</string>
     <string name="alarm_report">实时报警</string>
     <string name="factory_manage">生产管理</string>
-    <string name="material_search_bar_hint">请输入任务编号/产品编码/产品描述</string>
-    <string name="task_number">任务数量</string>
+    <string name="material_search_bar_hint">请输入派工单编号/产品编码/产品描述</string>
+    <string name="task_number">派工单数量</string>
     <string name="task_scan_bar_hint">请输入或扫描产品条码</string>
     <string name="scan_product_serial_code">扫描产品条码</string>
     <string name="material">物料</string>
@@ -94,9 +95,9 @@
     <string name="maintain_description">维修描述</string>
     <string name="picture">图片</string>
     <string name="common_search_bar_hint">请扫描或输入</string>
-    <string name="task_execute_success_toast">任务执行成功</string>
-    <string name="task_finish_success_toast">完成任务成功</string>
-    <string name="task_execute_confirm">确定执行该任务？</string>
+    <string name="task_execute_success_toast">派工单执行成功</string>
+    <string name="task_finish_success_toast">完成派工单成功</string>
+    <string name="task_execute_confirm">确定执行该派工单？</string>
     <string name="already_report_number">已报工数量</string>
     <string name="remark">备注</string>
     <string name="pwd_changed_message">您的密码修改成功，请使用新密码重新登录！</string>
@@ -108,6 +109,7 @@
     <string name="alarm_report_success_message">报警成功</string>
     <string name="desc_and_code_formatter">%1$s %2$s</string>
     <string name="report_time_formatter">派工时间：%s</string>
+    <string name="receive_time_formatter">接收时间：%s</string>
     <string name="plan_finish_time_formatter">计划完成时间：%s</string>
     <string name="task_reported_number_formatter"><font color='#457FFF'>%1$d</font>/%2$d</string>
     <string name="take_photo_hint">上传图片\n(最多3张)</string>
@@ -182,7 +184,7 @@
     <string name="cause_analysis">原因分析</string>
     <string name="solution">解决对策</string>
     <string name="occurrence_place">发生地</string>
-    <string name="quality_task_code">质检任务编号</string>
+    <string name="quality_task_code">质检派工单编号</string>
     <string name="quality_problem_code">质检问题编号</string>
     <string name="quality_check_info">质检信息</string>
     <string name="inspector">质检人</string>
@@ -193,13 +195,13 @@
     <string name="process_cycle">处理周期</string>
     <string name="edit_problem_record">编辑质检问题记录</string>
     <string name="time_pick">选择时间</string>
-    <string name="quality_task_transfer_success">质检任务转办成功</string>
+    <string name="quality_task_transfer_success">质检派工单转办成功</string>
     <string name="upload_pic_hint">最多可上传3张图，每张最大5M，支持bmp、jpg、jpeg、png格式</string>
     <string name="upload_file_hint">最多上传3个，单个文档不超过50M</string>
     <string name="number_char_limit">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="task_unbind_confirm">确认解绑物料</string>
     <string name="operate_guide_search_hint">请输入作业指导书名称/产品编码/产品描述</string>
-    <string name="discovery_search_hint">请输入任务编号/任务描述</string>
+    <string name="discovery_search_hint">请输入派工单编号/派工单描述</string>
     <!--设备管理系统ems add by yinzhilin-->
     <string name="equipment_manage">设备管理</string>
     <string name="equipment_task">维保任务</string>
@@ -274,5 +276,12 @@
     <string name="equipment_search_hint_workorderlist">请输入工单号/设施名/设施号</string>
     <string name="equipment_search_hint_devicelist">请扫码或输入编号/名称/产品名称</string>
     <string name="picture_problem">问题图片</string>
+    <string name="produce_duty_person">生产负责人</string>
+    <string name="message">消息</string>
+    <string name="dispatch_order_code_formatter">派工单编号: %s</string>
+    <string name="dispatch_order_desc_formatter">派工单描述：%s</string>
+    <string name="prepare_finish_time_formatter">完成时间：%s</string>
+    <string name="produce_prepare_success">生产准备成功</string>
+    <string name="produce_prepare_confirm">确定完成该生产准备？</string>
     <!--设备管理系统ems end-->
 </resources>

@@ -69,16 +69,16 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
     private fun bindData(info: TaskInfoModel) {
         viewBinding.apply {
             val taskDetail = info.detail
-            tvTaskCode.text = taskDetail.taskCode
-            tvTaskDesc.text = taskDetail.taskDesc
-            tvTaskCount.text = taskDetail.taskNum.toString()
+            tvTaskCode.text = taskDetail.dispatchOrderCode
+            tvTaskDesc.text = taskDetail.dispatchOrderDesc
+            tvTaskCount.text = taskDetail.dispatchOrderNum.toString()
             tvProductCode.text = taskDetail.productCode
             tvProductDesc.text = taskDetail.productName
             tvPlanCode.text = taskDetail.planCode
             tvOrderCode.text = taskDetail.workNo
             tvBatchCode.text = taskDetail.batchNo
             tvTaskStatus.text =
-                CommonParameters.getDesc(DataParamType.TASK_STATUS, taskDetail.taskStatus)
+                CommonParameters.getDesc(DataParamType.TASK_STATUS, taskDetail.dispatchOrderStatus)
             tvPlanStartTime.text = taskDetail.planStartTime
             tvPlanFinishTime.text = taskDetail.planEndTime
             tvOperator.text = taskDetail.jockeyName

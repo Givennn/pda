@@ -15,10 +15,10 @@ data class TaskDetailModel(
     val productName: String,
     val realEndTime: String,
     val realStartTime: String,
-    val taskCode: String,
-    val taskDesc: String,
-    val taskNum: Int,
-    val taskStatus: Int,
+    val dispatchOrderCode: String,
+    val dispatchOrderDesc: String,
+    val dispatchOrderNum: Int,
+    val dispatchOrderStatus: Int,
     val workNo: String,
     val reportNum: Int
 )
