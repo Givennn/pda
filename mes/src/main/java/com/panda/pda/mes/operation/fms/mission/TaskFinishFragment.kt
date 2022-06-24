@@ -60,7 +60,7 @@ class TaskFinishFragment :
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
                         data.productName,
@@ -84,7 +84,7 @@ class TaskFinishFragment :
     private fun getColorTaskProgress(data: TaskModel): SpannableStringBuilder {
         return SpannableStringBuilder()
             .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
-            .append("/${data.taskNum}")
+            .append("/${data.dispatchOrderNum}")
     }
 
     private fun onItemInfoClicked(data: TaskModel) {

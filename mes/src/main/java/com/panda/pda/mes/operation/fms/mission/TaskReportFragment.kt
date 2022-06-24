@@ -59,7 +59,7 @@ class TaskReportFragment :
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
                         data.productName,
@@ -71,7 +71,7 @@ class TaskReportFragment :
                     tvTaskSender.text = data.issueName
                     tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
                     btnAction.visibility =
-                        if (data.taskNum > data.reportNum) View.VISIBLE else View.GONE
+                        if (data.dispatchOrderNum > data.reportNum) View.VISIBLE else View.GONE
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
@@ -86,7 +86,7 @@ class TaskReportFragment :
     private fun getColorTaskProgress(data: TaskModel): SpannableStringBuilder {
         return SpannableStringBuilder()
             .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
-            .append("/${data.taskNum}")
+            .append("/${data.dispatchOrderNum}")
     }
 
     private fun onItemInfoClicked(data: TaskModel) {

@@ -49,7 +49,7 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
                         data.productName,

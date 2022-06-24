@@ -6,18 +6,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
-import com.panda.pda.mes.base.ConfirmDialogFragment
-import com.panda.pda.mes.base.extension.putGenericObjectString
 import com.panda.pda.mes.base.extension.putObjectString
-import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.base.retrofit.onMainThread
 import com.panda.pda.mes.common.CommonSearchListFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
-import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
-import com.panda.pda.mes.databinding.ItemTaskExecuteBinding
 import com.panda.pda.mes.databinding.ItemTaskPrepareBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
@@ -68,15 +63,15 @@ public class TaskPrepareFragment :
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
                         data.productName,
                         data.productCode
                     )
                     tvPlanFinishDate.text =
-                        getString(R.string.receive_time_formatter, data.planEndTime)
-                    tvTaskResponsePerson.text = data.issueName //TODO update 生产负责人
+                        getString(R.string.receive_time_formatter, data.receiveTime ?: "-")
+                    tvTaskResponsePerson.text = data.issueName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }

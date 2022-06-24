@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
@@ -14,7 +12,6 @@ import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
-import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.databinding.*
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.ProducePrepareItem
@@ -42,9 +39,9 @@ public class ProducePrepareFragment : BaseFragment(R.layout.fragment_produce_pre
         }
 
         viewBinding.tvDispatchOrderNo.text =
-            getString(R.string.dispatch_order_code_formatter, taskModel.taskCode)
+            getString(R.string.dispatch_order_code_formatter, taskModel.dispatchOrderCode)
         viewBinding.tvDispatchOrderDesc.text =
-            getString(R.string.dispatch_order_desc_formatter, taskModel.taskDesc)
+            getString(R.string.dispatch_order_desc_formatter, taskModel.dispatchOrderDesc)
 
         viewBinding.rvPrepareList.adapter = prepareAdapter
         refreshData()
