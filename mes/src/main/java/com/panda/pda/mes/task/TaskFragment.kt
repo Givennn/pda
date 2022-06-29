@@ -38,9 +38,9 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
             }
         viewBinding.rvModuleArea.adapter = taskMessageNavigationAdapter
 
-        viewModel.taskMsgData.observe(viewLifecycleOwner, { msg ->
+        viewModel.taskMsgData.observe(viewLifecycleOwner) { msg ->
             taskMessageNavigationAdapter.updateBadge(msg)
-        })
+        }
     }
 
     private fun filterAuthority(item: MenuItem): Boolean {
@@ -52,6 +52,5 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
         val authorCode =
             authorTree.children.firstOrNull { it.name == item.title }?.id ?: return false
         return userAuthor.contains(authorCode.toString())
-//        return true
     }
 }

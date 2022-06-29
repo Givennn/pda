@@ -95,8 +95,8 @@ class TaskFinishFragment :
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
 
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
-                { detail, records -> TaskInfoModel(detail, records.dataList) })
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
+            ) { detail, records -> TaskInfoModel(detail, records.dataList) }
             .onMainThread()
             .bindLoadingStatus()
             .subscribe({ info ->

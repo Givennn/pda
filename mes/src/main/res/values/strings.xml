@@ -283,5 +283,7 @@
     <string name="prepare_finish_time_formatter">完成时间：%s</string>
     <string name="produce_prepare_success">生产准备成功</string>
     <string name="produce_prepare_confirm">确定完成该生产准备？</string>
+    <string name="work_order_notification">工单通知</string>
+    <string name="dispatch_order_notification">派工单通知</string>
     <!--设备管理系统ems end-->
 </resources>

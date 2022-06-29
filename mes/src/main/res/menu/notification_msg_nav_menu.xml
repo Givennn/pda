@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/taskReceiveFragment"
+        android:title="@string/work_order_notification"
+        android:icon="@drawable/ic_op_task_receive" />
+    <item
+        android:id="@+id/taskExecuteFragment"
+        android:title="@string/dispatch_order_notification"
+        android:icon="@drawable/ic_op_task_execute"/>
+</menu>

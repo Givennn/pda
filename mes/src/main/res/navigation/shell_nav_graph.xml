@@ -46,6 +46,12 @@
         android:name="com.panda.pda.mes.task.TaskFragment"
         android:label="TaskFragment"
         tools:layout="@layout/fragment_task" />
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.panda.pda.mes.message.MessageFragment"
+        android:label="MessageFragment"
+        tools:layout="@layout/fragment_message" />
     <fragment
         android:id="@+id/discoveryFragment"
         android:name="com.panda.pda.mes.discovery.DiscoveryFragment"
