@@ -1,6 +1,8 @@
 package com.panda.pda.library.android.material.extension
 
 import android.view.View
+import androidx.annotation.IdRes
+import androidx.annotation.NavigationRes
 import androidx.core.view.forEach
 import androidx.core.view.iterator
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,12 +14,18 @@ import com.panda.pda.library.android.R
  * created by AnJiwei 2021/8/20
  */
 
+fun BottomNavigationView.isDestinationInMenu(@IdRes id: Int): Boolean {
+    val menuItemIds = this.menu.iterator().asSequence().toList().map { it.itemId }
+    return id in menuItemIds;
+}
+
 fun BottomNavigationView.hideWhenDestinationExclude(navController: NavController): BottomNavigationView =
     this.let { bottomNav ->
-        val menuItemIds = bottomNav.menu.iterator().asSequence().toList().map { it.itemId }
+//        val menuItemIds = bottomNav.menu.iterator().asSequence().toList().map { it.itemId }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val visible = destination.id in menuItemIds
-            bottomNav.visibility = if (visible) View.VISIBLE else View.GONE
+//            val visible = destination.id in menuItemIds
+            bottomNav.visibility =
+                if (bottomNav.isDestinationInMenu(destination.id)) View.VISIBLE else View.GONE
         }
         return bottomNav
     }

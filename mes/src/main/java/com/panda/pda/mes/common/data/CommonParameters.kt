@@ -41,6 +41,7 @@ object CommonParameters {
         dictionary[DataParamType.FUNCTION_TYPE] = data.FUNCTION_TYPE
         dictionary[DataParamType.WORK_ORDER_STATUS] = data.WORK_ORDER_STATUS
         dictionary[DataParamType.WORK_ORDER_OPERATE] = data.WORK_ORDER_OPERATE
+        dictionary[DataParamType.PRODUCT_MODE] = data.BPS_PRODUCT_MODE
     }
 }
 
@@ -62,6 +63,7 @@ enum class DataParamType {
     FACILITY_TYPE,
     FUNCTION_TYPE,
     WORK_ORDER_STATUS,
-    WORK_ORDER_OPERATE
+    WORK_ORDER_OPERATE,
+    PRODUCT_MODE
 
 }

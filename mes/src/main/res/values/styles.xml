@@ -97,13 +97,13 @@
         <item name="android:textSize">14sp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconSize">16dp</item>
-
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
     </style>
 
     <style name="ThemeOverlay.App.Button.TextButton" parent="">
         <item name="colorPrimary">#425C89</item>
         <item name="colorOnPrimary">#425C89</item>
+        <item name="colorOnSurface">#000000</item>
     </style>
 
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">

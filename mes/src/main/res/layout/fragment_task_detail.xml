@@ -147,7 +147,7 @@
                     style="@style/detailText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_plan_code"
+                    android:id="@+id/tv_work_order_code"
                     tools:text="0011" />
             </LinearLayout>
 
@@ -248,6 +248,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_plan_finish_time"
+                    tools:text="0011" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_underline"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/detailText.label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_receiver" />
+
+                <TextView
+                    style="@style/detailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_product_receiver"
+                    tools:text="0011" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_underline"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/detailText.label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_type" />
+
+                <TextView
+                    style="@style/detailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_product_type"
                     tools:text="0011" />
             </LinearLayout>
 

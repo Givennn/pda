@@ -28,7 +28,7 @@ public class TaskPrepareFragment :
 
     override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(TaskApi::class.java)
-            .taskExecutionListByPageGet(key)
+            .prepareDispatchOrderListGet(key)
 
     override val titleResId: Int
         get() = R.string.task_prepare

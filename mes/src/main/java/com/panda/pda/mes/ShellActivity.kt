@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.library.android.material.extension.customIcons
 import com.panda.pda.library.android.material.extension.hideWhenDestinationExclude
+import com.panda.pda.library.android.material.extension.isDestinationInMenu
 import com.panda.pda.library.android.material.extension.setupNavControllerToFinalStack
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
@@ -66,12 +67,14 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
 
     private fun customNavAction() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id in arrayOf(
-                    R.id.operationFragment,
-                    R.id.taskFragment,
-                    R.id.profileFragment,
-                    R.id.operationFragment
-                )
+            if (
+//                destination.id in arrayOf(
+//                    R.id.operationFragment,
+//                    R.id.taskFragment,
+//                    R.id.profileFragment,
+//                    R.id.operationFragment
+//                )
+                viewBinding.nvBottom.isDestinationInMenu(destination.id)
             ) {
                 updateTaskCount()
             }

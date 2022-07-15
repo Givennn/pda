@@ -69,7 +69,7 @@ class TaskFinishFragment :
                     tvPlanFinishDate.text =
                         getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskProgress.text = getColorTaskProgress(data)
-                    tvTaskSender.text = data.issueName
+                    tvTaskSender.text = data.receiveName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }

@@ -20,5 +20,8 @@ data class TaskDetailModel(
     val dispatchOrderNum: Int,
     val dispatchOrderStatus: Int,
     val workNo: String,
-    val reportNum: Int
+    val reportNum: Int,
+    val receiveName: String?,
+    val workOrderCode: String,
+    val productMode: Int
 )

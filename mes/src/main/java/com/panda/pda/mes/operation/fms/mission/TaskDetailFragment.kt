@@ -74,15 +74,21 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             tvTaskCount.text = taskDetail.dispatchOrderNum.toString()
             tvProductCode.text = taskDetail.productCode
             tvProductDesc.text = taskDetail.productName
-            tvPlanCode.text = taskDetail.planCode
+            tvWorkOrderCode.text = taskDetail.workOrderCode
             tvOrderCode.text = taskDetail.workNo
             tvBatchCode.text = taskDetail.batchNo
+            tvProductReceiver.text = taskDetail.receiveName ?: ""
+            tvProductType.text = CommonParameters.getDesc(DataParamType.PRODUCT_MODE, taskDetail.productMode)
             tvTaskStatus.text =
                 CommonParameters.getDesc(DataParamType.TASK_STATUS, taskDetail.dispatchOrderStatus)
             tvPlanStartTime.text = taskDetail.planStartTime
             tvPlanFinishTime.text = taskDetail.planEndTime
             tvOperator.text = taskDetail.jockeyName
-            tvPrdEqp.text = taskDetail.equipmentDesc
+            if (taskDetail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE, "人工")) {
+                tvPrdEqp.text = "-"
+            } else {
+                tvPrdEqp.text = taskDetail.equipmentDesc
+            }
             tvActualStartTime.text = taskDetail.realStartTime
             tvActualFinishTime.text = taskDetail.realEndTime
             bindingAdapter.refreshData(info.recordList ?: listOf())

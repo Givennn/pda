@@ -68,7 +68,7 @@ class TaskReportFragment :
                     tvPlanFinishDate.text =
                         getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskProgress.text = getColorTaskProgress(data)
-                    tvTaskSender.text = data.issueName
+                    tvTaskSender.text = data.receiveName
                     tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
                     btnAction.visibility =
                         if (data.dispatchOrderNum > data.reportNum) View.VISIBLE else View.GONE

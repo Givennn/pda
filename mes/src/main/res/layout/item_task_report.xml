@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
                 app:layout_constraintTop_toTopOf="@id/tv_product_info_label"
-                android:text="@string/sender"
+                android:text="@string/product_receiver"
                 style="@style/descText"/>
 
             <ImageView

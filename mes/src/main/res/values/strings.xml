@@ -35,6 +35,7 @@
     <string name="task_description">派工单描述</string>
     <string name="already_report">已报工</string>
     <string name="sender">派工人</string>
+    <string name="product_receiver">生产负责人</string>
     <string name="finish">完成</string>
     <string name="report">报工</string>
     <string name="task_search_bar_hint">请输入派工单编号/产品编码/产品描述/派工人</string>
@@ -45,7 +46,7 @@
     <string name="task_count">派工单数量</string>
     <string name="product_code">产品编号</string>
     <string name="product_description">产品描述</string>
-    <string name="plan_code">计划编号</string>
+    <string name="plan_code">工单编号</string>
     <string name="work_order_code">工作令号</string>
     <string name="batch_code">批次号</string>
     <string name="task_status">派工单状态</string>
@@ -285,5 +286,6 @@
     <string name="produce_prepare_confirm">确定完成该生产准备？</string>
     <string name="work_order_notification">工单通知</string>
     <string name="dispatch_order_notification">派工单通知</string>
+    <string name="product_type">生产方式</string>
     <!--设备管理系统ems end-->
 </resources>

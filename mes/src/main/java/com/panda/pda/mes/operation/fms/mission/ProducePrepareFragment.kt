@@ -12,6 +12,7 @@ import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.databinding.*
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.ProducePrepareItem
@@ -75,12 +76,12 @@ public class ProducePrepareFragment : BaseFragment(R.layout.fragment_produce_pre
                 holder.itemViewBinding.apply {
                     tvProducePrepareName.text = data.name
                     tvProducePrepareDesc.text = data.detail
-                    if (data.finishTime.isNotEmpty()) {
+                    if (data.finishTime.isNullOrEmpty()) {
+                        btnActionFinish.isEnabled = true
+                    } else {
                         btnActionFinish.isEnabled = false
                         btnActionFinish.text =
                             getString(R.string.prepare_finish_time_formatter, data.finishTime)
-                    } else {
-                        btnActionFinish.isEnabled = true
                     }
                     btnActionFinish.setOnClickListener {
                         finishItem(data)
@@ -94,7 +95,7 @@ public class ProducePrepareFragment : BaseFragment(R.layout.fragment_produce_pre
         val dialog = ConfirmDialogFragment().setTitle(getString(R.string.produce_prepare_confirm))
             .setConfirmButton({ _, _ ->
                 WebClient.request(TaskApi::class.java)
-                    .finishPrepareItem(data.id)
+                    .finishPrepareItem(IdRequest(data.id))
                     .bindToFragment()
                     .subscribe({
                         toast(R.string.produce_prepare_success)

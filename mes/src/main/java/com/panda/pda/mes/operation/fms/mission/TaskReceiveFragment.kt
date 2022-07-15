@@ -66,7 +66,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
                     )
                     tvSendDate.text =
                         getString(R.string.report_time_formatter, data.issueTime ?: "")
-                    tvTaskSender.text = data.issueName
+                    tvTaskSender.text = data.receiveName
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }

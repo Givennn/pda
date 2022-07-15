@@ -18,6 +18,7 @@ data class TaskModel(
     val dispatchOrderDesc: String,
     val dispatchOrderNum: Int,
     val dispatchOrderStatus: Int,
+    val receiveName: String,
     val workNo: String,
     var issueTime: String?,
     var prepareFinishTime: String?,

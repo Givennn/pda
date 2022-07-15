@@ -32,6 +32,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
 
     override fun onResume() {
         super.onResume()
+        queryCommonParameters()
         requestLocalUserInfo()
         test()
     }
@@ -54,9 +55,9 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 .catchError()
                 .bindToLifecycle(requireView())
                 .subscribe({
+//                    queryCommonParameters()
                     commonViewModel.authorityViewModel.postValue(it.dataList)
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
-                    queryCommonParameters()
                 }, {
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
                 })
@@ -74,10 +75,10 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 .catchError()
                 .bindToLifecycle(requireView())
                 .subscribe({
+//                    queryCommonParameters()
                     commonViewModel.authorityViewModel.postValue(it.first)
                     viewModel.updateLoginData(it.second, loginRequest)
                     navController.navigate(R.id.action_splashFragment_to_taskFragment)
-                    queryCommonParameters()
                 }, {
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
                 })

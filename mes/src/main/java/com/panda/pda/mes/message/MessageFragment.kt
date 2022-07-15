@@ -25,7 +25,7 @@ class MessageFragment : BaseFragment(R.layout.fragment_message) {
         super.onViewCreated(view, savedInstanceState)
 
         taskMessageNavigationAdapter = TaskMessageNavigationAdapter(
-            R.menu.task_msg_nav_menu,
+            R.menu.notification_msg_nav_menu,
             requireContext()
         ) { true }
 //            .also {

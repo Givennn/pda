@@ -135,5 +135,9 @@ interface TaskApi {
     @GET("pda/fms/task/prepare/items")
     fun prepareListGetByDispatchOrderId(@retrofit2.http.Query("id") id: Int):Single<DataListNode<ProducePrepareItem>>
 
-    fun finishPrepareItem(@retrofit2.http.Query("id") id: Int): Single<Any>
+    /**
+     * 生产准备完成
+     */
+    @POST("pda/fms/task/prepare/finish")
+    fun finishPrepareItem(@retrofit2.http.Body request: IdRequest): Single<Any>
 }

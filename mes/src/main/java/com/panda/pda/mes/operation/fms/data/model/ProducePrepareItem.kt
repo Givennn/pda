@@ -7,5 +7,5 @@ data class ProducePrepareItem(
     val id: Int,
     val name: String,
     val detail: String,
-    val finishTime: String
+    val finishTime: String?
 )
