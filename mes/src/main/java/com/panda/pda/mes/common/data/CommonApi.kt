@@ -71,4 +71,10 @@ interface CommonApi {
 
     @GET("pda/admin/user/list-org-node")
     fun userListOrgNodeGet(@retrofit2.http.Query("parentId") id: String):Single<DataListNode<OrgNodeModel>>
+
+    /**
+     * 人员列表查询
+     */
+    @GET("pda/admin/user/select-list")
+    fun userListAllGet(): Single<DataListNode<PersonModel>>
 }

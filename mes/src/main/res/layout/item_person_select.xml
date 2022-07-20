@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    >
+
+    <CheckBox
+        android:id="@+id/cb_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_underline"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:paddingTop="16dp"
+        tools:text="张三"
+        android:paddingBottom="16dp"/>
+
+</LinearLayout>

@@ -19,18 +19,20 @@ data class QualityProblemRecordDetailModel(
     var occurrencePlace: String?,
     @ModelProperty(6, "质检任务编号")
     var qualityCode: String?,
-    @ModelProperty(7, "任务编号")
-    var taskCode: String?,
-    @ModelProperty(8, "任务描述")
-    var taskDesc: String?,
-    @ModelProperty(9, "计划编号")
-    var planCode: String?,
+    @ModelProperty(7, "派工单编号")
+    var dispatchOrderCode: String?,
+    @ModelProperty(8, "派工单描述")
+    var dispatchOrderDesc: String?,
+//    @ModelProperty(9, "计划编号")
+//    var planCode: String?,
     @ModelProperty(10, "工作令号")
     var workNo: String?,
-    @ModelProperty(11, "批次号")
+    @ModelProperty(11, "工单编号")
+    var workOrderCode: String?,
+    @ModelProperty(12, "批次号")
     var batchNo: String?,
-    @ModelProperty(12, "订单编号")
-    var orderNo: String?,
+    @ModelProperty(13, "主计划编号")
+    var planNo: String?,
     @ModelProperty(14, "质检结论")
     var conclusion: String?,
     @ModelProperty(15, "质检人")

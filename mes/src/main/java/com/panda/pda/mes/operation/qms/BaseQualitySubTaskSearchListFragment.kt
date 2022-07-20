@@ -75,9 +75,9 @@ abstract class BaseQualitySubTaskSearchListFragment<TItemViewBinding : ViewBindi
 
     private fun showDetail(data: QualitySubTaskModel) {
         Single.zip(
-            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskGetByIdGet(data.id),
-            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskOperationRecordGet(data.id),
-            { info, record -> Pair(info, record) })
+            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskGetByIdGet(data.qualityTaskId),
+            WebClient.request(QualityApi::class.java).pdaQmsQualitySubTaskOperationRecordGet(data.qualityTaskId)
+        ) { info, record -> Pair(info, record) }
             .bindToFragment()
             .subscribe({
                 navController.navigate(R.id.qualityDetailFragment, Bundle().apply {

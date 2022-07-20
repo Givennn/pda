@@ -56,7 +56,7 @@ tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
 }
 buildscript {
-    val kotlinVersion by extra("1.4.21")
+    val kotlinVersion by extra("1.5.10")
     repositories {
         maven("https://www.jitpack.io")
     }

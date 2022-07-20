@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="item_decoration_title_height">24dp</dimen>
+    <dimen name="item_decoration_title_start_margin">16dp</dimen>
+    <dimen name="item_decoration_title_font_size">14sp</dimen>
+    <dimen name="item_rv_front_size">14sp</dimen>
+    <dimen name="item_rv_small_size">12sp</dimen>
+    <dimen name="item_rv_big_front_size">17sp</dimen>
+    <dimen name="item_rv_title">16sp</dimen>
+    <dimen name="item_rv_weight">336dp</dimen>
+    <dimen name="item_rv_with_operate_height">151dp</dimen>
+    <dimen name="item_rv_height">120dp</dimen>
+    <dimen name="item_rv_icon_size">16dp</dimen>
+    <dimen name="item_rv_background_radius">8dp</dimen>
+    <dimen name="thin_divider_line_height">0.5dp</dimen>
+</resources>

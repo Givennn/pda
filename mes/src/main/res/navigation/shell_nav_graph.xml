@@ -107,6 +107,7 @@
         android:id="@+id/taskReportInputFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"
         android:label="TaskReportInputFragment" />
+
     <include app:graph="@navigation/profile_nav_graph" />
     <include app:graph="@navigation/material_replace_nav_graph" />
     <include app:graph="@navigation/operation_guide_nav_graph" />
@@ -288,6 +289,10 @@
         android:id="@+id/producePrepareFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.ProducePrepareFragment"
         android:label="ProducePrepareFragment" />
+    <fragment
+        android:id="@+id/personSelectFragment"
+        android:name="com.panda.pda.mes.common.PersonSelectFragment"
+        android:label="PersonSelectFragment" />
 
 
     <!--设备管理模块  end by 殷志林-->

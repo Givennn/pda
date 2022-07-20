@@ -26,18 +26,18 @@ data class QualityDetailModel(
     val deliverNum: String,
     @ModelProperty(9, "需质检数量")
     val qualityNum: String,
-    @ModelProperty(10, "任务编号", [QualityDetailTag])
-    val taskCode: String,
-    @ModelProperty(11, "任务描述", [QualityDetailTag])
-    val taskDesc: String,
-    @ModelProperty(12, "计划编号", [QualityDetailTag])
-    val planCode: String,
+    @ModelProperty(10, "派工单编号", [QualityDetailTag])
+    val dispatchOrderCode: String,
+    @ModelProperty(11, "派工单描述", [QualityDetailTag])
+    val dispatchOrderDesc: String,
+    @ModelProperty(12, "工单编号", [QualityDetailTag])
+    val workOrderCode: String,
     @ModelProperty(13, "工作令号", [QualityDetailTag])
     val workNo: String,
     @ModelProperty(14, "批次号", [QualityDetailTag])
     val batchNo: String,
-    @ModelProperty(15, "订单编号", [QualityDetailTag])
-    val orderNo: String,
+    @ModelProperty(15, "主计划编号", [QualityDetailTag])
+    val planNo: String,
     @ModelProperty(16, "状态", [QualityDetailTag], "QUALITY_TASK_STATUS")
     val status: Int,
     @ModelProperty(17, "计划开始时间", [QualityDetailTag])

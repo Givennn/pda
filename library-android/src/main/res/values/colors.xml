@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="item_decoration_title_background">#FAFAFA</color>
+    <color name="item_decoration_title_font_color">#999999</color>
+</resources>

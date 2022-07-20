@@ -1,5 +1,6 @@
 package com.panda.pda.mes.operation.qms.quality_problem_record
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -95,6 +96,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             uploadFile(uri)
         }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun uploadFile(uri: Uri?) {
         if (uri == null) {
             return
@@ -319,12 +321,12 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             detailModel.productName = etProductDesc.text.toString()
             detailModel.occurrencePlace = etOccurrencePlace.text.toString()
             detailModel.qualityCode = etQualityTaskCode.text.toString()
-            detailModel.taskCode = etTaskCode.text.toString()
-            detailModel.taskDesc = etTaskDescription.text.toString()
-            detailModel.planCode = etPlanCode.text.toString()
+            detailModel.dispatchOrderCode = etTaskCode.text.toString()
+            detailModel.dispatchOrderDesc = etTaskDescription.text.toString()
+            detailModel.workOrderCode = etPlanCode.text.toString()
             detailModel.workNo = etWorkOrderCode.text.toString()
             detailModel.batchNo = etBatchCode.text.toString()
-            detailModel.orderNo = etOrderCode.text.toString()
+            detailModel.planNo = etOrderCode.text.toString()
             detailModel.inspectorName = etInspector.text.toString()
             detailModel.causeAnalysis = etCauseAnalysis.text.toString()
             detailModel.solution = etSolution.text.toString()
@@ -345,12 +347,12 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             etProductDesc.setText(model.productName)
             etOccurrencePlace.setText(model.occurrencePlace)
             etQualityTaskCode.setText(model.qualityCode)
-            etTaskCode.setText(model.taskCode)
-            etTaskDescription.setText(model.taskDesc)
-            etPlanCode.setText(model.planCode)
+            etTaskCode.setText(model.dispatchOrderCode)
+            etTaskDescription.setText(model.dispatchOrderDesc)
+            etPlanCode.setText(model.workOrderCode)
             etWorkOrderCode.setText(model.workNo)
             etBatchCode.setText(model.batchNo)
-            etOrderCode.setText(model.orderNo)
+            etOrderCode.setText(model.planNo)
             etInspector.setText(model.inspectorName)
             etCauseAnalysis.setText(model.causeAnalysis)
             etSolution.setText(model.solution)
@@ -359,6 +361,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             tvNgReason.text = model.adverseCauseInfoList?.joinToString(";") {
                 it.badnessReasonName
             }
+            tvTraceTime.text = model.traceTime
+            tvTraceUser.text = model.traceUser
             tvVerifyResult.text = model.conclusion
             etProcessCycle.setText(model.processCycle)
             photoAdapter.setData(model.pictureList ?: listOf())

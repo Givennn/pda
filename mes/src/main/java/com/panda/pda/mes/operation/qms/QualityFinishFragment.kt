@@ -34,7 +34,7 @@ class QualityFinishFragment : BaseQualitySearchListFragment<ItemQualityFinishBin
                 data.qualityCode
             )
             tvTaskInfo.text =
-                getString(R.string.desc_and_code_formatter, data.taskDesc, data.taskCode)
+                getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
             tvPlanDateSection.text = getString(
                 R.string.time_section_formatter,
                 data.planStartTime,

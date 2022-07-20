@@ -89,13 +89,13 @@ class ProblemDetailFragment: BaseFragment(R.layout.fragment_problem_detial) {
 
         viewBinding.rvPicList.adapter = picAdapter
         viewBinding.rvFilesList.adapter = fileAdapter
-        viewModel.problemRecordDetailData.observe(viewLifecycleOwner, {
+        viewModel.problemRecordDetailData.observe(viewLifecycleOwner) {
             it.reInit()
             modelProperty.setData(it)
             viewBinding.tvRemark.text = it.remark
-            picAdapter.refreshData(it.pictureList?: listOf())
-            fileAdapter.refreshData(it.fileList?: listOf())
-        })
+            picAdapter.refreshData(it.pictureList ?: listOf())
+            fileAdapter.refreshData(it.fileList ?: listOf())
+        }
     }
 
     private fun showFileView(data: FileInfoModel) {

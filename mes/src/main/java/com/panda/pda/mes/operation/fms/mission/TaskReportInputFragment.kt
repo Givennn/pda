@@ -11,9 +11,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.data.CommonApi
+import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentTaskReportInputBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
@@ -34,6 +36,8 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     private val viewBinding by viewBinding<FragmentTaskReportInputBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
 
+    private val selectedPerson = mutableListOf<PersonModel>()
+
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
@@ -48,7 +52,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
         super.onViewCreated(view, savedInstanceState)
         setupPhotoAdapter()
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
-        viewModel.taskInfoData.observe(viewLifecycleOwner, { info ->
+        viewModel.taskInfoData.observe(viewLifecycleOwner) { info ->
             val detail = info.detail
             viewBinding.apply {
                 tvPlanCode.text = detail.planCode
@@ -60,10 +64,18 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvReportNumber.text = detail.reportNum.toString()
                 tilReportNum.minValue = 1
                 tilReportNum.maxValue = detail.dispatchOrderNum - detail.reportNum
+                llOperator.setOnClickListener {
+                    navToPersonSelect()
+                }
             }.btnConfirm.setOnClickListener {
                 report(info)
             }
-        })
+        }
+    }
+
+    private fun navToPersonSelect() {
+        navController.navigate(R.id.personSelectFragment,
+            Bundle().apply { putObjectString(selectedPerson) })
     }
 
     private fun report(info: TaskInfoModel) {
@@ -71,10 +83,15 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 //        if (remark.isEmpty()) {
 //            toast(R.string.remark_empty_message)
 //        }
+        if (selectedPerson.isEmpty()) {
+            toast(getString(R.string.operator_not_selected_message))
+        }
         val request = TaskReportRequest(info.detail.id,
             viewBinding.etReportNum.text.toString().toInt(),
             viewBinding.etRemark.text.toString(),
-            photoAdapter.getDataSource())
+            photoAdapter.getDataSource(),
+            selectedPerson.map { it.id }
+        )
         WebClient.request(TaskApi::class.java)
             .pdaFmsTaskReportConfirmPost(request)
             .bindToFragment()

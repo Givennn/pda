@@ -34,11 +34,53 @@ import java.util.concurrent.TimeUnit
  */
 class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
-    private lateinit var qualityItemsAdapter: CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel>
+    private val qualityItemsAdapter: CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel> by lazy {
+        object :
+            CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel>(
+                inspectItems.toMutableList()
+            ) {
+            override fun createBinding(parent: ViewGroup): ItemQualityCheckItemBinding {
+                return ItemQualityCheckItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            }
+
+            override fun onBindViewHolderWithData(
+                holder: ViewBindingHolder,
+                data: QualityInspectItemModel,
+                position: Int,
+            ) {
+                val isValueType =
+                    data.valueType == CommonParameters.getParameters(DataParamType.VALUE_TYPE)
+                        .firstOrNull { it.paramDesc == "数值型" }?.paramValue
+                holder.itemViewBinding.ivArrow.isVisible = !isValueType
+                holder.itemViewBinding.tvSelectValue.isVisible = !isValueType
+                holder.itemViewBinding.tvInputValue.isVisible = isValueType
+                holder.itemViewBinding.tvLabel.text = data.qualityName
+                holder.itemViewBinding.tvInputValue.doAfterTextChanged {
+                    data.conclusion = it.toString()
+                }
+
+                val conclusion = data.conclusion ?: ""
+                if (!isValueType) {
+                    holder.itemViewBinding.root.setOnClickListener {
+                        showConclusionSelectDialog(data, holder.itemViewBinding.tvSelectValue)
+                    }
+                    holder.itemViewBinding.tvSelectValue.text = conclusion;
+                } else {
+                    holder.itemViewBinding.tvInputValue.setText(conclusion);
+                }
+            }
+        }
+    }
     private var selectedNgList: List<QualityNgReasonModel>? = null
     private val viewBinding by viewBinding<FragmentExecuteInputBinding>()
 
-    private lateinit var subTaskDetailModel: QualitySubTaskDetailModel
+    private val subTaskDetailModel: QualitySubTaskDetailModel by lazy {
+        requireArguments().getSerializable(DETAIL_KEY) as QualitySubTaskDetailModel
+    }
 
     private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
 
@@ -72,70 +114,36 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
-
-        subTaskDetailModel =
-            requireArguments().getSerializable(DETAIL_KEY) as QualitySubTaskDetailModel
         inspectItems =
             inspectItemAdapter.fromJson(requireArguments().getString(QUALITY_ITEM_KEY, ""))
                 ?: listOf()
         val modelProperty =
             ModelPropertyCreator(QualitySubTaskDetailModel::class.java, viewBinding.llPropertyInfo)
         modelProperty.setData(subTaskDetailModel)
-        qualityItemsAdapter = object :
-            CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel>(
-                inspectItems.toMutableList()
-            ) {
-            override fun createBinding(parent: ViewGroup): ItemQualityCheckItemBinding {
-                return ItemQualityCheckItemBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            }
-
-            override fun onBindViewHolderWithData(
-                holder: ViewBindingHolder,
-                data: QualityInspectItemModel,
-                position: Int
-            ) {
-                val isValueType =
-                    data.valueType == CommonParameters.getParameters(DataParamType.VALUE_TYPE)
-                        .firstOrNull { it.paramDesc == "数值型" }?.paramValue
-                holder.itemViewBinding.ivArrow.isVisible = !isValueType
-                holder.itemViewBinding.tvSelectValue.isVisible = !isValueType
-                holder.itemViewBinding.tvInputValue.isVisible = isValueType
-                holder.itemViewBinding.tvLabel.text = data.qualityName
-                holder.itemViewBinding.tvInputValue.doAfterTextChanged {
-                    data.conclusion = it.toString()
-                }
-
-                if (!isValueType) {
-                    holder.itemViewBinding.root.setOnClickListener {
-                        showConclusionSelectDialog(data, holder.itemViewBinding.tvSelectValue)
-                    }
-                }
-            }
-        }
 
         viewBinding.rvQualityItem.adapter = qualityItemsAdapter
 
         viewBinding.llNgReason.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
-            .subscribe { navToNgReasonSelect() }
+            .subscribe()
+            { navToNgReasonSelect() }
 
 
         viewBinding.llVerifyResult.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
-            .subscribe { showVerifyResultDialog() }
+            .subscribe()
+            { showVerifyResultDialog() }
 
         viewBinding.btnConfirm.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
-            .subscribe { confirm() }
+            .subscribe()
+            { confirm() }
 
-        setFragmentResultListener(NgReasonFragment.REQUEST_KEY) { requestKey, bundle ->
+        setFragmentResultListener(NgReasonFragment.REQUEST_KEY)
+        { requestKey, bundle ->
             if (requestKey == NgReasonFragment.REQUEST_KEY) {
                 val ngReasonsStr = bundle.getString(NgReasonFragment.NG_REASON_ARG_KEY, "")
                 selectedNgList = ngReasonAdapter.fromJson(ngReasonsStr)
@@ -245,7 +253,7 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
     private fun showConclusionSelectDialog(
         data: QualityInspectItemModel,
-        tvSelectValue: TextView
+        tvSelectValue: TextView,
     ) {
         conclusionDialog.setConfirmButton { result ->
             data.conclusion = result!!.first

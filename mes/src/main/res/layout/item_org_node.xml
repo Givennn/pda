@@ -10,25 +10,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="@drawable/bg_item_underline"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:background="@drawable/bg_item_underline">
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="0dp"
             style="@style/moduleTitleText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            tools:text="检验一组"/>
+            android:layout_weight="1"
+            tools:text="检验一组" />
 
         <ImageView
             android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_right_svg"/>
+            android:src="@drawable/ic_arrow_right_svg" />
     </LinearLayout>
 </RelativeLayout>
