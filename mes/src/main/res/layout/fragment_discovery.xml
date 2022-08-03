@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         style="@style/Widget.App.Toolbar.main"
-        app:title="@string/task"/>
+        app:title="@string/discovery"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_discovery_area"
@@ -72,7 +72,7 @@
             android:layout_height="32dp"
             android:background="@drawable/bg_discovery_btn"
             android:gravity="center"
-            android:text="@string/task"
+            android:text="@string/dispatch_order"
             android:textColor="#4982FE"
             android:textSize="14sp"
             android:tag="320300"

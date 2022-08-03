@@ -6,20 +6,26 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
-import com.panda.pda.mes.base.extension.putObjectString
-import com.panda.pda.mes.base.extension.toast
+import com.panda.pda.mes.base.extension.*
+import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
+import com.panda.pda.mes.common.PersonSelectFragment
 import com.panda.pda.mes.common.data.CommonApi
 import com.panda.pda.mes.common.data.model.PersonModel
+import com.panda.pda.mes.common.data.model.UserModel
 import com.panda.pda.mes.databinding.FragmentTaskReportInputBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
 import com.panda.pda.mes.operation.fms.data.model.TaskReportRequest
+import com.panda.pda.mes.operation.qms.data.model.QualityTaskRecordModel
+import com.panda.pda.mes.user.UserViewModel
+import com.squareup.moshi.Types
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -35,8 +41,9 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     private lateinit var photoAdapter: TaskReportInputPhotoAdapter
     private val viewBinding by viewBinding<FragmentTaskReportInputBinding>()
     private val viewModel by activityViewModels<TaskViewModel>()
+    private val userViewModel by activityViewModels<UserViewModel>()
 
-    private val selectedPerson = mutableListOf<PersonModel>()
+    private var selectedPerson = listOf<PersonModel>()
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -55,7 +62,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
         viewModel.taskInfoData.observe(viewLifecycleOwner) { info ->
             val detail = info.detail
             viewBinding.apply {
-                tvPlanCode.text = detail.planCode
+                tvPlanCode.text = detail.workOrderCode
                 tvTaskCode.text = detail.dispatchOrderCode
                 tvTaskDesc.text = detail.dispatchOrderDesc
                 tvProductCode.text = detail.productCode
@@ -71,11 +78,31 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 report(info)
             }
         }
+
+        setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { _, bundle ->
+
+            selectedPerson =
+                bundle.getGenericObjectString<List<PersonModel>>(
+                    Types.newParameterizedType(
+                        List::class.java,
+                        PersonModel::class.java
+                    )) ?: listOf()
+
+            viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
+        }
+        val currentUser = userViewModel.loginData.value?.userInfo ?: return
+        selectedPerson = listOf(PersonModel(currentUser.id, -1, listOf(), -1, -1, "", "", currentUser.userName, ""))
+        viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
     }
 
     private fun navToPersonSelect() {
         navController.navigate(R.id.personSelectFragment,
-            Bundle().apply { putObjectString(selectedPerson) })
+            Bundle().apply {
+                putGenericObjectString(selectedPerson, Types.newParameterizedType(
+                    List::class.java,
+                    PersonModel::class.java
+                ))
+            })
     }
 
     private fun report(info: TaskInfoModel) {

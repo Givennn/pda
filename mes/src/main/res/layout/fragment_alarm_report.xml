@@ -72,7 +72,7 @@
             android:inputType="textMultiLine"
             android:gravity="top"
             android:padding="12dp"
-            android:maxLength="200"
+            android:maxLength="1000"
             android:hint="@string/remark_hint"
             tools:text="@string/long_text_test" />
     </com.google.android.material.textfield.TextInputLayout>

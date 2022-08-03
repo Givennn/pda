@@ -261,7 +261,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     }
 
     private fun updateTraceUser(nodeModel: OrgNodeModel) {
-        detailModel.traceUser = nodeModel.nodeId
+        detailModel.traceUserId = nodeModel.id
+        detailModel.traceUser = nodeModel.nodeName
         detailModel.traceDepartment = nodeModel.department?.nodeName
         detailModel.traceDepartmentId = nodeModel.department?.id
         viewBinding.tvTraceUser.text = nodeModel.nodeName
@@ -281,7 +282,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
 
     private fun convertLongToTime(time: Long): String {
         val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy-MM-dd 00:00:00", Locale.getDefault())
         return format.format(date)
     }
 

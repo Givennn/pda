@@ -28,6 +28,7 @@ class TaskMessageNavigationAdapter(
 
     private val msgKeyMap = mapOf<Int, String>(
         Pair(R.id.taskReceiveFragment, "fmsTaskToReceive"),
+        Pair(R.id.taskPrepareFragment, "dispatchOrderToPrepare"),
         Pair(R.id.taskExecuteFragment, "fmsTaskToRun"),
         Pair(R.id.taskReportFragment, "fmsTaskToReport"),
         Pair(R.id.taskFinishFragment, "fmsTaskToFinish"),
@@ -95,7 +96,8 @@ class TaskMessageNavigationAdapter(
             Pair(item.first, badgeCount ?: 0)
         }
         //过滤维保任务为0时的入口
-        dataSource=dataSource.filter { !(it.first.title=="维保任务"&&it.second==0)}
+//        dataSource = dataSource.filter { !(it.first.title == "维保任务" && it.second == 0) }
+        dataSource = dataSource.filter { it.second != 0 }
         notifyDataSetChanged()
     }
 

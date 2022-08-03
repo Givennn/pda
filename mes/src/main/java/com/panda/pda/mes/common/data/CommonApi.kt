@@ -23,7 +23,7 @@ interface CommonApi {
     @Multipart
     @POST("pda/common/upload-file")
     fun pdaCommonUploadFilePost(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
     ): Single<FileInfoModel>
 
     /**
@@ -70,11 +70,15 @@ interface CommonApi {
      */
 
     @GET("pda/admin/user/list-org-node")
-    fun userListOrgNodeGet(@retrofit2.http.Query("parentId") id: String):Single<DataListNode<OrgNodeModel>>
+    fun userListOrgNodeGet(@retrofit2.http.Query("parentId") id: String): Single<DataListNode<OrgNodeModel>>
 
     /**
      * 人员列表查询
      */
     @GET("pda/admin/user/select-list")
-    fun userListAllGet(): Single<DataListNode<PersonModel>>
+    fun userListAllGet(
+        @retrofit2.http.Query("keywords") keywords: String?,
+        @retrofit2.http.Query("page") page: Int = 1,
+        @retrofit2.http.Query("rows") rows: Int = 12,
+    ): Single<DataListNode<PersonModel>>
 }

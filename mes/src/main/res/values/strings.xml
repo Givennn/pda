@@ -72,7 +72,7 @@
     <string name="material_replace">物料替换</string>
     <string name="alarm_report">实时报警</string>
     <string name="factory_manage">生产管理</string>
-    <string name="material_search_bar_hint">请输入派工单编号/产品编码/产品描述</string>
+    <string name="material_search_bar_hint">请输入派工单/产品/生产负责人</string>
     <string name="task_number">派工单数量</string>
     <string name="task_scan_bar_hint">请输入或扫描产品条码</string>
     <string name="scan_product_serial_code">扫描产品条码</string>
@@ -83,7 +83,7 @@
     <string name="history_record">历史记录</string>
     <string name="alarm">报警</string>
     <string name="alarm_detail">警报说明</string>
-    <string name="remark_hint">请输入备注信息，最多200个字</string>
+    <string name="remark_hint">请输入备注信息，最多1000个字</string>
     <string name="alarm_reporter">报警人</string>
     <string name="alarm_report_time">报警时间</string>
     <string name="order">订单</string>
@@ -151,7 +151,7 @@
     <string name="already_distribute_number">已派发</string>
     <string name="distribute">派发</string>
     <string name="back_out">撤销</string>
-    <string name="quality_problem">质量问题</string>
+    <string name="quality_problem">质检问题记录</string>
     <string name="follower">跟踪人</string>
     <string name="person_demo">张三</string>
     <string name="quality_result">质检结论</string>
@@ -289,5 +289,9 @@
     <string name="product_type">生产方式</string>
     <string name="person_search_bar_hint">请输入操作工姓名</string>
     <string name="operator_not_selected_message">请选择操作工</string>
+    <string name="person_selected_format">已选择：%s</string>
+    <string name="person_select_comfirm_format">确认 %d/%d</string>
+    <string name="dispatch_order">派工单</string>
+    <string name="dispatch_order_prepare">派工单准备</string>
     <!--设备管理系统ems end-->
 </resources>
