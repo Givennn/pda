@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.panda.pda.mes.R
 import com.panda.pda.mes.common.data.model.FileInfoModel
 import com.panda.pda.mes.databinding.ItemEquipmentPhotoBinding

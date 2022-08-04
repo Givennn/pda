@@ -86,11 +86,15 @@ dependencies {
     implementation(SupportLibs.RX_LIFE_CYCLE_KOTLIN)
     implementation(SupportLibs.RX_BINDING)
     implementation(SupportLibs.COIL)
+//    implementation("io.coil-kt:coil-gif:${Versions.COIL}")
+//    implementation("io.coil-kt:coil-video:${Versions.COIL}")
     implementation(SupportLibs.MATERIAL)
 //    implementation("com.github.chrisbanes:PhotoView:2.3.0")
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
 
     implementation("cn.aigestudio.wheelpicker:WheelPicker:1.1.3")
+
+    implementation ("io.github.lucksiege:pictureselector:v3.10.5")
     testImplementation(TestingLib.JUNIT)
 
     androidTestImplementation(AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)

@@ -19,6 +19,12 @@ allprojects {
         jcenter()
         maven("https://www.jitpack.io")
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force("androidx.core:core:1.6.0")
+        }
+    }
 }
 
 subprojects {
@@ -55,6 +61,8 @@ subprojects {
 tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
 }
+
+
 buildscript {
     val kotlinVersion by extra("1.5.10")
     repositories {

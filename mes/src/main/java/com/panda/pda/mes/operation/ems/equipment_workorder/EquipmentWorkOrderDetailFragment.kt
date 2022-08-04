@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.api.load
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment

@@ -25,7 +25,7 @@ object Versions {
     const val OK_HTTP = "4.9.0"
     const val STETHO = "1.5.0"
     const val TIMBER = "4.7.1"
-    const val COIL = "0.11.0"
+    const val COIL = "2.1.0"
     const val EXO_PLAYER = "2.12.0"
     const val RX_JAVA = "3.0.7"
     const val KAML = "0.26.0"
