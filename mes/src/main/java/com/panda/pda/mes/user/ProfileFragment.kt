@@ -2,8 +2,11 @@ package com.panda.pda.mes.user
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
@@ -32,18 +35,23 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
         viewBinding.apply {
             topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+            val badgeDrawable = BadgeDrawable.create(requireContext()).apply {
+                isVisible = true
+                number = 11
+            }
+            BadgeUtils.attachBadgeDrawable(badgeDrawable, topAppBar, R.id.message)
             tvName.text = userInfoModel?.userName
             tvMyPhone.text = userInfoModel?.phoneNumber
             tvDepartment.text = userInfoModel?.getDepartment()
             tvVersion.text = userViewModel.getAppVersionName(requireContext())
-            llChangePwd.clicks()
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .bindToLifecycle(view)
-                .subscribe { changePwd() }
-            btnLogout.clicks()
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .bindToLifecycle(view)
-                .subscribe { logout() }
+//            llChangePwd.clicks()
+//                .throttleFirst(500, TimeUnit.MILLISECONDS)
+//                .bindToLifecycle(view)
+//                .subscribe { changePwd() }
+//            btnLogout.clicks()
+//                .throttleFirst(500, TimeUnit.MILLISECONDS)
+//                .bindToLifecycle(view)
+//                .subscribe { logout() }
         }
     }
 

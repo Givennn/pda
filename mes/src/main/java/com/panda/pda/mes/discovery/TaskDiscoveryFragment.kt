@@ -65,7 +65,7 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
 
 
     override val titleResId: Int
-        get() = R.string.task
+        get() = R.string.dispatch_order
 
     override fun api(key: String?): Single<DataListNode<TaskModel>> =
         WebClient.request(DiscoveryApi::class.java).pdaFmsTaskListAllGet(key)

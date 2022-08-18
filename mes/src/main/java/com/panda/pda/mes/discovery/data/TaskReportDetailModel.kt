@@ -10,7 +10,7 @@ data class TaskReportDetailModel(
     val fileList: List<FileInfoModel>,
     val id: Int,
     @ModelProperty(1, "订单编号")
-    val orderNo: String,
+    val planNo: String,
     @ModelProperty(2, "计划编号")
     val planCode: String,
     @ModelProperty(5, "工作令号")
@@ -18,7 +18,7 @@ data class TaskReportDetailModel(
     @ModelProperty(7, "统一号")
     val batchNo: String,
     @ModelProperty(8, "任务编号")
-    val taskCode: String,
+    val dispatchOrderCode: String,
     @ModelProperty(9, "任务描述")
     val taskDesc: String,
     @ModelProperty(10, "产品编号")
@@ -26,7 +26,7 @@ data class TaskReportDetailModel(
     @ModelProperty(11, "产品描述")
     val productName: String,
     @ModelProperty(12, "任务数量")
-    val taskNum: Int,
+    val dispatchOrderNum: Int,
     @ModelProperty(13, "报工数量")
     val reportNumber: Int,
     val reportTime: Int,

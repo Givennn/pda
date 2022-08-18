@@ -29,4 +29,17 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="16dp"
+            app:tint="@android:color/white"
+            app:maxImageSize="40dp"
+            app:fabCustomSize="54dp"
+            app:fabSize="normal"
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_add"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

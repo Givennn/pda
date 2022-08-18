@@ -9,13 +9,16 @@
         android:title="@string/operation"
         android:icon="@drawable/ic_nav_operation"/>
     <item
+        android:id="@+id/placeHolder"
+        android:title=""/>
+    <item
         android:id="@+id/discoveryFragment"
         android:title="@string/discovery"
         android:icon="@drawable/ic_nav_discovery"/>
-    <item
-        android:id="@+id/messageFragment"
-        android:title="@string/message"
-        android:icon="@drawable/ic_nav_task"/>
+<!--    <item-->
+<!--        android:id="@+id/messageFragment"-->
+<!--        android:title="@string/message"-->
+<!--        android:icon="@drawable/ic_nav_task"/>-->
     <item
         android:id="@+id/profileFragment"
         android:title="@string/profile"

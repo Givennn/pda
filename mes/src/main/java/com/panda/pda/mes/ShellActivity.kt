@@ -1,8 +1,10 @@
 package com.panda.pda.mes
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -48,7 +50,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     }
 
     private fun initTokenEvent() {
-        userViewModel.logoutActionData.observe(this, {
+        userViewModel.logoutActionData.observe(this) {
             viewBinding.nvBottom.selectedItemId = R.id.taskFragment
 
             navController.navigate(
@@ -56,7 +58,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
                 null,
                 NavOptions.Builder().setPopUpTo(R.id.shell_nav_graph, true).build()
             )
-        })
+        }
     }
 
     private fun createNavController() {
@@ -109,6 +111,7 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     }
 
     private fun initBottomNavigation() {
+        viewBinding.nvBottom.menu[2].isEnabled = false
         viewBinding.nvBottom.hideWhenDestinationExclude(navController)
             .customIcons()
             .setupNavControllerToFinalStack(navController)

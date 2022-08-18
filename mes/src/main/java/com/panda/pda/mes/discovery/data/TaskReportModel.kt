@@ -10,6 +10,6 @@ data class TaskReportModel(
     val productCode: String,
     val productName: String,
     val reportNumber: Int,
-    val taskCode: String,
+    val dispatchOrderCode: String,
     val taskDesc: String
 )

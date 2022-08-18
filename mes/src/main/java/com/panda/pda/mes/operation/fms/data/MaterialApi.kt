@@ -49,7 +49,7 @@ interface MaterialApi {
      * 查询已绑定的物料
      * keywords：任务编号/产品编码/产品描述/派工人
      * The endpoint is owned by docs service owner
-     * @param taskId  (required)
+     * @param dispatchOrderId  (required)
      * @param productBarCode  (required)
      * @param raw raw paramter (optional)
      */
@@ -57,7 +57,7 @@ interface MaterialApi {
     @GET("pda/fms/task/material/task/query-bind-by-product")
     fun materialTaskQueryBindByProductGet(
         @retrofit2.http.Query("productBarCode") productBarCode: String,
-        @retrofit2.http.Query("taskId") taskId: Int? = null,
+        @retrofit2.http.Query("dispatchOrderId") dispatchOrderId: Int? = null,
     ): Single<TaskBandedMaterialModel>
     /**
      * 绑定/查询物料

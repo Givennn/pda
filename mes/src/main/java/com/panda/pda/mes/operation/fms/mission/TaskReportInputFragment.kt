@@ -87,15 +87,18 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
             }
         }
 
-        setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { _, bundle ->
 
-            selectedPerson =
+        setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { result, bundle ->
+            val newSelectedPerson =
                 bundle.getGenericObjectString<List<PersonModel>>(
                     Types.newParameterizedType(
                         List::class.java,
                         PersonModel::class.java
-                    )) ?: listOf()
+                    ))
 
+            if (newSelectedPerson != null) {
+                selectedPerson = newSelectedPerson
+            }
             viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
         }
         val currentUser = userViewModel.loginData.value?.userInfo ?: return

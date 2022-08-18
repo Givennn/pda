@@ -117,12 +117,40 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_change_pwd"
+        android:id="@+id/ll_operation_record"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:background="@drawable/bg_item_underline"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/operate_record"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="@dimen/arrow_right_size"
+            android:layout_height="@dimen/arrow_right_size"
+            android:layout_marginStart="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_personal_performance"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_item_underline"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
@@ -131,7 +159,34 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="@string/change_password"
+            android:text="@string/personal_performance"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="@dimen/arrow_right_size"
+            android:layout_height="@dimen/arrow_right_size"
+            android:layout_marginStart="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_item_underline"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/setting"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 

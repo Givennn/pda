@@ -38,13 +38,13 @@
     <string name="product_receiver">生产负责人</string>
     <string name="finish">完成</string>
     <string name="report">报工</string>
-    <string name="task_search_bar_hint">请输入派工单编号/产品编码/产品描述/派工人</string>
+    <string name="task_search_bar_hint">请输入派工单/产品/生产负责人</string>
     <string name="receive">接收</string>
     <string name="execute">执行</string>
     <string name="basic_info">基本信息</string>
     <string name="task_code">派工单编号</string>
     <string name="task_count">派工单数量</string>
-    <string name="product_code">产品编号</string>
+    <string name="product_code">产品编码</string>
     <string name="product_description">产品描述</string>
     <string name="plan_code">工单编号</string>
     <string name="work_order_code">工作令号</string>
@@ -293,5 +293,20 @@
     <string name="person_select_comfirm_format">确认 %d/%d</string>
     <string name="dispatch_order">派工单</string>
     <string name="dispatch_order_prepare">派工单准备</string>
+    <string name="main_plan_report">主计划报工</string>
+    <string name="main_plan_num">主计划数量</string>
+    <string name="main_plan_desc">主计划描述</string>
+    <string name="plan_deliver_time_formatter">交货时间: %s</string>
+    <string name="main_plan_finish">主计划完工</string>
+    <string name="main_plan_finish_confirm">确定完成该主计划？</string>
+    <string name="main_plan_search_bar_hint">请输入主计划编号/工作令号/产品</string>
+    <string name="main_plan_code">主计划编号</string>
+    <string name="product_model">型号代号</string>
+    <string name="main_plan_status">主计划状态</string>
+    <string name="delete">删除</string>
+    <string name="operator_report_time">报工工时(小时)</string>
+    <string name="add_operator">添加操作工</string>
+    <string name="personal_performance">个人绩效</string>
+    <string name="setting">设置</string>
     <!--设备管理系统ems end-->
 </resources>

@@ -28,6 +28,7 @@ import com.panda.pda.mes.databinding.ItemPersonSelectBinding
 import com.panda.pda.mes.operation.qms.data.QualityApi
 import com.panda.pda.mes.operation.qms.data.model.QualityTaskRecordModel
 import com.squareup.moshi.Types
+import timber.log.Timber
 
 class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
     private lateinit var personAdapter: CommonViewBindingAdapter<ItemPersonSelectBinding, PersonModel>
@@ -35,7 +36,7 @@ class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
 //    private var layoutManager: LinearLayoutManager? = null
 
     private val maxSelectSize = 5
-    private var selectedPersonList = LinkedHashMap<Int, PersonModel>()
+    private var selectedPersonList = HashMap<Int, PersonModel>()
 
     private val viewBinding by viewBinding<FragmentPersonSelectBinding>()
 
@@ -84,7 +85,11 @@ class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
                 List::class.java,
                 PersonModel::class.java
             )) ?: listOf()
-        selectedPersonList.putAll(selectOperator.associateBy { it.id })
+        selectOperator.forEach {
+            Timber.e("id:${it.id}, name${it.userName}")
+        }
+        selectedPersonList.putAll(selectOperator.map { it.id to it })
+        notifySelectListChanged()
     }
 
     private fun commit() {
@@ -113,6 +118,11 @@ class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
                     parent,
                     false
                 )
+            }
+
+            override fun onViewRecycled(holder: ViewBindingHolder) {
+                super.onViewRecycled(holder)
+                holder.itemViewBinding.cbPerson.setOnCheckedChangeListener(null)
             }
 
             override fun onBindViewHolderWithData(
@@ -144,7 +154,7 @@ class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
 
     private fun notifySelectListChanged() {
         viewBinding.tvSelectedTitle.text = getString(R.string.person_selected_format,
-            selectedPersonList.values.map { it.userName }.joinToString(","))
+            selectedPersonList.values.joinToString(",") { it.userName })
         viewBinding.btnConfirm.text =
             getString(R.string.person_select_comfirm_format, selectedPersonList.size, maxSelectSize)
     }
@@ -163,11 +173,11 @@ class PersonSelectFragment : BaseFragment(R.layout.fragment_person_select) {
     }
 
     private fun updateCheckStatus() {
-        selectedPersonList.values.forEach { selectedModel ->
-            val person = personList.firstOrNull { listModel -> listModel.id == selectedModel.id }
-            if (person != null) {
-                person.isSelected = true
+        personList.forEachIndexed { index, personModel ->
+            if (selectedPersonList.containsKey(personModel.id)) {
+                personModel.isSelected = true
             }
+            personAdapter.notifyItemChanged(index)
         }
     }
 
