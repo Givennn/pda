@@ -27,9 +27,9 @@ fun BottomNavigationView.hideWhenDestinationExclude(
 //        val menuItemIds = bottomNav.menu.iterator().asSequence().toList().map { it.itemId }
         navController.addOnDestinationChangedListener { _, destination, _ ->
 //            val visible = destination.id in menuItemIds
-            bottomNav.visibility =
-                if (bottomNav.isDestinationInMenu(destination.id)) View.VISIBLE else View.GONE
-            onViewVisibleChanged(bottomNav.visibility)
+//            bottomNav.visibility =
+//                if (bottomNav.isDestinationInMenu(destination.id)) View.VISIBLE else View.GONE
+            onViewVisibleChanged(if (bottomNav.isDestinationInMenu(destination.id)) View.VISIBLE else View.GONE)
         }
         return bottomNav
     }

@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.BaseRootFragment
 import com.panda.pda.mes.common.CommonViewModel
 import com.panda.pda.mes.common.adapter.HeaderAdapter
 import com.panda.pda.mes.common.adapter.ModuleNavigationAdapter
@@ -24,7 +26,7 @@ import timber.log.Timber
 /**
  * created by AnJiwei 2021/8/16
  */
-class OperationFragment : BaseFragment(R.layout.fragment_operation) {
+class OperationFragment : BaseRootFragment(R.layout.fragment_operation) {
 
     private lateinit var moduleListAdapter: ConcatAdapter
     private lateinit var layoutManager: GridLayoutManager
@@ -39,6 +41,10 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
 
     override val isStatusBarLight: Boolean
         get() = true
+
+    override fun getTopToolBar(): MaterialToolbar {
+        return viewBinding.topAppBar
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,6 +87,12 @@ class OperationFragment : BaseFragment(R.layout.fragment_operation) {
         moduleListAdapter = ConcatAdapter()
         viewBinding.rvModuleArea.adapter = moduleListAdapter
 
+        addModuleGrid(
+            R.menu.bps_nav_menu,
+            R.string.plan_system_manage
+        ) {
+            navController.navigate(it)
+        }
         addModuleGrid(
             R.menu.fms_nav_menu,
             R.string.factory_manage,

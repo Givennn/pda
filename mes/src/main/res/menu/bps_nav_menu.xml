@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_plan_report_nav_graph"
+        android:title="@string/main_plan_report"
+        android:icon="@drawable/ic_op_equipment_task" />
+    <!--设备信息-->
+    <item
+        android:id="@+id/main_plan_finish_nav_graph"
+        android:title="@string/main_plan_finish"
+        android:icon="@drawable/ic_op_equipment_device"/>
+</menu>

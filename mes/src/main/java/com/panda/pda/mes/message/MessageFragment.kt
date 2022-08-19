@@ -24,6 +24,7 @@ class MessageFragment : BaseFragment(R.layout.fragment_message) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
         taskMessageNavigationAdapter = TaskMessageNavigationAdapter(
             R.menu.notification_msg_nav_menu,
             requireContext()

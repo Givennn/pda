@@ -26,6 +26,7 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2022/8/8
  */
 class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
+
     override fun createAdapter(): CommonViewBindingAdapter<*, MainPlanModel> {
         return object : CommonViewBindingAdapter<ItemMainPlanReportBinding, MainPlanModel>() {
             override fun createBinding(parent: ViewGroup): ItemMainPlanReportBinding {

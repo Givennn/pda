@@ -308,5 +308,8 @@
     <string name="add_operator">添加操作工</string>
     <string name="personal_performance">个人绩效</string>
     <string name="setting">设置</string>
+    <string name="exchange_card_operate">流转卡操作</string>
+    <string name="scan_exchange_card_hint">请扫描流转卡...</string>
+    <string name="plan_system_manage">计划管理</string>
     <!--设备管理系统ems end-->
 </resources>

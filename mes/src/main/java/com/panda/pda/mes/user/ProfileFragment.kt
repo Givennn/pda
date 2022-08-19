@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.BaseRootFragment
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.databinding.FragmentProfileBinding
 import com.panda.pda.mes.user.data.UserApi
@@ -19,7 +21,7 @@ import java.util.concurrent.TimeUnit
 /**
  * created by AnJiwei 2021/8/16
  */
-class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
+class ProfileFragment : BaseRootFragment(R.layout.fragment_profile) {
 
     private val viewBinding by viewBinding<FragmentProfileBinding>()
 
@@ -30,16 +32,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     override val isStatusBarLight: Boolean
         get() = true
 
+    override fun getTopToolBar(): MaterialToolbar {
+        return viewBinding.topAppBar
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.apply {
-            topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
-            val badgeDrawable = BadgeDrawable.create(requireContext()).apply {
-                isVisible = true
-                number = 11
-            }
-            BadgeUtils.attachBadgeDrawable(badgeDrawable, topAppBar, R.id.message)
+//            val badgeDrawable = BadgeDrawable.create(requireContext()).apply {
+//                isVisible = true
+//                number = 11
+//            }
+//            BadgeUtils.attachBadgeDrawable(badgeDrawable, topAppBar, R.id.message)
             tvName.text = userInfoModel?.userName
             tvMyPhone.text = userInfoModel?.phoneNumber
             tvDepartment.text = userInfoModel?.getDepartment()

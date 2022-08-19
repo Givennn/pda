@@ -88,6 +88,7 @@
     <include app:graph="@navigation/discovery_plan_nav_graph" />
     <include app:graph="@navigation/discovery_report_nav_graph" />
     <include app:graph="@navigation/profile_setting_nav_graph"/>
+    <include app:graph="@navigation/order_exchange_nav_graph"/>
     <fragment
         android:id="@+id/taskReportInputFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"

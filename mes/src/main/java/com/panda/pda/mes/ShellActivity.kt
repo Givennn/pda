@@ -47,6 +47,9 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
         initViewModel()
         initTokenEvent()
         customNavAction()
+        viewBinding.btnScan.setOnClickListener {
+            navController.navigate(R.id.order_exchange_nav_graph)
+        }
     }
 
     private fun initTokenEvent() {
@@ -106,8 +109,6 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
             .subscribe({
                 taskViewModel.taskMsgData.postValue(it)
             }, { })
-
-
     }
 
     private fun initBottomNavigation() {

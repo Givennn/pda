@@ -65,8 +65,6 @@
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@android:color/black</item>
         <item name="menu">@menu/main_title_items_menu</item>
-        <item name="paddingStart">8dp</item>
-        <item name="paddingEnd">8dp</item>
         <item name="titleCentered">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
