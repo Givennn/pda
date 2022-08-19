@@ -1,8 +1,8 @@
 package com.panda.pda.mes.user
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.badge.BadgeDrawable
@@ -44,6 +44,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             tvMyPhone.text = userInfoModel?.phoneNumber
             tvDepartment.text = userInfoModel?.getDepartment()
             tvVersion.text = userViewModel.getAppVersionName(requireContext())
+            llSetting.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .bindToLifecycle(view)
+                .subscribe { navController.navigate(R.id.profile_setting_nav_graph) }
 //            llChangePwd.clicks()
 //                .throttleFirst(500, TimeUnit.MILLISECONDS)
 //                .bindToLifecycle(view)
@@ -55,18 +59,18 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun logout() {
-        WebClient.request(UserApi::class.java)
-            .pdaAdminUserLogoutPost()
-            .bindToFragment()
-            .onErrorComplete()
-            .subscribe {
-                navBackListener.invoke(requireView())
-                userViewModel.logout(null)
-            }
-    }
-
-    private fun changePwd() {
-        navController.navigate(R.id.action_profileFragment_to_changePwdOldVerifyFragment)
-    }
+//    private fun logout() {
+//        WebClient.request(UserApi::class.java)
+//            .pdaAdminUserLogoutPost()
+//            .bindToFragment()
+//            .onErrorComplete()
+//            .subscribe {
+//                navBackListener.invoke(requireView())
+//                userViewModel.logout(null)
+//            }
+//    }
+//
+//    private fun changePwd() {
+//        navController.navigate(R.id.action_profileFragment_to_changePwdOldVerifyFragment)
+//    }
 }

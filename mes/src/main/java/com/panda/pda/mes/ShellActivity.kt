@@ -111,8 +111,12 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     }
 
     private fun initBottomNavigation() {
+        viewBinding.nvBottom.background = null
         viewBinding.nvBottom.menu[2].isEnabled = false
-        viewBinding.nvBottom.hideWhenDestinationExclude(navController)
+        viewBinding.nvBottom.hideWhenDestinationExclude(navController) {
+            viewBinding.btnScan.visibility = it
+            viewBinding.bottomAppBar.visibility = it
+        }
             .customIcons()
             .setupNavControllerToFinalStack(navController)
     }

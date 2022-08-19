@@ -6,25 +6,9 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/changePwdOldVerifyFragment"
-        android:name="com.panda.pda.mes.user.ChangePwdOldVerifyFragment"
-        android:label="ChangePwdOldVerifyFragment">
-        <action
-            android:id="@+id/action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment"
-            app:destination="@id/changePwdNewVerifyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/changePwdNewVerifyFragment"
-        android:name="com.panda.pda.mes.user.ChangePwdNewVerifyFragment"
-        android:label="ChangePwdNewVerifyFragment" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.panda.pda.mes.user.ProfileFragment"
-        android:label="ProfileFragment">
-        <action
-            android:id="@+id/action_profileFragment_to_changePwdOldVerifyFragment"
-            app:destination="@id/changePwdOldVerifyFragment" />
-    </fragment>
+        android:label="ProfileFragment"/>
     <fragment
         android:id="@+id/taskReportFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.TaskReportFragment"
@@ -103,12 +87,13 @@
     <include app:graph="@navigation/discovery_task_nav_graph" />
     <include app:graph="@navigation/discovery_plan_nav_graph" />
     <include app:graph="@navigation/discovery_report_nav_graph" />
+    <include app:graph="@navigation/profile_setting_nav_graph"/>
     <fragment
         android:id="@+id/taskReportInputFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"
         android:label="TaskReportInputFragment" />
 
-    <include app:graph="@navigation/profile_nav_graph" />
+    <include app:graph="@navigation/profile_setting_nav_graph" />
     <include app:graph="@navigation/material_replace_nav_graph" />
     <include app:graph="@navigation/operation_guide_nav_graph" />
 

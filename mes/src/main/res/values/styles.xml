@@ -68,6 +68,8 @@
         <item name="paddingStart">8dp</item>
         <item name="paddingEnd">8dp</item>
         <item name="titleCentered">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">

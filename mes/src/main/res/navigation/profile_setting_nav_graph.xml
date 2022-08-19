@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_setting_nav_graph"
+    app:startDestination="@id/profileSettingFragment">
+    <fragment
+        android:id="@+id/profileSettingFragment"
+        android:name="com.panda.pda.mes.user.ProfileSettingFragment"
+        android:label="ProfileSettingFragment" >
+        <action
+            android:id="@+id/action_profileSettingFragment_to_changePwdOldVerifyFragment"
+            app:destination="@id/changePwdOldVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePwdNewVerifyFragment"
+        android:name="com.panda.pda.mes.user.ChangePwdNewVerifyFragment"
+        android:label="ChangePwdNewVerifyFragment" />
+    <fragment
+        android:id="@+id/changePwdOldVerifyFragment"
+        android:name="com.panda.pda.mes.user.ChangePwdOldVerifyFragment"
+        android:label="ChangePwdOldVerifyFragment" >
+        <action
+            android:id="@+id/action_changePwdOldVerifyFragment_to_changePwdNewVerifyFragment"
+            app:destination="@id/changePwdNewVerifyFragment" />
+    </fragment>
+</navigation>
