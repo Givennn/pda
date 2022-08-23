@@ -9,10 +9,14 @@ import com.panda.pda.mes.base.retrofit.onMainThread
 import com.panda.pda.mes.common.CommonViewModel
 import com.panda.pda.mes.common.data.CommonApi
 import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.user.LoginMode
 import com.panda.pda.mes.user.UserViewModel
+import com.panda.pda.mes.user.UserViewModel.Companion.SP_LOGIN_TYPE
 import com.panda.pda.mes.user.UserViewModel.Companion.SP_PASSWORD
+import com.panda.pda.mes.user.UserViewModel.Companion.SP_QR_CODE
 import com.panda.pda.mes.user.UserViewModel.Companion.SP_USER_NAME
 import com.panda.pda.mes.user.data.UserApi
+import com.panda.pda.mes.user.data.model.LoginDataModel
 import com.panda.pda.mes.user.data.model.LoginRequest
 import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
@@ -46,7 +50,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     }
 
     private fun requestLocalUserInfo() {
-        val loginRequest = getCacheLoginInfo()
+        val loginRequest = getCacheLoginAPi()
         if (loginRequest == null) {
             WebClient.request(CommonApi::class.java).getAuthorityTree()
                 .onErrorReturn { DataListNode(listOf()) } //TODO mock test
@@ -66,8 +70,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 WebClient.request(CommonApi::class.java).getAuthorityTree()
                     .onErrorReturn { DataListNode(listOf()) } //TODO mock test
                 ,
-                WebClient.request(UserApi::class.java)
-                    .userNameLoginPost(loginRequest)
+                loginRequest
             ) { auto, loginInfo ->
                 Pair(auto.dataList, loginInfo)
             }.delay(1, TimeUnit.SECONDS)
@@ -77,7 +80,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 .subscribe({
 //                    queryCommonParameters()
                     commonViewModel.authorityViewModel.postValue(it.first)
-                    viewModel.updateLoginData(it.second, loginRequest)
+
                     navController.navigate(R.id.action_splashFragment_to_taskFragment)
                 }, {
                     navController.navigate(R.id.action_splashFragment_to_loginFragment)
@@ -96,11 +99,25 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
             }, { toast(it.message ?: "无法获取数据字典") })
     }
 
-    private fun getCacheLoginInfo(): LoginRequest? {
+    private fun getCacheLoginAPi(): Single<LoginDataModel>? {
         val viewModelSp =
             requireContext().getSharedPreferences(UserViewModel.SP_NAME, Context.MODE_PRIVATE)
-        val userName = viewModelSp.getString(SP_USER_NAME, null) ?: return null
-        val pwd = viewModelSp.getString(SP_PASSWORD, null) ?: return null
-        return LoginRequest(userName, pwd)
+        val loginMode = viewModelSp.getString(SP_LOGIN_TYPE, null) ?: return null
+        if (loginMode == LoginMode.PWD.spKey) {
+            val userName = viewModelSp.getString(SP_USER_NAME, null) ?: return null
+            val pwd = viewModelSp.getString(SP_PASSWORD, null) ?: return null
+            val request = LoginRequest(userName, pwd)
+            return WebClient.request(UserApi::class.java)
+                .userNameLoginPost(request)
+                .doOnSuccess { viewModel.updateLoginData(it, request, null) }
+        }
+        if (loginMode == LoginMode.QRCODE.spKey) {
+            val code = viewModelSp.getString(SP_QR_CODE, null) ?: return null
+            return WebClient.request(UserApi::class.java)
+                .qrCodeLoginPost(code)
+                .doOnSuccess { viewModel.updateLoginData(it, null, code) }
+        }
+
+        return null
     }
 }

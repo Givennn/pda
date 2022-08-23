@@ -36,13 +36,21 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         return "V${versionName}"
     }
 
-    fun updateLoginData(dataModel: LoginDataModel, request: LoginRequest) {
+    fun updateLoginData(dataModel: LoginDataModel, request: LoginRequest?, qrcode: String?) {
         loginData.postValue(dataModel)
         QueryParamInterceptor.TOKEN = dataModel.token
         getApplication<PdaApplication>().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
             .edit {
-                putString(SP_USER_NAME, request.workCode)
-                putString(SP_PASSWORD, request.password)
+                if (request != null) {
+                    putString(SP_USER_NAME, request.workCode)
+                    putString(SP_PASSWORD, request.password)
+                    putString(SP_LOGIN_TYPE, LoginMode.PWD.spKey)
+                }
+                if (qrcode != null) {
+                    putString(SP_QR_CODE, qrcode)
+                    putString(SP_LOGIN_TYPE, LoginMode.QRCODE.spKey)
+                }
+
             }
     }
 
@@ -62,6 +70,8 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
         val SP_NAME = UserViewModel::class.simpleName
         const val SP_USER_NAME = "UserName"
         const val SP_PASSWORD = "password"
+        const val SP_LOGIN_TYPE = "loginType"
+        const val SP_QR_CODE = "qrcode"
         val IgnoreToastCodeList = listOf(
             41205, // 角色不存在
             41211, // 没有权限,无法登录
@@ -73,4 +83,10 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
             50006
         )
     }
+}
+
+enum class LoginMode(val spKey: String) {
+
+    PWD("pwd"),
+    QRCODE("code")
 }

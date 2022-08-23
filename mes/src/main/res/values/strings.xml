@@ -311,5 +311,8 @@
     <string name="exchange_card_operate">流转卡操作</string>
     <string name="scan_exchange_card_hint">请扫描流转卡...</string>
     <string name="plan_system_manage">计划管理</string>
+    <string name="login_type_password">密码登陆</string>
+    <string name="login_type_qrcode">二维码登陆</string>
+    <string name="login_scan_qrcode_hint">请扫描个人二维码</string>
     <!--设备管理系统ems end-->
 </resources>

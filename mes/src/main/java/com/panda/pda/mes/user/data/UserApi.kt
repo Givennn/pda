@@ -5,6 +5,9 @@ import com.panda.pda.mes.user.data.model.LoginRequest
 import com.panda.pda.mes.user.data.model.PwdCheckRequest
 import com.panda.pda.mes.user.data.model.PwdModifyRequest
 import io.reactivex.rxjava3.core.Single
+import okhttp3.RequestBody
+import org.json.JSONObject
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 /**
@@ -59,4 +62,8 @@ interface UserApi {
     fun pdaAdminUserPasswordModifyPost(
         @retrofit2.http.Body request: PwdModifyRequest
     ): Single<Any>
+
+    @Headers("Content-Type: application/json")
+    @POST("pda/admin/user/code-login")
+    fun qrCodeLoginPost(@retrofit2.http.Body request: String): Single<LoginDataModel>
 }

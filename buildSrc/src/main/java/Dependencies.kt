@@ -63,6 +63,8 @@ object SupportLibs {
         "com.squareup.retrofit2:converter-moshi:${Versions.RETROFIT}"
     const val RETROFIT_RXJAVA3_ADAPTER =
         "com.squareup.retrofit2:adapter-rxjava3:${Versions.RETROFIT}"
+    const val RETROFIT_SCALARS_CONVERTOR =
+        "com.squareup.retrofit2:converter-scalars:${Versions.RETROFIT}"
 
     // ViewModel and LiveData
     const val LIFE_CYCLE = "androidx.lifecycle:lifecycle-extensions:2.0.0"

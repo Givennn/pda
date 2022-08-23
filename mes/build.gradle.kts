@@ -43,7 +43,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        dataBinding = true
+//        dataBinding = true
     }
 
 
@@ -70,6 +70,7 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_CONSTRAINT_LAYOUT)
     implementation(SupportLibs.RETROFIT)
     implementation(SupportLibs.RETROFIT_MOSHI_CONVERTER)
+    implementation(SupportLibs.RETROFIT_SCALARS_CONVERTOR)
     implementation(SupportLibs.RETROFIT_RXJAVA3_ADAPTER)
     implementation(SupportLibs.LOGGING_INTERCEPTOR)
     implementation(SupportLibs.OK_HTTP)

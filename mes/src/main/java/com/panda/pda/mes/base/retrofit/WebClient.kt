@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -50,6 +51,7 @@ object WebClient {
     fun <TService> request(serviceClass: Class<TService>): TService {
         return Retrofit.Builder()
             .client(client)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .baseUrl(BuildConfig.GRADLE_API_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(BaseResponseConverterFactory())
