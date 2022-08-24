@@ -8,12 +8,16 @@ import android.widget.EditText
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.putObjectString
+import com.panda.pda.mes.base.extension.toast
+import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.databinding.FragmentExchangeScanBinding
+import com.panda.pda.mes.operation.exchange_card.data.ExchangeCardApi
 
 /**
  * created by AnJiwei 2022/8/19
  */
-class ExchangeScanFragment: BaseFragment(R.layout.fragment_exchange_scan) {
+class ExchangeScanFragment : BaseFragment(R.layout.fragment_exchange_scan) {
 
     val viewBinding by viewBinding<FragmentExchangeScanBinding>()
 
@@ -33,5 +37,19 @@ class ExchangeScanFragment: BaseFragment(R.layout.fragment_exchange_scan) {
 
     private fun onSearching() {
 
+        val code = viewBinding.etScanBar.text.toString()
+        if (code.isEmpty()) {
+            toast("条码异常")
+            return
+        }
+        WebClient.request(ExchangeCardApi::class.java)
+            .exchangeCardScantGet(code)
+            .bindToFragment()
+            .subscribe({
+                navController.navigate(R.id.action_exchangeScanFragment_to_exchangeCardOperateFragment,
+                    Bundle().apply {
+                        putObjectString(it)
+                    })
+            }, {})
     }
 }

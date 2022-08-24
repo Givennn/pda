@@ -141,7 +141,7 @@
             style="@style/actionButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/finish"
+            android:text="@string/finish_work"
             app:icon="@drawable/ic_action_finish"/>
     </LinearLayout>
 

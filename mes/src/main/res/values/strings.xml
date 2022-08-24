@@ -314,5 +314,8 @@
     <string name="login_type_password">密码登陆</string>
     <string name="login_type_qrcode">二维码登陆</string>
     <string name="login_scan_qrcode_hint">请扫描个人二维码</string>
+    <string name="main_plan_report_success_message">主计划报工成功</string>
+    <string name="finish_work">完工</string>
+    <string name="dispatch_order_operate">派工单操作</string>
     <!--设备管理系统ems end-->
 </resources>

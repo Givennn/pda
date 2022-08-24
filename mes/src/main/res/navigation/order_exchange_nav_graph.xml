@@ -9,18 +9,11 @@
         android:name="com.panda.pda.mes.operation.exchange_card.ExchangeScanFragment"
         android:label="ExchangeScanFragment" >
         <action
-            android:id="@+id/action_exchangeScanFragment_to_dispatchOrderExchangeFragment"
-            app:destination="@id/dispatchOrderExchangeFragment" />
-        <action
-            android:id="@+id/action_exchangeScanFragment_to_workOrderExchangeFragment"
-            app:destination="@id/workOrderExchangeFragment" />
+            android:id="@+id/action_exchangeScanFragment_to_exchangeCardOperateFragment"
+            app:destination="@id/exchangeCardOperateFragment" />
     </fragment>
     <fragment
-        android:id="@+id/dispatchOrderExchangeFragment"
-        android:name="com.panda.pda.mes.operation.exchange_card.DispatchOrderExchangeFragment"
-        android:label="DispatchOrderExchangeFragment" />
-    <fragment
-        android:id="@+id/workOrderExchangeFragment"
-        android:name="com.panda.pda.mes.operation.exchange_card.WorkOrderExchangeFragment"
-        android:label="WorkOrderExchangeFragment" />
+        android:id="@+id/exchangeCardOperateFragment"
+        android:name="com.panda.pda.mes.operation.exchange_card.ExchangeCardOperateFragment"
+        android:label="ExchangeCardOperateFragment" />
 </navigation>

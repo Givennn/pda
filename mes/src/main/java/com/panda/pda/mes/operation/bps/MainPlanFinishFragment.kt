@@ -30,6 +30,8 @@ import io.reactivex.rxjava3.core.Single
  * created by AnJiwei 2022/8/8
  */
 class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
+
+
     override fun createAdapter(): CommonViewBindingAdapter<*, MainPlanModel> {
         return object : CommonViewBindingAdapter<ItemMainPlanReportBinding, MainPlanModel>() {
             override fun createBinding(parent: ViewGroup): ItemMainPlanReportBinding {
@@ -60,6 +62,8 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
                     tvDeliverDate.text =
                         getString(R.string.plan_deliver_time_formatter, data.deliveryTime)
                     tvMainPlanNum.text = data.planNumber.toString()
+                    tvWorkOrderCode.text = data.workNo
+
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }

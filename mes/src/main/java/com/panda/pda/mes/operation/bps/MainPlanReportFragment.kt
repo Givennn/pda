@@ -15,6 +15,7 @@ import com.panda.pda.mes.common.DateUtils
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.model.CommonOperationRecordModel
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
+import com.panda.pda.mes.databinding.ItemMainPlanFinishBinding
 import com.panda.pda.mes.databinding.ItemMainPlanReportBinding
 import com.panda.pda.mes.databinding.ItemTaskReportBinding
 import com.panda.pda.mes.operation.bps.data.MainPlanApi
@@ -29,9 +30,9 @@ import io.reactivex.rxjava3.core.Single
 class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
 
     override fun createAdapter(): CommonViewBindingAdapter<*, MainPlanModel> {
-        return object : CommonViewBindingAdapter<ItemMainPlanReportBinding, MainPlanModel>() {
-            override fun createBinding(parent: ViewGroup): ItemMainPlanReportBinding {
-                return ItemMainPlanReportBinding.inflate(
+        return object : CommonViewBindingAdapter<ItemMainPlanFinishBinding, MainPlanModel>() {
+            override fun createBinding(parent: ViewGroup): ItemMainPlanFinishBinding {
+                return ItemMainPlanFinishBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -58,6 +59,7 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                     tvDeliverDate.text =
                         getString(R.string.plan_deliver_time_formatter, data.deliveryTime)
                     tvMainPlanNum.text = data.planNumber.toString()
+                    tvWorkOrderCode.text = data.workNo
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
@@ -112,4 +114,7 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
 
     override val titleResId: Int
         get() = R.string.main_plan_report
+
+    override val searchBarHintResId: Int
+        get() = R.string.main_plan_search_bar_hint
 }
