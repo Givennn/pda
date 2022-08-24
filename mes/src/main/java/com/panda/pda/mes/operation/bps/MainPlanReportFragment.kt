@@ -13,6 +13,7 @@ import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.CommonSearchListFragment
 import com.panda.pda.mes.common.DateUtils
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.mes.common.data.model.CommonOperationRecordModel
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemMainPlanReportBinding
 import com.panda.pda.mes.databinding.ItemTaskReportBinding
@@ -87,7 +88,7 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                             it.second,
                             Types.newParameterizedType(
                                 DataListNode::class.java,
-                                QualityTaskRecordModel::class.java
+                                CommonOperationRecordModel::class.java
                             )
                         )
                     })

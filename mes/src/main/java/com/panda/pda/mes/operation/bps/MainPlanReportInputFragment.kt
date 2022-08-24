@@ -24,6 +24,8 @@ import com.panda.pda.mes.common.CoilEngine
 import com.panda.pda.mes.common.PersonSelectFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.CommonApi
+import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentMainPlanReportInputBinding
 import com.panda.pda.mes.databinding.ItemMainPlanOperatorListBinding
@@ -78,7 +80,7 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
             tvProductCode.text = mainPlanDetail.productCode
             tvProductDesc.text = mainPlanDetail.productName
             tvProductModel.text = mainPlanDetail.productModel
-            tvMainPlanStatus.text = mainPlanDetail.planStatus.toString()
+            tvMainPlanStatus.text = CommonParameters.getDesc(DataParamType.BPS_PLAN_STATUS, mainPlanDetail.planStatus)
             tvMainPlanNum.text = mainPlanDetail.planNumber.toString()
             tvWorkOrderCode.text = mainPlanDetail.workOrderCode
         }
@@ -121,6 +123,12 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                 }
             }
         }
+        viewBinding.rvOperatorList.adapter = operatorAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        operatorAdapter.notifyDataSetChanged()
     }
 
     private fun removeOperatorItem(position: Int) {

@@ -30,6 +30,7 @@ data class DataParameterModel(
     //工单状态对应的文字
     val WORK_ORDER_OPERATE: List<Parameter>,
     val BPS_PRODUCT_MODE: List<Parameter>,
+    val BPS_PLAN_STATUS: List<Parameter>,
 )
 
 data class Parameter(

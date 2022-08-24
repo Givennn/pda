@@ -117,6 +117,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Timber.e("${LoginFragment::class.java.name}: onresume")
+    }
 
     private fun switchLoginMode(index: Int) {
         loginMode = index

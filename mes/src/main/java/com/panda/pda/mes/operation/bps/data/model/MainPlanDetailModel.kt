@@ -1,6 +1,8 @@
 package com.panda.pda.mes.operation.bps.data.model
 
 import com.panda.pda.mes.common.ModelProperty
+import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.common.data.DataParamType
 
 /**
  * created by AnJiwei 2022/8/8
@@ -18,7 +20,7 @@ data class MainPlanDetailModel(
     val productName: String,
     @ModelProperty(4, "型号代号")
     val productModel: String,
-    @ModelProperty(5, "主计划状态")
+    @ModelProperty(5, "主计划状态", dataParameterType = "BPS_PLAN_STATUS")
     val planStatus: Int,
     @ModelProperty(11, "主计划数量")
     val planNumber: Int,

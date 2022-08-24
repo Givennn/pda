@@ -279,6 +279,8 @@
         android:id="@+id/personSelectFragment"
         android:name="com.panda.pda.mes.common.PersonSelectFragment"
         android:label="PersonSelectFragment" />
+    <include app:graph="@navigation/main_plan_finish_nav_graph" />
+    <include app:graph="@navigation/main_plan_report_nav_graph" />
 
 
     <!--设备管理模块  end by 殷志林-->
