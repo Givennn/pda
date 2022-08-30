@@ -107,7 +107,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                     viewModel.updateLoginData(data, null, code)
                     navToMain()
                 }, {
-                    setErrorMsg(it.message ?: getString(R.string.user_pwd_error))
+                    toast(it.message ?: getString(R.string.user_pwd_error))
                 })
         } catch (err: JSONException) {
             toast("二维码信息异常")

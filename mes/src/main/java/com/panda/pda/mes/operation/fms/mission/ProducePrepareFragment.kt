@@ -16,7 +16,7 @@ import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.databinding.*
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.ProducePrepareItem
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 
 /**
  * created by AnJiwei 2022/6/21
@@ -26,12 +26,12 @@ public class ProducePrepareFragment : BaseFragment(R.layout.fragment_produce_pre
     private val prepareAdapter by lazy { createAdapter() }
     private val viewBinding by viewBinding<FragmentProducePrepareBinding>()
 
-    private lateinit var taskModel: TaskModel
+    private lateinit var taskModel: DispatchOrderModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
-        val task = arguments?.getStringObject<TaskModel>()
+        val task = arguments?.getStringObject<DispatchOrderModel>()
         if (task != null) {
             taskModel = task
         } else {

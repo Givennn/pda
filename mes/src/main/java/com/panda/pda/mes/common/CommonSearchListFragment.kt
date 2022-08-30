@@ -63,7 +63,7 @@ abstract class CommonSearchListFragment<TSource> :
         refreshData()
     }
 
-    protected fun refreshData() {
+    open fun refreshData() {
         api(viewBinding.etSearchBar.text?.toString())
             .bindToFragment()
             .doFinally { viewBinding.swipe.isRefreshing = false }

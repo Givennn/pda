@@ -12,6 +12,6 @@ interface ExchangeCardApi {
     /**
      * 流转卡扫描
      */
-    @GET("pda/fms/exchange-card/scan")
+    @GET("pda/task/exchange-card/scan")
     fun exchangeCardScantGet(@retrofit2.http.Query("code") code: String): Single<ExchangeCardModel>
 }

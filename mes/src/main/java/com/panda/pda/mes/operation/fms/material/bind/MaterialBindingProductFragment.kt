@@ -24,7 +24,7 @@ import com.panda.pda.mes.operation.fms.data.model.MaterialModel
 import com.panda.pda.mes.operation.fms.data.model.ProductModel
 import com.panda.pda.mes.operation.fms.data.model.TaskBandedMaterialModel
 import com.panda.pda.mes.operation.fms.material.MaterialViewModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import timber.log.Timber
 
 /**
@@ -32,7 +32,7 @@ import timber.log.Timber
  */
 class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_binding_product) {
 
-    private lateinit var taskModel: TaskModel
+    private lateinit var taskModel: DispatchOrderModel
     private lateinit var productModel: ProductModel
     private lateinit var bindingBindingAdapter: CommonViewBindingAdapter<ItemBindMaterialCodeBinding, MaterialModel>
     private val viewBinding by viewBinding<FragmentMaterialBindingProductBinding>()

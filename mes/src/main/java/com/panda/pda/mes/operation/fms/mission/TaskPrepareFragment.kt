@@ -10,23 +10,22 @@ import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.base.retrofit.onMainThread
-import com.panda.pda.mes.common.CommonSearchListFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemTaskPrepareBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import io.reactivex.rxjava3.core.Single
 
 /**
  * created by AnJiwei 2022/6/21
  */
 public class TaskPrepareFragment :
-    CommonSearchListFragment<TaskModel>() {
+    BaseExchangeOperateActionFragment<DispatchOrderModel>() {
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
-    override fun api(key: String?): Single<DataListNode<TaskModel>> =
+    override fun api(key: String?): Single<DataListNode<DispatchOrderModel>> =
         WebClient.request(TaskApi::class.java)
             .prepareDispatchOrderListGet(key)
 
@@ -36,9 +35,9 @@ public class TaskPrepareFragment :
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): CommonViewBindingAdapter<*, TaskModel> {
+    override fun createAdapter(): CommonViewBindingAdapter<*, DispatchOrderModel> {
         return object :
-            CommonViewBindingAdapter<ItemTaskPrepareBinding, TaskModel>(
+            CommonViewBindingAdapter<ItemTaskPrepareBinding, DispatchOrderModel>(
                 mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskPrepareBinding {
                 return ItemTaskPrepareBinding.inflate(
@@ -58,17 +57,12 @@ public class TaskPrepareFragment :
 
             override fun onBindViewHolderWithData(
                 holder: ViewBindingHolder,
-                data: TaskModel,
+                data: DispatchOrderModel,
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
-                    tvProductInfo.text = getString(
-                        R.string.desc_and_code_formatter,
-                        data.productName,
-                        data.productCode
-                    )
+                    tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
                     tvPlanFinishDate.text =
                         getString(R.string.receive_time_formatter, data.receiveTime ?: "-")
                     tvTaskResponsePerson.text = data.issueName
@@ -83,7 +77,7 @@ public class TaskPrepareFragment :
         }
     }
 
-    private fun onItemInfoClicked(data: TaskModel) {
+    private fun onItemInfoClicked(data: DispatchOrderModel) {
         if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
             navToDetailFragment(data.id)
             return
@@ -105,7 +99,7 @@ public class TaskPrepareFragment :
             Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
     }
 
-    private fun onItemActionClicked(data: TaskModel) {
+    private fun onItemActionClicked(data: DispatchOrderModel) {
 
         navController.navigate(R.id.producePrepareFragment,
             Bundle().apply { putObjectString(data) })

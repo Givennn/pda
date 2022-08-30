@@ -15,22 +15,22 @@ import com.panda.pda.mes.discovery.data.DiscoveryApi
 import com.panda.pda.mes.operation.fms.mission.TaskViewModel
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import io.reactivex.rxjava3.core.Single
 
 /**
  * created by AnJiwei 2021/9/1
  */
-class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
+class TaskDiscoveryFragment : CommonSearchListFragment<DispatchOrderModel>() {
 
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
     override val searchBarHintResId: Int?
         get() = R.string.discovery_search_hint
-    override fun createAdapter(): CommonViewBindingAdapter<*, TaskModel> {
+    override fun createAdapter(): CommonViewBindingAdapter<*, DispatchOrderModel> {
 
         return object :
-            CommonViewBindingAdapter<ItemDiscoveryTaskBinding, TaskModel>(mutableListOf()) {
+            CommonViewBindingAdapter<ItemDiscoveryTaskBinding, DispatchOrderModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemDiscoveryTaskBinding {
                 return ItemDiscoveryTaskBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -44,7 +44,7 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
 
             override fun onBindViewHolderWithData(
                 holder: ViewBindingHolder,
-                data: TaskModel,
+                data: DispatchOrderModel,
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
@@ -67,10 +67,10 @@ class TaskDiscoveryFragment : CommonSearchListFragment<TaskModel>() {
     override val titleResId: Int
         get() = R.string.dispatch_order
 
-    override fun api(key: String?): Single<DataListNode<TaskModel>> =
+    override fun api(key: String?): Single<DataListNode<DispatchOrderModel>> =
         WebClient.request(DiscoveryApi::class.java).pdaFmsTaskListAllGet(key)
 
-    private fun onItemInfoClicked(data: TaskModel) {
+    private fun onItemInfoClicked(data: DispatchOrderModel) {
         if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
             navToDetailFragment(data.id)
             return

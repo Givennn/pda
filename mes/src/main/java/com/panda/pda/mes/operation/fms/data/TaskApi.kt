@@ -33,7 +33,7 @@ interface TaskApi {
     @GET("pda/fms/task/complete/list-by-page")
     fun taskCompleteListGet(
         @retrofit2.http.Query("keywords") keywords: String? = null,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 执行任务
@@ -56,7 +56,7 @@ interface TaskApi {
     @GET("pda/fms/task/execution/list-by-page")
     fun taskExecutionListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 任务详情
@@ -102,7 +102,7 @@ interface TaskApi {
     @GET("pda/fms/task/receive/list-by-page")
     fun taskReceiveListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
     /**
      * 任务报工
      *
@@ -121,13 +121,13 @@ interface TaskApi {
     @GET("pda/fms/task/report/list-by-page")
     fun pdaFmsTaskReportListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 生产准备派工单列表
      */
     @GET("pda/fms/task/prepare/list-by-page")
-    fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?):Single<DataListNode<TaskModel>>
+    fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?):Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 生产准备列表

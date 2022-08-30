@@ -1,7 +1,7 @@
 package com.panda.pda.mes.operation.exchange_card.data.model
 
 import com.panda.pda.mes.common.data.model.TaskMessageCountModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 
 /**
  * created by AnJiwei 2022/8/24

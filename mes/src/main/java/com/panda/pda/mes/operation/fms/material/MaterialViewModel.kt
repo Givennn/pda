@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.panda.pda.mes.operation.fms.data.model.MaterialModel
 import com.panda.pda.mes.operation.fms.data.model.ProductModel
 import com.panda.pda.mes.operation.fms.data.model.TaskBandedMaterialModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 
 /**
  * create by AnJiwei 2021/9/5
@@ -13,7 +13,7 @@ import com.panda.pda.mes.operation.fms.data.model.TaskModel
 class MaterialViewModel : ViewModel() {
     val scannedProductData = MutableLiveData<ProductModel>()
     val materialData = MutableLiveData<MaterialModel>()
-    val selectedTaskData = MutableLiveData<TaskModel>()
+    val selectedTaskData = MutableLiveData<DispatchOrderModel>()
 
     val materialActionData = MutableLiveData<ProductScanFragment.MaterialAction>()
     val taskBandedMaterialData = MutableLiveData<TaskBandedMaterialModel>()

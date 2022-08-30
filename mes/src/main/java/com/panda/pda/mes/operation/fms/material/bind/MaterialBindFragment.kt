@@ -9,7 +9,6 @@ import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.retrofit.*
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
-import com.panda.pda.mes.common.CommonSearchListFragment
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemMaterialBindBinding
 import com.panda.pda.mes.operation.fms.data.MaterialApi
@@ -18,13 +17,14 @@ import com.panda.pda.mes.operation.fms.material.ProductScanFragment
 import com.panda.pda.mes.operation.fms.mission.TaskViewModel
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
+import com.panda.pda.mes.operation.fms.mission.BaseExchangeOperateActionFragment
 import io.reactivex.rxjava3.core.Single
 
 /**
  * created by AnJiwei 2021/8/30
  */
-class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
+class MaterialBindFragment : BaseExchangeOperateActionFragment<DispatchOrderModel>() {
     private val taskViewModel by activityViewModels<TaskViewModel>()
     val viewModel by activityViewModels<MaterialViewModel>()
 
@@ -33,9 +33,9 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         viewBinding.etSearchBar.setHint(R.string.material_search_bar_hint)
     }
 
-    override fun createAdapter(): CommonViewBindingAdapter<*, TaskModel> {
+    override fun createAdapter(): CommonViewBindingAdapter<*, DispatchOrderModel> {
         return object :
-            CommonViewBindingAdapter<ItemMaterialBindBinding, TaskModel>(mutableListOf()) {
+            CommonViewBindingAdapter<ItemMaterialBindBinding, DispatchOrderModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemMaterialBindBinding {
                 return ItemMaterialBindBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -54,17 +54,12 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
 
             override fun onBindViewHolderWithData(
                 holder: ViewBindingHolder,
-                data: TaskModel,
+                data: DispatchOrderModel,
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
-                    tvProductInfo.text = getString(
-                        R.string.desc_and_code_formatter,
-                        data.productName,
-                        data.productCode
-                    )
+                    tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
                     tvTaskNumber.text = data.dispatchOrderNum.toString()
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
@@ -77,7 +72,7 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
         }
     }
 
-    private fun onItemInfoClicked(data: TaskModel) {
+    private fun onItemInfoClicked(data: DispatchOrderModel) {
         if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
             navToDetailFragment(data.id)
             return
@@ -100,14 +95,14 @@ class MaterialBindFragment : CommonSearchListFragment<TaskModel>() {
     }
 
 
-    override fun api(key: String?): Single<DataListNode<TaskModel>> =
+    override fun api(key: String?): Single<DataListNode<DispatchOrderModel>> =
         WebClient.request(MaterialApi::class.java)
             .materialTaskListByPageGet(key)
 
     override val titleResId: Int
         get() = R.string.material_bind
 
-    private fun onItemActionClicked(data: TaskModel) {
+    private fun onItemActionClicked(data: DispatchOrderModel) {
         viewModel.selectedTaskData.postValue(data)
         viewModel.materialActionData.postValue(ProductScanFragment.MaterialAction.Bind)
         navController.navigate(R.id.action_materialBindFragment_to_productScanBindFragment,

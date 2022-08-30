@@ -108,7 +108,7 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
                     .mainPlanFinishConfirmPost(IdRequest(data.id))
                     .bindToFragment()
                     .subscribe({
-                        toast(R.string.task_finish_success_toast)
+                        toast(R.string.main_plan_finish_success_toast)
                         refreshData()
                     },
                         { })

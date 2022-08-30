@@ -38,7 +38,7 @@
     <string name="product_receiver">生产负责人</string>
     <string name="finish">完成</string>
     <string name="report">报工</string>
-    <string name="task_search_bar_hint">请输入派工单/产品/生产负责人</string>
+    <string name="task_search_bar_hint">请输入工单/派工单/产品/生产负责人</string>
     <string name="receive">接收</string>
     <string name="execute">执行</string>
     <string name="basic_info">基本信息</string>
@@ -317,5 +317,9 @@
     <string name="main_plan_report_success_message">主计划报工成功</string>
     <string name="finish_work">完工</string>
     <string name="dispatch_order_operate">派工单操作</string>
+    <string name="work_order_operate">工单操作</string>
+    <string name="system_log">系统日志</string>
+    <string name="exchange_card_detail">流转卡操作</string>
+    <string name="main_plan_finish_success_toast">完成主计划成功!</string>
     <!--设备管理系统ems end-->
 </resources>

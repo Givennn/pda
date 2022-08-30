@@ -24,7 +24,7 @@ data class MainPlanDetailModel(
     val planStatus: Int,
     @ModelProperty(11, "主计划数量")
     val planNumber: Int,
-    @ModelProperty(12, "主计划数量")
+    @ModelProperty(12, "工作令号")
     val workNo: String,
     @ModelProperty(13, "交货时间")
     val deliveryTime: String,

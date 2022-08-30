@@ -10,20 +10,19 @@ import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.base.ConfirmDialogFragment
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.*
-import com.panda.pda.mes.common.CommonSearchListFragment
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemTaskReceiveBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import io.reactivex.rxjava3.core.Single
 
-class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
+class TaskReceiveFragment : BaseExchangeOperateActionFragment<DispatchOrderModel>() {
 
     private val taskViewModel by activityViewModels<TaskViewModel>()
 
-    override fun api(key: String?): Single<DataListNode<TaskModel>> =
+    override fun api(key: String?): Single<DataListNode<DispatchOrderModel>> =
         WebClient.request(TaskApi::class.java)
             .taskReceiveListByPageGet(key)
 
@@ -33,8 +32,8 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
     override val searchBarHintResId: Int
         get() = R.string.task_search_bar_hint
 
-    override fun createAdapter(): CommonViewBindingAdapter<*, TaskModel> {
-        return object : CommonViewBindingAdapter<ItemTaskReceiveBinding, TaskModel>(mutableListOf()) {
+    override fun createAdapter(): CommonViewBindingAdapter<*, DispatchOrderModel> {
+        return object : CommonViewBindingAdapter<ItemTaskReceiveBinding, DispatchOrderModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReceiveBinding {
                 return ItemTaskReceiveBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -53,17 +52,12 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
 
             override fun onBindViewHolderWithData(
                 holder: ViewBindingHolder,
-                data: TaskModel,
+                data: DispatchOrderModel,
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
-                    tvProductInfo.text = getString(
-                        R.string.desc_and_code_formatter,
-                        data.productName,
-                        data.productCode
-                    )
+                    tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
                     tvSendDate.text =
                         getString(R.string.report_time_formatter, data.issueTime ?: "")
                     tvTaskSender.text = data.receiveName
@@ -78,7 +72,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
         }
     }
 
-    private fun onItemInfoClicked(data: TaskModel) {
+    private fun onItemInfoClicked(data: DispatchOrderModel) {
         if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
             navToDetailFragment(data.id)
             return
@@ -100,7 +94,7 @@ class TaskReceiveFragment : CommonSearchListFragment<TaskModel>() {
             Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
     }
 
-    private fun onItemActionClicked(data: TaskModel) {
+    private fun onItemActionClicked(data: DispatchOrderModel) {
 
         val dialog = ConfirmDialogFragment().setTitle(getString(R.string.task_receive_confirm))
             .setConfirmButton({ _, _ ->

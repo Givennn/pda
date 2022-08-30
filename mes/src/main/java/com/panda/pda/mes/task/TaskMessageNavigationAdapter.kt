@@ -97,9 +97,11 @@ class TaskMessageNavigationAdapter(
         }
         //过滤维保任务为0时的入口
 //        dataSource = dataSource.filter { !(it.first.title == "维保任务" && it.second == 0) }
-        dataSource = dataSource.filter { it.second != 0 }
+        dataSource = dataSource.filter { dataSourceFilter(it.second) }
         notifyDataSetChanged()
     }
+
+    var dataSourceFilter = { count : Int -> count != 0 }
 
 
     inner class ViewBindingHolder(val viewBinding: ItemTaskMsgBinding) :

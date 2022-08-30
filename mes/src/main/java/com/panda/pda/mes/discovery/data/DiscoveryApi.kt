@@ -1,7 +1,7 @@
 package com.panda.pda.mes.discovery.data
 
 import com.panda.pda.mes.base.retrofit.DataListNode
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
@@ -18,7 +18,7 @@ interface DiscoveryApi {
     @GET("pda/fms/task/list-all")
     fun pdaFmsTaskListAllGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 全部报工列表

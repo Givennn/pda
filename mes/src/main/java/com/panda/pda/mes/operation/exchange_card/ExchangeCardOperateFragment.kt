@@ -9,9 +9,9 @@ import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.common.ModelPropertyCreator
 import com.panda.pda.mes.databinding.FragmentExchangeCardOperateBinding
-import com.panda.pda.mes.operation.exchange_card.data.model.DispatchOrderModel
 import com.panda.pda.mes.operation.exchange_card.data.model.ExchangeCardModel
 import com.panda.pda.mes.operation.exchange_card.data.model.WorkOrderModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import com.panda.pda.mes.task.TaskMessageNavigationAdapter
 
 /**
@@ -26,6 +26,7 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
     private lateinit var exchangeCardCode: String
 
     private lateinit var taskMessageNavigationAdapter: TaskMessageNavigationAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
@@ -41,7 +42,9 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
                 viewBinding.llPropertyInfo,
             )
             modelProperty.setData(card.workOrder)
-            exchangeCardCode = card.workOrder.workNo
+            exchangeCardCode = card.workOrder.workOrderCode
+            viewBinding.tvOperateTitle.text = getString(R.string.work_order_operate)
+//            viewBinding.topAppBar.title =
         } else {
             val modelProperty = ModelPropertyCreator(
                 DispatchOrderModel::class.java,
@@ -49,6 +52,7 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
             )
             modelProperty.setData(card.dispatchOrder)
             exchangeCardCode = card.dispatchOrder.workOrderCode
+            viewBinding.tvOperateTitle.text = getString(R.string.dispatch_order_operate)
         }
 
         taskMessageNavigationAdapter = TaskMessageNavigationAdapter(

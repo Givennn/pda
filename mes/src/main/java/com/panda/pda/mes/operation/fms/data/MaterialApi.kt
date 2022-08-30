@@ -2,7 +2,7 @@ package com.panda.pda.mes.operation.fms.data
 
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.operation.fms.data.model.*
-import com.panda.pda.mes.operation.fms.data.model.TaskModel
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -44,7 +44,7 @@ interface MaterialApi {
     @GET("pda/fms/task/material/task/list-by-page")
     fun materialTaskListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
-    ): Single<DataListNode<TaskModel>>
+    ): Single<DataListNode<DispatchOrderModel>>
     /**
      * 查询已绑定的物料
      * keywords：任务编号/产品编码/产品描述/派工人
