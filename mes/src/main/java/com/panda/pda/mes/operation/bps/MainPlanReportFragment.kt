@@ -30,9 +30,9 @@ import io.reactivex.rxjava3.core.Single
 class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
 
     override fun createAdapter(): CommonViewBindingAdapter<*, MainPlanModel> {
-        return object : CommonViewBindingAdapter<ItemMainPlanFinishBinding, MainPlanModel>() {
-            override fun createBinding(parent: ViewGroup): ItemMainPlanFinishBinding {
-                return ItemMainPlanFinishBinding.inflate(
+        return object : CommonViewBindingAdapter<ItemMainPlanReportBinding, MainPlanModel>() {
+            override fun createBinding(parent: ViewGroup): ItemMainPlanReportBinding {
+                return ItemMainPlanReportBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

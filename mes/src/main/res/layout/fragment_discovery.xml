@@ -33,13 +33,28 @@
         android:paddingEnd="16dp">
 
         <TextView
+            app:layout_constraintTop_toTopOf="@id/discovery_order_nav_graph"
+            android:id="@+id/discovery_plan_nav_graph"
+            android:layout_width="60dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_discovery_btn"
+            android:gravity="center"
+            android:text="@string/main_plan"
+            android:textColor="#4982FE"
+            android:textSize="14sp"
+            android:tag="320200"
+            app:layout_constraintEnd_toStartOf="@+id/discovery_task_nav_graph"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/discovery_order_nav_graph" />
+
+        <TextView
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/discovery_order_nav_graph"
             android:layout_width="60dp"
             android:layout_height="32dp"
             android:background="@drawable/bg_discovery_btn"
             android:gravity="center"
-            android:text="@string/order"
+            android:text="@string/work_order"
             android:textColor="#4982FE"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/discovery_plan_nav_graph"
@@ -48,23 +63,6 @@
             android:tag="320100"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            app:layout_constraintTop_toTopOf="@id/discovery_order_nav_graph"
-            android:id="@+id/discovery_plan_nav_graph"
-            android:layout_width="60dp"
-            android:layout_height="32dp"
-            android:background="@drawable/bg_discovery_btn"
-            android:gravity="center"
-            android:text="@string/plan"
-            android:textColor="#4982FE"
-            android:textSize="14sp"
-            android:enabled="false"
-            android:tag="320200"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/discovery_task_nav_graph"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/discovery_order_nav_graph" />
 
         <TextView
             app:layout_constraintTop_toTopOf="@id/discovery_order_nav_graph"

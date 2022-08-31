@@ -9,7 +9,9 @@ data class TaskReportModel(
     val id: Int,
     val productCode: String,
     val productName: String,
+    val productModel: String,
     val reportNumber: Int,
-    val dispatchOrderCode: String,
+    val dispatchOrderCode: String?,
+    val dispatchOrderDesc: String?,
     val taskDesc: String
 )

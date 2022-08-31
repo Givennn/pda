@@ -85,7 +85,7 @@
             style="@style/descText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sender"
+            android:text="@string/product_receiver"
             app:layout_constraintEnd_toEndOf="@id/tv_task_sender"
             app:layout_constraintTop_toTopOf="@id/tv_task_desc_label" />
 

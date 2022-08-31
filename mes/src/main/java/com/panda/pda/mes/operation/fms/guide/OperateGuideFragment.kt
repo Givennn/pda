@@ -67,9 +67,7 @@ class OperateGuideFragment : CommonSearchListFragment<GuideInfoModel>() {
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvProductCode.text = getString(R.string.desc_and_code_formatter,
-                        data.productName, data.productCode
-                    )
+                    tvProductCode.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
                     tvFileName.text = data.fileName
                     tvTechDesc.text = getString(R.string.desc_and_code_formatter, data.technicsDesc,
                         data.technicsVersion

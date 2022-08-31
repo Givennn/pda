@@ -21,5 +21,6 @@ data class GuideInfoModel(
     val productName: String,
     val technicsCode: String,
     val technicsDesc: String,
-    val technicsVersion: String
+    val technicsVersion: String,
+    val productModel: String
 ) : Serializable

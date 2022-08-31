@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/discovery_plan_nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/discovery_plan_nav_graph"
+    app:startDestination="@id/mainPlanDiscoveryFragment">
 
+    <fragment
+        android:id="@+id/mainPlanDiscoveryFragment"
+        android:name="com.panda.pda.mes.discovery.MainPlanDiscoveryFragment"
+        android:label="MainPlanDiscoveryFragment" >
+        <action
+            android:id="@+id/action_mainPlanDiscoveryFragment_to_mainPlanDetailFragment3"
+            app:destination="@id/mainPlanDetailFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainPlanDetailFragment3"
+        android:name="com.panda.pda.mes.operation.bps.MainPlanDetailFragment"
+        android:label="MainPlanDetailFragment" />
 </navigation>

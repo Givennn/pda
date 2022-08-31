@@ -9,7 +9,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.jakewharton.rxbinding4.view.clicks
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.entity.LocalMedia
@@ -28,7 +27,6 @@ import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.CommonApi
 import com.panda.pda.mes.common.data.CommonParameters
 import com.panda.pda.mes.common.data.DataParamType
-import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentMainPlanReportInputBinding
 import com.panda.pda.mes.databinding.ItemMainPlanOperatorListBinding
@@ -37,16 +35,13 @@ import com.panda.pda.mes.operation.bps.data.model.MainPlanDetailModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportItem
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportRequest
 import com.panda.pda.mes.operation.fms.mission.TaskReportInputPhotoAdapter
-import com.panda.pda.mes.operation.qms.data.QualityApi
 import com.panda.pda.mes.user.UserViewModel
 import com.squareup.moshi.Types
-import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 /**
  * created by AnJiwei 2022/8/8
@@ -69,20 +64,30 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
 
         viewBinding.btnAddOperator.setOnClickListener {
-            val currentUser = userViewModel.loginData.value?.userInfo ?: return@setOnClickListener
-            val newOperators = listOf(PersonModel(currentUser.id,
-                -1,
-                listOf(),
-                -1,
-                -1,
-                "",
-                "",
-                currentUser.userName,
-                ""))
+            val item: MainPlanReportItem
+            if (operatorAdapter!!.dataSource.isEmpty()) {
+                val currentUser =
+                    userViewModel.loginData.value?.userInfo ?: return@setOnClickListener
+                val newOperators = listOf(PersonModel(currentUser.id,
+                    -1,
+                    listOf(),
+                    -1,
+                    -1,
+                    "",
+                    "",
+                    currentUser.userName,
+                    ""))
 
-            addOperators(MainPlanReportItem(1, 1, listOf()).also {
-                it.selectedPerson = newOperators
-            })
+                item = MainPlanReportItem(null, null, listOf()).also {
+                    it.selectedPerson = newOperators
+                }
+            } else {
+                item = MainPlanReportItem(null, null, listOf()).also {
+                    it.selectedPerson = listOf()
+                }
+            }
+            addOperators(item)
+
         }
         val detail = arguments?.getStringObject<MainPlanDetailModel>() ?: return
         mainPlanDetail = detail
@@ -94,7 +99,7 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
             tvMainPlanStatus.text =
                 CommonParameters.getDesc(DataParamType.BPS_PLAN_STATUS, detail.planStatus)
             tvMainPlanNum.text = detail.planNumber.toString()
-            tvWorkOrderCode.text = detail.workOrderCode
+            tvWorkOrderCode.text = detail.workNo
         }
 
         viewBinding.btnConfirm.setOnClickListener {
@@ -112,7 +117,7 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                 throw Exception("请添加操作工")
             }
             operators.forEach {
-                it.operateUserId = it.selectedPerson.map { user -> user.id }
+                it.jockeyList = it.selectedPerson.map { user -> user.id }
             }
             val request = MainPlanReportRequest(
                 detail.id,
@@ -124,7 +129,10 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
             WebClient.request(MainPlanApi::class.java)
                 .mainPlanReportConfirmPost(request)
                 .bindToFragment()
-                .subscribe({ toast(getString(R.string.main_plan_report_success_message)) }, {})
+                .subscribe({
+                    toast(getString(R.string.main_plan_report_success_message))
+                    navController.popBackStack()
+                }, {})
         } catch (err: Throwable) {
             toast(err.message ?: getString(R.string.net_work_error))
         }
@@ -150,20 +158,20 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                     holder.itemViewBinding.apply {
 
                         tvSelectedOperator.text = data.selectedPerson.joinToString { it.userName }
-                        etReportNum.setText(data.reportNumber.toString())
-                        etReportTime.setText(data.reportTime.toString())
+                        etReportNum.setText(data.reportNumber?.toString() ?: "")
+                        etReportTime.setText(data.reportTime?.toString() ?: "")
                         etReportNum.doAfterTextChanged {
-                            data.reportNumber = it.toString().toIntOrNull() ?: 0
+                            data.reportNumber = it.toString().toIntOrNull()
                         }
                         etReportTime.doAfterTextChanged {
-                            data.reportTime = it.toString().toIntOrNull() ?: 0
+                            data.reportTime = it.toString().toIntOrNull()
                         }
                         llOperator.setOnClickListener {
                             navToPersonSelect(data.selectedPerson, holder.bindingAdapterPosition)
                         }
 
                         btnAction.setOnClickListener {
-                            removeOperatorItem(holder.bindingAdapterPosition)
+                            removeOperatorItem(data)
                         }
                     }
                 }
@@ -173,14 +181,16 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
         viewBinding.rvOperatorList.adapter = operatorAdapter
     }
 
-    private fun removeOperatorItem(position: Int) {
-        operatorAdapter!!.dataSource.removeAt(position)
-        operatorAdapter!!.notifyItemRemoved(position)
+    private fun removeOperatorItem(data: MainPlanReportItem) {
+        val index = operatorAdapter!!.dataSource.indexOf(data)
+        operatorAdapter!!.dataSource.removeAt(index)
+        Timber.e(index.toString())
+        operatorAdapter!!.notifyDataSetChanged()
     }
 
     private fun addOperators(data: MainPlanReportItem) {
-        operatorAdapter!!.dataSource.add(0, data)
-        operatorAdapter!!.notifyItemInserted(0)
+        operatorAdapter!!.dataSource.add(data)
+        operatorAdapter!!.notifyDataSetChanged()
     }
 
     private fun navToPersonSelect(operators: List<PersonModel>, bindingAdapterPosition: Int) {

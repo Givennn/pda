@@ -14,9 +14,9 @@ data class MainPlanReportRequest(
 )
 
 data class MainPlanReportItem(
-    var reportNumber: Int,
-    var reportTime: Int, // 工时
-    var operateUserId: List<Int>
+    var reportNumber: Int?,
+    var reportTime: Int?, // 工时
+    var jockeyList: List<Int>
 ) {
     @Transient
     var selectedPerson = listOf<PersonModel>()

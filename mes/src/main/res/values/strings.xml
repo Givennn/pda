@@ -72,7 +72,7 @@
     <string name="material_replace">物料替换</string>
     <string name="alarm_report">实时报警</string>
     <string name="factory_manage">生产管理</string>
-    <string name="material_search_bar_hint">请输入派工单/产品/生产负责人</string>
+    <string name="material_search_bar_hint">请输入工单/派工单/产品</string>
     <string name="task_number">派工单数量</string>
     <string name="task_scan_bar_hint">请输入或扫描产品条码</string>
     <string name="scan_product_serial_code">扫描产品条码</string>
@@ -201,7 +201,7 @@
     <string name="upload_file_hint">最多上传3个，单个文档不超过50M</string>
     <string name="number_char_limit">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="task_unbind_confirm">确认解绑物料</string>
-    <string name="operate_guide_search_hint">请输入作业指导书名称/产品编码/产品描述</string>
+    <string name="operate_guide_search_hint">请输入作业指导书名称/产品/产品/工序</string>
     <string name="discovery_search_hint">请输入派工单编号/派工单描述</string>
     <!--设备管理系统ems add by yinzhilin-->
     <string name="equipment_manage">设备管理</string>
@@ -321,5 +321,8 @@
     <string name="system_log">系统日志</string>
     <string name="exchange_card_detail">流转卡操作</string>
     <string name="main_plan_finish_success_toast">完成主计划成功!</string>
+    <string name="main_plan">主计划</string>
+    <string name="main_plan_discovery_search_bar_hint">请输入主计划编号</string>
+    <string name="work_order">工单</string>
     <!--设备管理系统ems end-->
 </resources>

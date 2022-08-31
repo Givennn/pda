@@ -35,6 +35,7 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
                     parent,
                     false)
             }
+
             override fun createEmptyViewBinding(parent: ViewGroup): ViewBinding {
                 return FrameEmptyViewBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -48,12 +49,10 @@ class WorkReportDiscoveryFragment : CommonSearchListFragment<TaskReportModel>() 
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text =
-                        getString(R.string.desc_and_code_formatter, data.dispatchOrderCode,"") // data.dispatchOrderCode ?: "")
-                    tvProductInfo.text = getString(
-                        R.string.desc_and_code_formatter,
-                        data.productName,
-                        data.productCode
-                    )
+                        listOf(data.dispatchOrderCode ?: "", data.dispatchOrderDesc ?: "").joinToString(" ")
+
+                    tvProductInfo.text = listOf(data.productName,
+                        data.productCode, data.productModel).joinToString(" ")
                     tvReportTime.text = "报工时间: ${data.createTime}"
                     tvTaskReporter.text = data.createName
                     tvReportNumber.text = data.reportNumber.toString()
