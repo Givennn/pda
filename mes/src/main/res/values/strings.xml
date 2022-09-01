@@ -324,5 +324,8 @@
     <string name="main_plan">主计划</string>
     <string name="main_plan_discovery_search_bar_hint">请输入主计划编号</string>
     <string name="work_order">工单</string>
+    <string name="work_order_number">工单数量</string>
+    <string name="work_order_desc">工单描述</string>
+    <string name="work_order_discovery_search_bar_hint">请输入工单编号</string>
     <!--设备管理系统ems end-->
 </resources>

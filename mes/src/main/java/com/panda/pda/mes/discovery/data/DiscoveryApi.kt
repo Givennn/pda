@@ -56,6 +56,36 @@ interface DiscoveryApi {
     ): Single<DataListNode<MainPlanModel>>
 
     /**
+     * 工单发现列表
+     */
+    @GET("pda/fms/work-order/discovery/list")
+    fun workOrderDiscoveryListGet(@retrofit2.http.Query("keywords") keywords: String?,
+    ): Single<DataListNode<WorkOrderDiscoveryModel>>
+
+    /**
+     * 工单详情
+     *
+     * The endpoint is owned by docs service owner
+     * @param id  (required)
+     * @param raw raw paramter (optional)
+     */
+    @GET("pda/fms/work-order/get-by-id")
+    fun workOrderGetByIdGet(
+        @retrofit2.http.Query("id") id: Int,
+    ): Single<WorkOrderDetailDiscoveryModel>
+
+    /**
+     * 工单操作记录
+     *
+     * The endpoint is owned by docs service owner
+     * @param id  (required)
+     */
+    @GET("pda/fms/work-order/operation-record")
+    fun workOrderOperationRecordGet(
+        @retrofit2.http.Query("id") id: Int,
+    ): Single<DataListNode<CommonOperationRecordModel>>
+
+    /**
      * 任务详情
      *
      * The endpoint is owned by docs service owner
