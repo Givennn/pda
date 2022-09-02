@@ -59,7 +59,7 @@ class MaterialBindFragment : BaseExchangeOperateActionFragment<DispatchOrderMode
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
-                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productModel).joinToString(" ")
                     tvTaskNumber.text = data.dispatchOrderNum.toString()
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)

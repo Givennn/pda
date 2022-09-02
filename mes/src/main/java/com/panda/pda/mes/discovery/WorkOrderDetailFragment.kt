@@ -27,6 +27,7 @@ class WorkOrderDetailFragment: BaseFragment(R.layout.fragment_quality_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+        viewBinding.topAppBar.title = getString(R.string.work_order_detail)
         val recordList =
             arguments?.getGenericObjectString<DataListNode<CommonOperationRecordModel>>(
                 Types.newParameterizedType(

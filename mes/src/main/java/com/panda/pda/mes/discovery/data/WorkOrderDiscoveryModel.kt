@@ -45,5 +45,5 @@ data class WorkOrderDiscoveryModel(
     val updateTime: String,
     val workNo: String,
     val workOrderCode: String,
-    val workOrderNum: Double
+    val workOrderNum: Int
 )

@@ -327,5 +327,9 @@
     <string name="work_order_number">工单数量</string>
     <string name="work_order_desc">工单描述</string>
     <string name="work_order_discovery_search_bar_hint">请输入工单编号</string>
+    <string name="dispatch_order_report_detail">报工详情</string>
+    <string name="dispatch_order_detail">派工单详情</string>
+    <string name="work_order_detail">工单详情</string>
+    <string name="main_plan_detail">主计划详情</string>
     <!--设备管理系统ems end-->
 </resources>

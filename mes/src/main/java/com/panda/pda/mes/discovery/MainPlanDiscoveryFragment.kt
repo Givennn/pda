@@ -15,6 +15,7 @@ import com.panda.pda.mes.common.data.model.CommonOperationRecordModel
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemMainPlanDiscoveryBinding
 import com.panda.pda.mes.databinding.ItemMainPlanFinishBinding
+import com.panda.pda.mes.discovery.data.DiscoveryApi
 import com.panda.pda.mes.operation.bps.data.MainPlanApi
 import com.panda.pda.mes.operation.bps.data.model.MainPlanModel
 import com.squareup.moshi.Types
@@ -90,8 +91,8 @@ class MainPlanDiscoveryFragment: CommonSearchListFragment<MainPlanModel>()  {
     }
 
     override fun api(key: String?): Single<DataListNode<MainPlanModel>> =
-        WebClient.request(MainPlanApi::class.java)
-            .mainPlanReportListGet(key)
+        WebClient.request(DiscoveryApi::class.java)
+            .mainPlanDiscoveryListGet(key)
 
     override val titleResId: Int
         get() = R.string.main_plan

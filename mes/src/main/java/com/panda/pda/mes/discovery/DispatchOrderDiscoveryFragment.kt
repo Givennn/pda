@@ -53,13 +53,12 @@ class DispatchOrderDiscoveryFragment : CommonSearchListFragment<DispatchOrderMod
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text = listOf(data.dispatchOrderDesc, data.dispatchOrderCode, data.productModel).joinToString(" ")
+                    tvTaskInfo.text = listOf(data.dispatchOrderDesc, data.dispatchOrderCode).joinToString(" ")
 //                        getString(R.string.desc_and_code_formatter, data.dispatchOrderDesc, data.dispatchOrderCode)
-                    tvProductInfo.text = getString(
-                        R.string.desc_and_code_formatter,
+                    tvProductInfo.text = listOf(
                         data.productName,
-                        data.productCode
-                    )
+                        data.productCode,
+                        data.productModel).joinToString(" ")
                     tvTaskSender.text = data.receiveName
                     tvPlanIssueDate.text = "派工时间: ${data.issueTime}"
                 }.clInfo.setOnClickListener { onItemInfoClicked(data) }

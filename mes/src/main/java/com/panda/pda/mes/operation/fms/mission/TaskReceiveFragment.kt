@@ -57,7 +57,7 @@ class TaskReceiveFragment : BaseExchangeOperateActionFragment<DispatchOrderModel
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
-                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productModel).joinToString(" ")
                     tvSendDate.text =
                         getString(R.string.report_time_formatter, data.issueTime ?: "")
                     tvTaskSender.text = data.receiveName

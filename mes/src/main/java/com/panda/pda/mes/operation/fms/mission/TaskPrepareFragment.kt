@@ -62,7 +62,7 @@ public class TaskPrepareFragment :
             ) {
                 holder.itemViewBinding.apply {
                     tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
-                    tvProductInfo.text = listOf(data.productName, data.productCode, data.productModel).joinToString(" ")
+                    tvProductInfo.text = listOf(data.productName, data.productModel).joinToString(" ")
                     tvPlanFinishDate.text =
                         getString(R.string.receive_time_formatter, data.receiveTime ?: "-")
                     tvTaskResponsePerson.text = data.issueName
