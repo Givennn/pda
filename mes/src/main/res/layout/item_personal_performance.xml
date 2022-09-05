@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_item_underline"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/tv_real_money"
+        style="@style/headerLineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:maxWidth="240dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_performance"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="机器人001机器人001机器" />
+
+    <TextView
+        android:id="@+id/tv_performance"
+        style="@style/subHeaderLineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_real_money"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="绩效1" />
+
+    <TextView
+        android:id="@+id/tv_log_time"
+        style="@style/subHeaderLineText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12.5dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/tv_real_money"
+        app:layout_constraintTop_toBottomOf="@id/tv_real_money"
+        tools:text="时间：20202020" />
+
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/divider"
+        android:background="@android:color/transparent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

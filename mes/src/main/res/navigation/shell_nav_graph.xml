@@ -281,6 +281,11 @@
         android:label="PersonSelectFragment" />
     <include app:graph="@navigation/main_plan_finish_nav_graph" />
     <include app:graph="@navigation/main_plan_report_nav_graph" />
+    <fragment
+        android:id="@+id/systemLogFragment"
+        android:name="com.panda.pda.mes.user.SystemLogFragment"
+        android:label="SystemLogFragment" />
+    <include app:graph="@navigation/personal_performance_nav_graph" />
 
 
     <!--设备管理模块  end by 殷志林-->

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/personal_performance_nav_graph"
+    app:startDestination="@id/personalPerformanceFragment">
+
+    <fragment
+        android:id="@+id/personalPerformanceFragment"
+        android:name="com.panda.pda.mes.user.PersonalPerformanceFragment"
+        android:label="PersonalPerformanceFragment" >
+        <action
+            android:id="@+id/action_personalPerformanceFragment_to_performanceDetailFragment"
+            app:destination="@id/performanceDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/performanceDetailFragment"
+        android:name="com.panda.pda.mes.user.PerformanceDetailFragment"
+        android:label="PerformanceDetailFragment" />
+</navigation>

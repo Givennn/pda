@@ -9,7 +9,7 @@
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/system_log" />
+        app:title="@string/personal_staff" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

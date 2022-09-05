@@ -331,5 +331,14 @@
     <string name="dispatch_order_detail">派工单详情</string>
     <string name="work_order_detail">工单详情</string>
     <string name="main_plan_detail">主计划详情</string>
+    <string name="time_range_select_hint">请选择时间</string>
+    <string name="personal_staff">个人绩效</string>
+    <string name="real_performance_formatter">实得绩效（元）：%s</string>
+    <string name="statistic_time_formatter">统计时间：%s</string>
+    <string name="performance_rank_formatter">考评系数：%d</string>
+    <string name="performance_rank_hint">实得绩效 = 绩效 * 考评系数</string>
+    <string name="performance_rank">绩效指标</string>
+    <string name="skill_info">技能信息</string>
+    <string name="work_hour_info">工时信息</string>
     <!--设备管理系统ems end-->
 </resources>

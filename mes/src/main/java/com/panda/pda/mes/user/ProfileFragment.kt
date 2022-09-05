@@ -49,6 +49,15 @@ class ProfileFragment : BaseRootFragment(R.layout.fragment_profile) {
             tvMyPhone.text = userInfoModel?.phoneNumber
             tvDepartment.text = userInfoModel?.getDepartment()
             tvVersion.text = userViewModel.getAppVersionName(requireContext())
+            llOperationRecord.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .bindToLifecycle(view)
+                .subscribe { navController.navigate(R.id.systemLogFragment) }
+
+            llPersonalPerformance.clicks()
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .bindToLifecycle(view)
+                .subscribe { navController.navigate(R.id.personal_performance_nav_graph) }
             llSetting.clicks()
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .bindToLifecycle(view)
