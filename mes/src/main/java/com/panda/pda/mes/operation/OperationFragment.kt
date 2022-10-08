@@ -176,6 +176,7 @@ class OperationFragment : BaseRootFragment(R.layout.fragment_operation) {
     }
 
     private fun filterAuthority(item: MenuItem): Boolean {
+//        return true
         val userAuthor = userViewModel.loginData.value?.menus ?: return true
         val authorTree =
             commonViewModel.authorityViewModel.value?.firstOrNull { it.name == getString(R.string.operation) }

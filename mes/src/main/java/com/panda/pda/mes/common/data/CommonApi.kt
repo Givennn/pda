@@ -3,6 +3,7 @@ package com.panda.pda.mes.common.data
 import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.common.data.model.*
+import com.panda.pda.mes.operation.bps.data.model.EquipmentModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
@@ -81,4 +82,6 @@ interface CommonApi {
         @retrofit2.http.Query("page") page: Int = 1,
         @retrofit2.http.Query("rows") rows: Int = 12,
     ): Single<DataListNode<PersonModel>>
+
+
 }

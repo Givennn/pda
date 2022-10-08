@@ -304,8 +304,8 @@
     <string name="product_model">型号代号</string>
     <string name="main_plan_status">主计划状态</string>
     <string name="delete">删除</string>
-    <string name="operator_report_time">报工工时(小时)</string>
-    <string name="add_operator">添加操作工</string>
+    <string name="operator_report_time">人员报工工时(小时)</string>
+    <string name="add_operator">添加资源</string>
     <string name="personal_performance">个人绩效</string>
     <string name="setting">设置</string>
     <string name="exchange_card_operate">流转卡操作</string>
@@ -340,5 +340,9 @@
     <string name="performance_rank">绩效指标</string>
     <string name="skill_info">技能信息</string>
     <string name="work_hour_info">工时信息</string>
+    <string name="operator_or_eqp">操作工/设备</string>
+    <string name="step_report_number">工序报工数量</string>
+    <string name="equipement">设备</string>
+    <string name="equipment_report_time">设备工时(小时)</string>
     <!--设备管理系统ems end-->
 </resources>

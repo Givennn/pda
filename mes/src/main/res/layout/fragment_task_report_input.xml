@@ -232,7 +232,7 @@
                     style="@style/detailText.label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/operator"/>
+                    android:text="@string/operator_or_eqp"/>
 
                 <TextView
                     android:id="@+id/tv_selected_operator"

@@ -23,6 +23,8 @@ import com.panda.pda.mes.base.retrofit.onMainThread
 import com.panda.pda.mes.common.CoilEngine
 import com.panda.pda.mes.common.PersonSelectFragment
 import com.panda.pda.mes.common.data.CommonApi
+import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentTaskReportInputBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
@@ -51,6 +53,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     private val viewModel by activityViewModels<TaskViewModel>()
     private val userViewModel by activityViewModels<UserViewModel>()
 
+    private var isEqpProductMode = false
     private var selectedPerson = listOf<PersonModel>()
 
     //    private val takeImageResult =
@@ -84,6 +87,12 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 }
             }.btnConfirm.setOnClickListener {
                 report(info)
+            }
+
+            if (detail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE, "设备")) {
+                viewBinding.llOperator.isEnabled = false
+                viewBinding.tvSelectedOperator.text = detail.equipmentDesc
+                isEqpProductMode = true
             }
         }
 
@@ -129,7 +138,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 //        if (remark.isEmpty()) {
 //            toast(R.string.remark_empty_message)
 //        }
-        if (selectedPerson.isEmpty()) {
+        if (selectedPerson.isEmpty() && isEqpProductMode) {
             toast(getString(R.string.operator_not_selected_message))
         }
         val request = TaskReportRequest(info.detail.id,

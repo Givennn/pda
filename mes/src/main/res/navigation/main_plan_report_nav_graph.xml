@@ -23,4 +23,8 @@
         android:id="@+id/mainPlanReportInputFragment"
         android:name="com.panda.pda.mes.operation.bps.MainPlanReportInputFragment"
         android:label="MainPlanReportInputFragment" />
+    <fragment
+        android:id="@+id/equipmentSelectFragment"
+        android:name="com.panda.pda.mes.operation.bps.EquipmentSelectFragment"
+        android:label="EquipmentSelectFragment" />
 </navigation>

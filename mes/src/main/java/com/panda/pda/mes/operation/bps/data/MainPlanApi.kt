@@ -3,6 +3,7 @@ package com.panda.pda.mes.operation.bps.data
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.common.data.model.CommonOperationRecordModel
 import com.panda.pda.mes.common.data.model.IdRequest
+import com.panda.pda.mes.operation.bps.data.model.EquipmentModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanDetailModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportRequest
@@ -57,4 +58,11 @@ interface MainPlanApi {
     @POST("pda/bps/main-plan/finish/confirm")
     fun mainPlanFinishConfirmPost(@retrofit2.http.Body request: IdRequest): Single<Any>
 
+    /**
+     * 设备列表查询
+     */
+    @GET("pda/bps/main-plan/report/equipment-list")
+    fun equipmentAllGet(
+        @retrofit2.http.Query("keywords") keywords: String?,
+    ): Single<DataListNode<EquipmentModel>>
 }

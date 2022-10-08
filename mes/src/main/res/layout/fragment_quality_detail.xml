@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/quality_detail" />
+        app:title="@string/personal_performance" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"

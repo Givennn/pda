@@ -85,7 +85,7 @@ class PersonalPerformanceFragment : BaseFragment(R.layout.fragment_personal_perf
 
     private fun convertLongToTime(time: Long): String {
         val date = Date(time)
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy-MM", Locale.getDefault())
         return format.format(date)
     }
 

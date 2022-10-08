@@ -31,6 +31,7 @@ import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentMainPlanReportInputBinding
 import com.panda.pda.mes.databinding.ItemMainPlanOperatorListBinding
 import com.panda.pda.mes.operation.bps.data.MainPlanApi
+import com.panda.pda.mes.operation.bps.data.model.EquipmentModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanDetailModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportItem
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportRequest
@@ -48,6 +49,7 @@ import java.io.File
  */
 class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_report_input) {
 
+    private var equipmentSelectPosition: Int = -1
     private var operatorSelectPosition: Int = -1
     private var photoAdapter: TaskReportInputPhotoAdapter? = null
     private var operatorAdapter: CommonViewBindingAdapter<ItemMainPlanOperatorListBinding, MainPlanReportItem>? =
@@ -78,11 +80,11 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                     currentUser.userName,
                     ""))
 
-                item = MainPlanReportItem(null, null, listOf()).also {
+                item = MainPlanReportItem(null, null, null, listOf(), listOf()).also {
                     it.selectedPerson = newOperators
                 }
             } else {
-                item = MainPlanReportItem(null, null, listOf()).also {
+                item = MainPlanReportItem(null, null, null, listOf(), listOf()).also {
                     it.selectedPerson = listOf()
                 }
             }
@@ -158,18 +160,23 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                     holder.itemViewBinding.apply {
 
                         tvSelectedOperator.text = data.selectedPerson.joinToString { it.userName }
+                        tvSelectedEquipment.text = data.selectedEquipment.joinToString { it.equipmentDesc }
+
                         etReportNum.setText(data.reportNumber?.toString() ?: "")
-                        etReportTime.setText(data.reportTime?.toString() ?: "")
+                        etOperatorReportTime.setText("")
                         etReportNum.doAfterTextChanged {
                             data.reportNumber = it.toString().toIntOrNull()
                         }
-                        etReportTime.doAfterTextChanged {
+                        etOperatorReportTime.doAfterTextChanged {
                             data.reportTime = it.toString().toIntOrNull()
                         }
                         llOperator.setOnClickListener {
                             navToPersonSelect(data.selectedPerson, holder.bindingAdapterPosition)
                         }
 
+                        llEquipment.setOnClickListener{
+                            navToEquipmentSelect(data.selectedEquipment, holder.bindingAdapterPosition)
+                        }
                         btnAction.setOnClickListener {
                             removeOperatorItem(data)
                         }
@@ -200,6 +207,20 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                 putGenericObjectString(operators, Types.newParameterizedType(
                     List::class.java,
                     PersonModel::class.java
+                ))
+            })
+    }
+
+    private fun navToEquipmentSelect(
+        selectedEquipment: List<EquipmentModel>,
+        bindingAdapterPosition: Int,
+    ) {
+        equipmentSelectPosition = bindingAdapterPosition
+        navController.navigate(R.id.equipmentSelectFragment,
+            Bundle().apply {
+                putGenericObjectString(selectedEquipment, Types.newParameterizedType(
+                    List::class.java,
+                    EquipmentModel::class.java
                 ))
             })
     }
@@ -269,6 +290,19 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
             operatorAdapter!!.notifyItemChanged(operatorSelectPosition)
         }
 
+        setFragmentResultListener(EquipmentSelectFragment.EQUIPMENT_SELECTED) { result, bundle ->
+            val newSelectedEquipment =
+                bundle.getGenericObjectString<List<EquipmentModel>>(
+                    Types.newParameterizedType(
+                        List::class.java,
+                        EquipmentModel::class.java
+                    )) ?: return@setFragmentResultListener
+
+            val item = operatorAdapter!!.dataSource.getOrNull(equipmentSelectPosition)
+                ?: return@setFragmentResultListener
+            item.selectedEquipment = newSelectedEquipment
+            operatorAdapter!!.notifyItemChanged(operatorSelectPosition)
+        }
     }
 
     companion object {
