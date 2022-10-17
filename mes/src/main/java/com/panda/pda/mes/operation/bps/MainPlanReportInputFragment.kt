@@ -114,18 +114,19 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
         try {
             val detail = mainPlanDetail ?: throw Exception("主计划详情异常")
             val photos = photoAdapter?.getDataSource() ?: return
-            val operators = operatorAdapter?.dataSource ?: throw Exception("请添加操作工")
-            if (operators.isEmpty()) {
-                throw Exception("请添加操作工")
+            val resources = operatorAdapter?.dataSource ?: throw Exception("请添加资源")
+            if (resources.isEmpty()) {
+                throw Exception("请添加资源")
             }
-            operators.forEach {
+            resources.forEach {
                 it.jockeyList = it.selectedPerson.map { user -> user.id }
+                it.equipmentList = it.selectedEquipment.map { eqp -> eqp.id }
             }
             val request = MainPlanReportRequest(
                 detail.id,
                 viewBinding.etRemark.text.toString(),
                 photos,
-                operators
+                resources
             )
 
             WebClient.request(MainPlanApi::class.java)
@@ -163,12 +164,17 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                         tvSelectedEquipment.text = data.selectedEquipment.joinToString { it.equipmentDesc }
 
                         etReportNum.setText(data.reportNumber?.toString() ?: "")
-                        etOperatorReportTime.setText("")
+                        etOperatorReportTime.setText(data.reportTime?.toString() ?: "")
+                        etEquipmentReportTime.setText(data.equipmentTime?.toString() ?: "")
+
                         etReportNum.doAfterTextChanged {
                             data.reportNumber = it.toString().toIntOrNull()
                         }
                         etOperatorReportTime.doAfterTextChanged {
                             data.reportTime = it.toString().toIntOrNull()
+                        }
+                        etEquipmentReportTime.doAfterTextChanged {
+                            data.equipmentTime = it.toString().toIntOrNull()
                         }
                         llOperator.setOnClickListener {
                             navToPersonSelect(data.selectedPerson, holder.bindingAdapterPosition)

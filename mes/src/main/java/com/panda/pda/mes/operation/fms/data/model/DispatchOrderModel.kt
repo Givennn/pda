@@ -62,7 +62,16 @@ data class DispatchOrderModel(
     val receiveTime: String?,
     val totalReportTime: Int?,
 ): IExchangeCardOperateItem {
+
     override fun getWorkOrder(): String {
         return workOrderCode
+    }
+
+    override fun filterExchangeCardCode(code: String, isWorkOrder: Boolean): Boolean {
+        return if (isWorkOrder) {
+            workOrderCode == code
+        } else {
+            dispatchOrderCode == code
+        }
     }
 }

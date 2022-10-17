@@ -286,6 +286,7 @@
         android:name="com.panda.pda.mes.user.SystemLogFragment"
         android:label="SystemLogFragment" />
     <include app:graph="@navigation/personal_performance_nav_graph" />
+    <include app:graph="@navigation/ng_product_deal_nav_graph" />
 
 
     <!--设备管理模块  end by 殷志林-->

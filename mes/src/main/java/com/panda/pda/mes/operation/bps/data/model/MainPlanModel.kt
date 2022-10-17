@@ -24,7 +24,8 @@ data class MainPlanModel(
     val updateId: Int,
     val updateName: String,
     val updateTime: String,
-    val workNo: String
+    val workNo: String,
+    val planSource: Int
 )
 
 data class Report(

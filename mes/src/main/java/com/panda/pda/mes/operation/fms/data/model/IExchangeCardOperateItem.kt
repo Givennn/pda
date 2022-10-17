@@ -6,4 +6,6 @@ package com.panda.pda.mes.operation.fms.data.model
 interface IExchangeCardOperateItem {
 
     fun getWorkOrder(): String
+
+    fun filterExchangeCardCode(code: String, isWorkOrder: Boolean): Boolean
 }

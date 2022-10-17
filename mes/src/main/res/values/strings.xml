@@ -344,5 +344,9 @@
     <string name="step_report_number">工序报工数量</string>
     <string name="equipement">设备</string>
     <string name="equipment_report_time">设备工时(小时)</string>
+    <string name="ng_product_deal">不合格品处理</string>
+    <string name="deal">处理</string>
+    <string name="deal_number">处理数量</string>
+    <string name="ng_product_num">不合格数量</string>
     <!--设备管理系统ems end-->
 </resources>

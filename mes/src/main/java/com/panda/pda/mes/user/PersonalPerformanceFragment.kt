@@ -156,7 +156,7 @@ class PersonalPerformanceFragment : BaseFragment(R.layout.fragment_personal_perf
     }
 
     private fun refreshData() {
-        var startDateTime = if (startTime != null) "$startTime 00:00:00" else null
+        var startDateTime = if (startTime != null) "$startTime-01 00:00:00" else null
         if (startDateTime == null) {
             val date = Date()
             date.month = date.month - 1

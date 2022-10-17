@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.extension.putGenericObjectString
@@ -60,11 +61,13 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                         getString(R.string.plan_deliver_time_formatter, data.deliveryTime)
                     tvMainPlanNum.text = data.planNumber.toString()
                     tvWorkOrderCode.text = data.workNo
-                    btnAction.setOnClickListener {
-                        onItemActionClicked(data)
-                    }
+
                     clInfo.setOnClickListener {
                         onItemInfoClicked(data)
+                    }
+                    btnAction.isVisible = data.planSource == 1
+                    btnAction.setOnClickListener {
+                        onItemActionClicked(data)
                     }
                 }
             }

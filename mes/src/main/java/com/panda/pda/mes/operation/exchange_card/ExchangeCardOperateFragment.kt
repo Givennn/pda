@@ -25,6 +25,8 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
 
     private lateinit var exchangeCardCode: String
 
+    private var isWorkOrder = true
+
     private lateinit var taskMessageNavigationAdapter: TaskMessageNavigationAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +53,8 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
                 viewBinding.llPropertyInfo,
             )
             modelProperty.setData(card.dispatchOrder)
-            exchangeCardCode = card.dispatchOrder.workOrderCode
+            exchangeCardCode = card.dispatchOrder.dispatchOrderCode
+            isWorkOrder = false
             viewBinding.tvOperateTitle.text = getString(R.string.dispatch_order_operate)
         }
 
@@ -63,6 +66,7 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
                 it.navAction = { navId ->
                     navController.navigate(navId, Bundle().apply {
                         putString(WORK_ORDER_CODE, exchangeCardCode)
+                        putBoolean(IS_WORK_ORDER, isWorkOrder)
                     })
                 }
             }
@@ -73,5 +77,6 @@ class ExchangeCardOperateFragment : BaseFragment(R.layout.fragment_exchange_card
 
     companion object {
         const val WORK_ORDER_CODE = "workOrderCode"
+        const val IS_WORK_ORDER = "isWorkOrder"
     }
 }

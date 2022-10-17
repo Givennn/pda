@@ -78,10 +78,10 @@ public class TaskPrepareFragment :
     }
 
     private fun onItemInfoClicked(data: DispatchOrderModel) {
-        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
-            navToDetailFragment(data.id)
-            return
-        }
+//        if (taskViewModel.taskInfoData.value?.detail?.id == data.id) {
+//            navToDetailFragment(data.id)
+//            return
+//        }
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
             .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)

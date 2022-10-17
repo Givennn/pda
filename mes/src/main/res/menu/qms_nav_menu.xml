@@ -25,6 +25,11 @@
         android:id="@+id/quality_problem_record_nav_graph"
         android:title="@string/quality_problem_record"
         android:icon="@drawable/ic_op_qc_problem_record"/>
+    <!--TODO change icon-->
+    <item
+        android:id="@+id/ng_product_deal_nav_graph"
+        android:title="@string/ng_product_deal"
+        android:icon="@drawable/ic_op_qc_problem_record"/>
     <item
         android:id="@+id/qualityFinishFragment"
         android:title="@string/quality_finish"

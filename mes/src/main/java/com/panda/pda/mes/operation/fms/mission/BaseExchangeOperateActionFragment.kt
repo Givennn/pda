@@ -14,9 +14,12 @@ abstract class BaseExchangeOperateActionFragment<TSource : IExchangeCardOperateI
 
     protected var workOrderCodeFilter: String? = null
 
+    protected var filterType = true // is work order
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         workOrderCodeFilter = arguments?.getString(ExchangeCardOperateFragment.WORK_ORDER_CODE)
+        filterType = arguments?.getBoolean(ExchangeCardOperateFragment.IS_WORK_ORDER) ?: true
     }
 
     override fun refreshData() {
@@ -26,7 +29,8 @@ abstract class BaseExchangeOperateActionFragment<TSource : IExchangeCardOperateI
             .subscribe({ data ->
                 itemListAdapter.refreshData(if (workOrderCodeFilter == null) data.dataList else data.dataList.toMutableList()
                     .filter { item ->
-                        item.getWorkOrder() == workOrderCodeFilter
+//                        item.getWorkOrder() == workOrderCodeFilter
+                        item.filterExchangeCardCode(workOrderCodeFilter!!, filterType)
                     })
             }, { })
     }

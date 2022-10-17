@@ -105,7 +105,10 @@ class SystemLogFragment : BaseFragment(R.layout.fragment_system_log) {
 
     private fun refreshData() {
         val startDateTime = if (startTime != null) "$startTime 00:00:00" else null
-        val endDataTime = if (endTime != null) "$endTime 00:00:00" else null
+        var endDataTime = if (endTime != null) "$endTime 00:00:00" else null
+        if (endDataTime != null && endDataTime == startDateTime) {
+            endDataTime = "$endTime 24:59:59"
+        }
         WebClient.request(UserApi::class.java)
             .pdaSystemLogGet(startDateTime, endDataTime)
             .bindToFragment()
@@ -113,4 +116,5 @@ class SystemLogFragment : BaseFragment(R.layout.fragment_system_log) {
                 bindingAdapter.refreshData(it.dataList)
             }, {})
     }
+
 }
