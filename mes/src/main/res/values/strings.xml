@@ -348,5 +348,10 @@
     <string name="deal">处理</string>
     <string name="deal_number">处理数量</string>
     <string name="ng_product_num">不合格数量</string>
+    <string name="report_record">报工记录</string>
+    <string name="overload_report_percent">超量报工比例</string>
+    <string name="main_plan_report_detail">报工详情</string>
+    <string name="report_info">报工信息</string>
+    <string name="photo">图片</string>
     <!--设备管理系统ems end-->
 </resources>

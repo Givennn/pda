@@ -13,14 +13,18 @@ data class MainPlanDetailModel(
     val id: Int,
     @ModelProperty(1, "主计划编号")
     val planNo: String,
-    @ModelProperty(2, "产品编码")
+    @ModelProperty(2, "原主计划")
+    var parentPlanNo: String,
+    @ModelProperty(3, "包含返修主计划")
+    var includeRepairPlan: String,
+    @ModelProperty(6, "产品编码")
     val productCode: String,
     val productId: Int,
-    @ModelProperty(3, "产品名称")
+    @ModelProperty(7, "产品名称")
     val productName: String,
-    @ModelProperty(4, "型号代号")
+    @ModelProperty(8, "型号代号")
     val productModel: String,
-    @ModelProperty(5, "主计划状态", dataParameterType = "BPS_PLAN_STATUS")
+    @ModelProperty(9, "主计划状态", dataParameterType = "BPS_PLAN_STATUS")
     val planStatus: Int,
     @ModelProperty(11, "主计划数量")
     val planNumber: Int,
@@ -42,5 +46,11 @@ data class MainPlanDetailModel(
     val updateName: String,
     @ModelProperty(24, "更新时间")
     val updateTime: String,
-    val workOrderCode: String
+    val workOrderCode: String,
+    val includePlanList: List<IncludePlanModel>
+)
+
+data class IncludePlanModel(
+    val id: Int,
+    val planNo: String
 )

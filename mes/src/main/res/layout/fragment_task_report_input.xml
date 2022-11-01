@@ -179,6 +179,28 @@
 
             <LinearLayout
                 android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_underline"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/detailText.label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overload_report_percent" />
+
+                <TextView
+                    style="@style/detailText"
+                    android:id="@+id/tv_overload_report_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="0011" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingStart="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_item_underline"

@@ -28,6 +28,9 @@ class MainPlanDetailInfoFragment(
             viewBinding.llPropertyInfo,
         )
         if (detail != null) {
+            detail.includeRepairPlan =
+                if (detail.includePlanList.isNullOrEmpty()) "" else detail.includePlanList.joinToString(
+                    ",") { it.planNo }
             modelProperty.setData(detail)
         }
     }
