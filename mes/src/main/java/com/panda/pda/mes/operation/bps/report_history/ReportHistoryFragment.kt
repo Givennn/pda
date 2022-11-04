@@ -8,7 +8,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.databinding.FragmentQualityDetailBinding
+import com.panda.pda.mes.operation.bps.data.model.MainPlanDetailModel
+import com.panda.pda.mes.operation.bps.data.model.MainPlanReportDetailModel
 
 /**
  * created by AnJiwei 2022/11/1
@@ -27,7 +30,7 @@ class ReportHistoryFragment : BaseFragment(R.layout.fragment_quality_detail) {
 //                    CommonOperationRecordModel::class.java
 //                )
 //            )
-//        val detail = arguments?.getStringObject<MainPlanDetailModel>()
+        val detail = arguments?.getStringObject<MainPlanReportDetailModel>()
 
         viewBinding.apply {
             viewPage.adapter = object : FragmentStateAdapter(parentFragmentManager, lifecycle) {
@@ -37,9 +40,9 @@ class ReportHistoryFragment : BaseFragment(R.layout.fragment_quality_detail) {
 
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
-                        0 -> BasicInfoFragment()
-                        1 -> ReportInfoFragment()
-                        2 -> PhotosFragment()
+                        0 -> BasicInfoFragment(detail)
+                        1 -> ReportInfoFragment(detail)
+                        2 -> PhotosFragment(detail)
                         else -> throw IndexOutOfBoundsException()
                     }
                 }
