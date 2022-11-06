@@ -13,13 +13,13 @@ import com.panda.pda.mes.common.data.CommonApi
 import com.panda.pda.mes.common.data.model.FileInfoModel
 import com.panda.pda.mes.databinding.FragmentReportHistoryPhotosBinding
 import com.panda.pda.mes.databinding.ItemTaskReportDetailPicBinding
-import com.panda.pda.mes.operation.bps.data.model.MainPlanReportDetailModel
+import com.panda.pda.mes.operation.bps.data.model.MainPlanReportHistoryModel
 
 /**
  * created by AnJiwei 2022/11/1
  */
 class PhotosFragment(
-    private val detail: MainPlanReportDetailModel?,
+    private val detail: MainPlanReportHistoryModel?,
 ) : BaseFragment(R.layout.fragment_report_history_photos) {
 
     private val viewBinding by viewBinding<FragmentReportHistoryPhotosBinding>()

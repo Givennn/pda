@@ -9,17 +9,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
-import com.panda.pda.mes.databinding.FragmentQualityDetailBinding
 import com.panda.pda.mes.databinding.FragmentReportHistoryReportInfoBinding
 import com.panda.pda.mes.databinding.ItemMainPlanReportInfoBinding
-import com.panda.pda.mes.operation.bps.data.model.MainPlanReportDetailModel
+import com.panda.pda.mes.operation.bps.data.model.MainPlanReportHistoryModel
 import com.panda.pda.mes.operation.bps.data.model.MainPlanReportModel
 
 /**
  * created by AnJiwei 2022/11/1
  */
 class ReportInfoFragment(
-    private val detail: MainPlanReportDetailModel?,
+    private val detail: MainPlanReportHistoryModel?,
 ) : BaseFragment(R.layout.fragment_report_history_report_info) {
 
     private val viewBinding by viewBinding<FragmentReportHistoryReportInfoBinding>()

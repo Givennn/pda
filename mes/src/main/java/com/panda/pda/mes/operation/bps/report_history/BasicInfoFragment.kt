@@ -7,13 +7,13 @@ import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.common.ModelPropertyCreator
 import com.panda.pda.mes.databinding.FragmentReportHistoryBasicInfoBinding
-import com.panda.pda.mes.operation.bps.data.model.MainPlanReportDetailModel
+import com.panda.pda.mes.operation.bps.data.model.MainPlanReportHistoryModel
 
 /**
  * created by AnJiwei 2022/11/1
  */
 class BasicInfoFragment(
-    private val detail: MainPlanReportDetailModel?,
+    private val detail: MainPlanReportHistoryModel?,
 ) : BaseFragment(R.layout.fragment_report_history_basic_info) {
 
     private val viewBinding by viewBinding<FragmentReportHistoryBasicInfoBinding>()
@@ -22,7 +22,7 @@ class BasicInfoFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val modelProperty = ModelPropertyCreator(
-            MainPlanReportDetailModel::class.java,
+            MainPlanReportHistoryModel::class.java,
             viewBinding.llPropertyInfo,
         )
         if (detail != null) {

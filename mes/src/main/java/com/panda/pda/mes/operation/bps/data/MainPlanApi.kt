@@ -3,10 +3,7 @@ package com.panda.pda.mes.operation.bps.data
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.common.data.model.CommonOperationRecordModel
 import com.panda.pda.mes.common.data.model.IdRequest
-import com.panda.pda.mes.operation.bps.data.model.EquipmentModel
-import com.panda.pda.mes.operation.bps.data.model.MainPlanDetailModel
-import com.panda.pda.mes.operation.bps.data.model.MainPlanModel
-import com.panda.pda.mes.operation.bps.data.model.MainPlanReportRequest
+import com.panda.pda.mes.operation.bps.data.model.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -65,4 +62,9 @@ interface MainPlanApi {
     fun equipmentAllGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<EquipmentModel>>
+
+    /**
+     * 主计划报工记录详情
+     */
+    fun mainPlanReportHistoryGet(@retrofit2.http.Query("id") id: Int): Single<MainPlanReportHistoryModel>
 }

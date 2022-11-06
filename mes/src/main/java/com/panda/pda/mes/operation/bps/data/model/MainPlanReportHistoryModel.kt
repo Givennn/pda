@@ -6,7 +6,7 @@ import com.panda.pda.mes.common.data.model.FileInfoModel
 /**
  * created by AnJiwei 2022/11/2
  */
-data class MainPlanReportDetailModel(
+data class MainPlanReportHistoryModel(
     val fileList: List<FileInfoModel>,
     val id: Int,
     @ModelProperty(1, "主计划编号")

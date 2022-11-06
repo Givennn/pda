@@ -353,5 +353,8 @@
     <string name="main_plan_report_detail">报工详情</string>
     <string name="report_info">报工信息</string>
     <string name="photo">图片</string>
+    <string name="main_plan_report_history">报工记录</string>
+    <string name="reporter">报工人</string>
+    <string name="report_time">报工时间</string>
     <!--设备管理系统ems end-->
 </resources>

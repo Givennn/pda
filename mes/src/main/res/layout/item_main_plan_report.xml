@@ -136,13 +136,28 @@
             android:layout_width="match_parent"
             style="@style/divider"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_action"
-            style="@style/actionButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/report"
-            app:icon="@drawable/ic_action_report"/>
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_action"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/report"
+                app:icon="@drawable/ic_action_report"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_report_history"
+                style="@style/actionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/main_plan_report_history"
+                app:icon="@drawable/ic_action_report"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

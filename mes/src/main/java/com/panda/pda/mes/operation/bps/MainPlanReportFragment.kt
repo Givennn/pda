@@ -21,6 +21,7 @@ import com.panda.pda.mes.databinding.ItemMainPlanReportBinding
 import com.panda.pda.mes.databinding.ItemTaskReportBinding
 import com.panda.pda.mes.operation.bps.data.MainPlanApi
 import com.panda.pda.mes.operation.bps.data.model.MainPlanModel
+import com.panda.pda.mes.operation.bps.data.model.ReportModel
 import com.panda.pda.mes.operation.qms.data.model.QualityTaskRecordModel
 import com.squareup.moshi.Types
 import io.reactivex.rxjava3.core.Single
@@ -69,10 +70,25 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
+                    btnReportHistory.setOnClickListener {
+                        onReportHistoryClicked(data)
+                    }
                 }
             }
 
         }
+    }
+
+    private fun onReportHistoryClicked(data: MainPlanModel) {
+        navController.navigate(R.id.action_mainPlanReportFragment_to_reportHistoryFragment,
+        Bundle().apply {
+            putGenericObjectString(data.reportList,
+                Types.newParameterizedType(
+                    List::class.java,
+                    ReportModel::class.java
+                )
+            )
+        })
     }
 
     private fun onItemInfoClicked(data: MainPlanModel) {

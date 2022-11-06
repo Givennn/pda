@@ -20,7 +20,7 @@ data class MainPlanModel(
     val productModel: String,
     val productName: String,
     val remark: String,
-    val reportList: List<Report>,
+    val reportList: List<ReportModel>,
     val updateId: Int,
     val updateName: String,
     val updateTime: String,
@@ -28,7 +28,7 @@ data class MainPlanModel(
     val planSource: Int
 )
 
-data class Report(
+data class ReportModel(
     val createId: Int,
     val createName: String,
     val createTime: String,

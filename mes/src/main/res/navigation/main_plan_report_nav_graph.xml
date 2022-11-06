@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_mainPlanReportFragment_to_mainPlanReportInputFragment"
             app:destination="@id/mainPlanReportInputFragment" />
+        <action
+            android:id="@+id/action_mainPlanReportFragment_to_reportHistoryFragment"
+            app:destination="@id/reportHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainPlanDetailFragment"
@@ -27,4 +30,16 @@
         android:id="@+id/equipmentSelectFragment"
         android:name="com.panda.pda.mes.operation.bps.EquipmentSelectFragment"
         android:label="EquipmentSelectFragment" />
+    <fragment
+        android:id="@+id/reportHistoryFragment"
+        android:name="com.panda.pda.mes.operation.bps.report_history.ReportHistoryFragment"
+        android:label="ReportHistoryFragment" >
+        <action
+            android:id="@+id/action_reportHistoryFragment_to_reportHistoryDetailFragment"
+            app:destination="@id/reportHistoryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportHistoryDetailFragment"
+        android:name="com.panda.pda.mes.operation.bps.report_history.ReportHistoryDetailFragment"
+        android:label="ReportHistoryDetailFragment" />
 </navigation>
