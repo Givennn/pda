@@ -23,5 +23,17 @@ data class TaskDetailModel(
     val reportNum: Int,
     val receiveName: String?,
     val workOrderCode: String,
-    val productMode: Int
+    val productMode: Int,
+    val originalDispatchOrderCode: String,
+    val reportExcessRate: Double,
+    val includeDispatchOrderList: List<IncludeDispatchOrder>?,
+    val selfInspection: Int,
+    val specialInspection: Int,
+    val repairFlag: Int
+)
+
+data class IncludeDispatchOrder(
+    val dispatchOrderCode: String,
+    val dispatchOrderDesc: String,
+    val id: String
 )

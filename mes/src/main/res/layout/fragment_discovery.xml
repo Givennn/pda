@@ -91,6 +91,7 @@
             android:text="@string/report"
             android:textColor="#4982FE"
             android:textSize="14sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/discovery_task_nav_graph"

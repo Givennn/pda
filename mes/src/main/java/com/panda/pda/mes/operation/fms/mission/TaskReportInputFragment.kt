@@ -16,6 +16,7 @@ import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.extension.getGenericObjectString
+import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.putGenericObjectString
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
@@ -70,7 +71,8 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
         super.onViewCreated(view, savedInstanceState)
         setupPhotoAdapter()
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
-        viewModel.taskInfoData.observe(viewLifecycleOwner) { info ->
+        val info = arguments?.getStringObject<TaskInfoModel>()
+        if (info != null) {
             val detail = info.detail
             viewBinding.apply {
                 tvPlanCode.text = detail.workOrderCode
@@ -78,10 +80,24 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvTaskDesc.text = detail.dispatchOrderDesc
                 tvProductCode.text = detail.productCode
                 tvProductDesc.text = detail.productName
+                tvOverloadReportPercent.text = detail.reportExcessRate.toString()
                 tvTaskCount.text = detail.dispatchOrderNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
                 tilReportNum.minValue = 1
-                tilReportNum.maxValue = detail.dispatchOrderNum - detail.reportNum
+                tilReportNum.maxValue  = if (detail.repairFlag == 0) {
+                    detail.dispatchOrderNum - detail.reportNum
+                } else {
+                    detail.dispatchOrderNum * (detail.reportExcessRate + 1).toInt() - detail.reportNum
+                }
+
+                if (detail.selfInspection != 0 && detail.specialInspection != 0) {
+                    etInspectNum.setText(detail.reportNum.toString())
+                    tilInspectNum.minValue = 1
+                    tilInspectNum.maxValue = detail.reportNum
+                } else {
+                    llInspectNumber.isEnabled = false
+                }
+
                 llOperator.setOnClickListener {
                     navToPersonSelect()
                 }
@@ -94,7 +110,36 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 viewBinding.tvSelectedOperator.text = detail.equipmentDesc
                 isEqpProductMode = true
             }
+        } else {
+            toast(R.string.net_work_error)
+            navController.popBackStack()
         }
+//        viewModel.taskInfoData.observe(viewLifecycleOwner) { info ->
+//            val detail = info.detail
+//            viewBinding.apply {
+//                tvPlanCode.text = detail.workOrderCode
+//                tvTaskCode.text = detail.dispatchOrderCode
+//                tvTaskDesc.text = detail.dispatchOrderDesc
+//                tvProductCode.text = detail.productCode
+//                tvProductDesc.text = detail.productName
+//                tvOverloadReportPercent.text = detail.reportExcessRate.toString()
+//                tvTaskCount.text = detail.dispatchOrderNum.toString()
+//                tvReportNumber.text = detail.reportNum.toString()
+//                tilReportNum.minValue = 1
+//                tilReportNum.maxValue = detail.dispatchOrderNum - detail.reportNum
+//                llOperator.setOnClickListener {
+//                    navToPersonSelect()
+//                }
+//            }.btnConfirm.setOnClickListener {
+//                report(info)
+//            }
+//
+//            if (detail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE, "设备")) {
+//                viewBinding.llOperator.isEnabled = false
+//                viewBinding.tvSelectedOperator.text = detail.equipmentDesc
+//                isEqpProductMode = true
+//            }
+//        }
 
 
         setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { result, bundle ->
@@ -145,8 +190,12 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
             viewBinding.etReportNum.text.toString().toInt(),
             viewBinding.etRemark.text.toString(),
             photoAdapter.getDataSource(),
-            selectedPerson.map { it.id }
+            selectedPerson.map { it.id },
+            viewBinding.etInspectNum.text.toString().toIntOrNull()
         )
+        if (request.deliverNumber != null && request.deliverNumber > request.reportNumber) {
+            toast("送检数量超出报工数量")
+        }
         WebClient.request(TaskApi::class.java)
             .pdaFmsTaskReportConfirmPost(request)
             .bindToFragment()

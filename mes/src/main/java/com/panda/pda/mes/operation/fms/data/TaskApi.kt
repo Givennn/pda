@@ -17,7 +17,7 @@ interface TaskApi {
      * @param root (optional)
      */
 
-    @POST("pda/fms/task/complete/confirm")
+    @POST("pda/fms/dispatch_order/complete/confirm")
     fun taskCompleteConfirmPost(
         @retrofit2.http.Body request: IdRequest,
     ): Single<Any>

@@ -25,7 +25,9 @@ data class MainPlanModel(
     val updateName: String,
     val updateTime: String,
     val workNo: String,
-    val planSource: Int
+    val planSource: Int,
+    val selfInspection: Int,
+    val specialInspection: Int
 )
 
 data class ReportModel(

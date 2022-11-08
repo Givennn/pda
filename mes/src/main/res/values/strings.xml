@@ -288,7 +288,7 @@
     <string name="dispatch_order_notification">派工单通知</string>
     <string name="product_type">生产方式</string>
     <string name="person_search_bar_hint">请输入操作工姓名</string>
-    <string name="operator_not_selected_message">请选择操作工</string>
+    <string name="operator_not_selected_message">请选择资源</string>
     <string name="person_selected_format">已选择：%s</string>
     <string name="person_select_comfirm_format">确认 %d/%d</string>
     <string name="dispatch_order">派工单</string>
@@ -356,5 +356,6 @@
     <string name="main_plan_report_history">报工记录</string>
     <string name="reporter">报工人</string>
     <string name="report_time">报工时间</string>
+    <string name="resources">资源</string>
     <!--设备管理系统ems end-->
 </resources>

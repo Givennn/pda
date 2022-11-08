@@ -7,5 +7,6 @@ data class TaskReportRequest(
     val reportNumber: Int,
     val remark: String,
     val fileList: List<FileInfoModel>,
-    val jockeyList: List<Int>
-)
+    val jockeyList: List<Int>,
+    val deliverNumber: Int?,
+    )

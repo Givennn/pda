@@ -53,7 +53,7 @@ interface MainPlanApi {
      * 主计划完工
      */
     @POST("pda/bps/main-plan/finish/confirm")
-    fun mainPlanFinishConfirmPost(@retrofit2.http.Body request: IdRequest): Single<Any>
+    fun mainPlanFinishConfirmPost(@retrofit2.http.Body request: MainPlanFinishRequest): Single<Any>
 
     /**
      * 设备列表查询

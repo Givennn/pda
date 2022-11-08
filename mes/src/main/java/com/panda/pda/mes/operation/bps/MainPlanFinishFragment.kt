@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.ConfirmDialogFragment
+import com.panda.pda.mes.base.NumberInputDialogFragment
 import com.panda.pda.mes.base.extension.putGenericObjectString
 import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.base.extension.toast
@@ -19,6 +20,7 @@ import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemMainPlanFinishBinding
 import com.panda.pda.mes.databinding.ItemMainPlanReportBinding
 import com.panda.pda.mes.operation.bps.data.MainPlanApi
+import com.panda.pda.mes.operation.bps.data.model.MainPlanFinishRequest
 import com.panda.pda.mes.operation.bps.data.model.MainPlanModel
 import com.panda.pda.mes.operation.fms.data.TaskApi
 import com.panda.pda.mes.operation.qms.data.QualityApi
@@ -103,18 +105,33 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
 
 
     private fun onItemActionClicked(data: MainPlanModel) {
-        val dialog = ConfirmDialogFragment().setTitle(getString(R.string.main_plan_finish_confirm))
-            .setConfirmButton({ _, _ ->
-                WebClient.request(MainPlanApi::class.java)
-                    .mainPlanFinishConfirmPost(IdRequest(data.id))
-                    .bindToFragment()
-                    .subscribe({
-                        toast(R.string.main_plan_finish_success_toast)
-                        refreshData()
-                    },
-                        { })
-            })
-        dialog.show(parentFragmentManager, TAG)
+        if (data.selfInspection != 0 && data.specialInspection != 0) {
+            val dialog = ConfirmDialogFragment().setTitle(getString(R.string.main_plan_finish_confirm))
+                .setConfirmButton({ _, _ ->
+                    WebClient.request(MainPlanApi::class.java)
+                        .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id))
+                        .bindToFragment()
+                        .subscribe({
+                            toast(R.string.main_plan_finish_success_toast)
+                            refreshData()
+                        },
+                            { })
+                })
+            dialog.show(parentFragmentManager, TAG)
+        } else {
+            val dialog = NumberInputDialogFragment()
+                .setConfirmButton({ inspectNumber ->
+                    WebClient.request(MainPlanApi::class.java)
+                        .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id, inspectNumber))
+                        .bindToFragment()
+                        .subscribe({
+                            toast(R.string.main_plan_finish_success_toast)
+                            refreshData()
+                        },
+                            { })
+                })
+            dialog.show(parentFragmentManager, TAG)
+        }
     }
 
     override fun api(key: String?): Single<DataListNode<MainPlanModel>> =

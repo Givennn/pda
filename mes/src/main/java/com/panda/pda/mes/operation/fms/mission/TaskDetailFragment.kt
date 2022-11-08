@@ -55,7 +55,8 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
                 ) {
                     holder.itemViewBinding.apply {
                         viewStepLineTop.isVisible = holder.layoutPosition != 0
-                        viewStepLineBottom.isVisible = holder.bindingAdapterPosition != itemCount - 1
+                        viewStepLineBottom.isVisible =
+                            holder.bindingAdapterPosition != itemCount - 1
                         tvRecordType.text = data.operateType
                         tvOperator.text = data.operateName
                         tvTime.text = data.createTime
@@ -71,6 +72,10 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             val taskDetail = info.detail
             tvTaskCode.text = taskDetail.dispatchOrderCode
             tvTaskDesc.text = taskDetail.dispatchOrderDesc
+            tvParentOrder.text = taskDetail.originalDispatchOrderCode
+            tvIncludeOrders.text =
+                if (taskDetail.includeDispatchOrderList == null) "" else taskDetail.includeDispatchOrderList.joinToString(
+                    ",") { it.dispatchOrderCode }
             tvTaskCount.text = taskDetail.dispatchOrderNum.toString()
             tvProductCode.text = taskDetail.productCode
             tvProductDesc.text = taskDetail.productName
@@ -78,13 +83,16 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
             tvOrderCode.text = taskDetail.workNo
             tvBatchCode.text = taskDetail.batchNo
             tvProductReceiver.text = taskDetail.receiveName ?: ""
-            tvProductType.text = CommonParameters.getDesc(DataParamType.PRODUCT_MODE, taskDetail.productMode)
+            tvProductType.text =
+                CommonParameters.getDesc(DataParamType.PRODUCT_MODE, taskDetail.productMode)
             tvTaskStatus.text =
                 CommonParameters.getDesc(DataParamType.TASK_STATUS, taskDetail.dispatchOrderStatus)
             tvPlanStartTime.text = taskDetail.planStartTime
             tvPlanFinishTime.text = taskDetail.planEndTime
             tvOperator.text = taskDetail.jockeyName
-            if (taskDetail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE, "人工")) {
+            if (taskDetail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE,
+                    "人工")
+            ) {
                 tvPrdEqp.text = "-"
             } else {
                 tvPrdEqp.text = taskDetail.equipmentDesc

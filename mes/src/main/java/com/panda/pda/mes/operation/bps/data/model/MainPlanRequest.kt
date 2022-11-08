@@ -1,6 +1,7 @@
 package com.panda.pda.mes.operation.bps.data.model
 
 import com.panda.pda.mes.common.data.model.FileInfoModel
+import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.common.data.model.PersonModel
 
 /**
@@ -26,3 +27,8 @@ data class MainPlanReportItem(
     @Transient
     var selectedEquipment = listOf<EquipmentModel>()
 }
+
+data class MainPlanFinishRequest(
+    val id: Int,
+    val inspectNum: Int? = null
+)

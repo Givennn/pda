@@ -200,11 +200,20 @@
             </LinearLayout>
 
             <LinearLayout
-                android:paddingStart="16dp"
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_item_underline"
                 android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_import"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subTitle" />
 
                 <TextView
                     style="@style/detailText.label"
@@ -235,6 +244,51 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_inspect_number"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_item_underline"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_import"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_subTitle" />
+
+                <TextView
+                    style="@style/detailText.label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inspect_number"
+                    android:layout_weight="1"/>
+
+                <com.panda.pda.library.android.material.custom.NumbersTextField
+                    android:id="@+id/til_inspect_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:startIconDrawable="@drawable/ic_minus"
+                    app:iconDisableColor="@color/numberEditTextBtnDisable"
+                    app:endIconDrawable="@drawable/ic_plus"
+                    app:iconEnableColor="@color/numberEditTextBtnEnable"
+                    style="@style/Widget.App.TextInputLayout.NumbersTextField">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_inspect_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:inputType="number"
+                        android:text="1"/>
+                </com.panda.pda.library.android.material.custom.NumbersTextField>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_operator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -254,7 +308,7 @@
                     style="@style/detailText.label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/operator_or_eqp"/>
+                    android:text="@string/resources"/>
 
                 <TextView
                     android:id="@+id/tv_selected_operator"

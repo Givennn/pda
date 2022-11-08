@@ -9,9 +9,13 @@ import androidx.core.text.color
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
+import com.panda.pda.mes.base.extension.putGenericObjectString
+import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.base.retrofit.*
 import com.panda.pda.mes.common.DateUtils
+import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemTaskReportBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
@@ -34,7 +38,8 @@ class TaskReportFragment :
         get() = R.string.task_search_bar_hint
 
     override fun createAdapter(): CommonViewBindingAdapter<*, DispatchOrderModel> {
-        return object : CommonViewBindingAdapter<ItemTaskReportBinding, DispatchOrderModel>(mutableListOf()) {
+        return object :
+            CommonViewBindingAdapter<ItemTaskReportBinding, DispatchOrderModel>(mutableListOf()) {
             override fun createBinding(parent: ViewGroup): ItemTaskReportBinding {
                 return ItemTaskReportBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -57,15 +62,19 @@ class TaskReportFragment :
                 position: Int,
             ) {
                 holder.itemViewBinding.apply {
-                    tvTaskInfo.text = listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
-                    tvProductInfo.text = listOf(data.productName, data.productModel).joinToString(" ")
+                    tvTaskInfo.text =
+                        listOf(data.dispatchOrderCode, data.dispatchOrderDesc).joinToString(" ")
+                    tvProductInfo.text =
+                        listOf(data.productName, data.productModel).joinToString(" ")
                     tvPlanFinishDate.text =
                         getString(R.string.plan_finish_time_formatter, data.planStartTime)
                     tvTaskProgress.text = getColorTaskProgress(data)
                     tvTaskSender.text = data.receiveName
                     tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
                     btnAction.visibility =
-                        if (data.dispatchOrderNum > data.reportNum) View.VISIBLE else View.GONE
+                        if (data.dispatchOrderNum > data.reportNum && data.dispatchOrderStatus == CommonParameters.getValue(
+                                DataParamType.TASK_STATUS, "执行中")
+                        ) View.VISIBLE else View.GONE
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
@@ -79,7 +88,7 @@ class TaskReportFragment :
 
     private fun getColorTaskProgress(data: DispatchOrderModel): SpannableStringBuilder {
         return SpannableStringBuilder()
-            .color(requireContext().getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
+            .color(requireContext().resources.getColor(R.color.textHighLightColor)) { append(data.reportNum.toString()) }
             .append("/${data.dispatchOrderNum}")
     }
 
@@ -92,14 +101,17 @@ class TaskReportFragment :
             .onMainThread()
             .bindLoadingStatus()
             .subscribe({ info ->
-                taskViewModel.taskInfoData.postValue(info)
-                navToDetailFragment(data.id)
+//                taskViewModel.taskInfoData.postValue(info)
+                navToDetailFragment(data.id, info)
             }, { })
     }
 
-    private fun navToDetailFragment(id: Int) {
+    private fun navToDetailFragment(id: Int, info: TaskInfoModel) {
         navController.navigate(R.id.taskDetailFragment,
-            Bundle().apply { putInt(TaskViewModel.TASK_ID, id) })
+            Bundle().apply {
+                putInt(TaskViewModel.TASK_ID, id)
+                putObjectString(info)
+            })
     }
 
     private fun onItemActionClicked(data: DispatchOrderModel) {
