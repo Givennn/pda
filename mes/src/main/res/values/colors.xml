@@ -27,4 +27,8 @@
 
     <color name="dialog_hint">#4CD8DFE7</color>
 
+    <color name="tag_orange">#FFFEC141</color>
+    <color name="tag_red">#FFF12C20</color>
+    <color name="tag_green">#FF7ED321</color>
+    <color name="tag_blue">#FF6CA9F0</color>
 </resources>

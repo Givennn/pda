@@ -20,6 +20,11 @@ data class AlarmHistoryModel(
     val id: Int,
     val status: Int,
     val closeTime: String?,
+    val breakdownFlag: Int,
+    val emergencyFlag: Int,
+    val equipmentCode: String,
+    val equipmentDesc: String,
+    val exceptionTypes: Int,
 ) {
     val alarmStatus: AlarmStatus get() = if (status == 1) AlarmStatus.Open else AlarmStatus.Close
 }

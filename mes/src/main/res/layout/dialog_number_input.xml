@@ -31,7 +31,7 @@
                 android:layout_width="80dp"
                 android:layout_height="36dp"
                 android:layout_marginStart="12dp"
-                app:startIconDrawable="null"
+                app:startIconDrawable="@null"
                 android:layout_marginEnd="12dp">
 
                 <requestFocus />

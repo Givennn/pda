@@ -25,26 +25,103 @@
                 android:src="@drawable/ic_header_bullet"/>
             <TextView
                 android:id="@+id/tv_alarm_code"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 tools:text="W202101011"
                 android:includeFontPadding="false"
                 android:gravity="start"
                 android:ellipsize="end"
 
+                android:layout_marginEnd="12dp"
                 style="@style/headerLineText"/>
 
             <TextView
+                android:id="@+id/tv_tag_breakdown"
+                android:layout_width="46dp"
+                android:layout_height="16dp"
+                android:text="故障"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/tag_orange"
+                android:layout_marginEnd="4dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:background="@drawable/bg_item_tag_orange"/>
+
+            <TextView
+                android:id="@+id/tv_tag_emergency"
+                android:layout_width="46dp"
+                android:layout_height="16dp"
+                android:text="紧急"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/tag_red"
+                android:layout_marginEnd="4dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:background="@drawable/bg_item_tag_red"/>
+            <TextView
                 android:id="@+id/tv_alarm_status"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 tools:text="未关闭"
                 android:gravity="end"
                 android:includeFontPadding="false"
                 style="@style/moduleTitleText"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/exception_type" />
+
+            <TextView
+                android:id="@+id/tv_exception_type"
+                style="@style/headerLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                tools:text="7" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/equipment" />
+
+            <TextView
+                android:id="@+id/tv_selected_equipment"
+                style="@style/headerLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                tools:text="7" />
+        </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_report"
             android:layout_width="match_parent"
@@ -58,8 +135,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="4dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
                 tools:text="张三"
                 style="@style/moduleTitleText"/>
 
@@ -69,7 +146,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 style="@style/moduleTitleText"
                 tools:text="2019-01-22 10:12:40"/>
 

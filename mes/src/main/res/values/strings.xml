@@ -342,7 +342,7 @@
     <string name="work_hour_info">工时信息</string>
     <string name="operator_or_eqp">操作工/设备</string>
     <string name="step_report_number">工序报工数量</string>
-    <string name="equipement">设备</string>
+    <string name="equipment">设备</string>
     <string name="equipment_report_time">设备工时(小时)</string>
     <string name="ng_product_deal">不合格品处理</string>
     <string name="deal">处理</string>
@@ -357,5 +357,7 @@
     <string name="reporter">报工人</string>
     <string name="report_time">报工时间</string>
     <string name="resources">资源</string>
+    <string name="exception_type">异常类型</string>
+    <string name="device">设备</string>
     <!--设备管理系统ems end-->
 </resources>

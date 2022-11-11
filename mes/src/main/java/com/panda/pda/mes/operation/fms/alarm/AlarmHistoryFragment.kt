@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.CommonSearchListFragment
+import com.panda.pda.mes.common.data.CommonParameters
+import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemAlarmHistoryBinding
 import com.panda.pda.mes.operation.fms.data.AlarmApi
@@ -53,6 +56,11 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
                     tvReporter.text = data.createName
                     tvReportTime.text = data.createTime
                     tvAlarmDetail.text = data.alarmDetail
+
+                    tvExceptionType.text = CommonParameters.getDesc(DataParamType.EXCEPTION_TYPE, data.exceptionTypes)
+                    tvTagBreakdown.isVisible = data.breakdownFlag == 1
+                    tvTagEmergency.isVisible = data.emergencyFlag == 1
+                    tvSelectedEquipment.text = data.equipmentDesc
 
                     if (data.alarmStatus == AlarmStatus.Open) {
                         clClose.visibility = View.GONE

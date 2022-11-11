@@ -168,7 +168,7 @@
                 android:paddingBottom="8dp"
                 android:textSize="12sp"
                 android:layout_marginStart="16dp"
-                android:text="@string/equipement"/>
+                android:text="@string/equipment"/>
 
             <TextView
                 android:id="@+id/tv_selected_equipment"
