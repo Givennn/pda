@@ -98,7 +98,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                     llInspectNumber.isEnabled = false
                 }
 
-                llOperator.setOnClickListener {
+                llResource.setOnClickListener {
                     navToPersonSelect()
                 }
             }.btnConfirm.setOnClickListener {
@@ -106,7 +106,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
             }
 
             if (detail.productMode == CommonParameters.getValue(DataParamType.PRODUCT_MODE, "设备")) {
-                viewBinding.llOperator.isEnabled = false
+                viewBinding.llResource.isEnabled = false
                 viewBinding.tvSelectedOperator.text = detail.equipmentDesc
                 isEqpProductMode = true
             }
@@ -169,13 +169,15 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     }
 
     private fun navToPersonSelect() {
-        navController.navigate(R.id.personSelectFragment,
-            Bundle().apply {
-                putGenericObjectString(selectedPerson, Types.newParameterizedType(
-                    List::class.java,
-                    PersonModel::class.java
-                ))
-            })
+        val dialog = ResourceSelectDialogFragment(0)
+        dialog.show(parentFragmentManager, TAG)
+//        navController.navigate(R.id.personSelectFragment,
+//            Bundle().apply {
+//                putGenericObjectString(selectedPerson, Types.newParameterizedType(
+//                    List::class.java,
+//                    PersonModel::class.java
+//                ))
+//            })
     }
 
     private fun report(info: TaskInfoModel) {

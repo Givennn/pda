@@ -103,6 +103,7 @@ interface TaskApi {
     fun taskReceiveListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<DispatchOrderModel>>
+
     /**
      * 任务报工
      *
@@ -110,8 +111,9 @@ interface TaskApi {
      */
     @POST("pda/fms/dispatch_order/report/confirm")
     fun pdaFmsTaskReportConfirmPost(
-        @retrofit2.http.Body request: TaskReportRequest
+        @retrofit2.http.Body request: TaskReportRequest,
     ): Single<Any>
+
     /**
      * 任务报工列表
      * keywords：任务编号  产品编码或者描述  派工人工号或者姓名
@@ -127,17 +129,26 @@ interface TaskApi {
      * 生产准备派工单列表
      */
     @GET("pda/fms/dispatch_order/prepare/list-by-page")
-    fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?):Single<DataListNode<DispatchOrderModel>>
+    fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 生产准备列表
      */
     @GET("pda/fms/dispatch_order/prepare/items")
-    fun prepareListGetByDispatchOrderId(@retrofit2.http.Query("id") id: Int):Single<DataListNode<ProducePrepareItem>>
+    fun prepareListGetByDispatchOrderId(@retrofit2.http.Query("id") id: Int): Single<DataListNode<ProducePrepareItem>>
 
     /**
      * 生产准备完成
      */
     @POST("pda/fms/dispatch_order/prepare/finish")
     fun finishPrepareItem(@retrofit2.http.Body request: IdRequest): Single<Any>
+
+    @GET("pda/fms/dispatch-order/report/get-recourse-by-workcenter")
+    fun resourceListGetByWorkCenter(
+        @retrofit2.http.Query("workCenterId") workCenterId: Int,
+        @retrofit2.http.Query("workCenterId") resourceType: Int,
+        @retrofit2.http.Query("workCenterId") resource: String,
+        @retrofit2.http.Query("workCenterId") page: Int,
+        @retrofit2.http.Query("workCenterId") rows: Int = 10,
+    ): Single<DataListNode<ResourceModel>>
 }

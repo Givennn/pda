@@ -18,6 +18,15 @@
         <item name="switchStyle">@style/Widget.App.Switch</item>
     </style>
 
+    <style name="Widget.App.RadioButton.ResourceIndicate" parent="">
+        <item name="android:button">@drawable/selector_resource_tab_indicate</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:buttonTint">@color/colorPrimary</item>
+        <item name="background">@drawable/selector_bg_resource_tab</item>
+    </style>
+
     <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
     </style>

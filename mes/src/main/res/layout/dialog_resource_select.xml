@@ -3,46 +3,150 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加"
+        style="@style/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rg_resource_type_selector"
+        android:layout_margin="16dp"/>
+
+    <ImageView
+        android:id="@+id/iv_close_dialog"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_dialog_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        android:padding="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"/>
+
+
+    <RadioGroup
+        android:id="@+id/rg_resource_type_selector"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/gl_tab"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:background="#FFF2F3F5"
+        android:checkedButton="@id/rb_person"
+        android:layout_height="360dp">
+
+        <RadioButton
+            android:id="@+id/rb_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.RadioButton.ResourceIndicate"
+            android:background="@drawable/selector_bg_resource_tab"
+            android:text="人员"/>
+        <RadioButton
+            android:id="@+id/rb_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.RadioButton.ResourceIndicate"
+            android:text="小组"/>
+        <RadioButton
+            android:id="@+id/rb_eqp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.RadioButton.ResourceIndicate"
+            android:text="设备"/>
+    </RadioGroup>
+
     <RelativeLayout
-        android:id="@+id/rl_confirm_header"
-        android:layout_width="match_parent"
-        android:layout_height="47.5dp"
-        android:background="@drawable/bg_item_underline"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/rl_search"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toEndOf="@id/rg_resource_type_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rg_resource_type_selector"
+        android:layout_height="wrap_content"
+        android:background="@color/search_bg_color"
+        android:paddingStart="8dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_cancel"
-            style="@style/actionButton"
+        <TextView
+            android:id="@+id/til_search_bar_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/cancel"
-            android:textColor="@color/textHeaderLineColor"
-            android:textSize="16sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/til_search_bar"
+            android:layout_alignBottom="@+id/til_search_bar"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="@string/confirm"
-            style="@style/actionButton"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:gravity="center_vertical"
+            android:paddingStart="2dp"
+            android:paddingEnd="10dp"
+            android:text="@string/search"
+            android:textColor="@color/text_field_search_bar_highlight"
+            android:textSize="15sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search_bar"
+            style="@style/Widget.App.WhiteTextInputLayout.searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:layout_toStartOf="@id/til_search_bar_btn"
+            app:endIconTint="@color/text_field_icon"
+            app:startIconTint="@color/text_field_icon">
+
+            <requestFocus />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/resource_search_hint"
+                android:textColor="@color/text_field_search_bar_highlight"
+                tools:text="" />
+        </com.google.android.material.textfield.TextInputLayout>
     </RelativeLayout>
 
-    <com.aigestudio.wheelpicker.WheelPicker
-        android:id="@+id/wheel_picker"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tv_resource_list"
+        app:layout_constraintTop_toBottomOf="@+id/rl_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/rg_resource_type_selector"
+        app:layout_constraintStart_toStartOf="@id/gl_tab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/item_resource"
+        tools:itemCount="3"
+        android:paddingStart="12dp"
+        android:paddingEnd="16dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rl_confirm_header">
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            style="@style/Widget.App.Button.confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_gravity="center|bottom"
+            android:text="@string/confirm"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    </com.aigestudio.wheelpicker.WheelPicker>
-
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
