@@ -269,4 +269,9 @@ interface QualityApi {
     fun pdaQmsQualityProblemGetByProductBarCodeGet(
         @retrofit2.http.Query("productBarCode") barCode: String
     ): Single<ProductInfoModel>
+
+    @GET("pda/qms/adverse/deal/list-record")
+    fun pdaQmsNgProductListGet(
+        @retrofit2.http.Query("id") id: Int
+    ): Single<DataListNode<NGProductItemModel>>
 }

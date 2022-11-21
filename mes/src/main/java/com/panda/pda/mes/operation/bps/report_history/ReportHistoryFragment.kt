@@ -26,7 +26,6 @@ import io.reactivex.rxjava3.core.Single
  */
 class ReportHistoryFragment : CommonSearchListFragment<ReportModel>() {
 
-    private lateinit var reportList: List<ReportModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewBinding.etSearchBar.isVisible = false
         val reports = arguments?.getGenericObjectString<List<ReportModel>>(
@@ -36,16 +35,17 @@ class ReportHistoryFragment : CommonSearchListFragment<ReportModel>() {
             ))
         if (reports == null) {
             toast(getString(R.string.net_work_error))
-        } else {
-            reportList = reports
+            navController.popBackStack()
+            return
         }
+        itemListAdapter.refreshData(reports)
         super.onViewCreated(view, savedInstanceState)
 
     }
 
     override fun createAdapter(): CommonViewBindingAdapter<*, ReportModel> {
         return object :
-            CommonViewBindingAdapter<ItemReportHistoryBinding, ReportModel>(reportList.toMutableList()) {
+            CommonViewBindingAdapter<ItemReportHistoryBinding, ReportModel>() {
             override fun createBinding(parent: ViewGroup): ItemReportHistoryBinding {
                 return ItemReportHistoryBinding.inflate(LayoutInflater.from(parent.context),
                     parent,
@@ -83,7 +83,11 @@ class ReportHistoryFragment : CommonSearchListFragment<ReportModel>() {
     }
 
     override fun api(key: String?): Single<DataListNode<ReportModel>> {
-        return Single.just(DataListNode(reportList))
+        return Single.never()
+    }
+
+    override fun refreshData() {
+        return
     }
 
     override val titleResId: Int

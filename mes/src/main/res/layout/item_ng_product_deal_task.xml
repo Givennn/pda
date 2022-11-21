@@ -59,14 +59,14 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12.5dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_quality_number"
+                app:layout_constraintEnd_toStartOf="@id/tv_ng_number"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="@id/tv_task_info"
                 app:layout_constraintTop_toBottomOf="@id/tv_task_info"
                 tools:text="过程检验 00001" />
 
             <TextView
-                android:id="@+id/tv_quality_number"
+                android:id="@+id/tv_ng_number"
                 style="@style/contentText"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ng_product_num"
-                app:layout_constraintEnd_toEndOf="@id/tv_quality_number"
+                app:layout_constraintEnd_toEndOf="@id/tv_ng_number"
                 app:layout_constraintTop_toTopOf="@id/tv_quality_info_label" />
 
 
@@ -120,7 +120,7 @@
                 android:text="@string/deal_number" />
 
             <TextView
-                android:id="@+id/tv_inspect_number"
+                android:id="@+id/tv_deal_number"
                 style="@style/headerLineText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/deal"
-                app:icon="@drawable/ic_action_receive" />
+                app:icon="@drawable/ic_action_deal" />
 
 <!--            <com.google.android.material.button.MaterialButton-->
 <!--                android:id="@+id/btn_action_commit"-->

@@ -47,7 +47,9 @@ data class QualityTaskModel(
     val updateId: Int,
     val updateName: String,
     val updateTime: String,
-    val workNo: String
+    val workNo: String,
+    val unqualifiedNum: Int,
+    val temporaryControlNum: Int
 )
 
 enum class QualityTaskModelType(val code: Int) {

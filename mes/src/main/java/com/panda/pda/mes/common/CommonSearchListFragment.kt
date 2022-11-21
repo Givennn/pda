@@ -59,7 +59,7 @@ abstract class CommonSearchListFragment<TSource> :
     protected open val searchBarHintResId: Int? = null
 
 
-    protected fun onSearching() {
+    open fun onSearching() {
         refreshData()
     }
 

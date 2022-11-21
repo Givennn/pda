@@ -119,7 +119,7 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
                 })
             dialog.show(parentFragmentManager, TAG)
         } else {
-            val dialog = NumberInputDialogFragment()
+            val dialog = NumberInputDialogFragment().setTitle("送检数量")
                 .setConfirmButton({ inspectNumber ->
                     WebClient.request(MainPlanApi::class.java)
                         .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id, inspectNumber))

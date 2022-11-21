@@ -2,6 +2,7 @@ package com.panda.pda.mes.base.extension
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import com.panda.pda.mes.operation.qms.data.model.QualityTaskModel
 import com.squareup.moshi.Moshi
 import java.lang.reflect.ParameterizedType
 

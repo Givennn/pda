@@ -70,6 +70,7 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
+                    btnReportHistory.isEnabled = data.reportList != null
                     btnReportHistory.setOnClickListener {
                         onReportHistoryClicked(data)
                     }
@@ -82,12 +83,15 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
     private fun onReportHistoryClicked(data: MainPlanModel) {
         navController.navigate(R.id.action_mainPlanReportFragment_to_reportHistoryFragment,
         Bundle().apply {
-            putGenericObjectString(data.reportList,
-                Types.newParameterizedType(
-                    List::class.java,
-                    ReportModel::class.java
+            if (data.reportList != null) {
+                putGenericObjectString(data.reportList,
+                    Types.newParameterizedType(
+                        List::class.java,
+                        ReportModel::class.java
+                    )
                 )
-            )
+            }
+
         })
     }
 

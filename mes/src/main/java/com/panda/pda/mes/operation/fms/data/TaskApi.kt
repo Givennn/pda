@@ -17,7 +17,7 @@ interface TaskApi {
      * @param root (optional)
      */
 
-    @POST("pda/fms/dispatch_order/complete/confirm")
+    @POST("pda/fms/dispatch-order/complete/confirm")
     fun taskCompleteConfirmPost(
         @retrofit2.http.Body request: IdRequest,
     ): Single<Any>
@@ -30,7 +30,7 @@ interface TaskApi {
      * @param raw raw paramter (optional)
      */
 
-    @GET("pda/fms/dispatch_order/complete/list-by-page")
+    @GET("pda/fms/dispatch-order/complete/list-by-page")
     fun taskCompleteListGet(
         @retrofit2.http.Query("keywords") keywords: String? = null,
     ): Single<DataListNode<DispatchOrderModel>>
@@ -41,7 +41,7 @@ interface TaskApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/fms/dispatch_order/execution/confirm")
+    @POST("pda/fms/dispatch-order/execution/confirm")
     fun taskExecutionConfirmPost(
         @retrofit2.http.Body request: IdRequest,
     ): Single<Any>
@@ -53,7 +53,7 @@ interface TaskApi {
      * @param keywords  (optional)
      */
 
-    @GET("pda/fms/dispatch_order/execution/list-by-page")
+    @GET("pda/fms/dispatch-order/execution/list-by-page")
     fun taskExecutionListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<DispatchOrderModel>>
@@ -65,7 +65,7 @@ interface TaskApi {
      * @param id  (required)
      * @param raw raw paramter (optional)
      */
-    @GET("pda/fms/dispatch_order/get-by-id")
+    @GET("pda/fms/dispatch-order/get-by-id")
     fun taskGetByIdGet(
         @retrofit2.http.Query("id") id: Int,
     ): Single<TaskDetailModel>
@@ -76,7 +76,7 @@ interface TaskApi {
      * The endpoint is owned by docs service owner
      * @param id  (required)
      */
-    @GET("pda/fms/dispatch_order/operation-record")
+    @GET("pda/fms/dispatch-order/operation-record")
     fun taskOperationRecordGet(
         @retrofit2.http.Query("id") id: Int,
     ): Single<DataListNode<TaskRecordModel>>
@@ -87,7 +87,7 @@ interface TaskApi {
      * The endpoint is owned by docs service owner
      * @param root (optional)
      */
-    @POST("pda/fms/dispatch_order/receive/confirm")
+    @POST("pda/fms/dispatch-order/receive/confirm")
     fun taskReceiveConfirmPost(
         @retrofit2.http.Body request: IdRequest,
     ): Single<Any>
@@ -99,7 +99,7 @@ interface TaskApi {
      * @param keywords  (optional)
      */
 
-    @GET("pda/fms/dispatch_order/receive/list-by-page")
+    @GET("pda/fms/dispatch-order/receive/list-by-page")
     fun taskReceiveListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<DispatchOrderModel>>
@@ -109,7 +109,7 @@ interface TaskApi {
      *
      * The endpoint is owned by docs service owner
      */
-    @POST("pda/fms/dispatch_order/report/confirm")
+    @POST("pda/fms/dispatch-order/report/confirm")
     fun pdaFmsTaskReportConfirmPost(
         @retrofit2.http.Body request: TaskReportRequest,
     ): Single<Any>
@@ -120,7 +120,7 @@ interface TaskApi {
      * The endpoint is owned by docs service owner
      * @param keywords  (optional)
      */
-    @GET("pda/fms/dispatch_order/report/list-by-page")
+    @GET("pda/fms/dispatch-order/report/list-by-page")
     fun pdaFmsTaskReportListByPageGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<DispatchOrderModel>>
@@ -128,19 +128,19 @@ interface TaskApi {
     /**
      * 生产准备派工单列表
      */
-    @GET("pda/fms/dispatch_order/prepare/list-by-page")
+    @GET("pda/fms/dispatch-order/prepare/list-by-page")
     fun prepareDispatchOrderListGet(@retrofit2.http.Query("keywords") keywords: String?): Single<DataListNode<DispatchOrderModel>>
 
     /**
      * 生产准备列表
      */
-    @GET("pda/fms/dispatch_order/prepare/items")
+    @GET("pda/fms/dispatch-order/prepare/items")
     fun prepareListGetByDispatchOrderId(@retrofit2.http.Query("id") id: Int): Single<DataListNode<ProducePrepareItem>>
 
     /**
      * 生产准备完成
      */
-    @POST("pda/fms/dispatch_order/prepare/finish")
+    @POST("pda/fms/dispatch-order/prepare/finish")
     fun finishPrepareItem(@retrofit2.http.Body request: IdRequest): Single<Any>
 
     @GET("pda/fms/dispatch-order/report/get-recourse-by-workcenter")
