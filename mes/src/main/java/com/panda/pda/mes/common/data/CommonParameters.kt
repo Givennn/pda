@@ -44,6 +44,7 @@ object CommonParameters {
         dictionary[DataParamType.PRODUCT_MODE] = data.BPS_PRODUCT_MODE
         dictionary[DataParamType.BPS_PLAN_STATUS] = data.BPS_PLAN_STATUS
         dictionary[DataParamType.BPS_WORK_ORDER_STATUS] = data.BPS_WORK_ORDER_STATUS
+        dictionary[DataParamType.ALARM_EXCEPTION_TYPE] = data.ALARM_EXCEPTION_TYPE
     }
 }
 
@@ -69,5 +70,5 @@ enum class DataParamType {
     PRODUCT_MODE,
     BPS_PLAN_STATUS,
     BPS_WORK_ORDER_STATUS,
-    EXCEPTION_TYPE
+    ALARM_EXCEPTION_TYPE
 }

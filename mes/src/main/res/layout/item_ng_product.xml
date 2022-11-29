@@ -261,14 +261,14 @@
                 android:text="@string/edit"
                 app:icon="@drawable/ic_action_edit" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_action_submit"
-                style="@style/actionButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/submit"
-                app:icon="@drawable/ic_action_submit" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_action_submit"-->
+<!--                style="@style/actionButton"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/submit"-->
+<!--                app:icon="@drawable/ic_action_submit" />-->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_action_delete"

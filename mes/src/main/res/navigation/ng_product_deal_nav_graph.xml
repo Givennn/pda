@@ -15,5 +15,13 @@
     <fragment
         android:id="@+id/NGProductListFragment"
         android:name="com.panda.pda.mes.operation.qms.ng_product_deall.NGProductListFragment"
-        android:label="NGProductListFragment" />
+        android:label="NGProductListFragment" >
+        <action
+            android:id="@+id/action_NGProductListFragment_to_NGProductEditFragment"
+            app:destination="@id/NGProductEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/NGProductEditFragment"
+        android:name="com.panda.pda.mes.operation.qms.ng_product_deall.NGProductEditFragment"
+        android:label="NGProductEditFragment" />
 </navigation>

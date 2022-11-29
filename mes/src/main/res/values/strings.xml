@@ -370,5 +370,10 @@
     <string name="product_bar_code">产品条码</string>
     <string name="deal_method">处理方式</string>
     <string name="submit">提交</string>
+    <string name="return_procedure">返工工序</string>
+    <string name="ng_product_delete_hint">不合格品处理数据删除将无法恢复，确定删除不合格品处理数据？</string>
+    <string name="ng_product_delte_finish_success_toast">不合格品处理数据删除成功</string>
+    <string name="equipment_select">设备选择</string>
+    <string name="equipment_search_bar_hint">输入设备名称</string>
     <!--设备管理系统ems end-->
 </resources>

@@ -2,20 +2,24 @@ package com.panda.pda.mes.operation.fms.alarm
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.getGenericObjectString
+import com.panda.pda.mes.base.extension.putGenericObjectString
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.WheelPickerDialogFragment
 import com.panda.pda.mes.common.data.CommonParameters
 import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.databinding.FragmentAlarmReportBinding
+import com.panda.pda.mes.operation.bps.EquipmentSelectFragment
+import com.panda.pda.mes.operation.bps.data.model.EquipmentModel
 import com.panda.pda.mes.operation.fms.data.AlarmApi
 import com.panda.pda.mes.operation.fms.data.model.AlarmDetailRequest
-import com.panda.pda.mes.operation.qms.data.model.QualityInspectItemModel
+import com.squareup.moshi.Types
 import java.util.concurrent.TimeUnit
 
 /**
@@ -27,7 +31,7 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
     private val requestAlarm = AlarmDetailRequest()
 
     private val exceptionTypeMap by lazy {
-        CommonParameters.getParameters(DataParamType.EXCEPTION_TYPE)
+        CommonParameters.getParameters(DataParamType.ALARM_EXCEPTION_TYPE)
     }
     private val exceptionTypeDialog by lazy {
         WheelPickerDialogFragment().also {
@@ -39,7 +43,7 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.apply {
             if (requestAlarm.exceptionTypes != null) {
-                tvExceptionType.text = CommonParameters.getDesc(DataParamType.EXCEPTION_TYPE,
+                tvExceptionType.text = CommonParameters.getDesc(DataParamType.ALARM_EXCEPTION_TYPE,
                     requestAlarm.exceptionTypes!!)
 
             }
@@ -92,11 +96,35 @@ class AlarmReportFragment : BaseFragment(R.layout.fragment_alarm_report) {
                 }
             }
         }
+
+        setFragmentResultListener(EquipmentSelectFragment.EQUIPMENT_SELECTED) { result, bundle ->
+            val newSelectedEquipment =
+                bundle.getGenericObjectString<List<EquipmentModel>>(
+                    Types.newParameterizedType(
+                        List::class.java,
+                        EquipmentModel::class.java
+                    )) ?: return@setFragmentResultListener
+
+            if (newSelectedEquipment.isNotEmpty()) {
+                val eqp = newSelectedEquipment.first()
+                requestAlarm.equipmentCode = eqp.equipmentCode
+                requestAlarm.equipmentDesc = eqp.equipmentDesc
+                viewBinding.tvSelectedEquipment.text = eqp.equipmentCode
+            } else {
+                requestAlarm.equipmentCode = null
+                requestAlarm.equipmentDesc = null
+                viewBinding.tvSelectedEquipment.text = ""
+
+            }
+        }
     }
 
     private fun navToEquipmentSelect() {
 
-
+        navController.navigate(R.id.equipmentSelectFragment2,
+            Bundle().apply {
+                putInt(EquipmentSelectFragment.MAX_SELECT_SIZE, 1)
+            })
     }
 
     private fun navToAlarmHistory() {

@@ -27,7 +27,7 @@ import io.reactivex.rxjava3.core.Single
 class ReportHistoryFragment : CommonSearchListFragment<ReportModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewBinding.etSearchBar.isVisible = false
+        viewBinding.tilSearchBar.isVisible = false
         val reports = arguments?.getGenericObjectString<List<ReportModel>>(
             Types.newParameterizedType(
                 List::class.java,
@@ -75,7 +75,7 @@ class ReportHistoryFragment : CommonSearchListFragment<ReportModel>() {
         WebClient.request(MainPlanApi::class.java).mainPlanReportHistoryGet(data.id)
             .bindToFragment()
             .subscribe({
-                navController.navigate(R.id.action_mainPlanReportFragment_to_mainPlanReportInputFragment,
+                navController.navigate(R.id.action_reportHistoryFragment_to_reportHistoryDetailFragment,
                     Bundle().apply {
                         putObjectString(it)
                     })

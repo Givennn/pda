@@ -33,7 +33,8 @@ class EquipmentSelectFragment : BaseFragment(R.layout.fragment_person_select) {
     private var personList = mutableListOf<EquipmentModel>()
 //    private var layoutManager: LinearLayoutManager? = null
 
-    private val maxSelectSize = 5
+    private var maxSelectSize = 5
+    private val defaultSelectSize = 5
     private var selectedequipmentList = HashMap<Int, EquipmentModel>()
 
     private val viewBinding by viewBinding<FragmentPersonSelectBinding>()
@@ -44,6 +45,7 @@ class EquipmentSelectFragment : BaseFragment(R.layout.fragment_person_select) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        maxSelectSize = arguments?.getInt(MAX_SELECT_SIZE, defaultSelectSize) ?: defaultSelectSize
         personAdapter = initAdapter()
         viewBinding.rvPersons.adapter = personAdapter
         viewBinding.btnConfirm.setOnClickListener {
@@ -186,5 +188,6 @@ class EquipmentSelectFragment : BaseFragment(R.layout.fragment_person_select) {
 
     companion object {
         const val EQUIPMENT_SELECTED: String = "equipment_selected"
+        const val MAX_SELECT_SIZE: String = "max_select_size"
     }
 }

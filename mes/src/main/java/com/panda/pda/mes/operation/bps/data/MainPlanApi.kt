@@ -66,5 +66,6 @@ interface MainPlanApi {
     /**
      * 主计划报工记录详情
      */
+    @GET("pda/bps/main-plan/report/get-by-recordId")
     fun mainPlanReportHistoryGet(@retrofit2.http.Query("id") id: Int): Single<MainPlanReportHistoryModel>
 }

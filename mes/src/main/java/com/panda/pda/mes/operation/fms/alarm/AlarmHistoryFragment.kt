@@ -57,7 +57,7 @@ class AlarmHistoryFragment : CommonSearchListFragment<AlarmHistoryModel>() {
                     tvReportTime.text = data.createTime
                     tvAlarmDetail.text = data.alarmDetail
 
-                    tvExceptionType.text = CommonParameters.getDesc(DataParamType.EXCEPTION_TYPE, data.exceptionTypes)
+                    tvExceptionType.text = CommonParameters.getDesc(DataParamType.ALARM_EXCEPTION_TYPE, data.exceptionTypes)
                     tvTagBreakdown.isVisible = data.breakdownFlag == 1
                     tvTagEmergency.isVisible = data.emergencyFlag == 1
                     tvSelectedEquipment.text = data.equipmentDesc

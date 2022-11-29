@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/org_node_select" />
+            app:title="@string/equipment_select" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
@@ -42,7 +42,7 @@
             android:id="@+id/et_search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/person_search_bar_hint"
+            android:hint="@string/equipment_search_bar_hint"
             tools:text="" />
     </com.google.android.material.textfield.TextInputLayout>
 

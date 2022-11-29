@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl_title"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/ng_reason" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/abl_title"
+        android:id="@+id/ll_property_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_product_serial_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_item_underline"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_import"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_subTitle" />
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_serial_code" />
+
+            <EditText
+                android:id="@+id/et_product_serial_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:hint="@string/input_or_scan_hint"
+                android:textColorHint="@color/text_field_hint"
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                style="@style/detailText.label"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:importantForAutofill="no" >
+                <requestFocus/>
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_deal_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_item_underline"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/deal_method"/>
+
+            <TextView
+                android:id="@+id/tv_selected_deal_method"
+                style="@style/updatablePropertyTextView" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_ng_procedure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_item_underline"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/return_procedure"/>
+
+            <TextView
+                android:id="@+id/tv_selected_ng_procedure"
+                style="@style/updatablePropertyTextView" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_return_procedure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_item_underline"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/return_procedure"/>
+
+            <TextView
+                android:id="@+id/tv_selected_return_procedure"
+                style="@style/updatablePropertyTextView" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_arrow_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_underline"
+            android:orientation="horizontal">
+
+            <!--                <ImageView-->
+
+            <!--                    android:layout_width="8dp"-->
+            <!--                    android:layout_height="18dp"-->
+            <!--                    android:src="@drawable/ic_import"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/tv_subTitle"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    android:layout_marginStart="4dp"-->
+            <!--                    android:layout_marginEnd="4dp"-->
+            <!--                    android:layout_marginTop="16dp"/>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remark"
+                android:layout_marginStart="16dp"
+                style="@style/detailText.label"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:padding="12dp"
+                    android:maxLength="1000"
+                    android:hint="@string/remark_hint"
+                    tools:text="@string/long_text_test" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="@style/detailText.label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_number" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.Button.cancel"
+            android:text="@string/cancel"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.Button.confirm"
+            android:layout_marginStart="12dp"
+            android:text="@string/confirm"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

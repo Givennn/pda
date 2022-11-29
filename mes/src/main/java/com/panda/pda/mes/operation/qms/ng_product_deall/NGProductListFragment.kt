@@ -14,12 +14,17 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.ConfirmDialogFragment
 import com.panda.pda.mes.base.extension.getStringObject
+import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.databinding.FragmentNgProductListBinding
 import com.panda.pda.mes.databinding.ItemNgProductBinding
+import com.panda.pda.mes.operation.bps.data.MainPlanApi
+import com.panda.pda.mes.operation.bps.data.model.MainPlanFinishRequest
 import com.panda.pda.mes.operation.qms.data.QualityApi
 import com.panda.pda.mes.operation.qms.data.model.NGProductItemModel
 import com.panda.pda.mes.operation.qms.data.model.QualityTaskModel
@@ -43,7 +48,7 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
 
         if (task == null) {
             toast(R.string.net_work_error)
-            navController.popBackStack()
+            navBackListener.invoke(requireView())
         } else {
             qualityTask = task
         }
@@ -74,7 +79,10 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
     }
 
     private fun addNgProduct() {
-//        navController.navigate(R.id.action_qualityProblemRecordFragment_to_problemRecordEditFragment)
+        navController.navigate(R.id.action_NGProductListFragment_to_NGProductEditFragment,
+            Bundle().apply {
+                putObjectString(qualityTask)
+            })
     }
 
     override fun onResume() {
@@ -110,9 +118,9 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
                     btnActionEdit.setOnClickListener {
                         editNgProduct(data)
                     }
-                    btnActionSubmit.setOnClickListener {
-                        submitNgProduct(data)
-                    }
+//                    btnActionSubmit.setOnClickListener {
+//                        submitNgProduct(data)
+//                    }
                     btnActionDelete.setOnClickListener {
                         deleteNgProduct(data)
                     }
@@ -124,6 +132,18 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
 
     private fun deleteNgProduct(data: NGProductItemModel) {
 
+        val dialog = ConfirmDialogFragment().setTitle(getString(R.string.ng_product_delete_hint))
+            .setConfirmButton({ _, _ ->
+                WebClient.request(QualityApi::class.java)
+                    .deleteNgProductPost(IdRequest(data.id))
+                    .bindToFragment()
+                    .subscribe({
+                        toast(R.string.ng_product_delte_finish_success_toast)
+                        refreshData()
+                    },
+                        { })
+            })
+        dialog.show(parentFragmentManager, TAG)
     }
 
     private fun submitNgProduct(data: NGProductItemModel) {
@@ -131,6 +151,11 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
     }
 
     private fun editNgProduct(data: NGProductItemModel) {
+        navController.navigate(R.id.action_NGProductListFragment_to_NGProductEditFragment,
+            Bundle().apply {
+                putObjectString(qualityTask)
+                putObjectString(data)
+            })
 
     }
 
@@ -156,7 +181,7 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
     }
 
     private fun setupDealType(textView: TextView, type: Int) {
-        val typeDrawer = when(type) {
+        val typeDrawer = when (type) {
             1 -> NgDealType.StepQualified
             2 -> NgDealType.ReWork
             3 -> NgDealType.Scrap

@@ -274,4 +274,7 @@ interface QualityApi {
     fun pdaQmsNgProductListGet(
         @retrofit2.http.Query("id") id: Int
     ): Single<DataListNode<NGProductItemModel>>
+
+    @POST("pda/qms/adverse/deal/del-record")
+    fun deleteNgProductPost(@retrofit2.http.Body body: IdRequest): Single<Any>
 }

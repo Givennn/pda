@@ -3,7 +3,10 @@ package com.panda.pda.mes.base
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -53,6 +56,19 @@ class NumberInputDialogFragment: DialogFragment(R.layout.dialog_number_input) {
             }
             binding.dialogMsg.text = title
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val layoutParams = requireDialog().window?.attributes
+        if (layoutParams != null) {
+            layoutParams.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+            requireDialog().window?.attributes = layoutParams
+        }
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     fun setConfirmButton(

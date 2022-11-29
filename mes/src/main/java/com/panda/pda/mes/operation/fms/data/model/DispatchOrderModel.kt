@@ -42,6 +42,7 @@ data class DispatchOrderModel(
     val receiveName: String,
     val remark: String,
     val reportNum: Int,
+    val reportFlag: Int,
     val technicsCode: String,
     val technicsId: Int,
     @ModelProperty(14, "操作工")

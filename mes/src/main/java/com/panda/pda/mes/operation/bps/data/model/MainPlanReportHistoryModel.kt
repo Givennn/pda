@@ -18,7 +18,7 @@ data class MainPlanReportHistoryModel(
     val productName: String,
     @ModelProperty(4, "型号代号")
     val productModel: String,
-    @ModelProperty(5, "主计划状态", dataParameterType = "MAIN_PLAN_REPORT_STATUS")
+    @ModelProperty(5, "主计划状态", dataParameterType = "BPS_PLAN_STATUS")
     val planStatus: Int,
     @ModelProperty(6, "主计划数量")
     val planNumber: Int,

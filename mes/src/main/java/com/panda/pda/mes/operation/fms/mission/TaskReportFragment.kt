@@ -71,10 +71,8 @@ class TaskReportFragment :
                     tvTaskProgress.text = getColorTaskProgress(data)
                     tvTaskSender.text = data.receiveName
                     tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
-                    btnAction.visibility =
-                        if (data.dispatchOrderNum > data.reportNum && data.dispatchOrderStatus == CommonParameters.getValue(
-                                DataParamType.TASK_STATUS, "执行中")
-                        ) View.VISIBLE else View.GONE
+                    btnAction.isEnabled = data.reportFlag == 1
+
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
@@ -118,8 +116,10 @@ class TaskReportFragment :
         WebClient.request(TaskApi::class.java).taskGetByIdGet(data.id)
             .bindToFragment()
             .subscribe({
-                taskViewModel.taskInfoData.postValue(TaskInfoModel(it, null))
-                navController.navigate(R.id.taskReportInputFragment)
+//                taskViewModel.taskInfoData.postValue(TaskInfoModel(it, null))
+                navController.navigate(R.id.taskReportInputFragment, Bundle().apply {
+                    putObjectString(TaskInfoModel(it, null))
+                })
             }, {})
     }
 }

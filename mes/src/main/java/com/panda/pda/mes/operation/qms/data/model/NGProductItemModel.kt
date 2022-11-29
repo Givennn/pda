@@ -6,9 +6,9 @@ package com.panda.pda.mes.operation.qms.data.model
 data class NGProductItemModel(
     val dealTime: String,
     val dealType: Int,
-    val id: String,
-    val procedureBadList: List<ProcedureBad>,
-    val procedureReturnList: List<ProcedureReturn>,
+    val id: Int,
+    val procedureBadList: List<ProcedureItem>,
+    val procedureReturnList: List<ProcedureItem>,
     val productBarCode: String,
     val productCount: String,
     val qualityTaskId: String,
@@ -17,12 +17,7 @@ data class NGProductItemModel(
     val status: String
 )
 
-data class ProcedureBad(
-    val procedureCode: String,
-    val procedureName: String
-)
-
-data class ProcedureReturn(
+data class ProcedureItem(
     val procedureCode: String,
     val procedureName: String
 )

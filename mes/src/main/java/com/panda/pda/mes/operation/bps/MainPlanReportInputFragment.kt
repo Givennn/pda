@@ -119,6 +119,12 @@ class MainPlanReportInputFragment : BaseFragment(R.layout.fragment_main_plan_rep
                 throw Exception("请添加资源")
             }
             resources.forEach {
+                if (it.reportNumber == null || it.reportNumber == 0) {
+                    throw Exception("工序报工数量不能为0")
+                }
+                if (it.reportNumber !in 1..detail.planNumber) {
+                    throw Exception("工序报工数量不能大于主计划数量")
+                }
                 it.jockeyList = it.selectedPerson.map { user -> user.id }
                 it.equipmentList = it.selectedEquipment.map { eqp -> eqp.id }
             }

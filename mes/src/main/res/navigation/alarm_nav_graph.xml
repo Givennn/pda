@@ -15,4 +15,8 @@
         android:id="@+id/alarmHistoryFragment"
         android:name="com.panda.pda.mes.operation.fms.alarm.AlarmHistoryFragment"
         android:label="AlarmHistoryFragment" />
+    <fragment
+        android:id="@+id/equipmentSelectFragment2"
+        android:name="com.panda.pda.mes.operation.bps.EquipmentSelectFragment"
+        android:label="EquipmentSelectFragment" />
 </navigation>

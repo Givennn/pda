@@ -1,69 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="12dp"
-    xmlns:tools="http://schemas.android.com/tools">
-    <TextView
-        android:id="@+id/tv_reporter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        tools:text="张三"
-        style="@style/moduleTitleText"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_report_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        style="@style/moduleTitleText"
-        tools:text="2019-01-22 10:12:40"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/tv_reporter_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/tv_reporter"
-        app:layout_constraintTop_toBottomOf="@id/tv_reporter"
-        android:text="@string/reporter"
-        style="@style/descText"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tv_reporter"
+            style="@style/moduleTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="张三" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        app:layout_constraintEnd_toEndOf="@+id/tv_report_time"
-        android:text="@string/report_time"
-        app:layout_constraintTop_toBottomOf="@id/tv_report_time"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tv_report_time"
+            style="@style/moduleTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2019-01-22 10:12:40" />
 
-    <ImageView
-        android:id="@+id/iv_detail_bullet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_message_detail"
-        app:layout_constraintTop_toBottomOf="@id/tv_reporter_label"
-        app:layout_constraintStart_toStartOf="@+id/tv_reporter"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tv_reporter_label"
+            style="@style/descText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/reporter"
+            app:layout_constraintStart_toStartOf="@id/tv_reporter"
+            app:layout_constraintTop_toBottomOf="@id/tv_reporter" />
 
-    <TextView
-        android:id="@+id/tv_remark"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/iv_detail_bullet"
-        app:layout_constraintTop_toTopOf="@+id/iv_detail_bullet"
-        app:layout_constraintEnd_toEndOf="@id/tv_report_time"
-        android:layout_marginStart="2dp"
-        android:includeFontPadding="false"
-        android:textSize="14sp"
-        android:textColor="@color/textRemarkColor"
-        tools:text="@string/long_text_test"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="end"
+            android:text="@string/report_time"
+            app:layout_constraintEnd_toEndOf="@+id/tv_report_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_report_time" />
+
+        <ImageView
+            android:id="@+id/iv_detail_bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_message_detail"
+            app:layout_constraintStart_toStartOf="@+id/tv_reporter"
+            app:layout_constraintTop_toBottomOf="@id/tv_reporter_label" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/textRemarkColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_report_time"
+            app:layout_constraintStart_toEndOf="@id/iv_detail_bullet"
+            app:layout_constraintTop_toTopOf="@+id/iv_detail_bullet"
+            tools:text="@string/long_text_test" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -31,7 +31,8 @@ data class DataParameterModel(
     val WORK_ORDER_OPERATE: List<Parameter>,
     val BPS_PRODUCT_MODE: List<Parameter>,
     val BPS_PLAN_STATUS: List<Parameter>,
-    val BPS_WORK_ORDER_STATUS: List<Parameter>
+    val BPS_WORK_ORDER_STATUS: List<Parameter>,
+    val ALARM_EXCEPTION_TYPE: List<Parameter>
 )
 
 data class Parameter(
