@@ -14,8 +14,8 @@ data class QualityTaskModel(
     val qualitySolutionName: String,
     @ModelProperty(4, "质检类型")
     val qualityType: String,
-    @ModelProperty(5, "质检方式")
-    val qualityMethod: String,
+    @ModelProperty(5, "质检方式", dataParameterType = "QUALITY_METHOD")
+    val qualityMethod: Int,
     @ModelProperty(6, "产品编码")
     val productCode: String,
     @ModelProperty(7, "产品描述")

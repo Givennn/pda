@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dispatch_order_report_nav_graph"
+    app:startDestination="@id/taskReportFragment2">
+
+    <fragment
+        android:id="@+id/taskReportFragment2"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportFragment"
+        android:label="TaskReportFragment" >
+        <action
+            android:id="@+id/action_taskReportFragment2_to_taskReportInputFragment2"
+            app:destination="@id/taskReportInputFragment2" />
+        <action
+            android:id="@+id/action_taskReportFragment2_to_dispatchOrderReportHistoryFragment"
+            app:destination="@id/dispatchOrderReportHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskReportInputFragment2"
+        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"
+        android:label="TaskReportInputFragment" />
+    <fragment
+        android:id="@+id/dispatchOrderReportHistoryFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.report_history.DispatchOrderReportHistoryFragment"
+        android:label="DispatchOrderReportHistoryFragment" >
+        <action
+            android:id="@+id/action_dispatchOrderReportHistoryFragment_to_dispatchOrderReportHistoryDetailFragment"
+            app:destination="@id/dispatchOrderReportHistoryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dispatchOrderReportHistoryDetailFragment"
+        android:name="com.panda.pda.mes.operation.fms.mission.report_history.DispatchOrderReportHistoryDetailFragment"
+        android:label="DispatchOrderReportHistoryDetailFragment" />
+</navigation>

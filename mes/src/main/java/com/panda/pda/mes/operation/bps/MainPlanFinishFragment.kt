@@ -90,45 +90,52 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
         ) { info, record -> Pair(info, record) }
             .bindToFragment()
             .subscribe({
-                navController.navigate(R.id.action_mainPlanFinishFragment2_to_mainPlanDetailFragment2, Bundle().apply {
-                    putObjectString(it.first)
-                    putGenericObjectString(
-                        it.second,
-                        Types.newParameterizedType(
-                            DataListNode::class.java,
-                            CommonOperationRecordModel::class.java
+                navController.navigate(R.id.action_mainPlanFinishFragment2_to_mainPlanDetailFragment2,
+                    Bundle().apply {
+                        putObjectString(it.first)
+                        putGenericObjectString(
+                            it.second,
+                            Types.newParameterizedType(
+                                DataListNode::class.java,
+                                CommonOperationRecordModel::class.java
+                            )
                         )
-                    )
-                })
+                    })
             }, {})
     }
 
 
     private fun onItemActionClicked(data: MainPlanModel) {
-        if (data.selfInspection != 0 && data.specialInspection != 0) {
-            val dialog = ConfirmDialogFragment().setTitle(getString(R.string.main_plan_finish_confirm))
-                .setConfirmButton({ _, _ ->
-                    WebClient.request(MainPlanApi::class.java)
-                        .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id))
-                        .bindToFragment()
-                        .subscribe({
-                            toast(R.string.main_plan_finish_success_toast)
-                            refreshData()
-                        },
-                            { })
-                })
+        if (data.selfInspection == 0 && data.specialInspection == 0) {
+            val dialog =
+                ConfirmDialogFragment().setTitle(getString(R.string.main_plan_finish_confirm))
+                    .setConfirmButton({ _, _ ->
+                        WebClient.request(MainPlanApi::class.java)
+                            .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id))
+                            .bindToFragment()
+                            .subscribe({
+                                toast(R.string.main_plan_finish_success_toast)
+                                refreshData()
+                            },
+                                { })
+                    })
             dialog.show(parentFragmentManager, TAG)
         } else {
             val dialog = NumberInputDialogFragment().setTitle("送检数量")
                 .setConfirmButton({ inspectNumber ->
-                    WebClient.request(MainPlanApi::class.java)
-                        .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id, inspectNumber))
-                        .bindToFragment()
-                        .subscribe({
-                            toast(R.string.main_plan_finish_success_toast)
-                            refreshData()
-                        },
-                            { })
+                    if (inspectNumber <= 0) {
+                        toast("请输入送检数量")
+                    } else {
+                        WebClient.request(MainPlanApi::class.java)
+                            .mainPlanFinishConfirmPost(MainPlanFinishRequest(data.id,
+                                inspectNumber))
+                            .bindToFragment()
+                            .subscribe({
+                                toast(R.string.main_plan_finish_success_toast)
+                                refreshData()
+                            }, { })
+                    }
+
                 })
             dialog.show(parentFragmentManager, TAG)
         }
@@ -139,7 +146,7 @@ class MainPlanFinishFragment : CommonSearchListFragment<MainPlanModel>() {
             .mainPlanFinishListGet(key)
 
     override val titleResId: Int
-    get() = R.string.main_plan_finish
+        get() = R.string.main_plan_finish
 
     override val searchBarHintResId: Int
         get() = R.string.main_plan_search_bar_hint

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.common.data.CommonParameters
@@ -31,7 +32,7 @@ class TaskDetailFragment : BaseFragment(R.layout.fragment_task_detail) {
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener(it) }
         createRecordAdapter()
         viewBinding.rvRecords.adapter = bindingAdapter
-        val taskInfo = viewModel.taskInfoData.value
+        val taskInfo = arguments?.getStringObject<TaskInfoModel>()
         if (taskInfo != null) {
             bindData(taskInfo)
         } else {

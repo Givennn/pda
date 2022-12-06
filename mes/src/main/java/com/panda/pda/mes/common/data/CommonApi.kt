@@ -34,7 +34,7 @@ interface CommonApi {
      */
     @GET("pda/config/sys-param/list-all")
     fun pdaConfigSysParamListByParamGet(
-    ): Single<DataParameterModel>
+    ): Single<Map<String, List<Parameter>>>
 
 
     @Streaming
@@ -84,4 +84,9 @@ interface CommonApi {
     ): Single<DataListNode<PersonModel>>
 
 
+    /**
+     * 查询系统配置
+     */
+    @GET("pda/config/sys/query")
+    fun pdaConfigSysQueryGet(@retrofit2.http.Query("sysModules") sysModules: String): Single<DataListNode<SysParameter>>
 }

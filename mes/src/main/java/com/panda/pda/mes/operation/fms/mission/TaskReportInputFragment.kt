@@ -3,8 +3,6 @@ package com.panda.pda.mes.operation.fms.mission
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,12 +10,10 @@ import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
-import com.panda.pda.mes.BuildConfig
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.extension.getGenericObjectString
 import com.panda.pda.mes.base.extension.getStringObject
-import com.panda.pda.mes.base.extension.putGenericObjectString
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.base.retrofit.onMainThread
@@ -29,18 +25,18 @@ import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.common.data.model.PersonModel
 import com.panda.pda.mes.databinding.FragmentTaskReportInputBinding
 import com.panda.pda.mes.operation.fms.data.TaskApi
+import com.panda.pda.mes.operation.fms.data.model.ResourceModel
 import com.panda.pda.mes.operation.fms.data.model.TaskInfoModel
 import com.panda.pda.mes.operation.fms.data.model.TaskReportRequest
 import com.panda.pda.mes.user.UserViewModel
 import com.squareup.moshi.Types
-import com.trello.rxlifecycle4.kotlin.bindToLifecycle
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 /**
@@ -55,7 +51,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
     private val userViewModel by activityViewModels<UserViewModel>()
 
     private var isEqpProductMode = false
-    private var selectedPerson = listOf<PersonModel>()
+    private var selectedPerson = listOf<ResourceModel>()
 
     //    private val takeImageResult =
 //        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -66,6 +62,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 //            }
 //        }
     private var latestTmpUri: Uri? = null
+    private var workCenterId: Int? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,6 +71,7 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
         val info = arguments?.getStringObject<TaskInfoModel>()
         if (info != null) {
             val detail = info.detail
+            workCenterId = detail.workCenterId
             viewBinding.apply {
                 tvPlanCode.text = detail.workOrderCode
                 tvTaskCode.text = detail.dispatchOrderCode
@@ -84,22 +82,31 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
                 tvTaskCount.text = detail.dispatchOrderNum.toString()
                 tvReportNumber.text = detail.reportNum.toString()
                 tilReportNum.minValue = 1
-                tilReportNum.maxValue  = if (detail.repairFlag == 0) {
+                tilReportNum.maxValue = if (detail.repairFlag == 1) {
                     detail.dispatchOrderNum - detail.reportNum
                 } else {
-                    detail.dispatchOrderNum * (detail.reportExcessRate + 1).toInt() - detail.reportNum
+                    val floatMaxValue = BigDecimal(detail.dispatchOrderNum.toDouble() * (detail.reportExcessRate / 100.0 + 1.0))
+                    val reportMaxValue = floatMaxValue.setScale(
+                            0,
+                            RoundingMode.CEILING).toInt()
+//                    Timber.e("reportMaxValue: $reportMaxValue, floatMaxValue: $floatMaxValue")
+                    reportMaxValue - detail.reportNum
                 }
 
-                if (detail.selfInspection != 0 && detail.specialInspection != 0) {
+                if (detail.inspectFlag == 1) {
                     etInspectNum.setText(detail.reportNum.toString())
-                    tilInspectNum.minValue = 1
-                    tilInspectNum.maxValue = detail.reportNum
+                    tilInspectNum.minValue = 0
+                    tilInspectNum.maxValue = tilReportNum.maxValue
+//                    tilInspectNum.minValue = minOf(1, detail.reportNum)
+                    tilInspectNum.isEnabled = true
                 } else {
-                    llInspectNumber.isEnabled = false
+                    tilInspectNum.minValue = 0
+                    tilInspectNum.maxValue = 0
+                    tilInspectNum.isEnabled = false
                 }
 
                 llResource.setOnClickListener {
-                    navToPersonSelect()
+                    navToResourceSelect()
                 }
             }.btnConfirm.setOnClickListener {
                 report(info)
@@ -142,34 +149,43 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 //        }
 
 
-        setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { result, bundle ->
-            val newSelectedPerson =
-                bundle.getGenericObjectString<List<PersonModel>>(
-                    Types.newParameterizedType(
-                        List::class.java,
-                        PersonModel::class.java
-                    ))
-
-            if (newSelectedPerson != null) {
-                selectedPerson = newSelectedPerson
-            }
-            viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
-        }
-        val currentUser = userViewModel.loginData.value?.userInfo ?: return
-        selectedPerson = listOf(PersonModel(currentUser.id,
-            -1,
-            listOf(),
-            -1,
-            -1,
-            "",
-            "",
-            currentUser.userName,
-            ""))
-        viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
+//        setFragmentResultListener(PersonSelectFragment.PERSON_SELECTED) { result, bundle ->
+//            val newSelectedPerson =
+//                bundle.getGenericObjectString<List<PersonModel>>(
+//                    Types.newParameterizedType(
+//                        List::class.java,
+//                        PersonModel::class.java
+//                    ))
+//
+//            if (newSelectedPerson != null) {
+//                selectedPerson = newSelectedPerson
+//            }
+//            viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.userName }
+//        }
+//        val currentUser = userViewModel.loginData.value?.userInfo ?: return
+//        selectedPerson = listOf(ResourceModel(currentUser.id,
+//            -1,
+//            listOf(),
+//            -1,
+//            -1,
+//            "",
+//            "",
+//            currentUser.userName,
+//            ""))
+        viewBinding.tvSelectedOperator.text = selectedPerson.joinToString { it.resource }
     }
 
-    private fun navToPersonSelect() {
-        val dialog = ResourceSelectDialogFragment(0)
+    private fun navToResourceSelect() {
+        if (workCenterId == null) {
+            toast(R.string.net_work_error)
+            return
+        }
+        val dialog = ResourceSelectDialogFragment(workCenterId!!)
+            .setConfirmButton {
+                selectedPerson = it
+                viewBinding.tvSelectedOperator.text =
+                    selectedPerson.joinToString { res -> res.resource }
+            }
         dialog.show(parentFragmentManager, TAG)
 //        navController.navigate(R.id.personSelectFragment,
 //            Bundle().apply {
@@ -187,16 +203,18 @@ class TaskReportInputFragment : BaseFragment(R.layout.fragment_task_report_input
 //        }
         if (selectedPerson.isEmpty() && isEqpProductMode) {
             toast(getString(R.string.operator_not_selected_message))
+            return
         }
         val request = TaskReportRequest(info.detail.id,
             viewBinding.etReportNum.text.toString().toInt(),
             viewBinding.etRemark.text.toString(),
             photoAdapter.getDataSource(),
-            selectedPerson.map { it.id },
+            selectedPerson,
             viewBinding.etInspectNum.text.toString().toIntOrNull()
         )
         if (request.deliverNumber != null && request.deliverNumber > request.reportNumber) {
             toast("送检数量超出报工数量")
+            return
         }
         WebClient.request(TaskApi::class.java)
             .pdaFmsTaskReportConfirmPost(request)

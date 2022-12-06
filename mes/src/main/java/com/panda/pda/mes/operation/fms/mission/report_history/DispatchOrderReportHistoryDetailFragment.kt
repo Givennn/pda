@@ -1,4 +1,4 @@
-package com.panda.pda.mes.operation.bps.report_history
+package com.panda.pda.mes.operation.fms.mission.report_history
 
 import android.os.Bundle
 import android.view.View
@@ -10,12 +10,14 @@ import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.databinding.FragmentQualityDetailBinding
-import com.panda.pda.mes.operation.bps.data.model.MainPlanReportHistoryModel
+import com.panda.pda.mes.operation.bps.report_history.PhotosFragment
+import com.panda.pda.mes.operation.fms.data.model.DispatchOrderReportHistoryModel
+import com.panda.pda.mes.operation.fms.data.model.TaskDetailModel
 
 /**
- * created by AnJiwei 2022/11/1
+ * created by AnJiwei 2022/11/30
  */
-class ReportHistoryDetailFragment : BaseFragment(R.layout.fragment_quality_detail) {
+class DispatchOrderReportHistoryDetailFragment: BaseFragment(R.layout.fragment_quality_detail) {
     private val viewBinding by viewBinding<FragmentQualityDetailBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,19 +25,20 @@ class ReportHistoryDetailFragment : BaseFragment(R.layout.fragment_quality_detai
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         viewBinding.topAppBar.title = getString(R.string.main_plan_report_detail)
 
-        val detail = arguments?.getStringObject<MainPlanReportHistoryModel>()
+        val reportHistory = arguments?.getStringObject<DispatchOrderReportHistoryModel>()
+
+        val dispatchOrder = arguments?.getStringObject<TaskDetailModel>()
 
         viewBinding.apply {
             viewPage.adapter = object : FragmentStateAdapter(parentFragmentManager, lifecycle) {
                 override fun getItemCount(): Int {
-                    return 3
+                    return 2
                 }
 
                 override fun createFragment(position: Int): Fragment {
                     return when (position) {
-                        0 -> BasicInfoFragment(detail)
-                        1 -> ReportInfoFragment(detail)
-                        2 -> PhotosFragment(detail?.fileList)
+                        0 -> ReportHistoryBasicInfoFragment(dispatchOrder, reportHistory)
+                        1 -> PhotosFragment(reportHistory?.fileList)
                         else -> throw IndexOutOfBoundsException()
                     }
                 }
@@ -44,8 +47,7 @@ class ReportHistoryDetailFragment : BaseFragment(R.layout.fragment_quality_detai
             TabLayoutMediator(tabLayout, viewPage) { tab, position ->
                 tab.text = when (position) {
                     0 -> getString(R.string.basic_info)
-                    1 -> getString(R.string.report_info)
-                    2 -> getString(R.string.photo)
+                    1 -> getString(R.string.photo)
                     else -> ""
                 }
             }.attach()

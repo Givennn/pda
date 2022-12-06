@@ -30,7 +30,7 @@ class TaskMessageNavigationAdapter(
         Pair(R.id.taskReceiveFragment, "fmsTaskToReceive"),
         Pair(R.id.taskPrepareFragment, "dispatchOrderToPrepare"),
         Pair(R.id.taskExecuteFragment, "fmsTaskToRun"),
-        Pair(R.id.taskReportFragment, "fmsTaskToReport"),
+        Pair(R.id.dispatch_order_report_nav_graph, "fmsTaskToReport"),
         Pair(R.id.taskFinishFragment, "fmsTaskToFinish"),
         Pair(R.id.quality_task_nav_graph, "qmsTask"),
         Pair(R.id.quality_review_nav_graph, "qmsTaskToAudit"),

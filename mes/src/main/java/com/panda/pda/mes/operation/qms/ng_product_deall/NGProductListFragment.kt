@@ -112,7 +112,7 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
                     tvProductBarCode.text = data.productBarCode
                     setupDealType(tvDealMethod, data.dealType)
                     tvDealNumber.text = data.productCount
-                    tvDealStatus.text = data.status
+                    tvDealStatus.text = if (data.status == 1) "处理中" else "已完成"
                     tvDealTime.text = data.dealTime
                     tvActualFinishTime.text = data.realFinishTime
                     btnActionEdit.setOnClickListener {
@@ -180,7 +180,7 @@ class NGProductListFragment : BaseFragment(R.layout.fragment_ng_product_list) {
             }, {})
     }
 
-    private fun setupDealType(textView: TextView, type: Int) {
+    private fun setupDealType(textView: TextView, type: Int?) {
         val typeDrawer = when (type) {
             1 -> NgDealType.StepQualified
             2 -> NgDealType.ReWork

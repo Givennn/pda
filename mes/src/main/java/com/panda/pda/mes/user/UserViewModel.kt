@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.panda.pda.mes.PdaApplication
 import com.panda.pda.mes.base.retrofit.QueryParamInterceptor
+import com.panda.pda.mes.common.data.model.SysParameter
 import com.panda.pda.mes.user.data.model.LoginDataModel
 import com.panda.pda.mes.user.data.model.LoginRequest
 import timber.log.Timber

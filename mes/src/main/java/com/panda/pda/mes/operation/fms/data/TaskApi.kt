@@ -146,9 +146,9 @@ interface TaskApi {
     @GET("pda/fms/dispatch-order/report/get-recourse-by-workcenter")
     fun resourceListGetByWorkCenter(
         @retrofit2.http.Query("workCenterId") workCenterId: Int,
-        @retrofit2.http.Query("workCenterId") resourceType: Int,
-        @retrofit2.http.Query("workCenterId") resource: String,
-        @retrofit2.http.Query("workCenterId") page: Int,
-        @retrofit2.http.Query("workCenterId") rows: Int = 10,
+        @retrofit2.http.Query("resourceType") resourceType: Int,
+        @retrofit2.http.Query("resource") resource: String,
+        @retrofit2.http.Query("page") page: Int,
+        @retrofit2.http.Query("rows") rows: Int = 10,
     ): Single<DataListNode<ResourceModel>>
 }

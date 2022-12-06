@@ -161,7 +161,7 @@
     <string name="quality_task_commit">提交质检任务</string>
     <string name="input_hint">请输入</string>
     <string name="select_hint">请选择</string>
-    <string name="verifier">审核人</string>
+    <string name="verifier">质检人</string>
     <string name="quality_task_search_hint">请输入质检任务编号/质检任务描述/质检方案编码/质检方案描述/产品编码/产品描述</string>
     <string name="quality_task_review">审核质检任务</string>
     <string name="verifier_result">审核结果</string>
@@ -375,5 +375,6 @@
     <string name="ng_product_delte_finish_success_toast">不合格品处理数据删除成功</string>
     <string name="equipment_select">设备选择</string>
     <string name="equipment_search_bar_hint">输入设备名称</string>
+    <string name="ng_procedure">不良工序</string>
     <!--设备管理系统ems end-->
 </resources>

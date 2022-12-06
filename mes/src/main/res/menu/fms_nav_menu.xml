@@ -30,7 +30,7 @@
         android:title="@string/material_replace"
         android:icon="@drawable/ic_op_material_replace"/>
     <item
-        android:id="@+id/taskReportFragment"
+        android:id="@+id/dispatch_order_report_nav_graph"
         android:title="@string/task_report"
         android:icon="@drawable/ic_op_task_report"/>
     <item

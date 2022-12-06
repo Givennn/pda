@@ -73,15 +73,26 @@ class TaskReportFragment :
                     tvManHour.text = DateUtils.getManHour(data.totalReportTime ?: 0)
                     btnAction.isEnabled = data.reportFlag == 1
 
+                    btnReportRecord.isEnabled = data.reportRecordList?.isNotEmpty() == true
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }
                     clInfo.setOnClickListener {
                         onItemInfoClicked(data)
                     }
+                    btnReportRecord.setOnClickListener {
+                        navToReportRecord(data)
+                    }
                 }
             }
         }
+    }
+
+    private fun navToReportRecord(data: DispatchOrderModel) {
+        navController.navigate(R.id.action_taskReportFragment2_to_dispatchOrderReportHistoryFragment,
+            Bundle().apply {
+                putObjectString(data)
+            })
     }
 
     private fun getColorTaskProgress(data: DispatchOrderModel): SpannableStringBuilder {
@@ -94,8 +105,8 @@ class TaskReportFragment :
 
         WebClient.request(TaskApi::class.java)
             .taskGetByIdGet(data.id)
-            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id),
-                { detail, records -> TaskInfoModel(detail, records.dataList) })
+            .zipWith(WebClient.request(TaskApi::class.java).taskOperationRecordGet(data.id)
+            ) { detail, records -> TaskInfoModel(detail, records.dataList) }
             .onMainThread()
             .bindLoadingStatus()
             .subscribe({ info ->
@@ -117,9 +128,10 @@ class TaskReportFragment :
             .bindToFragment()
             .subscribe({
 //                taskViewModel.taskInfoData.postValue(TaskInfoModel(it, null))
-                navController.navigate(R.id.taskReportInputFragment, Bundle().apply {
-                    putObjectString(TaskInfoModel(it, null))
-                })
+                navController.navigate(R.id.action_taskReportFragment2_to_taskReportInputFragment2,
+                    Bundle().apply {
+                        putObjectString(TaskInfoModel(it, null))
+                    })
             }, {})
     }
 }

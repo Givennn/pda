@@ -3,6 +3,7 @@ package com.panda.pda.mes.operation.qms
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.panda.pda.mes.base.retrofit.DataListNode
+import com.panda.pda.mes.common.data.model.SysParameter
 import com.panda.pda.mes.operation.qms.data.model.QualityDetailModel
 import com.panda.pda.mes.operation.qms.data.model.QualityProblemRecordDetailModel
 import com.panda.pda.mes.operation.qms.data.model.QualitySubTaskDetailModel
@@ -20,4 +21,16 @@ class QualityViewModel : ViewModel() {
     val qualityDetailSubTaskData by lazy { MutableLiveData<QualitySubTaskDetailModel>() }
 
     val problemRecordDetailData by lazy { MutableLiveData<QualityProblemRecordDetailModel>() }
+
+    val sysParametersData by lazy { MutableLiveData<List<SysParameter>>() }
+
+//    suspend fun getQmsSysParameter(): List<SysParameter> {
+//
+//        if (sysParametersData.value == null) {
+//
+//        }
+//    }
+//
+//    suspend fun getQmsSysParameter(): SysParameter
+
 }

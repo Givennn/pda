@@ -277,4 +277,22 @@ interface QualityApi {
 
     @POST("pda/qms/adverse/deal/del-record")
     fun deleteNgProductPost(@retrofit2.http.Body body: IdRequest): Single<Any>
+
+    /**
+     * 不合格品选择处理工序
+     */
+    @GET("pda/qms/adverse/deal/procedure-list")
+    fun adverseDealProcedureListGet( @retrofit2.http.Query("qualityTaskId") qualityTaskId: Int): Single<DataListNode<ProcedureItem>>
+
+    /**
+     * 增加处理记录
+     */
+    @POST("pda/qms/adverse/deal/add-record")
+    fun adverseDealAddRecordPost(@retrofit2.http.Body body: NGProductItemModel): Single<Any>
+
+    /**
+     * 编辑处理记录
+     */
+    @POST("pda/qms/adverse/deal/edit-record")
+    fun adverseDealEditRecordPost(@retrofit2.http.Body body: NGProductItemModel): Single<Any>
 }

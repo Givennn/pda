@@ -118,11 +118,12 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tv_resource_list"
+        android:id="@+id/rv_resource_list"
         app:layout_constraintTop_toBottomOf="@+id/rl_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/rg_resource_type_selector"
         app:layout_constraintStart_toStartOf="@id/gl_tab"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/item_resource"

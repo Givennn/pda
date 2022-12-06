@@ -1,6 +1,7 @@
 package com.panda.pda.mes.operation.fms.data.model
 
 import com.panda.pda.mes.common.ModelProperty
+import com.panda.pda.mes.common.data.model.FileInfoModel
 
 /**
  * created by AnJiwei 2021/8/24
@@ -62,6 +63,7 @@ data class DispatchOrderModel(
     val planStartTime: String,
     val receiveTime: String?,
     val totalReportTime: Int?,
+    val reportRecordList: List<DispatchOrderReportHistoryModel>?
 ): IExchangeCardOperateItem {
 
     override fun getWorkOrder(): String {
@@ -76,3 +78,23 @@ data class DispatchOrderModel(
         }
     }
 }
+
+data class DispatchOrderReportHistoryModel(
+
+    val id: String,
+    @ModelProperty(14, "报工数量")
+    val reportNumber: String,
+    @ModelProperty(14, "送检数量")
+    val deliverNumber: Int,
+    @ModelProperty(14, "报工工时")
+    val reportTime: String,
+    @ModelProperty(14, "资源")
+    val resources: String,
+    @ModelProperty(14, "报工人")
+    val createName: String,
+    @ModelProperty(14, "报工时间")
+    val createTime: String,
+    val remark: String,
+    val fileList: List<FileInfoModel>,
+
+    )

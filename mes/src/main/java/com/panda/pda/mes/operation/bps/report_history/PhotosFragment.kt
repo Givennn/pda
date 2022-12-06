@@ -19,16 +19,16 @@ import com.panda.pda.mes.operation.bps.data.model.MainPlanReportHistoryModel
  * created by AnJiwei 2022/11/1
  */
 class PhotosFragment(
-    private val detail: MainPlanReportHistoryModel?,
+    private val photos: List<FileInfoModel>?,
 ) : BaseFragment(R.layout.fragment_report_history_photos) {
 
     private val viewBinding by viewBinding<FragmentReportHistoryPhotosBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (detail != null) {
+        if (photos != null) {
             viewBinding.rvPicList.adapter = object :
-                CommonViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(detail.fileList.toMutableList()) {
+                CommonViewBindingAdapter<ItemTaskReportDetailPicBinding, FileInfoModel>(photos.toMutableList()) {
                 override fun createBinding(parent: ViewGroup): ItemTaskReportDetailPicBinding {
                     return ItemTaskReportDetailPicBinding.inflate(
                         LayoutInflater.from(parent.context),

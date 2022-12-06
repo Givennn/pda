@@ -179,6 +179,9 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        app:counterMaxLength="1000"
+        app:counterEnabled="true"
+        app:counterTextColor="@color/text_field_hint"
         app:layout_constraintTop_toBottomOf="@id/tv_alarm_detail">
 
         <com.google.android.material.textfield.TextInputEditText

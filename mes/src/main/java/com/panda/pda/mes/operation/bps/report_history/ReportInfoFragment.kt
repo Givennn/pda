@@ -45,8 +45,8 @@ class ReportInfoFragment(
                         tvReportNumber.text = "工序报工数量: ${data.reportNumber}"
                         tvOperator.text = "操作工：${data.jockeyNameStr}"
                         tvDevice.text = "设备：${data.equipmentStr}"
-                        tvPersonWorkHour.text = "人员工时（小时）：${data.reportTime}"
-                        tvDeviceWorkHour.text = "设备工时（小时）：${data.equRealReportTime}"
+                        tvPersonWorkHour.text = "人员工时（小时）：${ data.realReportTime / 60.0}"
+                        tvDeviceWorkHour.text = "设备工时（小时）：${data.equRealReportTime / 60.0}"
                     }
                 }
 

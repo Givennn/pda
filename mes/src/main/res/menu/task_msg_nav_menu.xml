@@ -13,7 +13,7 @@
         android:title="@string/task_execute"
         android:icon="@drawable/ic_op_task_execute"/>
     <item
-        android:id="@+id/taskReportFragment"
+        android:id="@+id/dispatch_order_report_nav_graph"
         android:title="@string/task_report"
         android:icon="@drawable/ic_op_task_report"/>
     <item

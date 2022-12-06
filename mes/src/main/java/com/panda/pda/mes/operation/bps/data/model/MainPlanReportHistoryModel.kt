@@ -31,7 +31,7 @@ data class MainPlanReportModel(
     val equRealReportTime: Int,
     val equipmentStr: String,
     val jockeyNameStr: String,
-    val realReportTime: String,
+    val realReportTime: Int,
     val reportNumber: Int,
     val reportTime: Double
 )

@@ -19,7 +19,7 @@ interface DiscoveryApi {
      * The endpoint is owned by docs service owner
      * @param keywords  (required)
      */
-    @GET("pda/fms/task/list-all")
+    @GET("pda/fms/dispatch-order/list-all")
     fun pdaFmsTaskListAllGet(
         @retrofit2.http.Query("keywords") keywords: String?,
     ): Single<DataListNode<DispatchOrderModel>>
@@ -92,7 +92,7 @@ interface DiscoveryApi {
      * @param id  (required)
      * @param raw raw paramter (optional)
      */
-    @GET("pda/fms/task/get-by-id")
+    @GET("pda/fms/dispatch-order/get-by-id")
     fun taskGetByIdGet(
         @retrofit2.http.Query("id") id: Int,
     ): Single<DispatchOrderDetailDiscoveryModel>
@@ -103,7 +103,7 @@ interface DiscoveryApi {
      * The endpoint is owned by docs service owner
      * @param id  (required)
      */
-    @GET("pda/fms/task/operation-record")
+    @GET("pda/fms/dispatch-order/operation-record")
     fun taskOperationRecordGet(
         @retrofit2.http.Query("id") id: Int,
     ): Single<DataListNode<CommonOperationRecordModel>>

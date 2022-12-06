@@ -102,7 +102,7 @@ class QualityDistributeDistributeFragment :
 
     private fun distribute() {
         if (selectedVerifier == null) {
-            toast("请选择审核人")
+            toast("请选择质检人")
             return
         }
 

@@ -66,7 +66,7 @@ class MainPlanReportFragment : CommonSearchListFragment<MainPlanModel>() {
                     clInfo.setOnClickListener {
                         onItemInfoClicked(data)
                     }
-                    btnAction.isVisible = data.planSource == 1
+                    btnAction.isEnabled = data.planStatus == 1 || data.planStatus == 4
                     btnAction.setOnClickListener {
                         onItemActionClicked(data)
                     }

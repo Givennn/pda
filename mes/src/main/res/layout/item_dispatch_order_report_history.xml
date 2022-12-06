@@ -11,11 +11,33 @@
         android:padding="12dp">
 
         <TextView
+            android:id="@+id/tv_report_number"
+            style="@style/moduleTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_reporter"
+            app:layout_constraintEnd_toEndOf="@+id/tv_report_number_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_report_number_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_reporter"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_report_number_title"
+            style="@style/descText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_reporter_label"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/tv_reporter_label"
+            app:layout_constraintTop_toTopOf="@+id/tv_reporter_label"
+            android:text="报工数量" />
+
+        <TextView
             android:id="@+id/tv_reporter"
             style="@style/moduleTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="张三" />
@@ -25,9 +47,9 @@
             style="@style/moduleTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_reporter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_reporter"
             tools:text="2019-01-22 10:12:40" />
 
         <TextView
@@ -41,6 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_reporter" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
