@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
+import com.panda.pda.mes.base.extension.getStringObject
 import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.ModelPropertyCreator
@@ -19,9 +22,12 @@ import com.panda.pda.mes.common.WheelPickerDialogFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.common.data.CommonParameters
 import com.panda.pda.mes.common.data.DataParamType
+import com.panda.pda.mes.common.data.model.QMSModuleProperty
+import com.panda.pda.mes.common.data.model.TaskRunType
 import com.panda.pda.mes.databinding.FragmentExecuteInputBinding
 import com.panda.pda.mes.databinding.ItemQualityCheckItemBinding
 import com.panda.pda.mes.operation.qms.NgReasonFragment
+import com.panda.pda.mes.operation.qms.QualityViewModel
 import com.panda.pda.mes.operation.qms.data.QualityApi
 import com.panda.pda.mes.operation.qms.data.model.*
 import com.squareup.moshi.Moshi
@@ -33,6 +39,42 @@ import java.util.concurrent.TimeUnit
  * created by AnJiwei 2021/10/13
  */
 class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
+
+    private var selectedNgList: List<QualityNgReasonModel>? = null
+    private val viewBinding by viewBinding<FragmentExecuteInputBinding>()
+
+    private val subTaskDetailModel: QualitySubTaskDetailModel by lazy {
+        requireArguments().getStringObject<QualitySubTaskDetailModel>()!!
+    }
+
+    private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
+
+    private val conclusionDialog by lazy {
+        WheelPickerDialogFragment().also {
+            it.pickerData = listOf("合格", "不合格")
+        }
+    }
+
+    private val verifyOptionDialog by lazy {
+        WheelPickerDialogFragment().also {
+            it.pickerData = verifyResultList ?: listOf()
+        }
+    }
+
+    private val inspectItemAdapter by lazy {
+        Moshi.Builder().build().adapter<List<QualityInspectItemModel>>(
+            Types.newParameterizedType(
+                List::class.java,
+                QualityInspectItemModel::class.java
+            )
+        )
+    }
+
+    private lateinit var inspectItems: List<QualityInspectItemModel>
+
+    private var verifyResultList: List<String>? = null
+
+    private var selectedVerifyResult: String? = null
 
     private val qualityItemsAdapter: CommonViewBindingAdapter<ItemQualityCheckItemBinding, QualityInspectItemModel> by lazy {
         object :
@@ -75,41 +117,10 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             }
         }
     }
-    private var selectedNgList: List<QualityNgReasonModel>? = null
-    private val viewBinding by viewBinding<FragmentExecuteInputBinding>()
 
-    private val subTaskDetailModel: QualitySubTaskDetailModel by lazy {
-        requireArguments().getSerializable(DETAIL_KEY) as QualitySubTaskDetailModel
-    }
+    private val qualityViewModel by activityViewModels<QualityViewModel>()
 
-    private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
-
-    private val conclusionDialog by lazy {
-        WheelPickerDialogFragment().also {
-            it.pickerData = listOf("合格", "不合格")
-        }
-    }
-
-    private val verifyOptionDialog by lazy {
-        WheelPickerDialogFragment().also {
-            it.pickerData = verifyResultList ?: listOf()
-        }
-    }
-
-    private val inspectItemAdapter by lazy {
-        Moshi.Builder().build().adapter<List<QualityInspectItemModel>>(
-            Types.newParameterizedType(
-                List::class.java,
-                QualityInspectItemModel::class.java
-            )
-        )
-    }
-
-    private lateinit var inspectItems: List<QualityInspectItemModel>
-
-    private var verifyResultList: List<String>? = null
-
-    private var selectedVerifyResult: String? = null
+    private var taskRunType = TaskRunType.SerialCode
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,6 +134,18 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
         viewBinding.rvQualityItem.adapter = qualityItemsAdapter
 
+        lifecycleScope.launchWhenStarted {
+            val parameter = qualityViewModel.getQmsSysProperty(QMSModuleProperty.taskRunType)
+            if (parameter != null) {
+                taskRunType = TaskRunType.getTaskRunType(parameter)
+                viewBinding.tvProductCodeOrNumber.text =
+                    when(taskRunType) {
+                        TaskRunType.SerialCode -> getString(R.string.product_serial_code)
+                        TaskRunType.Encode -> getString(R.string.product_number)
+                    }
+            }
+
+        }
         viewBinding.llNgReason.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())
@@ -156,11 +179,25 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
 
     private fun confirm() {
 
-        val productSerialCode = viewBinding.etProductSerialCode.text.toString()
-        if (productSerialCode.isEmpty()) {
-            toast("请输入产品条码！")
-            return
+        var productSerialCode = ""
+        var productCount: Int? = null
+        when (taskRunType) {
+            TaskRunType.SerialCode -> {
+                productSerialCode = viewBinding.etProductSerialCode.text.toString()
+                if (productSerialCode.isEmpty()) {
+                    toast("请输入产品条码！")
+                    return
+                }
+            }
+            TaskRunType.Encode -> {
+                productCount = viewBinding.etProductSerialCode.text.toString().toIntOrNull()
+                if (productCount == null) {
+                    toast("请输入产品数量！")
+                    return
+                }
+            }
         }
+
         if (selectedVerifyResult == null) {
             toast("请选择审核结论！")
             return
@@ -170,6 +207,7 @@ class ExecuteInputFragment : BaseFragment(R.layout.fragment_execute_input) {
             subTaskDetailModel.id,
             selectedVerifyResult!!,
             productSerialCode,
+            productCount,
             selectedNgList?.map { it.id },
             qualityItems
         )

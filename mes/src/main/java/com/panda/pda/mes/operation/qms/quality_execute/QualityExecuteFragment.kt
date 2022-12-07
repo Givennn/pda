@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jakewharton.rxbinding4.view.clicks
 import com.panda.pda.mes.R
+import com.panda.pda.mes.base.extension.putObjectString
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.databinding.ItemQualityExecuteBinding
@@ -79,7 +80,7 @@ class QualityExecuteFragment : BaseQualitySubTaskSearchListFragment<ItemQualityE
             .subscribe({
 
                 val args = Bundle().apply {
-                    putSerializable(ExecuteInputFragment.DETAIL_KEY, it.first)
+                    putObjectString(it.first)
                     putString(
                         ExecuteInputFragment.QUALITY_ITEM_KEY,
                         inspectItemAdapter.toJson(it.second.dataList)

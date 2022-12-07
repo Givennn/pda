@@ -27,15 +27,27 @@ data class QualitySubTaskDetailModel(
     val distributedNum: String,
     @ModelProperty(10, "已质检数量")
     val inspectedNum: String,
-    val expectEndTime: String,
-    val expectStartTime: String,
+
     val id: Int,
-    val notInspectedNum: String,
-    val qualifiedNum: String,
-    val concessionNum: String,
+    @ModelProperty(11, "待质检数量")
     val qualityNotInspectedNum: String,
-    val realEndTime: String,
-    val realStartTime: String,
+    @ModelProperty(12, "合格数量")
+    val qualifiedNum: String,
+    @ModelProperty(13, "让步合格数量")
+    val concessionNum: String,
+    @ModelProperty(14, "待检数量")
+    val notInspectedNum: String,
+    @ModelProperty(15, "不合格数量")
+    val unqualifiedNum: String,
+    @ModelProperty(20, "暂控数量")
     val temporaryControlNum: String,
-    val unqualifiedNum: String
+    @ModelProperty(21, "预计开始时间")
+    val expectStartTime: String,
+    @ModelProperty(22, "预计完成时间")
+    val expectEndTime: String,
+    @ModelProperty(23, "实际开始时间")
+    val realStartTime: String,
+    @ModelProperty(24, "实际完成时间")
+    val realEndTime: String,
+    val conclusion: String
 ): Serializable

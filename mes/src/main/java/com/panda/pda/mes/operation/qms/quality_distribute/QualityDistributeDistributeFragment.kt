@@ -57,6 +57,7 @@ class QualityDistributeDistributeFragment :
             }
         }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
+
         val modelProperty = ModelPropertyCreator(
             QualityDetailModel::class.java,
             viewBinding.llPropertyInfo
@@ -64,6 +65,8 @@ class QualityDistributeDistributeFragment :
         viewModel.qualityDetailInfoData.observe(viewLifecycleOwner) {
             modelProperty.setData(it)
             currentQualityTask = it
+            viewBinding.tilReportNum.minValue = 1
+            viewBinding.tilReportNum.maxValue = currentQualityTask.qualityNum - currentQualityTask.distributedNum
         }
 
         viewBinding.llSelectVerifier.clicks()
@@ -86,6 +89,8 @@ class QualityDistributeDistributeFragment :
             viewBinding.tvPlanDate.text =
                 "${planTime!!.first}~${planTime!!.second}"
         }
+
+
         viewBinding.llSelectPlanDate.clicks()
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .bindToLifecycle(requireView())

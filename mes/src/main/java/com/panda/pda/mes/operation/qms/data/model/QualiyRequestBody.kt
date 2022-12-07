@@ -48,6 +48,7 @@ data class QualityTaskExecuteRequest(
     val id: Int,
     val conclusion: String,
     val productBarCode: String,
+    val productCount: Int?,
     val badnessReasonIds: List<Int>?,
     val qualityItems: List<QualityItem>
 )

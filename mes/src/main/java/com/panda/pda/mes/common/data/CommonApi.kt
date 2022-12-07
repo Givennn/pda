@@ -88,5 +88,5 @@ interface CommonApi {
      * 查询系统配置
      */
     @GET("pda/config/sys/query")
-    fun pdaConfigSysQueryGet(@retrofit2.http.Query("sysModules") sysModules: String): Single<DataListNode<SysParameter>>
+    suspend fun pdaConfigSysQueryGet(@retrofit2.http.Query("sysModules") sysModules: String): DataListNode<SysParameter>
 }

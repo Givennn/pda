@@ -33,6 +33,21 @@ enum class QMSModuleProperty {
     taskRunType // : 质检任务执行方式 1条码 2编码
 }
 
+enum class TaskRunType(val code: Int) {
+    SerialCode(1),
+    Encode(2);
+
+    companion object {
+        fun getTaskRunType(parameter: SysParameter): TaskRunType {
+            if (parameter.sysParam != QMSModuleProperty.taskRunType.name) {
+                throw EnumConstantNotPresentException(TaskRunType::class.java, parameter.sysValue)
+            }
+            return values().first { it.code == parameter.sysValue.toInt() }
+        }
+    }
+
+}
+
 //sysModules :  FMS
 //字段含义
 //taskAutoReceive：任务接收方式 0手动 1自动

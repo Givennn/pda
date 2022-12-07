@@ -25,7 +25,7 @@ data class QualityDetailModel(
     @ModelProperty(8, "送检数量")
     val deliverNum: String,
     @ModelProperty(9, "需质检数量")
-    val qualityNum: String,
+    val qualityNum: Int,
     @ModelProperty(10, "派工单编号", [QualityDetailTag])
     val dispatchOrderCode: String,
     @ModelProperty(11, "派工单描述", [QualityDetailTag])
@@ -52,6 +52,9 @@ data class QualityDetailModel(
     val updateTime: String,
     @ModelProperty(22, "更新时间", [QualityDetailTag])
     val updateName: String,
+    val qualityNotInspectedNum: Int,
+    val distributedNum: Int,
+
 //    val qualifiedNum: String? = null
 //    val reportNumber: Int,
 //    val createId: Int,

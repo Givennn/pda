@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -32,11 +33,13 @@ import com.panda.pda.mes.common.data.CommonParameters
 import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.common.data.model.FileInfoModel
 import com.panda.pda.mes.common.data.model.OrgNodeModel
+import com.panda.pda.mes.common.data.model.QMSModuleProperty
 import com.panda.pda.mes.databinding.FragmentProblemRecordEditBinding
 import com.panda.pda.mes.databinding.ItemProblemRecordDetailFileBinding
 import com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment
 import com.panda.pda.mes.operation.fms.mission.TaskReportInputPhotoAdapter
 import com.panda.pda.mes.operation.qms.NgReasonFragment
+import com.panda.pda.mes.operation.qms.QualityViewModel
 import com.panda.pda.mes.operation.qms.data.QualityApi
 import com.panda.pda.mes.operation.qms.data.model.QualityProblemRecordDetailModel
 import com.squareup.moshi.JsonAdapter
@@ -65,6 +68,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private val viewBinding by viewBinding<FragmentProblemRecordEditBinding>()
 
     private val ngReasonAdapter by lazy { NgReasonFragment.getNgReasonAdapter() }
+
+    private val qualityViewModel by activityViewModels<QualityViewModel>()
 
     private val verifyDialog by lazy {
         WheelPickerDialogFragment().also {
@@ -121,6 +126,12 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val detailStr = arguments?.getString(DETAIL_KEY)
+        lifecycleScope.launchWhenStarted {
+            val parameter = qualityViewModel.getQmsSysProperty(QMSModuleProperty.taskRunType)
+            viewBinding.tvProductCodeOrNumber.text =
+                if (parameter?.sysValue == "2") getString(R.string.product_number) else getString(
+                    R.string.product_serial_code)
+        }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         detailModel = if (detailStr == null) {
 
@@ -246,10 +257,10 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             .pdaQmsQualityProblemGetByProductBarCodeGet(barCode)
             .bindToFragment()
             .subscribe({
-                       viewBinding.apply {
-                           etProductCode.setText(it.productCode)
-                           etProductDesc.setText(it.productName)
-                       }
+                viewBinding.apply {
+                    etProductCode.setText(it.productCode)
+                    etProductDesc.setText(it.productName)
+                }
             }, {})
 
     }
@@ -463,7 +474,7 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             override fun onBindViewHolderWithData(
                 holder: ViewBindingHolder,
                 data: FileInfoModel,
-                position: Int
+                position: Int,
             ) {
                 holder.itemViewBinding.btnFile.text = data.fileName
                 holder.itemViewBinding.root.setOnClickListener {

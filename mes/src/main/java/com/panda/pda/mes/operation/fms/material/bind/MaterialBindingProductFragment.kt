@@ -15,6 +15,7 @@ import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
 import com.panda.pda.mes.base.extension.deepCopy
+import com.panda.pda.mes.base.extension.toast
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.databinding.FragmentMaterialBindingProductBinding
 import com.panda.pda.mes.databinding.ItemBindMaterialCodeBinding
@@ -94,7 +95,9 @@ class MaterialBindingProductFragment : BaseFragment(R.layout.fragment_material_b
         WebClient.request(MaterialApi::class.java)
             .taskMaterialBindPost(MaterialBindRequest(taskModel.id, productModel.code, code))
             .bindToFragment()
-            .subscribe({ requestBindData(taskModel.id, productModel.code) }, {})
+            .subscribe({ requestBindData(taskModel.id, productModel.code) }, {
+                toast(it.message ?: getString(R.string.net_work_error))
+            })
     }
 
     private fun requestBindData(taskId: Int, productCode: String) {

@@ -376,5 +376,6 @@
     <string name="equipment_select">设备选择</string>
     <string name="equipment_search_bar_hint">输入设备名称</string>
     <string name="ng_procedure">不良工序</string>
+    <string name="product_number">产品数量</string>
     <!--设备管理系统ems end-->
 </resources>
