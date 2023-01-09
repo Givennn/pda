@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.annotation.StringRes
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.jakewharton.rxbinding4.view.clicks
@@ -16,6 +17,8 @@ import com.panda.pda.mes.R
 import com.panda.pda.mes.base.BaseFragment
 import com.panda.pda.mes.base.retrofit.WebClient
 import com.panda.pda.mes.common.adapter.CommonViewBindingAdapter
+import com.panda.pda.mes.common.data.model.QMSModuleProperty
+import com.panda.pda.mes.common.data.model.TaskRunType
 import com.panda.pda.mes.databinding.FragmentQualityProblemRecordBinding
 import com.panda.pda.mes.databinding.FrameEmptyViewBinding
 import com.panda.pda.mes.databinding.ItemQualityProblemRecordBinding
@@ -34,6 +37,10 @@ class QualityProblemRecordFragment :
     private val viewModel by activityViewModels<QualityViewModel>()
 
     private val itemListAdapter by lazy { createAdapter() }
+
+    private val qualityViewModel by activityViewModels<QualityViewModel>()
+
+    private var taskRunType = TaskRunType.SerialCode
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +62,13 @@ class QualityProblemRecordFragment :
                     false
                 }
             }
+
+        lifecycleScope.launchWhenStarted {
+            val parameter = qualityViewModel.getQmsSysProperty(QMSModuleProperty.taskRunType)
+            if (parameter != null) {
+                taskRunType = TaskRunType.getTaskRunType(parameter)
+            }
+        }
 
         viewBinding.floatingActionButton.clicks()
             .bindToLifecycle(requireView())
@@ -98,10 +112,16 @@ class QualityProblemRecordFragment :
                 position: Int
             ) {
                 holder.itemViewBinding.apply {
+
+                    val productCode =
+                        when(taskRunType) {
+                            TaskRunType.SerialCode -> data.productBarCode
+                            TaskRunType.Encode -> data.productCount.toString()
+                        }
                     tvProductInfo.text = getString(
                         R.string.desc_and_code_formatter,
                         data.productName,
-                        "${data.productBarCode} ${data.productCode}"
+                        "${productCode} ${data.productCode}"
                     )
                     tvQualityProblemInfo.text =
                         getString(
@@ -113,6 +133,7 @@ class QualityProblemRecordFragment :
                     tvInspectTaskCode.text = data.qualityCode
 //                    tvQualityScheme.text = data.qualitySolutionName
                     tvQualityResult.text = data.conclusion
+
                     btnActionEdit.clicks()
                         .throttleFirst(500, TimeUnit.MILLISECONDS)
                         .bindToLifecycle(holder.itemView)

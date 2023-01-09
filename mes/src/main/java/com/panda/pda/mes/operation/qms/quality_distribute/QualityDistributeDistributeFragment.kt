@@ -65,8 +65,8 @@ class QualityDistributeDistributeFragment :
         viewModel.qualityDetailInfoData.observe(viewLifecycleOwner) {
             modelProperty.setData(it)
             currentQualityTask = it
-            viewBinding.tilReportNum.minValue = 1
             viewBinding.tilReportNum.maxValue = currentQualityTask.qualityNum - currentQualityTask.distributedNum
+            viewBinding.tilReportNum.minValue = minOf(1, viewBinding.tilReportNum.maxValue)
         }
 
         viewBinding.llSelectVerifier.clicks()

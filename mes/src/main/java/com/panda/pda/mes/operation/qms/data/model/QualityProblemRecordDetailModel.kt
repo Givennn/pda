@@ -50,8 +50,8 @@ data class QualityProblemRecordDetailModel(
     var causeAnalysis: String?,
     @ModelProperty(24, "解决对策")
     var solution: String?,
-    @ModelProperty(25, "状态")
-    var status: String?,
+    @ModelProperty(25, "状态", dataParameterType = "QUALITY_PROBLEM_STATUS")
+    var status: Int,
     @ModelProperty(26, "优化建议")
     var optimization: String?,
     @ModelProperty(27, "处理周期")
@@ -59,6 +59,7 @@ data class QualityProblemRecordDetailModel(
     var adverseCauseInfoList: List<QualityNgReasonModel>?,
     var fileList: List<FileInfoModel>?,
     var pictureList: List<FileInfoModel>?,
+    var productCount: Int?,
     var remark: String?,
     var taskId: Int?,
     var traceUserId: Int?,
@@ -97,7 +98,7 @@ data class QualityProblemRecordDetailModel(
                 null,
                 null,
                 null,
-                null,
+                1,
                 null,
                 null,
                 null,

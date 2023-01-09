@@ -90,6 +90,7 @@ data class QualityProblemRecordModel(
     val problemCode: String,
     val processCycle: String,
     val productBarCode: String,
+    val productCount: Int,
     val productCode: String,
     val productName: Any,
     val qualityCode: String,

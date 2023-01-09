@@ -34,6 +34,7 @@ import com.panda.pda.mes.common.data.DataParamType
 import com.panda.pda.mes.common.data.model.FileInfoModel
 import com.panda.pda.mes.common.data.model.OrgNodeModel
 import com.panda.pda.mes.common.data.model.QMSModuleProperty
+import com.panda.pda.mes.common.data.model.TaskRunType
 import com.panda.pda.mes.databinding.FragmentProblemRecordEditBinding
 import com.panda.pda.mes.databinding.ItemProblemRecordDetailFileBinding
 import com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment
@@ -101,6 +102,8 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
             uploadFile(uri)
         }
 
+    private var taskRunType = TaskRunType.SerialCode
+
     @SuppressLint("NotifyDataSetChanged")
     private fun uploadFile(uri: Uri?) {
         if (uri == null) {
@@ -127,10 +130,19 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
         super.onViewCreated(view, savedInstanceState)
         val detailStr = arguments?.getString(DETAIL_KEY)
         lifecycleScope.launchWhenStarted {
+//            val parameter = qualityViewModel.getQmsSysProperty(QMSModuleProperty.taskRunType)
+//            viewBinding.tvProductCodeOrNumber.text =
+//                if (parameter?.sysValue == "2") getString(R.string.product_number) else getString(
+//                    R.string.product_serial_code)
             val parameter = qualityViewModel.getQmsSysProperty(QMSModuleProperty.taskRunType)
-            viewBinding.tvProductCodeOrNumber.text =
-                if (parameter?.sysValue == "2") getString(R.string.product_number) else getString(
-                    R.string.product_serial_code)
+            if (parameter != null) {
+                taskRunType = TaskRunType.getTaskRunType(parameter)
+                viewBinding.tvProductCodeOrNumber.text =
+                    when(taskRunType) {
+                        TaskRunType.SerialCode -> getString(R.string.product_serial_code)
+                        TaskRunType.Encode -> getString(R.string.product_number)
+                    }
+            }
         }
         viewBinding.topAppBar.setNavigationOnClickListener { navBackListener.invoke(it) }
         detailModel = if (detailStr == null) {
@@ -249,6 +261,10 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
     private fun onSearchingProduct(isFocus: Boolean) {
         if (isFocus)
             return
+
+        if (taskRunType == TaskRunType.Encode) {
+            return
+        }
         val barCode = viewBinding.etProductSerialCode.text.toString()
         if (barCode.isEmpty())
             return
@@ -328,7 +344,11 @@ class ProblemRecordEditFragment : BaseFragment(R.layout.fragment_problem_record_
         viewBinding.apply {
 
             detailModel.problemCode = etQualityProblemCode.text.toString()
-            detailModel.productBarCode = etProductSerialCode.text.toString()
+            when(taskRunType) {
+                TaskRunType.SerialCode -> detailModel.productBarCode = etProductSerialCode.text.toString()
+
+                TaskRunType.Encode -> detailModel.productCount = etProductSerialCode.text.toString().toIntOrNull()
+            }
             detailModel.productCode = etProductCode.text.toString()
             detailModel.productName = etProductDesc.text.toString()
             detailModel.occurrencePlace = etOccurrencePlace.text.toString()
