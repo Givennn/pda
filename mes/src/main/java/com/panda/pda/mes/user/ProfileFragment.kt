@@ -71,6 +71,9 @@ class ProfileFragment : BaseRootFragment(R.layout.fragment_profile) {
 //                .bindToLifecycle(view)
 //                .subscribe { logout() }
         }
+        userViewModel.topMessageCount.observe(viewLifecycleOwner) { topMessageCount ->
+            topMessageCount?.let { setMessageCount(it) }
+        }
     }
 
 //    private fun logout() {

@@ -3,6 +3,8 @@ package com.panda.pda.mes.operation.ems.data
 import com.panda.pda.mes.base.retrofit.DataListNode
 import com.panda.pda.mes.common.data.model.IdRequest
 import com.panda.pda.mes.common.data.model.TaskMessageCountModel
+import com.panda.pda.mes.message.model.MessageCountModel
+import com.panda.pda.mes.message.model.MessageItemModel
 import com.panda.pda.mes.operation.ems.data.model.*
 import com.panda.pda.mes.operation.fms.data.model.TaskReportRequest
 import com.panda.pda.mes.operation.qms.data.model.*
@@ -321,4 +323,35 @@ interface EquipmentApi {
     fun pdaEquipmentTaskMsgCountGet(
     ): Single<List<TaskMessageCountModel>>
 
+    /**
+     * bdc消息记录
+     *
+     * The endpoint is owned by docs service owner
+     */
+    @GET("pda/message/list-by-page")
+    fun pdaMessageListGet(
+        @retrofit2.http.Query("msgRead") msgRead: Int,
+        @retrofit2.http.Query("msgLevel") msgLevel: Int,
+        @retrofit2.http.Query("rows") rows: Int = 20,
+        @retrofit2.http.Query("page") page: Int = 1,
+    ): Single<DataListNode<MessageItemModel>>
+
+    /**
+     * bdc消息未读数量
+     *
+     * The endpoint is owned by docs service owner
+     */
+    @GET("pda/message/unread-count")
+    fun pdaMessageUnreadCount(
+    ): Single<MessageCountModel>
+
+    /**
+     * bdc消息标记已读
+     *
+     * The endpoint is owned by docs service owner
+     */
+    @POST("pda/message/read")
+    fun pdaMessageReadPost(
+        @retrofit2.http.Body msgIdList: MessageReadRequest
+    ): Single<Any>
 }
