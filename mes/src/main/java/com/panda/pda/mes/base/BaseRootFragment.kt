@@ -34,7 +34,8 @@ abstract class BaseRootFragment(@LayoutRes contentLayoutId: Int) : BaseFragment(
     }
 
     private fun showMessage() {
-        navController.navigate(R.id.messageFragment)
+//        navController.navigate(R.id.messageFragment)
+        navController.navigate(R.id.messageHistoryFragment)
     }
 
     protected fun setMessageCount(count: Int) {

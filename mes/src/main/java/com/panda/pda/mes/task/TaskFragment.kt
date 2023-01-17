@@ -46,6 +46,9 @@ class TaskFragment : BaseRootFragment(R.layout.fragment_task) {
         viewModel.taskMsgData.observe(viewLifecycleOwner) { msg ->
             taskMessageNavigationAdapter.updateBadge(msg)
         }
+        userViewModel.topMessageCount.observe(viewLifecycleOwner) { topMessageCount ->
+            topMessageCount?.let { setMessageCount(it) }
+        }
     }
 
     private fun filterAuthority(item: MenuItem): Boolean {

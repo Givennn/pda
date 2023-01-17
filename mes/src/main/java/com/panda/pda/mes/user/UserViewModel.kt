@@ -19,6 +19,8 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
 
     val loginData by lazy { MutableLiveData<LoginDataModel>() }
     val logoutActionData by lazy { MutableLiveData<Int?>() }
+    val topMessageCount by lazy { MutableLiveData<Int?>() }
+
 
     fun getAppVersionName(context: Context): String {
         var versionName = ""

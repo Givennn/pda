@@ -1,5 +1,6 @@
 package com.panda.pda.mes
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -29,6 +30,7 @@ import com.trello.rxlifecycle4.kotlin.bindToLifecycle
 import io.reactivex.rxjava3.core.Single
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import kotlin.math.log
 
 
 class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
@@ -97,6 +99,13 @@ class ShellActivity : AppCompatActivity(R.layout.activity_shell) {
     }
 
     private fun updateTaskCount() {
+
+
+        WebClient.request(EquipmentApi::class.java)
+            .pdaMessageUnreadCount().onMainThread()
+            .subscribe({
+                userViewModel.topMessageCount.postValue(it.count)
+            }, { })
         WebClient.request(CommonApi::class.java)
             .pdaTaskMsgCountGet()
             .concatMap { old ->
