@@ -137,6 +137,9 @@ class OperationFragment : BaseRootFragment(R.layout.fragment_operation) {
 //            }
 //        }
         viewBinding.rvModuleArea.layoutManager = layoutManager
+        userViewModel.topMessageCount.observe(viewLifecycleOwner) { topMessageCount ->
+            topMessageCount?.let { setMessageCount(it) }
+        }
     }
 
     private fun addModuleGrid(

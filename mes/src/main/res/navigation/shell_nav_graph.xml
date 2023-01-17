@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.panda.pda.mes.user.ProfileFragment"
-        android:label="ProfileFragment"/>
-<!--    <fragment-->
-<!--        android:id="@+id/taskReportFragment"-->
-<!--        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportFragment"-->
-<!--        android:label="fragment_task_report" />-->
+        android:label="ProfileFragment" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/taskReportFragment"-->
+    <!--        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportFragment"-->
+    <!--        android:label="fragment_task_report" />-->
     <fragment
         android:id="@+id/taskReceiveFragment"
         android:name="com.panda.pda.mes.operation.fms.mission.TaskReceiveFragment"
@@ -36,6 +36,17 @@
         android:name="com.panda.pda.mes.message.MessageFragment"
         android:label="MessageFragment"
         tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/messageHistoryFragment"
+        android:name="com.panda.pda.mes.message.MessageHistoryFragment"
+        android:label="MessageHistoryFragment"
+        tools:layout="@layout/fragment_message_history" />
+    <fragment
+        android:id="@+id/messageDetailFragment"
+        android:name="com.panda.pda.mes.message.MessageDetailFragment"
+        android:label="MessageDetailFragment"
+        tools:layout="@layout/fragment_message_detail" />
+
     <fragment
         android:id="@+id/discoveryFragment"
         android:name="com.panda.pda.mes.discovery.DiscoveryFragment"
@@ -87,12 +98,12 @@
     <include app:graph="@navigation/discovery_dispatch_order_nav_graph" />
     <include app:graph="@navigation/discovery_plan_nav_graph" />
     <include app:graph="@navigation/discovery_report_nav_graph" />
-    <include app:graph="@navigation/profile_setting_nav_graph"/>
-    <include app:graph="@navigation/order_exchange_nav_graph"/>
-<!--    <fragment-->
-<!--        android:id="@+id/taskReportInputFragment"-->
-<!--        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"-->
-<!--        android:label="TaskReportInputFragment" />-->
+    <include app:graph="@navigation/profile_setting_nav_graph" />
+    <include app:graph="@navigation/order_exchange_nav_graph" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/taskReportInputFragment"-->
+    <!--        android:name="com.panda.pda.mes.operation.fms.mission.TaskReportInputFragment"-->
+    <!--        android:label="TaskReportInputFragment" />-->
 
     <include app:graph="@navigation/profile_setting_nav_graph" />
     <include app:graph="@navigation/material_replace_nav_graph" />
@@ -132,8 +143,7 @@
     <fragment
         android:id="@+id/equipmentTaskFragment"
         android:name="com.panda.pda.mes.operation.ems.equipment_task.EquipmentWorkOrderTaskFragment"
-        android:label="fragment_equipment_task">
-    </fragment>
+        android:label="fragment_equipment_task"></fragment>
     <!--ems维保页面-->
     <fragment
         android:id="@+id/equipmentWorkOrderFragment"

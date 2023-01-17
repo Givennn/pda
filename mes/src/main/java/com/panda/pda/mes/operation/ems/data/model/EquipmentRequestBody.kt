@@ -84,6 +84,9 @@ data class WorkOrderInStoreSubmitRequest(
     //图片列表
     val fileList: List<FileInfoModel>,
 )
+data class MessageReadRequest(
+    val msgIdList: MutableList<Int>,
+)
 
 //工单入库确认
 data class WorkOrderInStoreConfirmRequest(
