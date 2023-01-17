@@ -52,6 +52,7 @@ android {
         isAbortOnError = true
         disable("ContentDescription")
     }
+
 }
 
 dependencies {
